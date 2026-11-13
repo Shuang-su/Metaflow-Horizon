@@ -80,11 +80,16 @@
   .reader-header[data-reader-scroll-chrome] {
     transition: translate .19s cubic-bezier(.2,.75,.3,1);
   }
-  html[data-reader-controls-hidden] .reader-header[data-reader-scroll-chrome]:not(:has(:focus-visible)) {
+  html[data-reader-controls-hidden]:not(:has(main[data-card-pulling], .card-transition-backdrop[data-pull-visible]))
+    .reader-header[data-reader-scroll-chrome]:not(:has(:focus-visible)) {
     translate: 0 calc(-100% - 8px); pointer-events: none;
   }
-  html[data-reader-controls-hidden] .article-interaction-wrap[data-reader-scroll-chrome]:not(:has(:focus-visible)) {
+  html[data-reader-controls-hidden]:not(:has(main[data-card-pulling], .card-transition-backdrop[data-pull-visible]))
+    .article-interaction-wrap[data-reader-scroll-chrome]:not(:has(:focus-visible)) {
     translate: 0 calc(100% + 24px + env(safe-area-inset-bottom)); pointer-events: none;
+  }
+  html:has(main[data-card-pulling], .card-transition-backdrop[data-pull-visible]) [data-reader-scroll-chrome] {
+    transition: none;
   }
   body:has(.reader-header):has(#main .article-shell > .article-cover) { padding-top: 0; }
   .home-header { z-index: 72; border: 0; background: transparent; }
