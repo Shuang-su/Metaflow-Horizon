@@ -783,7 +783,9 @@ body:has(.article-interaction-bar) .site-footer { padding-bottom: 112px; }
 @media (max-width: 1279px) {
   body:has(.article-interaction-bar) .reading-actions { display: none; }
   .article-interaction-bar .bar-directory { display: flex; }
-  body:has(.reading-navigator.is-open) .article-interaction-wrap { visibility: hidden; }
+  body:has(.reading-navigator.is-open) .article-interaction-wrap {
+    translate: 0 calc(100% + 28px + env(safe-area-inset-bottom)); pointer-events: none;
+  }
 }
 @media (max-width: 767px) {
   .article-reading-edition .brief-news-list .event-title { font-size: 15px; }

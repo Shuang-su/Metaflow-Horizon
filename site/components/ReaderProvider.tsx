@@ -66,16 +66,19 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
     return () => window.removeEventListener("storage", sync);
   }, [catalogue]);
 
-  const toggleReadLater = useCallback((id: string) => {
+  const updateReadLater = useCallback((id: string, update: (current: string[]) => string[]) => {
     if (!known.has(id)) return false;
     try {
       const current = readSavedArticles(localStorage, catalogue);
-      const next = current.includes(id) ? current.filter(item => item !== id) : [id, ...current];
-      writeSavedArticles(localStorage, next);
+      const next = update(current);
+      if (next !== current) writeSavedArticles(localStorage, next);
       setReadLaterIds(next);
       return true;
     } catch { return false; }
   }, [catalogue, known]);
+
+  const toggleReadLater = useCallback((id: string) => updateReadLater(id, current =>
+    current.includes(id) ? current.filter(item => item !== id) : [id, ...current]), [updateReadLater]);
 
   const openReadLater = useCallback((origin: HTMLElement) => {
     setPanel(null);
@@ -184,7 +187,15 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
     {readLaterOrigin && <ReadLater origin={readLaterOrigin} items={readLaterIds.flatMap(id => {
       const item = known.get(id);
       return item ? [item] : [];
-    })} close={() => setReadLaterOrigin(null)} toggle={toggleReadLater}/>}
+    })} close={() => setReadLaterOrigin(null)}
+      removeItem={id => updateReadLater(id, current => current.includes(id) ? current.filter(item => item !== id) : current)}
+      restoreItem={(id, previous, next) => updateReadLater(id, current => {
+        if (current.includes(id)) return current;
+        const previousIndex = previous === undefined ? -1 : current.indexOf(previous);
+        const nextIndex = next === undefined ? -1 : current.indexOf(next);
+        const index = previousIndex !== -1 ? previousIndex + 1 : nextIndex !== -1 ? nextIndex : current.length;
+        return [...current.slice(0, index), id, ...current.slice(index)];
+      })}/>}
     {panel && <ReaderPanels panel={panel} close={() => setPanel(null)} reportCount={reportCount}/>}
   </Reader.Provider></Register.Provider>;
 }

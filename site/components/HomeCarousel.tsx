@@ -2,7 +2,7 @@
 
 import Link from "./ArticleLink";
 import { useEffect, useLayoutEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
-import { carouselAxis, carouselSnap } from "../lib/carousel-gesture";
+import { carouselAxis, carouselSnap, isCarouselEdge } from "../lib/carousel-gesture";
 import { useCarouselAutoplay } from "../lib/carousel-autoplay";
 import { carouselState, restoredUI, UI_CAPTURE, type PageUI } from "../lib/card-navigation";
 import { useCardNavigation } from "./CardNavigation";
@@ -11,7 +11,16 @@ import SourceImage from "./SourceImage";
 
 const INTERVAL = 8000;
 const SNAP_MS = 240;
-type Drag = { id: number; x: number; y: number; time: number; lastX: number; velocity: number; owned: boolean };
+type Drag = {
+  id: number;
+  x: number;
+  y: number;
+  time: number;
+  lastX: number;
+  velocity: number;
+  owned: boolean;
+  initialFocus: Element | null;
+};
 
 export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
   const [active, setActive] = useState(0);
@@ -26,6 +35,7 @@ export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
   const timerStarted = useRef<number | null>(null);
   const elapsed = useRef({ key: "", value: 0 });
   const progressStart = useRef({ key: "", value: 0 });
+  const surface = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const pointer = useRef<Drag | null>(null);
   const suppressClick = useRef(0);
@@ -106,7 +116,7 @@ export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
     snapTimer.current = undefined;
     const drag = pointer.current;
     pointer.current = null;
-    if (drag && viewport.current?.hasPointerCapture(drag.id)) viewport.current.releasePointerCapture(drag.id);
+    if (drag && surface.current?.hasPointerCapture(drag.id)) surface.current.releasePointerCapture(drag.id);
     wheel.current = { axis: null, x: 0, y: 0, last: 0 };
     paint(0, false);
     setInteracting(false);
@@ -129,8 +139,10 @@ export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
     if (pointer.current && event.pointerId !== pointer.current.id) { reset(); return; }
     if (navigation?.busy || slides.length < 2 || !event.isPrimary || event.button !== 0 ||
       event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || interacting) return;
+    if (event.pointerType === "touch" && isCarouselEdge(event.clientX, window.innerWidth)) return;
     pointer.current = { id: event.pointerId, x: event.clientX, y: event.clientY, time: event.timeStamp,
-      lastX: event.clientX, velocity: 0, owned: false };
+      lastX: event.clientX, velocity: 0, owned: false, initialFocus: document.activeElement };
+    setInteracting(true);
   }
 
   function pointerMove(event: ReactPointerEvent<HTMLDivElement>) {
@@ -140,10 +152,13 @@ export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
     if (!drag.owned) {
       const axis = carouselAxis(x, event.clientY - drag.y);
       if (!axis) return;
-      if (axis === "vertical") { pointer.current = null; return; }
+      if (axis === "vertical") { reset(); return; }
       drag.owned = true;
       event.currentTarget.setPointerCapture(event.pointerId);
-      setInteracting(true);
+      // A mouse press can focus a link or pager before the movement resolves into a drag.
+      const focusedElement = document.activeElement;
+      if (focusedElement !== drag.initialFocus && focusedElement instanceof HTMLElement &&
+        event.currentTarget.contains(focusedElement) && !focusedElement.matches(":focus-visible")) focusedElement.blur();
     }
     drag.velocity = (event.clientX - drag.lastX) / Math.max(8, event.timeStamp - drag.time);
     drag.lastX = event.clientX;
@@ -154,21 +169,21 @@ export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
 
   function pointerLeave(event: ReactPointerEvent<HTMLDivElement>) {
     const drag = pointer.current;
-    if (event.pointerType === "mouse" && drag?.id === event.pointerId && !drag.owned) pointer.current = null;
+    if (event.pointerType === "mouse" && drag?.id === event.pointerId && !drag.owned) reset();
   }
 
   function pointerEnd(event: ReactPointerEvent<HTMLDivElement>, cancel = false) {
     const drag = pointer.current;
     if (!drag || event.pointerId !== drag.id) return;
+    if (!drag.owned) { reset(); return; }
     pointer.current = null;
-    if (!drag.owned) return;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     suppressClick.current = performance.now() + 450;
     settle(event.timeStamp - drag.time < 90 ? drag.velocity : 0, cancel);
   }
 
   useEffect(() => {
-    const element = viewport.current;
+    const element = surface.current;
     if (!element) return;
     const onWheel = (event: WheelEvent) => {
       if (navigation?.busy || slides.length < 2 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || pointer.current) return;
@@ -239,20 +254,20 @@ export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
     <div className="home-carousel" data-active-report={slide.date} data-source-sha256={slide.contentHash}
       data-playing={playing} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
       onFocusCapture={() => setFocused(true)} onBlurCapture={event => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node)) setFocused(false);
+        if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) setFocused(false);
+      }} ref={surface} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerLeave={pointerLeave}
+      onPointerUp={event => pointerEnd(event)} onPointerCancel={event => pointerEnd(event, true)}
+      onLostPointerCapture={event => {
+        // Touch starts with implicit capture on a child before the carousel takes ownership.
+        if (event.target === event.currentTarget) pointerEnd(event, true);
+      }}
+      onDragStart={event => event.preventDefault()}
+      onClickCapture={event => {
+        if (event.detail > 0 && performance.now() < suppressClick.current) {
+          event.preventDefault(); event.stopPropagation(); suppressClick.current = 0;
+        }
       }}>
-      <div className="carousel-viewport" ref={viewport} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerLeave={pointerLeave}
-        onPointerUp={event => pointerEnd(event)} onPointerCancel={event => pointerEnd(event, true)}
-        onLostPointerCapture={event => {
-          // Touch starts with implicit capture on the link before the viewport takes ownership.
-          if (event.target === event.currentTarget) pointerEnd(event, true);
-        }}
-        onDragStart={event => event.preventDefault()}
-        onClickCapture={event => {
-          if (event.detail > 0 && performance.now() < suppressClick.current) {
-            event.preventDefault(); event.stopPropagation(); suppressClick.current = 0;
-          }
-        }}>
+      <div className="carousel-viewport" ref={viewport}>
         {slides.length > 1 && renderSlide((active + slides.length - 1) % slides.length, -1)}
         {renderSlide(active, 0)}
         {slides.length > 1 && renderSlide((active + 1) % slides.length, 1)}

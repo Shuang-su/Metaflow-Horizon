@@ -129,16 +129,17 @@ export function startGlassChrome(root: HTMLElement) {
     if (kind === "slider") surface.releaseControl = attachNativeControlMotion(element, "full", true);
     if (kind === "menu") {
       surface.trigger = document.getElementById(element.dataset.glassMorphFrom || "");
-      surface.content = element.querySelector<HTMLElement>(".reader-font-content");
+      surface.content = element.querySelector<HTMLElement>(".reader-font-content, [data-glass-menu-content]");
       surface.fallback = document.createElement("div");
       surface.fallback.className = "glass-menu-fallback";
       surface.fallback.hidden = true;
       root.append(surface.fallback);
+      const becomesTrigger = element.dataset.glassMorphMode === "become";
       surface.outline = attachGeometryMotion(element, {
         from: () => surface.trigger,
-        morph: "detach",
+        morph: becomesTrigger ? "become" : "detach",
         radius: 24,
-        neck: 36,
+        neck: becomesTrigger ? 0 : 36,
         motion,
         prepared: shape => failed || transparency.matches || Boolean(material(shape)),
       });
@@ -249,7 +250,11 @@ export function startGlassChrome(root: HTMLElement) {
       if (!failed && !transparency.matches) for (const shape of outline.waypoints()) material(shape);
       const reveal = parseFloat(surface.element.style.getPropertyValue("--lg-morph"));
       const contentReady = !surface.element.hasAttribute("data-glass-morph") || reveal >= .97;
-      if (!surface.entered && !outline.positioning() && !outline.pending() && contentReady
+      const menuBox = path && surface.element.dataset.glassMorphMode === "become"
+        ? surface.element.getBoundingClientRect() : undefined;
+      const positionReady = !menuBox || !path ||
+        (Math.abs(path.left - menuBox.left) < 1 && Math.abs(path.width - menuBox.width) < 1);
+      if (!surface.entered && !outline.positioning() && !outline.pending() && contentReady && positionReady
           && !surface.element.hasAttribute("data-ending-style") && !surface.element.hasAttribute("data-starting-style")) {
         surface.entered = true;
         surface.element.dispatchEvent(new CustomEvent("glass:entered"));

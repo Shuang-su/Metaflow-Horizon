@@ -1,6 +1,13 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { carouselAxis, carouselSnap } from "../lib/carousel-gesture";
+import { carouselAxis, carouselSnap, isCarouselEdge } from "../lib/carousel-gesture";
+
+test("carousel leaves the first and last 24px of the viewport to system touch gestures", () => {
+  assert.equal(isCarouselEdge(20, 495), true);
+  assert.equal(isCarouselEdge(475, 495), true);
+  assert.equal(isCarouselEdge(24, 495), false);
+  assert.equal(isCarouselEdge(471, 495), false);
+});
 
 test("carousel waits for intent and preserves vertical and diagonal scroll", () => {
   assert.equal(carouselAxis(5, 3), null);

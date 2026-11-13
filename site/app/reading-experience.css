@@ -96,7 +96,6 @@ dialog:modal ~ .reading-navigator .reading-nav-panel { pointer-events: none; }
     top: calc(100% + 4px);
     translate: -50% 0;
   }
-  .reader-edge:has(+ .reader-header .reader-restart) { height: calc(var(--header-height) + 58px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .reader-dialog[open], .search-overlay[open] { animation: none; }
