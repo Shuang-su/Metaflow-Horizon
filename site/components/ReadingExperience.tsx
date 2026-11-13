@@ -46,7 +46,8 @@ export default function ReadingExperience() {
       if (!frame) frame = requestAnimationFrame(update);
     }
     function markInput(event: Event) {
-      if (event.target instanceof Element && event.target.closest(".site-header, dialog, .article-interaction-wrap, .reading-nav-panel")) return;
+      if (event.defaultPrevented || (event.target instanceof Element &&
+        event.target.closest(".site-header, dialog, .article-interaction-wrap, .reading-nav-panel"))) return;
       inputUntil = performance.now() + 1100;
       if (event.type === "touchmove") touchScrolling = true;
     }
@@ -54,10 +55,14 @@ export default function ReadingExperience() {
       if (touchScrolling) inputUntil = performance.now() + 1100;
       touchScrolling = false;
     }
-    function reset() {
+    function resetInput() {
       inputUntil = 0;
       touchScrolling = false;
       last = window.scrollY;
+      distance = 0;
+    }
+    function reset() {
+      resetInput();
       reveal();
     }
     function keys(event: KeyboardEvent) {
@@ -69,6 +74,7 @@ export default function ReadingExperience() {
       if (event.target instanceof Element && event.target.closest("[data-reader-scroll-chrome]")) reveal();
     }
     window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("touchstart", resetInput, { passive: true });
     window.addEventListener("touchmove", markInput, { passive: true });
     window.addEventListener("touchend", endInput, { passive: true });
     window.addEventListener("touchcancel", endInput, { passive: true });
@@ -82,6 +88,7 @@ export default function ReadingExperience() {
       cancelAnimationFrame(frame);
       reveal();
       window.removeEventListener("scroll", schedule);
+      window.removeEventListener("touchstart", resetInput);
       window.removeEventListener("touchmove", markInput);
       window.removeEventListener("touchend", endInput);
       window.removeEventListener("touchcancel", endInput);

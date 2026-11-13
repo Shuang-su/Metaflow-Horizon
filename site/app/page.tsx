@@ -19,7 +19,7 @@ export default async function Home() {
           <article key={item.id}><h3><Link href={item.url}>{item.title}</Link></h3><p>{item.sourceLabel}</p></article>,
         )}</div></section>
         <section className="home-sidebar-topics"><h2>主题</h2><div className="sidebar-topics">{TOPICS.map((t) =>
-          <Link key={t.slug} href={`/topics/${t.slug}/`}>{t.label}</Link>,
+          <Link key={t.slug} href={`/topics/${t.slug}/`} prefetch={false}>{t.label}</Link>,
         )}</div></section>
         <section className="sidebar-subscribe"><h2>订阅 horizon</h2><Link href="/subscribe/">订阅方式 <Icon name="arrow" /></Link></section>
       </aside>} />
