@@ -6,7 +6,7 @@
   overflow: clip;
   pointer-events: none;
 }
-[data-glass-optics] > svg { position: absolute; }
+:is([data-glass-optics], [data-glass-optics-host]) > svg { position: absolute; }
 .glass-optical-strip {
   position: absolute;
   contain: strict;
@@ -20,17 +20,61 @@
   background: var(--bg);
   will-change: filter;
 }
-[data-glass-surface] {
+[data-glass-lens="slider"] .glass-optical-plane { background: var(--font-panel-bg, var(--bg)); }
+.glass-menu-tint { flood-color: var(--surface); flood-opacity: .64; }
+.glass-menu-fallback {
+  position: fixed; pointer-events: none;
+  background: color-mix(in srgb, var(--surface) 64%, transparent);
+  -webkit-backdrop-filter: blur(15px); backdrop-filter: blur(15px);
+}
+[data-glass-surface]:not([data-glass-surface="slider"], [data-glass-surface="menu"]) {
   background-color: color-mix(in srgb, var(--bg) 76%, transparent);
   box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
 }
-[data-glass-surface][data-glass-ready] {
+[data-glass-surface][data-glass-ready]:not([data-glass-surface="slider"], [data-glass-surface="menu"]) {
   background-color: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
-body:has([data-glass-state="fallback"]) [data-glass-surface] {
+body:has([data-glass-state="fallback"]) [data-glass-surface]:not([data-glass-surface="slider"], [data-glass-surface="menu"]) {
   background-color: color-mix(in srgb, var(--bg) 72%, transparent);
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+
+[data-glass-interactive] { position: relative; touch-action: manipulation; }
+[data-glass-interactive]::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  opacity: calc(1 - var(--glass-absorbed, 0));
+  background: radial-gradient(var(--lg-glow-size, 64px) circle at var(--lg-glow-x, 50%) var(--lg-glow-y, 50%),
+    rgb(255 255 255 / calc(.23 * var(--lg-glow, 0))), transparent);
+}
+.article-interaction-wrap { z-index: 70; }
+.article-interaction-bar[data-glass-surface] {
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  border-color: color-mix(in srgb, var(--ink) 14%, transparent);
+}
+.article-interaction-bar[data-glass-ready] { background: color-mix(in srgb, var(--bg) 24%, transparent); }
+.article-interaction-bar > button {
+  width: 44px; height: 44px; flex: 0 0 44px; padding: 0; border-radius: 50%;
+}
+.article-interaction-bar > .article-comment-entry,
+.article-interaction-bar > .article-comment-entry:hover {
+  width: auto; flex: 1 1 auto; min-width: 0; padding: 0 13px; border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  color: var(--ink);
+}
+.article-interaction-bar > .bar-comment-count { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.bar-comment-badge {
+  position: absolute; top: 0; right: 0; min-width: 16px; height: 16px;
+  padding: 0 3px; border-radius: 8px; background: var(--bg); color: var(--ink);
+  font-size: 10px; font-variant-numeric: tabular-nums; line-height: 16px; text-align: center;
+}
+.article-interaction-bar > button:focus-visible { outline-offset: -3px; }
+@media (max-width: 767px) {
+  .article-interaction-bar { gap: 4px; padding: 5px; }
+}
+@media (prefers-reduced-transparency: reduce), (forced-colors: active) {
+  :is([data-glass-optics], [data-glass-optics-host], .progressive-header-blur) { display: none; }
+  .reader-header, .home-header, body [data-glass-surface][data-glass-ready]:not([data-glass-surface="menu"], [data-glass-surface="slider"]) { background: var(--bg); }
 }

@@ -2,7 +2,7 @@ export type OpticalBox = { left: number; top: number; width: number; height: num
 
 const excluded = "script, style, link, svg, iframe, object, embed, canvas, audio, video, dialog, [data-glass-surface], [data-glass-optics], [data-no-optical-source]";
 const typeStyles = ["font", "font-kerning", "font-variant", "font-feature-settings", "font-optical-sizing", "letter-spacing", "line-height", "text-align", "text-decoration", "text-indent", "text-transform", "text-wrap", "white-space", "word-break", "overflow-wrap", "direction", "color"];
-const boxStyles = ["background-color", "background-image", "background-size", "background-position", "background-repeat", "border-radius", "border", "padding", "object-fit", "object-position", "overflow", "opacity", "box-sizing"];
+const boxStyles = ["background-color", "background-image", "background-size", "background-position", "background-repeat", "border-radius", "border", "padding", "object-fit", "object-position", "overflow", "opacity", "box-sizing", "mask-image"];
 const leaf = "p, h1, h2, h3, h4, h5, h6, pre, figcaption, dt, dd, blockquote, td, th, li";
 const maxPieces = 96;
 
@@ -55,7 +55,7 @@ export class OpticalSource {
 
   constructor(private layer: HTMLElement) {}
 
-  update(roots: HTMLElement[], region: OpticalBox) {
+  update(roots: HTMLElement[], region: OpticalBox, refresh = false) {
     const visible: HTMLElement[] = [];
     let textCount = 0;
     const active = new Set<HTMLElement>();
@@ -66,22 +66,28 @@ export class OpticalSource {
       const height = px("height") + (borderBox ? 0 : px("padding-top") + px("padding-bottom") + px("border-top-width") + px("border-bottom-width")) || source.offsetHeight || rect.height;
       const scale = width ? rect.width / width : 1;
       let entry = this.pieces.get(source);
-      if (!entry || entry.width !== width || entry.height !== height || entry.backgroundOnly !== backgroundOnly) {
-        const node = document.createElement(source instanceof HTMLImageElement ? "img" : "div");
+      const existing = entry && entry.backgroundOnly === backgroundOnly ? entry : undefined;
+      if (!existing || existing.width !== width || existing.height !== height || refresh) {
+        const node = existing?.node ?? document.createElement(source instanceof HTMLImageElement ? "img" : "div");
         copyStyles(style, node, [...typeStyles, ...boxStyles]);
         if (node instanceof HTMLImageElement && source instanceof HTMLImageElement) {
           node.alt = "";
-          node.src = source.currentSrc || source.src;
+          const url = source.currentSrc || source.src;
+          if (node.src !== url) node.src = url;
         } else if (!backgroundOnly) {
+          const fragments = [];
           for (const child of source.childNodes) {
             const clone = inlineCopy(child);
-            if (clone) node.append(clone);
+            if (clone) fragments.push(clone);
           }
+          node.replaceChildren(...fragments);
         }
-        Object.assign(node.style, { position: "absolute", boxSizing: "border-box", width: `${width}px`, height: `${height}px`, transformOrigin: "0 0" });
+        Object.assign(node.style, { position: "absolute", left: "0", top: "0", boxSizing: "border-box",
+          width: `${width}px`, height: `${height}px`, maxWidth: "none", maxHeight: "none", transformOrigin: "0 0" });
         entry = { node, width, height, backgroundOnly };
         this.pieces.set(source, entry);
       }
+      if (!entry) return;
       const transform = `translate(${rect.left - region.left}px, ${rect.top - region.top}px) scale(${scale}, ${height ? rect.height / height : 1})`;
       if (entry.node.style.transform !== transform) entry.node.style.transform = transform;
       if (entry.node.style.opacity !== style.opacity) entry.node.style.opacity = style.opacity;

@@ -75,51 +75,75 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
       if (rect.top < parent.top || rect.bottom > parent.bottom) list.scrollTop += rect.top - parent.top - list.clientHeight / 3;
     }
   }, [active, shown]);
-  useEffect(() => {
-    if (!open) return;
-    const closeOutside = (event: PointerEvent) => { if (!root.current?.contains(event.target as Node) && (compact || !pinned)) { setOpen(false); setHovered(false); } };
-    document.addEventListener("pointerdown", closeOutside);
-    const unlock = compact ? lockDocumentScroll() : undefined;
-    if (compact) closeButton.current?.focus({ preventScroll: true });
-    return () => { document.removeEventListener("pointerdown", closeOutside); unlock?.(); };
-  }, [open, compact, pinned]);
-  function closeImmediately() {
+  const closeImmediately = useCallback((afterClose?: () => void) => {
     setOpen(false); setHovered(false); setPinned(false);
     requestAnimationFrame(() => {
       const origin = externalTrigger.current;
-      (origin?.getClientRects().length ? origin : trigger.current)?.focus({ preventScroll: true });
       externalTrigger.current = null;
+      if (afterClose) afterClose();
+      else (origin?.getClientRects().length ? origin : trigger.current)?.focus({ preventScroll: true });
     });
-  }
-  function close() {
-    if (compact && open) closeReaderSheet(panel.current, closeImmediately);
-    else closeImmediately();
-  }
+  }, []);
+  const close = useCallback((afterClose?: () => void) => {
+    if (compact && open) closeReaderSheet(panel.current, () => closeImmediately(afterClose));
+    else closeImmediately(afterClose);
+  }, [closeImmediately, compact, open]);
+  useEffect(() => {
+    if (!open) return;
+    if (!compact) {
+      const outside = (event: PointerEvent) => { if (!pinned && !root.current?.contains(event.target as Node)) closeImmediately(); };
+      document.addEventListener("pointerdown", outside);
+      return () => document.removeEventListener("pointerdown", outside);
+    }
+    const unlock = lockDocumentScroll();
+    closeButton.current?.focus({ preventScroll: true });
+    const outside = Array.from(document.querySelectorAll<HTMLElement>(
+      "#main > *, .site-header, .reading-parent, .article-interaction-wrap, .site-footer, .skip-link",
+    )).filter(element => !element.contains(root.current) && !element.inert);
+    outside.forEach(element => { element.inert = true; });
+    const trap = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const controls = Array.from(panel.current?.querySelectorAll<HTMLElement>("a[href], button") || [])
+        .filter(element => element.getClientRects().length);
+      const first = controls[0], last = controls.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener("keydown", trap);
+    return () => {
+      outside.forEach(element => { element.inert = false; });
+      document.removeEventListener("keydown", trap);
+      unlock();
+    };
+  }, [closeImmediately, open, compact, pinned]);
   function togglePin() { setPinned(value => !value); setOpen(false); }
   useEffect(() => {
     if (!shown) return;
     const escape = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape") { event.preventDefault(); close(); } };
     document.addEventListener("keydown", escape);
     return () => document.removeEventListener("keydown", escape);
-  }, [shown]);
+  }, [shown, close]);
   const jump = useCallback((event: MouseEvent<HTMLAnchorElement> | globalThis.MouseEvent, id: string) => {
     const target = document.getElementById(id);
     if (!target || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     let parent = target.parentElement;
     while (parent) { if (parent instanceof HTMLDetailsElement) parent.open = true; parent = parent.parentElement; }
-    if (compact) { setOpen(false); setHovered(false); }
-    pushArticleHash(id);
-    const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
-    const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
-    // The reference title has a 16px inset; section IDs can precede the title by different amounts.
-    const destination = id === "article-top" ? 0 : window.scrollY + headingContentTop(target) - padding - 16;
-    const top = Math.max(0, Math.min(destination, document.documentElement.scrollHeight - window.innerHeight));
-    window.dispatchEvent(new CustomEvent("reading-navigation-jump", { detail: { top } }));
-    window.scrollTo({ top, behavior });
-    target.setAttribute("tabindex", "-1"); target.focus({ preventScroll: true });
-    setActive(id);
-  }, [compact]);
+    const go = () => {
+      pushArticleHash(id);
+      const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+      const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      // The reference title has a 16px inset; section IDs can precede the title by different amounts.
+      const destination = id === "article-top" ? 0 : window.scrollY + headingContentTop(target) - padding - 16;
+      const top = Math.max(0, Math.min(destination, document.documentElement.scrollHeight - window.innerHeight));
+      window.dispatchEvent(new CustomEvent("reading-navigation-jump", { detail: { top } }));
+      window.scrollTo({ top, behavior });
+      target.setAttribute("tabindex", "-1"); target.focus({ preventScroll: true });
+      setActive(id);
+    };
+    if (compact && open) close(go);
+    else go();
+  }, [close, compact, open]);
   useEffect(() => {
     // The server-rendered overview shares the directory's motion, focus, and title inset.
     const overviewJump = (event: globalThis.MouseEvent) => {
@@ -149,12 +173,12 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
     })}</ul>;
   }
   return <div className={`reading-navigator${shown ? " is-open" : ""}`} ref={root} onKeyDown={keys}>
-    <button className={`reading-nav-backdrop${compact && open ? " is-open" : ""}`} tabIndex={-1} inert={!compact || !open} aria-hidden={!compact || !open} aria-label="关闭目录" onClick={close} />
+    <button className={`reading-nav-backdrop${compact && open ? " is-open" : ""}`} tabIndex={-1} inert={!compact || !open} aria-hidden={!compact || !open} aria-label="关闭目录" onClick={() => close()} />
     <aside className={`reading-nav-rail${shown ? " is-open" : ""}${pinned ? " is-pinned" : ""}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
       <button className="reading-nav-ticks" aria-label="展开文章目录" aria-expanded={shown} aria-controls="reading-navigation" aria-hidden={shown} inert={shown} onClick={() => setOpen(true)} tabIndex={shown ? -1 : 0} />
       <div className="reading-nav-panel" ref={panel} id="reading-navigation" data-sheet-drag inert={!shown} aria-hidden={!shown} role={compact ? "dialog" : undefined} aria-modal={compact && open ? true : undefined} aria-label="文章目录">
         <div className="reader-sheet-handle" data-sheet-handle aria-hidden="true"/>
-        <header><h2>文章目录</h2><div className="reading-nav-controls"><button className="reading-nav-pin" aria-label="固定文章目录" aria-pressed={pinned} title={pinned ? "取消固定目录" : "固定目录"} onClick={togglePin}><Icon name="pin" /></button><button className="reading-nav-close" ref={closeButton} data-sheet-close aria-label="收起文章目录" onClick={close}><Icon name="close" /></button></div></header>
+        <header><h2>文章目录</h2><div className="reading-nav-controls"><button className="reading-nav-pin" aria-label="固定文章目录" aria-pressed={pinned} title={pinned ? "取消固定目录" : "固定目录"} onClick={togglePin}><Icon name="pin" /></button><button className="reading-nav-close" ref={closeButton} data-sheet-close aria-label="收起文章目录" onClick={() => close()}><Icon name="close" /></button></div></header>
         <nav aria-label="快捷跳转" ref={scrollList}>{list(items)}</nav>
       </div>
     </aside>

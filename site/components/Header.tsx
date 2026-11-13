@@ -14,9 +14,11 @@ import { useReader } from "./ReaderProvider";
 import { ReadLaterTrigger } from "./ReadLater";
 import { rememberSearch, searchTerm } from "../lib/search-history";
 import { lockDocumentScroll } from "../lib/scroll-lock";
+import { setCarouselAutoplay, useCarouselAutoplay } from "../lib/carousel-autoplay";
 
 type Panel = "mobile" | "topics" | "theme" | "search" | null;
 const themes = [["system", "跟随系统"], ["light", "浅色"], ["dark", "暗色"]] as const;
+type Theme = typeof themes[number][0];
 const routes: { href: string; label: string; icon: IconName }[] = [
   { href: "/daily/", label: "日报", icon: "paper" },
   { href: "/articles/", label: "文章", icon: "paper" },
@@ -27,22 +29,25 @@ const routes: { href: string; label: string; icon: IconName }[] = [
 
 export default function Header() {
   const [panel, setPanel] = useState<Panel>(null);
-  const [theme, setTheme] = useState("system");
+  const [theme, setTheme] = useState<Theme>("system");
   const [mobileLayout, setMobileLayout] = useState(false);
   const [phoneLayout, setPhoneLayout] = useState(false);
   const cardNavigation = useCardNavigation();
   const reader = useReader();
   const pathname = usePathname();
   const home = pathname === "/";
+  const collection = pathname === "/daily/" || pathname === "/daily";
   const article = /^\/(?:daily\/\d{4}\/\d{2}\/\d{2}|articles\/[^/]+)\/?$/.test(pathname) || reader?.article?.kind === "weekly";
   const immersive = article || (home && phoneLayout);
-  const fixedChrome = useRef(immersive);
-  fixedChrome.current = immersive;
+  const autoplay = useCarouselAutoplay();
+  const fixedChrome = useRef(immersive || collection);
+  fixedChrome.current = immersive || collection;
   const header = useRef<HTMLElement>(null);
   const navigation = useRef<HTMLElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const currentPanel = useRef(panel);
   const readingDestination = useRef<number | null>(null);
+  const themeTimer = useRef<number | undefined>(undefined);
   currentPanel.current = panel;
 
   useEffect(() => { setPanel(null); readingDestination.current = null; header.current?.classList.remove("header-hidden"); }, [pathname]);
@@ -57,7 +62,10 @@ export default function Header() {
     return () => window.removeEventListener("resize", sync);
   }, [home, article]);
   useEffect(() => {
-    try { const saved = localStorage.getItem("gsd-theme"); if (saved && ["system", "light", "dark"].includes(saved)) setTheme(saved); } catch {}
+    try {
+      const saved = localStorage.getItem("gsd-theme");
+      if (saved === "system" || saved === "light" || saved === "dark") setTheme(saved);
+    } catch {}
     let last = window.scrollY, frame = 0;
     const scroll = () => {
       if (frame) return;
@@ -94,6 +102,8 @@ export default function Header() {
     window.addEventListener("resize", cancelReadingScroll);
     document.addEventListener("keydown", escape); document.addEventListener("pointerdown", outside);
     return () => {
+      window.clearTimeout(themeTimer.current);
+      delete document.documentElement.dataset.themeChanging;
       cancelAnimationFrame(frame); window.removeEventListener("scroll", scroll);
       window.removeEventListener("reading-navigation-jump", readingJump);
       window.removeEventListener("wheel", cancelReadingScroll); window.removeEventListener("touchstart", cancelReadingScroll);
@@ -131,12 +141,20 @@ export default function Header() {
   function toggle(next: Exclude<Panel, null>, button: HTMLButtonElement) {
     trigger.current = button; header.current?.classList.remove("header-hidden"); setPanel(panel === next ? null : next);
   }
-  function changeTheme(value: string) {
-    setTheme(value); document.documentElement.dataset.theme = value;
+  function changeTheme(value: Theme) {
+    const root = document.documentElement;
+    if (root.dataset.theme !== value && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      root.dataset.themeChanging = "";
+      window.clearTimeout(themeTimer.current);
+      themeTimer.current = window.setTimeout(() => { delete root.dataset.themeChanging; }, 240);
+    }
+    setTheme(value); root.dataset.theme = value;
     try { localStorage.setItem("gsd-theme", value); } catch {}
   }
-  return <header ref={header} className={`site-header${home ? " home-header" : ""}${article ? " reader-header" : ""}`} data-menu-open={Boolean(panel)} data-mobile-open={panel === "mobile"} data-mobile-layout={mobileLayout} data-reader-chrome={immersive}>
-    <div className="progressive-header-blur" aria-hidden="true"><i/><i/><i/></div>
+  const appearanceOpen = panel === "theme";
+  return <>{(home || article) && <div className={`progressive-header-blur ${article ? "reader-edge" : "home-edge"}`} aria-hidden="true">
+    <span/><span/><span/><span/>
+  </div>}<header ref={header} className={`site-header${home ? " home-header" : ""}${article ? " reader-header" : ""}${collection ? " collection-header" : ""}`} data-menu-open={Boolean(panel)} data-mobile-open={panel === "mobile"} data-mobile-layout={mobileLayout} data-reader-chrome={immersive}>
     <div className="header-inner" data-reading-restart={Boolean(article && reader?.canRestart)}>
       <div className="header-brand-group" inert={mobileLayout && panel === "mobile"}>{article && <ArticleBack />}{!article && <Link href="/" className="brand" aria-label="metaflow horizon 首页" onClick={() => setPanel(null)}><BrandMark /><span>metaflow horizon</span></Link>}
         {home && <div id="home-feed-control" aria-hidden={panel === "mobile" || undefined} />}</div>
@@ -160,14 +178,17 @@ export default function Header() {
         inert={panel === "mobile" || cardNavigation?.busy || undefined}>从头开始阅读</button>}
       <div className="header-actions" inert={cardNavigation?.busy || undefined}>
         {article ? <><ReaderFontControl onOpen={() => setPanel(null)}/><ReaderShareControl onOpen={() => setPanel(null)}/></> : <>
-        <button type="button" className="search-link" data-glass-surface={immersive ? "" : undefined} aria-label="搜索" aria-haspopup="dialog" aria-expanded={panel === "search" || panel === "mobile"} onClick={(event) => toggle("search", event.currentTarget)} inert={mobileLayout && panel === "mobile"}><Icon name="search" /></button>
-        <div className="appearance-navigation desktop-action" inert={mobileLayout && panel === "mobile"} aria-hidden={mobileLayout && panel === "mobile" || undefined}><button className="appearance-toggle" data-glass-surface={immersive ? "" : undefined} aria-label="外观" aria-expanded={panel === "theme"} aria-controls="header-appearance" onClick={(e) => toggle("theme", e.currentTarget)}><Icon name="theme" /></button>
-          <div className="header-popover appearance-popover" id="header-appearance" hidden={panel !== "theme"} aria-label="显示主题">{[["light", "浅色"], ["dark", "暗色"], ["system", "跟随系统"]].map(([value, label]) => <button key={value} aria-pressed={theme === value} onClick={() => { changeTheme(value); setPanel(null); trigger.current?.focus({ preventScroll: true }); }}>{label}{theme === value && <Icon name="check" />}</button>)}</div>
+        <button type="button" className="search-link" data-glass-surface={immersive ? "" : undefined} data-glass-interactive={immersive ? "" : undefined} aria-label="搜索" aria-haspopup="dialog" aria-expanded={panel === "search" || panel === "mobile"} onClick={(event) => toggle("search", event.currentTarget)} inert={mobileLayout && panel === "mobile"}><Icon name="search" /></button>
+        <div className="appearance-navigation desktop-action" inert={mobileLayout && panel === "mobile"} aria-hidden={mobileLayout && panel === "mobile" || undefined}><button className="appearance-toggle" data-glass-surface={immersive ? "" : undefined} data-glass-interactive={immersive ? "" : undefined} aria-label="外观" aria-expanded={appearanceOpen} aria-controls="header-appearance" onClick={(e) => toggle("theme", e.currentTarget)}><Icon name="theme" /></button>
+          <div className="header-popover appearance-popover" id="header-appearance" inert={!appearanceOpen} aria-hidden={!appearanceOpen} data-open={appearanceOpen} aria-label="显示主题">
+            {themes.map(([value, label]) => <button key={value} type="button" aria-pressed={theme === value} onClick={() => changeTheme(value)}>{label}<span className="appearance-check"><Icon name="check"/></span></button>)}
+            {home && <button type="button" role="switch" aria-checked={autoplay} onClick={() => setCarouselAutoplay(!autoplay)}>自动轮播<span className="appearance-switch" aria-hidden="true"/></button>}
+          </div>
         </div>
         <Link className="subscribe-link desktop-action" href="/subscribe/" onClick={() => setPanel(null)} inert={mobileLayout && panel === "mobile"}>订阅</Link></>}
-        <button className="menu-toggle" data-reader-more-trigger data-glass-surface={immersive ? "" : undefined} aria-label={panel === "mobile" ? "关闭导航" : "打开导航"} aria-expanded={panel === "mobile"} aria-controls="main-nav" onClick={(e) => toggle("mobile", e.currentTarget)}><Icon name={panel === "mobile" ? "close" : immersive ? "more" : "grid"} /></button>
+        <button className="menu-toggle" data-reader-more-trigger data-glass-surface={immersive ? "" : undefined} data-glass-interactive={immersive ? "" : undefined} aria-label={panel === "mobile" ? "关闭导航" : "打开导航"} aria-expanded={panel === "mobile"} aria-controls="main-nav" onClick={(e) => toggle("mobile", e.currentTarget)}><Icon name={panel === "mobile" ? "close" : immersive ? "more" : "grid"} /></button>
       </div>
     </div>
     <SearchOverlay open={panel === "search"} onClose={() => setPanel(null)} />
-  </header>;
+  </header></>;
 }

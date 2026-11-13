@@ -19,8 +19,10 @@ export default function ReadingExperience() {
       const bounds = image!.getBoundingClientRect();
       const height = Math.max(bounds.height, 1);
       const top = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 56;
+      const coverStart = bounds.top + window.scrollY;
+      const overlap = Math.min(top, coverStart) - bounds.top;
       const progress = !reduced.matches && bounds.bottom > 0
-        ? Math.min(1, Math.max(0, (top - bounds.top) / (height * .8))) : 0;
+        ? Math.min(1, Math.max(0, overlap / (height * .8))) : 0;
       const blur = Math.round(14 * progress * 4) / 4;
       if (blur !== previous) {
         image!.style.filter = blur > 0 ? `blur(${blur}px)` : "";
