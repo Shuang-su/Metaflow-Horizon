@@ -139,13 +139,16 @@
 
 .reader-header .reader-chrome-control[data-glass-ready], .reader-header .menu-toggle[data-glass-ready],
 .home-header .header-actions :is(.search-link,.appearance-toggle,.menu-toggle)[data-glass-ready] {
-  background: color-mix(in srgb, var(--bg) 14%, transparent);
-  border-color: color-mix(in srgb, var(--ink) 12%, transparent);
+  /* Fill and rim are composed together by the Glass-HQ optical lens. */
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
 }
 .reader-header .reader-font-trigger[data-glass-absorbing] {
   background: color-mix(in srgb, var(--bg) calc(14% * (1 - var(--glass-absorbed, 0))), transparent);
-  border-color: color-mix(in srgb, var(--ink) calc(12% * (1 - var(--glass-absorbed, 0))), transparent);
+  border-color: transparent;
 }
+.reader-header .reader-font-trigger[data-glass-ready][data-glass-absorbing] { background: transparent; }
 .header-popover.appearance-popover {
   width: 172px; padding: 5px; border-radius: 18px; overflow: hidden;
   background: color-mix(in srgb, var(--bg) 86%, transparent);

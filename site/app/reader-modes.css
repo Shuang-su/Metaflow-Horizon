@@ -1,0 +1,42 @@
+/* Guangcai camera-panel timing; the active label moves to a fixed centre mark. */
+.reader-dialog-modes { overflow: hidden; }
+.reader-modes { min-height: 0; }
+.reader-mode-stage {
+  position: relative; height: min(400px, 55dvh); min-height: 0; overflow: hidden;
+  transition: height 420ms cubic-bezier(.22,.82,.22,1);
+}
+.reader-mode-pane {
+  position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 180ms ease-out, transform 290ms cubic-bezier(.2,.75,.2,1), visibility 0s 290ms;
+}
+.reader-mode-pane:first-child { transform: translateX(-20px); }
+.reader-mode-pane:nth-child(2) { transform: translateX(20px); }
+.reader-mode-pane[data-active="true"] { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; }
+.reader-mode-content { display: flow-root; padding: 8px 20px 20px; }
+.reader-mode-directory ul { margin: 0; padding: 0; list-style: none; }
+.reader-mode-directory li { margin: 0; }
+.reader-mode-directory li > a { display: block; padding: 12px 12px 12px 16px; border-inline-start: 2px solid var(--line); color: var(--muted); text-decoration: none; font-size: 14px; line-height: 1.6; }
+.reader-mode-directory li > a[aria-current] { border-color: #da282a; color: var(--ink); background: color-mix(in srgb, var(--ink) 4%, transparent); }
+.reader-mode-directory li > a:hover { color: var(--ink); }
+.reader-mode-directory details { margin: 0 0 6px 18px; }
+.reader-mode-directory summary { padding: 6px 10px; color: var(--muted); font-size: 12px; cursor: pointer; }
+.reader-mode-directory details a { font-size: 13px; }
+.reader-mode-footer { padding: 8px 16px max(12px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); }
+.reader-mode-tabs { position: relative; height: 48px; max-width: 330px; margin: auto; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.reader-mode-tabs button {
+  position: absolute; left: 50%; top: 2px; width: 80px; height: 44px; padding: 0;
+  background: transparent; border: 0; border-radius: 22px; color: var(--muted); font-size: 15px; font-weight: 500;
+  transform: translateX(-50%); transition: transform 420ms cubic-bezier(.22,.82,.22,1), color 180ms ease-out, opacity 180ms ease-out;
+}
+.reader-mode-tabs button[aria-selected="true"] { color: var(--ink); }
+.reader-modes[data-mode="directory"] [data-mode="discussion"] { transform: translateX(calc(-50% + 96px)); opacity: .65; }
+.reader-modes[data-mode="discussion"] [data-mode="directory"] { transform: translateX(calc(-50% - 96px)); opacity: .65; }
+.reader-mode-indicator { position: absolute; top: 2px; left: 50%; width: 80px; height: 44px; transform: translateX(-50%); border-radius: 22px; background: color-mix(in srgb, var(--ink) 6%, transparent); pointer-events: none; }
+.reader-mode-tabs button:focus-visible, .reader-mode-directory a:focus-visible { outline: 2px solid var(--ink); outline-offset: -3px; }
+@media (prefers-reduced-motion: reduce) {
+  .reader-mode-stage, .reader-mode-pane, .reader-mode-tabs button { transition: none; }
+}
+@media (forced-colors: active) {
+  .reader-mode-indicator { border: 1px solid Highlight; }
+}

@@ -1,8 +1,8 @@
 export interface DiscussionConfig { repo: string; repoId: string; category: string; categoryId: string; lightTheme: string; darkTheme: string; }
-// Verified 2026-11-13: official giscus installation selects only this public repository.
+// Reverified 2026-11-16 after the repository rename; repository/category IDs are unchanged.
 // The Comments category uses announcement format so threads are created by the app.
 export const DISCUSSIONS: DiscussionConfig | null = {
-  repo: "Shuang-su/metaflow-horizon",
+  repo: "Shuang-su/Metaflow-Horizon",
   repoId: "R_kgDOUxdQnw",
   category: "Comments",
   categoryId: "DIC_kwDOUxdQn84DLBLB",

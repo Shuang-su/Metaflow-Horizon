@@ -1,10 +1,12 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { MouseEvent, KeyboardEvent } from "react";
 import { flattenReadingLinks, type ReadingLink } from "../lib/reading-navigation";
+import { useReader } from "./ReaderProvider";
 import Icon from "./Icon";
 import { pushArticleHash } from "../lib/card-navigation";
 import { closeReaderSheet } from "../lib/reader-sheet";
+import { READING_BLOCK_SELECTOR } from "../lib/reading-progress";
 import { lockDocumentScroll } from "../lib/scroll-lock";
 
 function headingContentTop(target: Element) {
@@ -15,6 +17,9 @@ function headingContentTop(target: Element) {
 }
 
 export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
+  const reader = useReader();
+  const openDirectory = reader?.openDirectory;
+  const registerDirectory = reader?.registerDirectory;
   const [open, setOpen] = useState(false), [hovered, setHovered] = useState(false);
   const [pinned, setPinned] = useState(false);
   const [compact, setCompact] = useState(false), [active, setActive] = useState(items[0]?.id);
@@ -23,10 +28,14 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
   const root = useRef<HTMLDivElement>(null), scrollList = useRef<HTMLElement>(null);
   const externalTrigger = useRef<HTMLElement | null>(null);
   useEffect(() => {
-    const openFromBar = (event: Event) => { externalTrigger.current = (event as CustomEvent<{ origin: HTMLElement }>).detail.origin; setOpen(true); };
+    const openFromBar = (event: Event) => {
+      const origin = (event as CustomEvent<{ origin: HTMLElement }>).detail.origin;
+      if (matchMedia("(max-width: 1279px)").matches && openDirectory) { openDirectory(origin); return; }
+      externalTrigger.current = origin; setOpen(true);
+    };
     window.addEventListener("open-reading-navigation", openFromBar);
     return () => window.removeEventListener("open-reading-navigation", openFromBar);
-  }, []);
+  }, [openDirectory]);
   const readingPosition = useRef<{ node: Element; top: number; width: number } | null>(null);
   const shown = open || (!compact && (hovered || pinned));
   useEffect(() => {
@@ -47,14 +56,14 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
       setActive(current);
       // Retain a visible paragraph across width changes without animating normal scroll.
       if (!readingPosition.current || readingPosition.current.width === innerWidth) {
-        const blocks = document.querySelectorAll(".article-shell h2, .article-shell h3, .article-shell p, .article-shell figure, .past-daily-card");
+        const blocks = document.querySelectorAll(`${READING_BLOCK_SELECTOR}, .article-shell :is(h2,h3,p,figure), .past-daily-card`);
         const node = [...blocks].find(element => { const rect = element.getBoundingClientRect(); return rect.height > 0 && rect.bottom > 100 && rect.top < innerHeight; });
         readingPosition.current = node ? { node, top: node.getBoundingClientRect().top, width: innerWidth } : null;
       }
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const observer = new ResizeObserver(schedule);
-    const article = document.querySelector(".article-shell");
+    const article = document.getElementById("article-top");
     if (article) observer.observe(article);
     const resize = () => {
       const previous = readingPosition.current;
@@ -123,27 +132,28 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
     document.addEventListener("keydown", escape);
     return () => document.removeEventListener("keydown", escape);
   }, [shown, close]);
-  const jump = useCallback((event: MouseEvent<HTMLAnchorElement> | globalThis.MouseEvent, id: string) => {
+  const goTo = useCallback((id: string) => {
     const target = document.getElementById(id);
-    if (!target || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
+    if (!target) return;
     let parent = target.parentElement;
     while (parent) { if (parent instanceof HTMLDetailsElement) parent.open = true; parent = parent.parentElement; }
-    const go = () => {
-      pushArticleHash(id);
-      const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
-      const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
-      // The reference title has a 16px inset; section IDs can precede the title by different amounts.
-      const destination = id === "article-top" ? 0 : window.scrollY + headingContentTop(target) - padding - 16;
-      const top = Math.max(0, Math.min(destination, document.documentElement.scrollHeight - window.innerHeight));
-      window.dispatchEvent(new CustomEvent("reading-navigation-jump", { detail: { top } }));
-      window.scrollTo({ top, behavior });
-      target.setAttribute("tabindex", "-1"); target.focus({ preventScroll: true });
-      setActive(id);
-    };
-    if (compact && open) close(go);
-    else go();
-  }, [close, compact, open]);
+    pushArticleHash(id);
+    const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+    const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const destination = id === "article-top" ? 0 : window.scrollY + headingContentTop(target) - padding - 16;
+    const top = Math.max(0, Math.min(destination, document.documentElement.scrollHeight - window.innerHeight));
+    window.dispatchEvent(new CustomEvent("reading-navigation-jump", { detail: { top } }));
+    window.scrollTo({ top, behavior });
+    target.setAttribute("tabindex", "-1"); target.focus({ preventScroll: true });
+    setActive(id);
+  }, []);
+  useLayoutEffect(() => registerDirectory?.({ items, active, jump: goTo }), [registerDirectory, items, active, goTo]);
+  const jump = useCallback((event: MouseEvent<HTMLAnchorElement> | globalThis.MouseEvent, id: string) => {
+    if (!document.getElementById(id) || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    if (compact && open) close(() => goTo(id));
+    else goTo(id);
+  }, [close, compact, open, goTo]);
   useEffect(() => {
     // The server-rendered overview shares the directory's motion, focus, and title inset.
     const overviewJump = (event: globalThis.MouseEvent) => {
@@ -183,7 +193,7 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
       </div>
     </aside>
     <div className="reading-actions">
-      <button ref={trigger} className={shown ? "is-current" : undefined} aria-expanded={shown} aria-controls="reading-navigation" onClick={() => { if (shown) close(); else { setHovered(false); setOpen(true); } }}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" /></svg><span>目录</span></button>
+      <button ref={trigger} className={shown ? "is-current" : undefined} aria-expanded={compact ? undefined : shown} aria-haspopup={compact ? "dialog" : undefined} aria-controls={compact ? undefined : "reading-navigation"} onClick={event => { if (shown) close(); else if (compact && openDirectory) openDirectory(event.currentTarget); else { setHovered(false); setOpen(true); } }}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" /></svg><span>目录</span></button>
       <a className="reading-backtop" href="#article-top" aria-label="回到文章开头" onClick={event => jump(event, "article-top")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 11 7-7 7 7M12 4v16" /></svg></a>
     </div>
   </div>;

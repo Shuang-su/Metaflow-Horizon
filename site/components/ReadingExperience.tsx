@@ -103,38 +103,86 @@ export default function ReadingExperience() {
 
   useEffect(() => {
     const cover = document.querySelector<HTMLElement>(".article-cover, .article-intro-cover");
-    const image = cover?.querySelector<HTMLElement>(".source-image > img");
+    const image = cover?.querySelector<HTMLImageElement>(".source-image > img");
     if (!cover || !image) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     let previous = -1;
+    let sampledSource = "";
+    const properties = ["--cover-hue", "--cover-blur", "--cover-image-y", "--cover-ambient-y"];
+    // A real, non-interactive layer can also be sampled by the glass optics.
+    const ambient = document.createElement("span");
+    ambient.className = "reader-cover-ambient";
+    ambient.setAttribute("aria-hidden", "true");
+    cover.prepend(ambient);
+    function sample() {
+      if (!image!.complete || !image!.naturalWidth) return;
+      const source = image!.currentSrc || image!.src;
+      if (sampledSource === source) return;
+      sampledSource = source;
+      // A tiny, one-time lower-half sample preserves the image's ambient hue without
+      // holding a full-resolution canvas or reading pixels during scrolling.
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = 16;
+      const context = canvas.getContext("2d", { willReadFrequently: true });
+      if (!context) return;
+      try {
+        context.drawImage(image!, 0, image!.naturalHeight * .4, image!.naturalWidth, image!.naturalHeight * .6, 0, 0, 16, 16);
+        const pixels = context.getImageData(0, 0, 16, 16).data;
+        const buckets = new Map<string, { weight: number; r: number; g: number; b: number }>();
+        for (let index = 0; index < pixels.length; index += 4) {
+          if (pixels[index + 3] < 128) continue;
+          const [r, g, b] = [pixels[index], pixels[index + 1], pixels[index + 2]];
+          const key = `${r >> 5},${g >> 5},${b >> 5}`;
+          const weight = 1 + (Math.max(r, g, b) - Math.min(r, g, b)) / 255;
+          const bucket = buckets.get(key) || { weight: 0, r: 0, g: 0, b: 0 };
+          bucket.weight += weight; bucket.r += r * weight; bucket.g += g * weight; bucket.b += b * weight;
+          buckets.set(key, bucket);
+        }
+        const dominant = [...buckets.values()].sort((a, b) => b.weight - a.weight)[0];
+        if (dominant) cover!.style.setProperty("--cover-hue", `rgb(${Math.round(dominant.r / dominant.weight)} ${Math.round(dominant.g / dominant.weight)} ${Math.round(dominant.b / dominant.weight)})`);
+      } catch {
+        // External images without CORS keep the same fade with the theme surface.
+        cover!.style.removeProperty("--cover-hue");
+      }
+      cover!.dataset.readerCover = "";
+      schedule();
+    }
     function update() {
       frame = 0;
-      const bounds = image!.getBoundingClientRect();
-      const height = Math.max(bounds.height, 1);
-      const top = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 56;
-      const coverStart = bounds.top + window.scrollY;
-      const overlap = Math.min(top, coverStart) - bounds.top;
-      const progress = !reduced.matches && bounds.bottom > 0
-        ? Math.min(1, Math.max(0, overlap / (height * .8))) : 0;
-      const blur = Math.round(14 * progress * 4) / 4;
-      if (blur !== previous) {
-        image!.style.filter = blur > 0 ? `blur(${blur}px)` : "";
-        previous = blur;
-      }
+      const bounds = cover!.getBoundingClientRect();
+      const height = Math.max(image!.offsetHeight, 1);
+      const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 56;
+      const start = bounds.top + window.scrollY;
+      const overlap = Math.max(0, Math.min(header, start) - bounds.top);
+      const progress = !reduced.matches && bounds.bottom > -120 ? Math.min(1, overlap / (height * .8)) : 0;
+      const rounded = Math.round(progress * 1000) / 1000;
+      if (rounded === previous) return;
+      previous = rounded;
+      cover!.style.setProperty("--cover-blur", `${Math.round(18 * progress * 4) / 4}px`);
+      cover!.style.setProperty("--cover-image-y", `${Math.round(Math.min(overlap, height) * (reduced.matches ? 0 : .16))}px`);
+      cover!.style.setProperty("--cover-ambient-y", `${Math.round(Math.min(overlap, height) * (reduced.matches ? 0 : .28))}px`);
     }
-    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
-    schedule();
+    function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+    const failed = () => { delete cover!.dataset.readerCover; properties.forEach(property => cover!.style.removeProperty(property)); };
+    sample();
+    image.addEventListener("load", sample);
+    image.addEventListener("error", failed);
     addEventListener("scroll", schedule, { passive: true });
     addEventListener("resize", schedule);
     reduced.addEventListener("change", schedule);
     return () => {
       cancelAnimationFrame(frame);
-      image.style.removeProperty("filter");
+      ambient.remove();
+      delete cover.dataset.readerCover;
+      properties.forEach(property => cover.style.removeProperty(property));
+      image.removeEventListener("load", sample);
+      image.removeEventListener("error", failed);
       removeEventListener("scroll", schedule);
       removeEventListener("resize", schedule);
       reduced.removeEventListener("change", schedule);
     };
   }, [pathname]);
+
   return null;
 }

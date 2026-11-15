@@ -12,6 +12,8 @@ import "./glass.css";
 import "./reader-chrome.css";
 import "./reading-hierarchy.css";
 import "./reading-experience.css";
+import "./reader-cover.css";
+import "./reader-modes.css";
 import ReaderProvider from "../components/ReaderProvider";
 import DiscussionProvider from "../components/DiscussionProvider";
 import GlassChrome from "../components/GlassChrome";

@@ -33,8 +33,14 @@ export function createGlassLens(host: HTMLElement, kind: LensKind) {
   strip.style.visibility = "hidden";
   const plane = document.createElement("div");
   plane.className = "glass-optical-plane";
-  strip.append(plane);
-  const svgHost = svg("svg", { width: 0, height: 0, "aria-hidden": "true" });
+  // Keep the source and material primitives in the same SVG user space.
+  // The explicit viewBox gives both the HTML source and feImage placement a
+  // shared coordinate system instead of filtering a separate HTML box.
+  const svgHost = svg("svg", { width: "100%", height: "100%", "aria-hidden": "true" });
+  svgHost.style.display = "block";
+  const sourceHost = svg("foreignObject", { x: 0, y: 0, width: "100%", height: "100%", filter: `url(#${id})` });
+  sourceHost.append(plane);
+  strip.append(svgHost);
   const filter = svg("filter", { id, x: 0, y: 0, width: 1, height: 1,
     filterUnits: "objectBoundingBox", primitiveUnits: "userSpaceOnUse", "color-interpolation-filters": "sRGB" });
 
@@ -58,8 +64,10 @@ export function createGlassLens(host: HTMLElement, kind: LensKind) {
     svg("feComposite", { in: "refracted", in2: "field", operator: "in", result: "inside" }),
   );
   merge.append(svg("feMergeNode", { in: "inside" }));
-  if (kind === "menu") {
-    filter.append(svg("feFlood", { class: "glass-menu-tint", result: "tint" }),
+  if (kind !== "slider") {
+    // Fill, refraction and rim share the same field coverage and opacity.
+    // Ready controls must not add a second DOM-painted disc or capsule.
+    filter.append(svg("feFlood", { class: `glass-${kind}-tint`, result: "tint" }),
       svg("feComposite", { in: "tint", in2: "field", operator: "in", result: "tinted" }));
     merge.append(svg("feMergeNode", { in: "tinted" }));
   }
@@ -67,9 +75,8 @@ export function createGlassLens(host: HTMLElement, kind: LensKind) {
   filter.append(merge);
   const defs = svg("defs", {});
   defs.append(filter);
-  svgHost.append(defs);
-  host.append(svgHost, strip);
-  plane.style.filter = `url("#${id}")`;
+  svgHost.append(defs, sourceHost);
+  host.append(strip);
   const source = new OpticalSource(plane);
   let lastBox = "";
   let mapA: MaterialPlanes | undefined;
@@ -83,6 +90,7 @@ export function createGlassLens(host: HTMLElement, kind: LensKind) {
     if (key !== lastBox) {
       lastBox = key;
       Object.assign(strip.style, { left: `${left}px`, top: `${top}px`, width: `${bounds.width}px`, height: `${bounds.height}px` });
+      attribute(svgHost, "viewBox", `0 0 ${bounds.width} ${bounds.height}`);
     }
     return bounds;
   }
@@ -114,7 +122,7 @@ export function createGlassLens(host: HTMLElement, kind: LensKind) {
       // WebKit caches the decoded feImage inputs under the reference filter ID.
       if (webkit && (mapA !== a.maps || mapB !== b.maps)) {
         filter.id = `reader-glass-${++serial}`;
-        plane.style.filter = `url("#${filter.id}")`;
+        attribute(sourceHost, "filter", `url(#${filter.id})`);
       }
       mapA = a.maps;
       mapB = b.maps;

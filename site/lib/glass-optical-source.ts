@@ -11,6 +11,18 @@ export function intersectsOpticalBox(a: OpticalBox, b: OpticalBox) {
     a.top < b.top + b.height && a.top + a.height > b.top;
 }
 
+/** Overflow-visible tracks (including Swiper's translated wrapper) can have
+ * visible descendants outside their own box. Only clipping ancestors narrow
+ * the area in which descendants can paint. */
+export function opticalChildClip(clip: OpticalBox, box: OpticalBox, overflowX: string, overflowY: string): OpticalBox {
+  const clips = (value: string) => /^(hidden|clip|scroll|auto)$/.test(value);
+  const left = clips(overflowX) ? Math.max(clip.left, box.left) : clip.left;
+  const top = clips(overflowY) ? Math.max(clip.top, box.top) : clip.top;
+  const right = clips(overflowX) ? Math.min(clip.left + clip.width, box.left + box.width) : clip.left + clip.width;
+  const bottom = clips(overflowY) ? Math.min(clip.top + clip.height, box.top + box.height) : clip.top + clip.height;
+  return { left, top, width: Math.max(0, right - left), height: Math.max(0, bottom - top) };
+}
+
 function copyStyles(source: CSSStyleDeclaration, target: HTMLElement, properties: readonly string[]) {
   for (const property of properties) target.style.setProperty(property, source.getPropertyValue(property));
 }
@@ -36,11 +48,26 @@ function inlineCopy(source: Node): Node | null {
 }
 
 type Piece = { node: HTMLElement; width: number; height: number; backgroundOnly: boolean };
+type Group = { node: HTMLElement; displayed: HTMLElement[] };
+type Frame = { group: Group; children: HTMLElement[]; left: number; top: number; scaleX: number; scaleY: number };
+
+function layoutBox(source: HTMLElement, rect: DOMRect, style: CSSStyleDeclaration) {
+  const borderBox = style.boxSizing === "border-box";
+  const px = (name: string) => parseFloat(style.getPropertyValue(name)) || 0;
+  const width = px("width") + (borderBox ? 0 : px("padding-left") + px("padding-right") + px("border-left-width") + px("border-right-width")) || source.offsetWidth || rect.width;
+  const height = px("height") + (borderBox ? 0 : px("padding-top") + px("padding-bottom") + px("border-top-width") + px("border-bottom-width")) || source.offsetHeight || rect.height;
+  return { width, height, scaleX: width ? rect.width / width : 1, scaleY: height ? rect.height / height : 1 };
+}
+
+function placement(rect: DOMRect, scaleX: number, scaleY: number, parent: Frame) {
+  return `translate(${(rect.left - parent.left) / parent.scaleX}px, ${(rect.top - parent.top) / parent.scaleY}px) scale(${scaleX / parent.scaleX}, ${scaleY / parent.scaleY})`;
+}
 
 /** Uses real HTML layout for the visible source pieces. The replica contains
  * no original attributes, links, handlers, or interactive elements. */
 export class OpticalSource {
   private pieces = new Map<HTMLElement, Piece>();
+  private groups = new Map<HTMLElement, Group>();
   private displayed: HTMLElement[] = [];
   private textCount = 0;
 
@@ -48,6 +75,7 @@ export class OpticalSource {
 
   clear() {
     this.pieces.clear();
+    this.groups.clear();
     this.displayed = [];
     this.textCount = 0;
     this.layer.replaceChildren();
@@ -59,12 +87,33 @@ export class OpticalSource {
     const visible: HTMLElement[] = [];
     let textCount = 0;
     const active = new Set<HTMLElement>();
-    const add = (source: HTMLElement, rect: DOMRect, style: CSSStyleDeclaration, backgroundOnly: boolean) => {
-      const borderBox = style.boxSizing === "border-box";
-      const px = (name: string) => parseFloat(style.getPropertyValue(name)) || 0;
-      const width = px("width") + (borderBox ? 0 : px("padding-left") + px("padding-right") + px("border-left-width") + px("border-right-width")) || source.offsetWidth || rect.width;
-      const height = px("height") + (borderBox ? 0 : px("padding-top") + px("padding-bottom") + px("border-top-width") + px("border-bottom-width")) || source.offsetHeight || rect.height;
-      const scale = width ? rect.width / width : 1;
+    const activeGroups = new Set<HTMLElement>();
+    const root: Frame = { group: { node: this.layer, displayed: this.displayed }, children: [],
+      left: region.left, top: region.top, scaleX: 1, scaleY: 1 };
+    const frames: Frame[] = [root];
+    const effectGroup = (source: HTMLElement, rect: DOMRect, style: CSSStyleDeclaration, parent: Frame) => {
+      let group = this.groups.get(source);
+      if (!group) {
+        const node = document.createElement("div");
+        Object.assign(node.style, { position: "absolute", left: "0", top: "0", margin: "0", padding: "0",
+          border: "0", boxSizing: "border-box", transformOrigin: "0 0", pointerEvents: "none" });
+        group = { node, displayed: [] };
+        this.groups.set(source, group);
+      }
+      const { width, height, scaleX, scaleY } = layoutBox(source, rect, style);
+      const values = { width: `${width}px`, height: `${height}px`, transform: placement(rect, scaleX, scaleY, parent),
+        opacity: style.opacity, filter: style.filter, clipPath: style.clipPath };
+      for (const [key, value] of Object.entries(values)) {
+        const property = key as keyof typeof values;
+        if (group.node.style[property] !== value) group.node.style[property] = value;
+      }
+      activeGroups.add(source);
+      const frame = { group, children: [], left: rect.left, top: rect.top, scaleX, scaleY };
+      frames.push(frame);
+      return frame;
+    };
+    const add = (source: HTMLElement, rect: DOMRect, style: CSSStyleDeclaration, backgroundOnly: boolean, clip: OpticalBox, parent: Frame) => {
+      const { width, height, scaleX: scale, scaleY } = layoutBox(source, rect, style);
       let entry = this.pieces.get(source);
       const existing = entry && entry.backgroundOnly === backgroundOnly ? entry : undefined;
       if (!existing || existing.width !== width || existing.height !== height || refresh) {
@@ -88,36 +137,60 @@ export class OpticalSource {
         this.pieces.set(source, entry);
       }
       if (!entry) return;
-      const transform = `translate(${rect.left - region.left}px, ${rect.top - region.top}px) scale(${scale}, ${height ? rect.height / height : 1})`;
+      const transform = placement(rect, scale, scaleY, parent);
       if (entry.node.style.transform !== transform) entry.node.style.transform = transform;
-      if (entry.node.style.opacity !== style.opacity) entry.node.style.opacity = style.opacity;
+      // A source's own effects belong to its group, once for the composited
+      // descendants, rather than being multiplied onto each flattened piece.
+      if (entry.node.style.opacity !== "1") entry.node.style.opacity = "1";
+      if (entry.node.style.filter !== "none") entry.node.style.filter = "none";
+      // Rectangular overflow clipping still prunes neighbouring slides. Actual
+      // clip-paths stay on their sized groups, including calc() and round radii.
+      const inset = (value: number, ratio: number) => `${Math.max(0, value / (ratio || 1)).toFixed(3)}px`;
+      const clipPath = `inset(${inset(clip.top - rect.top, scaleY)} ${inset(rect.right - clip.left - clip.width, scale)} ${inset(rect.bottom - clip.top - clip.height, scaleY)} ${inset(clip.left - rect.left, scale)})`;
+      if (entry.node.style.clipPath !== clipPath) entry.node.style.clipPath = clipPath;
       visible.push(entry.node);
+      parent.children.push(entry.node);
       if (!backgroundOnly && entry.node.textContent?.trim()) textCount++;
       active.add(source);
     };
-    const visit = (node: HTMLElement) => {
-      if (visible.length >= maxPieces || node.matches(excluded)) return;
+    const visit = (node: HTMLElement, clip: OpticalBox, parent: Frame) => {
+      if (visible.length >= maxPieces || clip.width <= 0 || clip.height <= 0 || node.matches(excluded)) return;
       const rect = node.getBoundingClientRect();
-      if (!intersectsOpticalBox(rect, region)) {
-        // A display:contents wrapper owns no box.
-        if (!rect.width && !rect.height && getComputedStyle(node).display === "contents")
-          for (const child of node.children) if (child instanceof HTMLElement) visit(child);
-        return;
+      const intersects = intersectsOpticalBox(rect, clip);
+      if (!intersects) {
+        if (!node.children.length) return;
+        // Ordinary article sections can be pruned as a whole. Only the
+        // translated slide track, overhanging date badge and cover's ambient
+        // tail have visible descendants outside their box. Contents has no box.
+        const overflowSource = node.matches(".home-carousel > .swiper-wrapper, .home-slide-visual, :is(.article-cover, .article-intro-cover)[data-reader-cover]");
+        if (!overflowSource && (rect.width || rect.height || getComputedStyle(node).display !== "contents")) return;
       }
       const style = getComputedStyle(node);
-      if (style.visibility !== "visible" || Number(style.opacity) <= .01) return;
+      if (style.display === "none" || style.visibility !== "visible" || Number(style.opacity) <= .01) return;
+      // Keep only effect-bearing ancestors. The normal document stays flat and
+      // only visible pieces are cloned; ordinary offscreen branches stay pruned.
+      const grouped = style.display !== "contents" && rect.width > 0 && rect.height > 0 &&
+        (Number(style.opacity) < 1 || style.filter !== "none" || style.clipPath !== "none");
+      const frame = grouped ? effectGroup(node, rect, style, parent) : parent;
       const text = Array.from(node.childNodes).some(child => child.nodeType === Node.TEXT_NODE && child.textContent?.trim());
       const hasBlockChildren = node.querySelector(":scope > p, :scope > li, :scope > ul, :scope > ol, :scope > div");
       const isLeaf = node instanceof HTMLImageElement || ((node.matches(leaf) || text) && !hasBlockChildren);
-      if (isLeaf || style.backgroundColor !== "rgba(0, 0, 0, 0)" || style.backgroundImage !== "none") add(node, rect, style, !isLeaf);
-      if (!isLeaf) for (const child of node.children) if (child instanceof HTMLElement) visit(child);
+      if (intersects && (isLeaf || style.backgroundColor !== "rgba(0, 0, 0, 0)" || style.backgroundImage !== "none"))
+        add(node, rect, style, !isLeaf, clip, frame);
+      const childClip = style.display === "contents" ? clip : opticalChildClip(clip, rect, style.overflowX, style.overflowY);
+      if (!isLeaf) for (const child of node.children) if (child instanceof HTMLElement) visit(child, childClip, frame);
+      if (grouped && frame.children.length) parent.children.push(frame.group.node);
     };
-    for (const root of roots) visit(root);
+    for (const source of roots) visit(source, region, root);
     for (const node of this.pieces.keys()) if (!active.has(node)) this.pieces.delete(node);
-    if (visible.length !== this.displayed.length || visible.some((node, index) => node !== this.displayed[index])) {
-      this.layer.replaceChildren(...visible);
-      this.displayed = visible;
+    for (const node of this.groups.keys()) if (!activeGroups.has(node)) this.groups.delete(node);
+    for (const { group, children } of frames) {
+      if (children.length !== group.displayed.length || children.some((node, index) => node !== group.displayed[index])) {
+        group.node.replaceChildren(...children);
+        group.displayed = children;
+      }
     }
+    this.displayed = root.children;
     this.textCount = textCount;
     return visible.length;
   }

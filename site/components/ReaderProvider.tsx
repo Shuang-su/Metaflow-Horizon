@@ -8,6 +8,7 @@ import { readSavedArticles, READ_LATER_KEY, writeSavedArticles } from "../lib/re
 import type { ReadLaterArticle } from "../lib/read-later";
 import { useReadingProgress } from "./useReadingProgress";
 import ReadLater from "./ReadLater";
+import type { ReadingLink } from "../lib/reading-navigation";
 import type { ReaderIdentity } from "../lib/reader";
 import { DISCUSSIONS } from "../lib/discussions";
 import ReaderPanels from "./ReaderPanels";
@@ -20,8 +21,14 @@ export interface ReaderThread {
   sampleIndex?: number;
 }
 
+export interface ReaderDirectory {
+  items: ReadingLink[];
+  active?: string;
+  jump: (id: string) => void;
+}
+
 type ReaderPanel =
-  | { kind: "discussion"; thread: ReaderThread; origin: HTMLElement | null }
+  | { kind: "discussion" | "directory"; thread: ReaderThread; origin: HTMLElement | null }
   | { kind: "share"; url: string; origin: HTMLElement };
 
 interface ReaderState {
@@ -30,6 +37,8 @@ interface ReaderState {
   setFontSize: (size: number | null) => void;
   share: (origin: HTMLElement) => void;
   openDiscussion: (origin: HTMLElement | null, thread?: Omit<ReaderThread, "term">) => void;
+  openDirectory: (origin: HTMLElement | null) => void;
+  registerDirectory: (directory: ReaderDirectory) => () => void;
   counts: Record<string, number>;
   readLaterIds: string[];
   toggleReadLater: (id: string) => boolean;
@@ -46,6 +55,7 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
   const [registered, setRegistered] = useState<ReaderIdentity | null>(null);
   const [fontSize, setFont] = useState<number | null>(null);
   const [counts, setCounts] = useState<Record<string, number>>({});
+  const [directory, setDirectory] = useState<ReaderDirectory | null>(null);
   const [panel, setPanel] = useState<ReaderPanel | null>(null);
   const article = registered && registered.url.replace(/\/$/, "") === pathname.replace(/\/$/, "") ? registered : null;
 
@@ -123,7 +133,19 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
   const openDiscussion = useCallback((origin: HTMLElement | null, target?: Omit<ReaderThread, "term">) => {
     const current = target || (article && { article });
     if (!current) return;
+    setReadLaterOrigin(null);
     setPanel({ kind: "discussion", thread: { ...current, term: readerThreadTerm(current.article, current.eventId) }, origin });
+  }, [article]);
+
+  const registerDirectory = useCallback((next: ReaderDirectory) => {
+    setDirectory(next);
+    return () => setDirectory(current => current === next ? null : current);
+  }, []);
+
+  const openDirectory = useCallback((origin: HTMLElement | null) => {
+    if (!article) return;
+    setReadLaterOrigin(null);
+    setPanel({ kind: "directory", thread: { article, term: readerThreadTerm(article) }, origin });
   }, [article]);
 
   const share = useCallback(async (origin: HTMLElement) => {
@@ -180,8 +202,8 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
     } catch {}
   }, [article, openDiscussion]);
 
-  const value = useMemo(() => ({ article, fontSize, setFontSize, share, openDiscussion, counts, readLaterIds, toggleReadLater, openReadLater, canRestart, resetReading }),
-    [article, fontSize, setFontSize, share, openDiscussion, counts, readLaterIds, toggleReadLater, openReadLater, canRestart, resetReading]);
+  const value = useMemo(() => ({ article, fontSize, setFontSize, share, openDiscussion, openDirectory, registerDirectory, counts, readLaterIds, toggleReadLater, openReadLater, canRestart, resetReading }),
+    [article, fontSize, setFontSize, share, openDiscussion, openDirectory, registerDirectory, counts, readLaterIds, toggleReadLater, openReadLater, canRestart, resetReading]);
   return <Register.Provider value={register}><Reader.Provider value={value}>
     {children}
     {readLaterOrigin && <ReadLater origin={readLaterOrigin} items={readLaterIds.flatMap(id => {
@@ -196,7 +218,7 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
         const index = previousIndex !== -1 ? previousIndex + 1 : nextIndex !== -1 ? nextIndex : current.length;
         return [...current.slice(0, index), id, ...current.slice(index)];
       })}/>}
-    {panel && <ReaderPanels panel={panel} close={() => setPanel(null)} reportCount={reportCount}/>}
+    {panel && <ReaderPanels key={panel.kind === "share" ? "share" : "reading"} panel={panel} directory={directory} close={() => setPanel(null)} reportCount={reportCount}/>}
   </Reader.Provider></Register.Provider>;
 }
 

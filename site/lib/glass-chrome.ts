@@ -235,6 +235,31 @@ export function startGlassChrome(root: HTMLElement) {
       if (host) surfaces.set(element, makeSurface(element, kind, host));
     }
 
+    const backdrop = backdropRoots();
+    const finiteMotion = (animations: Animation[]) => animations.some(animation => {
+      const target = (animation.effect as KeyframeEffect | null)?.target;
+      // This thin timer runs for eight seconds; it does not need to keep all
+      // optical surfaces sampling between actual carousel movements.
+      if (target instanceof Element && target.closest(".carousel-progress")) return false;
+      return animation.playState === "running" && Number.isFinite(animation.effect?.getComputedTiming().endTime);
+    });
+
+    // The optical strips live outside the header's transform hierarchy. Keep
+    // sampling until its actual CSS transition finishes; the generic 250ms
+    // wake window is shorter than the header's 360ms hide/show transition.
+    const motionHosts = new Set<HTMLElement>();
+    for (const element of targets) {
+      for (let host: HTMLElement | null = element; host && host !== document.body; host = host.parentElement)
+        motionHosts.add(host);
+    }
+    for (const host of motionHosts) {
+      if (finiteMotion(host.getAnimations())) moving = true;
+    }
+    // Backdrop transitions, such as Swiper's 300ms slide, are not ancestors of
+    // the fixed controls. Follow their actual lifetime as well; reading the
+    // animation list does not walk and measure the source's DOM on every frame.
+    if (backdrop.some(source => finiteMotion(source.getAnimations({ subtree: true })))) moving = true;
+
     const paths = new Map<Surface, LensFrame>();
     const absorbed = new Map<Element, number>();
     for (const surface of surfaces.values()) {
@@ -261,9 +286,10 @@ export function startGlassChrome(root: HTMLElement) {
       }
     }
 
-    const backdrop = backdropRoots();
     let pieces = 0, textPieces = 0;
-    const changed = refreshSources;
+    // Source replicas store computed colours. Sample every frame of the theme
+    // crossfade instead of freezing its first colour until transitionend.
+    const changed = refreshSources || document.documentElement.hasAttribute("data-theme-changing");
     refreshSources = false;
     for (const surface of surfaces.values()) {
       const { element, kind, lens, outline } = surface;
