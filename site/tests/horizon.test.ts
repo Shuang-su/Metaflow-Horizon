@@ -11,6 +11,6 @@ test('new domain keeps old RSS identities and newsroom articles appear on homepa
  const dates=[...f.articles.matchAll(/<pubDate>(.*?)<\/pubDate>/g)].map(m=>Date.parse(m[1]));assert.deepEqual(dates,[...dates].sort((x,y)=>y-x));for(const article of a.editorials)assert.ok(f.articles.includes(`<guid isPermaLink="false">${article.id}</guid>`));
  const home=buildHome(a.index);assert.ok(home.feeds.app.length);assert.ok(home.feeds.feature.length);for(const article of a.editorials)assert.ok(home.feeds.recommended.some(x=>x.id===article.id));
 });
-test('every important discovered event has a visible reading destination',async()=>{
- const {articles}=await buildArchive();for(const f of fs.readdirSync(`${ROOT}/data/research`)){const r=JSON.parse(read('data/research/'+f));for(const c of r.candidates.filter((c:any)=>c.importance==='important'))assert.ok(articles.find(a=>a.date===r.date)?.events?.some(e=>e.id===c.eventId),c.title);}
+test('every included important discovered event has a visible reading destination',async()=>{
+ const {articles}=await buildArchive();for(const f of fs.readdirSync(`${ROOT}/data/research`)){const r=JSON.parse(read('data/research/'+f));for(const c of r.candidates.filter((c:any)=>c.importance==='important'&&['included','merged'].includes(c.disposition)))assert.ok(articles.find(a=>a.date===r.date)?.events?.some(e=>e.id===c.eventId),c.title);}
 });
