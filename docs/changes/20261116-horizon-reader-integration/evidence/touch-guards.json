@@ -1,0 +1,17 @@
+{
+  "input": "DOM TouchEvent with native Touch lists (not physical input)",
+  "results": [
+    {
+      "delta": 60,
+      "hidden": false,
+      "q": 1,
+      "width": 820
+    },
+    {
+      "delta": 0,
+      "hidden": false,
+      "q": 1,
+      "width": 613
+    }
+  ]
+}
