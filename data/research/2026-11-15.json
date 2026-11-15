@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-15",
+  "mode": "scheduled",
+  "window": {"start": "2026-11-13T17:47:13+08:00", "end": "2026-11-15T08:28:00+08:00"},
+  "reviewedAt": "2026-11-15T08:28:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields", "status": "candidates", "checkedAt": "2026-11-15T08:12:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"],
+      "candidateIds": ["github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0", "arxiv:2611.17060", "splattic.com/public-beta-4.0.0"],
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "candidates", "checkedAt": "2026-11-15T08:09:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "checked-no-new", "checkedAt": "2026-11-15T08:12:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official", "status": "candidates", "checkedAt": "2026-11-15T08:15:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": ["github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0", "splattic.com/public-beta-4.0.0"],
+      "gap": "Blender News 返回 HTTP 403；已保留为访问缺口，不能据此判断无新增。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-15T08:13:00+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-15T08:15:00+08:00", "gap": "HTTP 403，未取得可验证正文。"}
+      ]
+    },
+    {
+      "sourceId": "x", "status": "unavailable", "checkedAt": "2026-11-15T08:18:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "candidateIds": [],
+      "gap": "4 个登记账号均只返回 403、登录外壳或禁用错误；改由作者官网、项目页和 GitHub 一手记录核验。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-15T08:16:00+08:00", "gap": "DisabledError，无可验证原帖。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-15T08:17:00+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-15T08:17:30+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-15T08:18:00+08:00", "gap": "DisabledError，无可验证原帖。"}
+      ]
+    },
+    {
+      "sourceId": "research", "status": "candidates", "checkedAt": "2026-11-15T08:20:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"],
+      "candidateIds": ["arxiv:2611.17060"],
+      "gap": "arXiv export API 未能直接读取；候选以官方摘要页、Hugging Face 数据集和代码仓库交叉核验。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-15T08:19:00+08:00", "gap": "API 端点未能直接读取。"},
+        {"url": "https://huggingface.co/papers", "status": "checked-no-new", "checkedAt": "2026-11-15T08:20:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github", "status": "candidates", "checkedAt": "2026-11-15T08:23:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": ["github.com/nianticlabs/spz/pull/115", "github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb", "github.com/playcanvas/supersplat/pull/1108-pending", "github.com/MrNeRF/LichtFeld-Studio/pull/3886-pending"],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "candidates", "checkedAt": "2026-11-15T08:22:00+08:00"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "candidates", "checkedAt": "2026-11-15T08:23:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "community", "status": "candidates", "checkedAt": "2026-11-15T08:26:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": ["reddit-colmap-wasm-repeat-2026-11-15", "reddit-gausify-repeat-2026-11-15"],
+      "gap": "B 站只返回浏览器兼容提示；中文来源未取得可独立核验的新事件。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "candidates", "checkedAt": "2026-11-15T08:24:00+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "unavailable", "checkedAt": "2026-11-15T08:25:00+08:00", "gap": "仅返回浏览器版本过旧提示。"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-15T08:26:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0", "title": "NVIDIA ovrtx 0.7.0 为 Gaussian splat 加入漫反射重照明与实验性 LiDAR", "eventDate": "2026-11-14", "reportDate": "2026-11-15", "importance": "important", "disposition": "included", "reason": "正式预发布把高斯带入可重照明和传感器仿真管线，并包含明确的兼容性变化。", "sources": ["https://github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0", "https://radiancefields.com/ovrtx-0-7-0-adds-diffuse-relighting-for-gaussian-splats"], "eventId": "github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0"
+    },
+    {
+      "id": "arxiv:2611.17060", "title": "Ropedia Xperience 2", "eventDate": "2026-11-12", "reportDate": "2026-11-15", "importance": "important", "disposition": "included", "reason": "7 日重查补收；把大规模度量扫描、Gaussian splat 和第一视角任务视频绑定为 Physical AI 数据。", "sources": ["https://arxiv.org/abs/2611.17060", "https://huggingface.co/datasets/ropedia-ai/Ropedia-Xperience-2", "https://github.com/Ropedia/Ropedia-Xperience-2", "https://radiancefields.com/ropedia-xperience-2-pairs-splat-scans-with-egocentric-video"], "eventId": "arxiv:2611.17060"
+    },
+    {
+      "id": "splattic.com/public-beta-4.0.0", "title": "Splattic Public Beta 4.0.0 加入浏览器 4DGS 编辑与发布", "eventDate": "2026-11-10", "reportDate": "2026-11-15", "importance": "important", "disposition": "included", "reason": "迟到发现的官方公测版，提供可直接试用的 4DGS 裁切、局部删除、简化、拼接和发布路径。", "sources": ["https://www.splattic.com/landing/changelog.html", "https://radiancefields.com/splattic-4-0-0-adds-4dgs-editing-to-its-browser-editor"], "eventId": "splattic.com/public-beta-4.0.0"
+    },
+    {
+      "id": "github.com/nianticlabs/spz/pull/115", "title": "SPZ 修复旧版 v1—v3 扩展记录被静默丢弃", "eventDate": "2026-11-14", "reportDate": "2026-11-15", "importance": "important", "disposition": "included", "reason": "主干兼容性修复，影响依赖旧版扩展元数据的读取工作流。", "sources": ["https://github.com/nianticlabs/spz/pull/115", "https://github.com/nianticlabs/spz/commit/d5abdee9b37c426a0b66b961c3d43b5857a24f4f"], "eventId": "github.com/nianticlabs/spz/pull/115"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb", "title": "Spirula Studio 主干优化大规模训练显存与 densify 稳定性", "eventDate": "2026-11-15", "reportDate": "2026-11-15", "importance": "important", "disposition": "included", "reason": "主干提供位打包可见性掩码、显存预测重构和可选分裂门槛，并公开了有条件的作者测量。", "sources": ["https://github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb", "https://github.com/harry7557558/spirula-studio/commit/6caadf0c1101bf934a58d5ecd16764ed5c9db057"], "eventId": "github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat/pull/1108-pending", "title": "SuperSplat GSAF 时间线", "eventDate": "2026-11-14", "reportDate": "2026-11-15", "importance": "important", "disposition": "excluded", "reason": "已在 11 月 14 日独立稿和 PR 中完整报道，本期不跨日期重复。", "sources": ["https://github.com/playcanvas/supersplat/pull/1108"], "exclusionEvidence": "PR #133 的 docs/daily/2026/11/2026-11-14.md 与 docs/reading/2026-11-14.md 已映射该事件。"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/pull/3886-pending", "title": "LichtFeld 非破坏裁剪", "eventDate": "2026-11-14", "reportDate": "2026-11-15", "importance": "important", "disposition": "excluded", "reason": "已在 11 月 14 日独立稿和 PR 中完整报道，本期不跨日期重复。", "sources": ["https://github.com/MrNeRF/LichtFeld-Studio/pull/3886"], "exclusionEvidence": "PR #133 的 docs/daily/2026/11/2026-11-14.md 与 docs/reading/2026-11-14.md 已映射该事件。"
+    },
+    {
+      "id": "reddit-colmap-wasm-repeat-2026-11-15", "title": "COLMAP WASM 社区帖重新浮现", "eventDate": "2026-10-20", "reportDate": "2026-11-15", "importance": "standard", "disposition": "excluded", "reason": "同一社区信号已在历史日报归档，没有新增实现或 release。", "sources": ["https://www.reddit.com/r/GaussianSplatting/"], "exclusionEvidence": "仓库 2026-10-20 日报已包含 colmap-wasm。"
+    },
+    {
+      "id": "reddit-gausify-repeat-2026-11-15", "title": "Gausify 社区帖重新浮现", "eventDate": "2026-11-07", "reportDate": "2026-11-15", "importance": "standard", "disposition": "excluded", "reason": "社区列表仍显示旧帖，未发现新的版本、代码或一手发布。", "sources": ["https://www.reddit.com/r/GaussianSplatting/"], "exclusionEvidence": "候选 URL、核心结论和公开演示均未变化，且早于本轮增量窗口。"
+    }
+  ]
+}

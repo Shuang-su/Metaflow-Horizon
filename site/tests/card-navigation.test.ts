@@ -56,6 +56,17 @@ test("blocked and corrupt session storage degrade to an in-memory return chain",
   const hostile = new NavigationStore({ getItem: key => key === STORAGE_KEY ? JSON.stringify({ version: 1, entries: [{ ...home, url: "https://outside.test" }] }) : null, setItem: () => {} });
   assert.equal(hostile.get(home.marker.id), undefined);
 });
+test("legacy preview snapshots migrate the site prefix without losing source identity or scroll", () => {
+  const legacy = { ...home, url: "/gaussian-splatting-daily/?q=SOG#feed", focusHref: "/gaussian-splatting-daily/daily/2026/11/10/", marker: { ...home.marker, contextPath: "/gaussian-splatting-daily/topics/formats/" } };
+  const store = new NavigationStore({ getItem: () => JSON.stringify({ version: 1, entries: [legacy] }), setItem: () => {} });
+  const migrated = store.get(home.marker.id)!;
+  assert.equal(migrated.url, `${BASE}/?q=SOG#feed`);
+  assert.equal(migrated.focusHref, `${BASE}/daily/2026/11/10/`);
+  assert.equal(migrated.marker.contextPath, `${BASE}/topics/formats/`);
+  assert.equal(migrated.marker.id, home.marker.id);
+  assert.equal(migrated.scroll, home.scroll);
+  assert.equal(sitePath('/gaussian-splatting-daily/../outside/'), null);
+});
 
 test("carousel restoration handles a non-first paused slide and stale or malformed values", () => {
   const ids = ["2026-10-03", "2026-10-02", "2026-09-30"];

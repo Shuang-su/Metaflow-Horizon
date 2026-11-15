@@ -1,3 +1,7 @@
 # Glass HQ material renderer
 
 MIT-licensed subset of Glass HQ at upstream `9f5bfc7daa7be5d20a41b94d841b8f065de655fc` with the WebGL2 port from Guangcai's `a24ffb03`. The local import uses a TypeScript GLSL string for Next.js and defines the small pixel-buffer type locally so the WebGPU renderer stays out of the dependency graph. The independently licensed `@lisse/core` v0.7.2 path distribution in `../lisse-core/` provides the continuous-corner outline. The application renders the optical source in DOM and uses the generated displacement and rim planes with SVG filters.
+
+The reading controls also use the source implementations of `attachGeometryMotion`, `attachInteraction` and `attachNativeControlMotion` from the same Guangcai checkout. The font menu uses the Glass-HQ detach path and its traced union waypoints. The site adapter prepares WebGL2 maps for those waypoints and blends adjacent maps in its bounded DOM compositor. The slider uses the original control motion with a native range and a local copy of the live rail. Imports between TypeScript files omit the emitted extension for Next.js and resolve Lisse through the local ESM distribution.
+
+The PNG encoder feeds raw rows to the same deflate stream directly on this site. This avoids a temporary Blob URL in WebKit during route navigation.

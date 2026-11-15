@@ -6,10 +6,11 @@ import { createPortal } from "react-dom";
 import { commentCount, DISCUSSIONS, toggleReaction } from "../lib/discussions";
 import type { DiscussionComment } from "../lib/discussions";
 import { useDiscussionSample } from "./DiscussionProvider";
-import type { ReaderPanel, ReaderThread } from "./ReaderProvider";
+import type { ReaderDirectory, ReaderPanel, ReaderThread } from "./ReaderProvider";
 import { closeReaderSheet } from "../lib/reader-sheet";
 import { lockDocumentScroll } from "../lib/scroll-lock";
 import Icon from "./Icon";
+import ReaderModes from "./ReaderModes";
 
 const GiscusThread = dynamic(() => import("./GiscusThread"), { ssr: false });
 
@@ -67,13 +68,15 @@ function DiscussionContent({ thread, reportCount }: { thread: ReaderThread; repo
   </div>;
 }
 
-export default function ReaderPanels({ panel, close, reportCount }: {
+export default function ReaderPanels({ panel, directory, close, reportCount }: {
   panel: ReaderPanel;
+  directory: ReaderDirectory | null;
   close: () => void;
   reportCount: (term: string, count: number) => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const field = useRef<HTMLInputElement>(null);
+  const afterClose = useRef<(() => void) | null>(null);
   const titleId = useId();
   const [notice, setNotice] = useState("");
 
@@ -86,23 +89,32 @@ export default function ReaderPanels({ panel, close, reportCount }: {
       element.close();
       unlock();
       if (panel.origin?.isConnected) panel.origin.focus({ preventScroll: true });
+      // Navigation must run after the native modal and document lock are released.
+      if (afterClose.current) {
+        const jump = afterClose.current;
+        afterClose.current = null;
+        requestAnimationFrame(jump);
+      }
     };
-  }, [panel]);
+  }, [panel.origin]);
 
-  const title = panel.kind === "share" ? "分享文章" :
+  const title = panel.kind === "share" ? "分享文章" : directory ? (panel.thread.eventId ? "事件讨论与目录" : "文章目录与讨论") :
     panel.thread.eventId ? "事件讨论" : panel.thread.article.kind === "daily" ? "本期讨论" : "文章讨论";
-  const dismiss = () => closeReaderSheet(dialog.current, close);
-  return createPortal(<dialog ref={dialog} className={`reader-dialog reader-dialog-${panel.kind}`} aria-labelledby={titleId}
-    data-sheet-drag={panel.kind === "discussion" ? "" : undefined}
+  const dismiss = () => closeReaderSheet(dialog.current, () => close());
+  return createPortal(<dialog ref={dialog} className={`reader-dialog reader-dialog-${panel.kind === "share" ? "share" : "discussion"}${panel.kind !== "share" && directory ? " reader-dialog-modes" : ""}`} aria-labelledby={titleId}
+    data-sheet-drag={panel.kind !== "share" ? "" : undefined}
     onCancel={event => { event.preventDefault(); dismiss(); }}
     onClick={event => { if (event.target === event.currentTarget) dismiss(); }}>
     <div className="reader-dialog-content">
-      {panel.kind === "discussion" && <div className="reader-sheet-handle" data-sheet-handle aria-hidden="true"/>}
+      {panel.kind !== "share" && <div className="reader-sheet-handle" data-sheet-handle aria-hidden="true"/>}
       <header className="reader-dialog-header">
         <h2 id={titleId}>{title}</h2>
         <button type="button" className="reader-dialog-close" data-sheet-close aria-label={`关闭${title}`} onClick={dismiss}><Icon name="close"/></button>
       </header>
-      {panel.kind === "discussion" ? <div className="reader-dialog-scroll"><DiscussionContent key={panel.thread.term} thread={panel.thread} reportCount={reportCount}/></div> :
+      {panel.kind !== "share" ? directory ? <ReaderModes initialMode={panel.kind} directory={directory} jump={id => {
+        closeReaderSheet(dialog.current, () => { afterClose.current = () => directory.jump(id); close(); });
+      }}><DiscussionContent key={panel.thread.term} thread={panel.thread} reportCount={reportCount}/></ReaderModes> :
+        <div className="reader-dialog-scroll"><DiscussionContent key={panel.thread.term} thread={panel.thread} reportCount={reportCount}/></div> :
         <div className="reader-share-options">
           <input ref={field} aria-label="文章链接" readOnly value={panel.url} onFocus={event => event.currentTarget.select()}/>
           <button type="button" onClick={async () => {

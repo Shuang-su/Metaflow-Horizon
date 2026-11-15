@@ -17,7 +17,10 @@ type StorageLike = Pick<Storage, "getItem" | "setItem">;
 
 export function sitePath(value: string): string | null {
   if (!value.startsWith("/") || value.startsWith("//") || /[\\\u0000-\u001f]/.test(value)) return null;
-  const path = new URL(value, "https://local.invalid").pathname;
+  const parsed = new URL(value, "https://local.invalid");
+  const path = parsed.pathname;
+  const legacy = "/gaussian-splatting-daily";
+  if (path === legacy || path.startsWith(`${legacy}/`)) return `${BASE}${path.slice(legacy.length)}${parsed.search}${parsed.hash}`;
   return path === BASE || path.startsWith(`${BASE}/`) ? value : null;
 }
 
@@ -66,7 +69,12 @@ export class NavigationStore {
       const saved = JSON.parse(storage?.getItem(STORAGE_KEY) || "null");
       if (saved?.version === 1 && Array.isArray(saved.entries)) {
         for (const entry of saved.entries.slice(-40)) {
-          if (entry && sitePath(entry.url || "") && markerFrom({ [HISTORY_KEY]: entry.marker }) && Number.isFinite(entry.scroll) && entry.scroll >= 0 && Number.isFinite(entry.width) && entry.ui && typeof entry.ui === "object") this.entries.set(entry.marker.id, entry);
+          const url = entry && sitePath(entry.url || "");
+          if (url && markerFrom({ [HISTORY_KEY]: entry.marker }) && Number.isFinite(entry.scroll) && entry.scroll >= 0 && Number.isFinite(entry.width) && entry.ui && typeof entry.ui === "object") this.entries.set(entry.marker.id, {
+            ...entry, url,
+            ...(entry.focusHref && sitePath(entry.focusHref) ? { focusHref: sitePath(entry.focusHref) } : {}),
+            marker: { ...entry.marker, ...(entry.marker.contextPath && sitePath(entry.marker.contextPath) ? { contextPath: sitePath(entry.marker.contextPath) } : {}) },
+          });
         }
       }
     } catch { /* A blocked or stale session store must not disable navigation. */ }

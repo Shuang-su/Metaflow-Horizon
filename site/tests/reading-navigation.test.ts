@@ -6,7 +6,8 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { buildArchive, ROOT } from "../lib/content";
 import { loadEditorialCovers } from "../lib/editorial-covers";
-import { readingNavigation, flattenReadingLinks } from "../lib/reading-navigation";
+import { readingNavigation, readingOverview, flattenReadingLinks } from "../lib/reading-navigation";
+import { BASE, entryUrl } from "../lib/catalog";
 import { weekPicks } from "../lib/week-picks";
 import ArticleEvents from "../components/ArticleEvents";
 import ReadingGuide from "../components/ReadingGuide";
@@ -28,14 +29,13 @@ test("archived covers are local, have intrinsic dimensions and accessible origin
   }
   assert.match(articles.find(a => a.date === "2026-09-30")!.image!.source, /radiancefields.com\/spirula-studio-v2026.9.30/);
 });
-test("new reading editions use 22 distinct dated editorial covers", async () => {
+test("dated editorial covers remain distinct and match their manifest", async () => {
   const { articles } = await archive;
   const manifest = loadEditorialCovers(ROOT);
   const illustrated = articles.filter(article => article.image?.kind === "editorial-illustration");
-  assert.equal(illustrated.length, 22);
-  assert.deepEqual(illustrated.map(article => article.date).sort(),
-    articles.filter(article => article.date > "2026-10-18" && !["2026-10-21","2026-10-22","2026-10-23","2026-10-24"].includes(article.date)).map(article => article.date).sort());
-  assert.equal(new Set(Object.values(manifest).map(cover => cover.inputSha256)).size, 22);
+  assert.ok(illustrated.length >= 22);
+  assert.deepEqual(illustrated.map(article => article.date).sort(), Object.keys(manifest).sort());
+  assert.equal(new Set(Object.values(manifest).map(cover => cover.inputSha256)).size, illustrated.length);
   for (const article of illustrated) {
     const { date, image } = article;
     const cover = manifest[date];
@@ -79,4 +79,22 @@ test("discussion entry renders before opening without invented comments or a sub
   assert.ok(html.includes('id="sources"'));
   assert.ok(html.includes("原始研究记录"));
   assert.ok(!html.includes("全部日报"));
+});
+test("issue overview excludes permanent utilities and keeps weekly recommendations as real links", async () => {
+  const { articles } = await archive;
+  const article = articles.find(item => item.date === "2026-11-10")!;
+  const picks = weekPicks(article, articles);
+  assert.ok(picks.length > 0);
+  const weekItems = picks.map(item => ({ id: `week-${item.id}`, title: item.title, href: `${BASE}${entryUrl(item)}` }));
+  const overview = readingOverview(article, true, weekItems);
+  assert.ok(!overview.some(item => ["sources", "discussion", "reading-guide"].includes(item.id)));
+  const directory = readingNavigation(article, true, weekItems);
+  assert.ok(directory.some(item => item.id === "sources"));
+  assert.ok(directory.some(item => item.id === "discussion"));
+  const html = renderToStaticMarkup(createElement(ReadingGuide, { article, hasWeek: true, weekItems }));
+  assert.match(html, /<details[^>]*class="guide-subdirectory"[^>]*><summary>展开本周重要内容目录<\/summary>/);
+  for (const item of weekItems) {
+    assert.ok(html.includes(`href="${item.href}"`));
+    assert.ok(!html.includes(`href="#${item.id}"`));
+  }
 });

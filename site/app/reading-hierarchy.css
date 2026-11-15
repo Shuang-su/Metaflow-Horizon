@@ -75,7 +75,10 @@
     left: calc(var(--reading-pane-start) + var(--reading-pane-width) / 2);
     width: min(520px, calc(var(--reading-pane-width) - 24px));
   }
-  .reader-header .header-inner nav,
+  .reader-header .header-inner .reader-more-menu {
+    max-width: calc(var(--reading-pane-width) - 32px);
+    inset-inline-end: 16px;
+  }
   .reading-nav-panel {
     max-width: calc(var(--reading-pane-width) - 32px);
     inset-inline-start: auto;

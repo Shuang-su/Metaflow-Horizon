@@ -1,7 +1,7 @@
 export const READER_ROUTE_READY = "gsd:reader-route-ready";
 
 const PROGRESS_KEY = "gsd:reading-progress:v1:";
-const BLOCKS = "[data-reader-body] .prose :is(h2,h3,h4,p,li,blockquote,pre,figure,img,table), [data-reader-body] .event-title";
+export const READING_BLOCK_SELECTOR = "[data-reader-body] .prose :is(h2,h3,h4,p,li,blockquote,pre,figure,img,table), [data-reader-body] .event-title";
 const SECTION = "[data-event-id][id], .prose :is(h2,h3,h4)[id], section[id]";
 const EXCLUDED = ".longform-related, .this-week, .article-teasers, .article-revisions, .footnotes, [data-footnotes], .editorial-disclosure, .original-record";
 
@@ -23,10 +23,10 @@ function fingerprint(text: string) {
 function blocks(article: HTMLElement) {
   let anchor = article.id;
   const occurrences = new Map<string, number>();
-  return Array.from(article.querySelectorAll<HTMLElement>(`${SECTION}, ${BLOCKS}`)).flatMap(element => {
+  return Array.from(article.querySelectorAll<HTMLElement>(`${SECTION}, ${READING_BLOCK_SELECTOR}`)).flatMap(element => {
     if (element.closest(EXCLUDED) || !element.getClientRects().length) return [];
     if (element.matches(SECTION)) anchor = element.id;
-    if (!element.matches(BLOCKS)) return [];
+    if (!element.matches(READING_BLOCK_SELECTOR)) return [];
     if (element.matches("li,blockquote") && element.querySelector("p")) return [];
     if (element.matches("img") && element.closest("figure")) return [];
     if (element.matches("p") && !element.textContent?.trim() && element.querySelector("img")) return [];

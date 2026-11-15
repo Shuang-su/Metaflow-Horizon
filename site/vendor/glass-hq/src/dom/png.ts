@@ -44,8 +44,14 @@ function stored(raw: Uint8Array): Uint8Array {
 async function deflate(raw: Uint8Array): Promise<Uint8Array> {
   if (typeof CompressionStream === "undefined") return stored(raw);
   try {
-    const stream = new Blob([raw as BlobPart]).stream().pipeThrough(new CompressionStream("deflate"));
-    return new Uint8Array(await new Response(stream).arrayBuffer());
+    // A byte stream avoids opening a temporary blob URL while WebKit is leaving the page.
+    const bytes = new ReadableStream<Uint8Array<ArrayBuffer>>({
+      start(controller) {
+        controller.enqueue(raw as Uint8Array<ArrayBuffer>);
+        controller.close();
+      },
+    });
+    return new Uint8Array(await new Response(bytes.pipeThrough(new CompressionStream("deflate"))).arrayBuffer());
   } catch {
     return stored(raw);
   }

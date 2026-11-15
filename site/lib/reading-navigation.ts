@@ -1,6 +1,6 @@
 import type { Article } from "./types";
 
-export interface ReadingLink { id: string; title: string; children?: ReadingLink[] }
+export interface ReadingLink { id: string; title: string; href?: string; children?: ReadingLink[] }
 /** A retained heading alias sits inside prose, after the visible event title. */
 export function readingHashTarget(target: Element): Element {
   return target.classList.contains("legacy-anchor")
@@ -12,7 +12,7 @@ export function readingGroupLabel(article: Article, group: keyof typeof groups) 
   return article.readingEdition && group === "paper" ? "研究简讯" : groups[group];
 }
 /** Navigation follows the actual reading order and stable event identities. */
-export function readingNavigation(article: Article, hasWeek: boolean): ReadingLink[] {
+export function readingNavigation(article: Article, hasWeek: boolean, weekItems: ReadingLink[] = []): ReadingLink[] {
   const items: ReadingLink[] = [{ id: article.readingGuide?.id || "reading-guide", title: "日报速览" }];
   if (article.events) {
     items.push(...article.events.filter(e => e.group === "main").map(e => ({ id: e.anchor, title: e.title, children: e.sections })));
@@ -24,9 +24,14 @@ export function readingNavigation(article: Article, hasWeek: boolean): ReadingLi
   } else {
     items.push(...article.toc.filter(t => t.depth === 2 && t.id !== article.readingGuide?.id).map(t => ({ id: t.id, title: t.title.replace(/^\d+\.\s*/, "") })));
   }
-  if (hasWeek) items.push({ id: "this-week", title: "本周重要内容" });
+  if (hasWeek) items.push({ id: "this-week", title: "本周重要内容", children: weekItems });
   items.push({ id: "sources", title: "来源与纠错" }, { id: "discussion", title: "本期讨论" });
   return items;
+}
+/** The overview describes this issue; permanent reader utilities stay in the full directory. */
+export function readingOverview(article: Article, hasWeek: boolean, weekItems: ReadingLink[] = []): ReadingLink[] {
+  return readingNavigation(article, hasWeek, weekItems).filter(item =>
+    ![article.readingGuide?.id || "reading-guide", "sources", "discussion"].includes(item.id));
 }
 export function flattenReadingLinks(items: ReadingLink[]): ReadingLink[] {
   return items.flatMap(item => [item, ...flattenReadingLinks(item.children || [])]);

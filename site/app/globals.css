@@ -475,9 +475,9 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,su
 .article-shell .prose { font-size: 17px; line-height: 30.6px; }
 .article-shell .prose a, .guide-judgment a, .guide-context a { color: var(--article-link); text-decoration: none; }
 .article-shell .prose a:hover, .article-shell .prose a:focus-visible, .guide-judgment a:hover, .guide-judgment a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
-.article-date { width: 72px; height: 72px; border-radius: 16px; background: var(--date-day); color: var(--date-ink); top: 294px; box-shadow: var(--article-float-shadow); border: 1px solid var(--date-border); }
+.article-date { width: 72px; height: 72px; border-radius: 16px; background: var(--date-day); color: var(--date-ink); top: 294px; box-shadow: none; border: 0; }
 .article-date span { background: #DA282A; font-size: 14px; padding: 0; line-height: 26px; }
-.article-date strong { font-size: 32px; line-height: 44px; }
+.article-date strong { font-size: 32px; line-height: 46px; }
 .event-guide { border: 0; padding: 36px 0; margin: 0; overflow-wrap: anywhere; }
 .event-guide h2 { font-size: 17px; font-weight: 400; }
 .event-guide ol > li { display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 8px; margin: 20px 0; }
@@ -525,16 +525,21 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,su
 .past-daily h2 { font-size: 20px; font-weight: 500; }
 .past-daily header > a { font-size: 17px; line-height: 1.4; font-weight: 400; color: var(--article-muted); }
 .past-daily header > a:hover, .past-daily header > a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
-.past-daily-card { padding: 32px; display: flex; align-items: center; gap: 32px; border: 1px solid var(--article-card-border); border-radius: 16px; margin-bottom: 24px; background: var(--bg); }
+.past-daily-list { display: grid; gap: 16px; }
+.past-daily-card { position: relative; isolation: isolate; padding: 16px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid var(--article-card-border); border-radius: 16px; background: var(--bg); }
 .past-daily-card > div { flex: 1; min-width: 0; }
-.past-daily-card h3 { font-size: 17px; line-height: 1.5; font-weight: 500; margin-top: 24px; }
+.past-daily-card h3 { font-size: 17px; line-height: 1.5; font-weight: 500; margin-top: 16px; overflow-wrap: anywhere; }
+.past-daily-card h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.past-daily-card:has(h3 a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 .past-daily-card:hover { color: var(--ink); border-color: var(--line); }
-.past-daily-card:hover h3, .past-daily-card:focus-visible h3 { text-decoration: underline; text-underline-offset: 4px; }
+.past-daily-card:hover h3 a, .past-daily-card h3 a:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
 .past-date { display: block; width: 40px; height: 40px; border: 1px solid var(--date-border); box-shadow: var(--article-float-shadow); border-radius: 8px; overflow: hidden; text-align: center; background: var(--date-day); color: var(--date-ink); }
 .past-date span { display: block; background: #DA282A; color: white; font-size: 11px; font-weight: 500; line-height: 18px; }
 .past-date strong { display: block; font-size: 15px; font-weight: 500; line-height: 20px; }
-.past-daily-card figure { width: 140px; flex-shrink: 0; }
-.past-daily-card img { width: 100%; height: 105px; object-fit: cover; border-radius: 3px; }
+.past-daily-card figure { width: 84px; height: 65px; flex-shrink: 0; overflow: hidden; border-radius: 5px; }
+.past-daily-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.past-daily-card .image-unavailable { padding: 6px; gap: 2px; font-size: 10px; }
+.past-daily-card .image-unavailable a { position: relative; z-index: 2; }
 .article-subscription-wrap { max-width: 728px; margin: auto; padding: 0 24px 36px; }
 @media (max-width: 767px) {
  .article-cover { margin-top: 0; }
@@ -547,7 +552,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,su
  .article-shell .article-sources .prose { font-size: 13px; line-height: 1.8; }
  .article-date { width: 64px; height: 64px; border-radius: 16px; top: calc(100vw * 9 / 16 - 32px); }
  .article-date span { font-size: 12px; line-height: 24px; }
- .article-date strong { font-size: 28px; line-height: 38px; }
+ .article-date strong { font-size: 28px; line-height: 40px; }
  .event-title, .event-group-title, .this-week h2, .issue-discussion h2 { font-size: 20px; line-height: 28px; margin-bottom: 24px; }
  .news-event .prose h3 { font-size: 18px; }
  .group-brief .event-title { font-size: 18px; }
@@ -555,10 +560,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,su
  .guide-judgment { font-size: 13px; line-height: 23px; }
  .guide-context { font-size: 11px; }
  .article-events .news-event { padding-top: 32px; }
- .past-daily-card { padding: 16px; gap: 20px; margin-bottom: 16px; align-items: flex-start; }
- .past-daily-card figure { width: 84px; }
- .past-daily-card img { height: 65px; }
- .past-daily-card h3 { font-size: 15px; margin-top: 20px; }
+ .past-daily-card h3 { font-size: 15px; }
  .past-daily header > a { font-size: 15px; }
  .past-daily h2 { font-size: 20px; }
  .this-week li > a { font-size: 15px; }
@@ -781,7 +783,9 @@ body:has(.article-interaction-bar) .site-footer { padding-bottom: 112px; }
 @media (max-width: 1279px) {
   body:has(.article-interaction-bar) .reading-actions { display: none; }
   .article-interaction-bar .bar-directory { display: flex; }
-  body:has(.reading-navigator.is-open) .article-interaction-wrap { visibility: hidden; }
+  body:has(.reading-navigator.is-open) .article-interaction-wrap {
+    translate: 0 calc(100% + 28px + env(safe-area-inset-bottom)); pointer-events: none;
+  }
 }
 @media (max-width: 767px) {
   .article-reading-edition .brief-news-list .event-title { font-size: 15px; }

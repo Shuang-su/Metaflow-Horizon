@@ -1,0 +1,55 @@
+/* Image detail, ambient colour, and editorial text travel at distinct depths. */
+:is(.article-cover, .article-intro-cover)[data-reader-cover] {
+  position: relative;
+  isolation: isolate;
+  background: transparent;
+}
+.reader-cover-ambient { display: none; }
+:is(.article-cover, .article-intro-cover)[data-reader-cover] > .reader-cover-ambient {
+  display: block;
+  position: absolute;
+  inset: 12% 0 -112px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--cover-hue, var(--surface)) 68%, var(--bg)) 46%,
+    color-mix(in srgb, var(--cover-hue, var(--surface)) 18%, var(--bg)) 76%,
+    var(--bg) 100%);
+  translate: 0 var(--cover-ambient-y, 0px);
+}
+:is(.article-cover, .article-intro-cover)[data-reader-cover] .source-image {
+  position: relative;
+  overflow: hidden;
+}
+:is(.article-cover, .article-intro-cover)[data-reader-cover] .source-image > img {
+  filter: blur(var(--cover-blur, 0px));
+  translate: 0 var(--cover-image-y, 0px);
+  mask-image: linear-gradient(to bottom, #000 0 42%, rgb(0 0 0 / .88) 61%, rgb(0 0 0 / .28) 83%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0 42%, rgb(0 0 0 / .88) 61%, rgb(0 0 0 / .28) 83%, transparent 100%);
+}
+/* Reserve the overlap before image decoding so a cold load cannot move text. */
+.article-cover .article-date {
+  top: auto;
+  bottom: 76px;
+  z-index: 2;
+}
+.article-cover + .article-header {
+  position: relative;
+  z-index: 1;
+  margin-top: -44px;
+  padding-top: 0;
+}
+.article-shell[data-report-id] > .article-header .article-meta {
+  justify-content: space-between;
+  align-items: baseline;
+}
+.article-shell[data-report-id] > .article-header h1 { margin-top: 0; font-weight: 500; }
+/* Longform titles precede their cover; preserve that reading and keyboard order. */
+.article-intro-cover[data-reader-cover] { overflow: visible; }
+.article-intro-cover[data-reader-cover] .source-image { border-radius: inherit; }
+@media (prefers-reduced-motion: reduce) {
+  :is(.article-cover, .article-intro-cover)[data-reader-cover] > .reader-cover-ambient,
+  :is(.article-cover, .article-intro-cover)[data-reader-cover] .source-image > img { translate: none; }
+  :is(.article-cover, .article-intro-cover)[data-reader-cover] .source-image > img { filter: none; }
+}

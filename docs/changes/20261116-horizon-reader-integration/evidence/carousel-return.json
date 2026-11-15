@@ -1,0 +1,12 @@
+{
+  "before": {
+    "date": "2026-11-13",
+    "index": 2
+  },
+  "restored": {
+    "date": "2026-11-13",
+    "enabled": true,
+    "focus": "home-slide-link"
+  },
+  "next": 3
+}

@@ -4,22 +4,32 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { navigationStore, UI_CAPTURE } from "../lib/card-navigation";
 import { captureReadingPosition, consumeReadingResume, readReadingPosition, readingLine, READER_ROUTE_READY, resolveReadingPosition, writeReadingPosition } from "../lib/reading-progress";
 import type { ReaderIdentity } from "../lib/reader";
+import { scrollReadingTo } from "../lib/reading-scroll";
 
 export function useReadingProgress(article: ReaderIdentity | null) {
   const [restartId, setRestartId] = useState<string | null>(null);
   const stop = useRef<(() => void) | null>(null);
+  const restarting = useRef(false);
+  const cancelRestart = useRef<(() => void) | null>(null);
   const resetReading = useCallback(() => {
     if (!article) return;
+    cancelRestart.current?.();
     stop.current?.();
     writeReadingPosition(article.id, null);
     setRestartId(null);
     if (location.hash) history.replaceState(history.state, "", location.pathname + location.search);
     const heading = document.querySelector<HTMLElement>("#article-top h1");
-    if (heading) {
-      heading.tabIndex = -1;
-      heading.focus({ preventScroll: true });
-    }
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.dispatchEvent(new CustomEvent("reading-navigation-jump", { detail: { top: 0 } }));
+    restarting.current = true;
+    cancelRestart.current = scrollReadingTo(0, completed => {
+      stop.current?.();
+      restarting.current = false;
+      cancelRestart.current = null;
+      if (completed && heading?.isConnected) {
+        heading.tabIndex = -1;
+        heading.focus({ preventScroll: true });
+      }
+    });
   }, [article]);
 
   useEffect(() => {
@@ -54,18 +64,20 @@ export function useReadingProgress(article: ReaderIdentity | null) {
     };
     stop.current = () => {
       stopRestoring();
-      expectedScroll = 0;
+      expectedScroll = scrollY;
+      ready = true;
       dirty = false;
       clearTimeout(timer);
     };
     const save = () => {
-      if (!dirty || placing || navigationStore().restoration || !root.isConnected || location.pathname !== initialURL.pathname) return;
+      if (!dirty || placing || restarting.current || navigationStore().restoration || !root.isConnected || location.pathname !== initialURL.pathname) return;
       dirty = false;
       const position = captureReadingPosition(root);
       writeReadingPosition(article.id, position);
       if (!position) setRestartId(null);
     };
     const scroll = () => {
+      if (restarting.current) { expectedScroll = scrollY; return; }
       if (!ready || document.documentElement.hasAttribute("data-reader-route-pending") ||
           Math.abs(scrollY - expectedScroll) <= 1) return;
       expectedScroll = scrollY;
@@ -172,6 +184,7 @@ export function useReadingProgress(article: ReaderIdentity | null) {
     return () => {
       active = false;
       save();
+      cancelRestart.current?.();
       stopRestoring();
       clearTimeout(timer);
       stop.current = null;

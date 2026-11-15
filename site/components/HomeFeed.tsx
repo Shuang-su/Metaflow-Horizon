@@ -3,6 +3,7 @@
 import Link from "./ArticleLink";
 import { createPortal } from "react-dom";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { transitionContent } from "../lib/content-transition";
 import { restoredUI, UI_CAPTURE, type PageUI } from "../lib/card-navigation";
 import { HOME_SECTIONS, type HomeFeedKey, type HomeFeeds } from "../lib/home";
 import BrandMark from "./BrandMark";
@@ -20,6 +21,8 @@ export default function HomeFeed({ feeds, sidebar }: { feeds: HomeFeeds; sidebar
   const buttons = useRef<Partial<Record<HomeFeedKey, HTMLButtonElement | null>>>({});
   const menuButtons = useRef<Partial<Record<HomeFeedKey, HTMLButtonElement | null>>>({});
   const menu = useRef<HTMLDivElement>(null);
+  const feedContent = useRef<HTMLDivElement>(null);
+  const requestedFeed = useRef<HomeFeedKey>("recommended");
   const menuTrigger = useRef<HTMLButtonElement>(null);
   const ready = useRef(false);
   const reading = useRef<ReadingState>({ feed, limits, scroll: 0 });
@@ -44,6 +47,7 @@ export default function HomeFeed({ feeds, sidebar }: { feeds: HomeFeeds; sidebar
         // Keep cleanup/pagehide safe even if development Strict Mode reruns
         // mount effects before the restored React state has rendered.
         reading.current = { feed: state.feed, limits, scroll };
+        requestedFeed.current = state.feed;
         setFeed(state.feed); setLimits(limits);
       }
     } catch {}
@@ -93,6 +97,11 @@ export default function HomeFeed({ feeds, sidebar }: { feeds: HomeFeeds; sidebar
     };
   }, [menuOpen]);
 
+  function changeFeed(key: HomeFeedKey) {
+    requestedFeed.current = key;
+    transitionContent(feedContent.current, () => setFeed(key), reading.current.feed !== key);
+  }
+
   const section = HOME_SECTIONS.find(({ key }) => key === feed)!;
   const items = feeds[feed].slice(0, limits[feed]);
   const mobileMenu = <div className="home-feed-menu" ref={menu}>
@@ -104,11 +113,11 @@ export default function HomeFeed({ feeds, sidebar }: { feeds: HomeFeeds; sidebar
           const key = e.key === "ArrowUp" ? HOME_SECTIONS[HOME_SECTIONS.length - 1].key : feed;
           requestAnimationFrame(() => menuButtons.current[key]?.focus());
         }
-      }}>{section.label}<Icon name="chevron" /></button>
-    <div id="home-feed-menu" className="home-feed-dropdown" role="menu" aria-label="选择内容栏目" hidden={!menuOpen}>
+      }}><span className="home-feed-label" key={feed}>{section.label}</span><Icon name="chevron" /></button>
+    <div id="home-feed-menu" className="home-feed-dropdown" role="menu" aria-label="选择内容栏目" data-open={menuOpen} aria-hidden={!menuOpen} inert={!menuOpen}>
       {HOME_SECTIONS.map(({ key, label, icon }, i) => <button key={key} role="menuitemradio"
         ref={(el) => { menuButtons.current[key] = el; }} aria-checked={feed === key} tabIndex={feed === key ? 0 : -1}
-        onClick={() => { setFeed(key); setMenuOpen(false); menuTrigger.current?.focus({ preventScroll: true }); }}
+        onClick={() => { changeFeed(key); setMenuOpen(false); menuTrigger.current?.focus({ preventScroll: true }); }}
         onKeyDown={(e) => {
           const next = e.key === "ArrowDown" ? (i + 1) % HOME_SECTIONS.length
             : e.key === "ArrowUp" ? (i + HOME_SECTIONS.length - 1) % HOME_SECTIONS.length
@@ -122,19 +131,20 @@ export default function HomeFeed({ feeds, sidebar }: { feeds: HomeFeeds; sidebar
     {host && createPortal(mobileMenu, host)}
     <nav className="home-feed-nav" aria-label="首页内容栏目">
       <div className="home-feed-tabs" role="tablist" aria-label="内容类型" aria-orientation="vertical">
-        {HOME_SECTIONS.map(({ key, label, icon }, i) => <button key={key} id={`feed-${key}`}
+        {HOME_SECTIONS.map(({ key, label, icon }) => <button key={key} id={`feed-${key}`}
           ref={(el) => { buttons.current[key] = el; }} role="tab" aria-selected={feed === key}
-          aria-controls="home-feed-panel" tabIndex={feed === key ? 0 : -1} onClick={() => setFeed(key)}
+          aria-controls="home-feed-panel" tabIndex={feed === key ? 0 : -1} onClick={() => changeFeed(key)}
           onKeyDown={(e) => {
-            const next = e.key === "ArrowDown" || e.key === "ArrowRight" ? (i + 1) % HOME_SECTIONS.length
-              : e.key === "ArrowUp" || e.key === "ArrowLeft" ? (i + HOME_SECTIONS.length - 1) % HOME_SECTIONS.length
+            const current = HOME_SECTIONS.findIndex(section => section.key === requestedFeed.current);
+            const next = e.key === "ArrowDown" || e.key === "ArrowRight" ? (current + 1) % HOME_SECTIONS.length
+              : e.key === "ArrowUp" || e.key === "ArrowLeft" ? (current + HOME_SECTIONS.length - 1) % HOME_SECTIONS.length
                 : e.key === "Home" ? 0 : e.key === "End" ? HOME_SECTIONS.length - 1 : -1;
-            if (next >= 0) { e.preventDefault(); setFeed(HOME_SECTIONS[next].key); buttons.current[HOME_SECTIONS[next].key]?.focus(); }
+            if (next >= 0) { e.preventDefault(); changeFeed(HOME_SECTIONS[next].key); buttons.current[HOME_SECTIONS[next].key]?.focus(); }
           }}><Icon name={icon} /><span>{label}</span></button>)}
       </div>
     </nav>
     <section className="home-feed" aria-label={`${section.label}内容`}>
-      <div id="home-feed-panel" role="tabpanel" aria-label={`${section.label}内容`} tabIndex={0} data-feed={feed}>
+      <div ref={feedContent} id="home-feed-panel" role="tabpanel" aria-label={`${section.label}内容`} tabIndex={0} data-feed={feed}>
         {items.map((item) => <article data-article-origin={`home:${feed}:${item.id}`} className="feed-row" key={item.id} data-entry-id={item.id}>
           <div className="feed-row-copy"><h2><Link href={item.url}>{item.title}</Link></h2>
             <div className="feed-meta"><span className="feed-source">{item.kind === "daily" && <BrandMark />}{item.sourceLabel}</span>
