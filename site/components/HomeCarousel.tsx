@@ -66,6 +66,16 @@ export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
   }, [active, ready]);
 
   useEffect(() => {
+    const instance = swiper.current;
+    if (!instance || instance.destroyed) return;
+    // React updates params.enabled, but the live engine also owns enabled.
+    // A carousel mounted during the return transition must be enabled again
+    // when that transition finishes, using Swiper's public lifecycle API.
+    if (navigation?.busy) instance.disable();
+    else instance.enable();
+  }, [navigation?.busy, ready, recovery?.version]);
+
+  useEffect(() => {
     const interrupt = () => {
       const instance = swiper.current;
       if (!interaction.current || !instance || instance.destroyed) return;
@@ -171,7 +181,7 @@ export default function HomeCarousel({ slides }: { slides: HomeSlide[] }) {
             <div className="home-slide-date" aria-hidden="true"><span>{date.weekday}</span><strong>{date.day}</strong></div>
           </div>
           <div className="home-slide-copy">{isActive ? <h1>{item.title}</h1> : <p>{item.title}</p>}</div>
-          {isActive && <Link className="home-slide-link" draggable={false} href={item.url} aria-label={`${item.date} 日报：${item.title}`}><span className="sr-only">阅读全文</span></Link>}
+          {isActive && <Link className="home-slide-link" draggable={false} href={item.url} aria-label={`${item.date}，${item.title}`}><span className="sr-only">阅读全文</span></Link>}
         </SwiperSlide>;
       })}
       <div className="carousel-controls" slot="container-end">

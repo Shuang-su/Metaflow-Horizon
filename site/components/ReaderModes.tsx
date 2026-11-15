@@ -62,8 +62,8 @@ export default function ReaderModes({ initialMode, directory, jump, children }: 
     return <ul>{entries.map(item => {
       const selected = item.id === directory.active;
       const containsActive = selected || flattenReadingLinks(item.children || []).some(child => child.id === directory.active);
-      return <li key={item.id}><a href={`#${item.id}`} aria-current={selected ? "location" : undefined} onClick={event => {
-        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      return <li key={item.id}><a href={item.href || `#${item.id}`} aria-current={selected ? "location" : undefined} onClick={event => {
+        if (item.href || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault(); jump(item.id);
       }}>{item.title}</a>{item.children?.length ? <details open={containsActive || undefined}>
         <summary>子目录<span className="sr-only">：{item.title}</span></summary>{list(item.children)}

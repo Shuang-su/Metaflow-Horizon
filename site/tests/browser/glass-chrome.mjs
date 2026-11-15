@@ -1,6 +1,6 @@
 // Browser regression for the source/dropout and final-transition-frame defects.
 // Run on an isolated, hydrated home page at a narrow viewport through tab CDP.
-export async function verifyGlassSources(cdp) {
+export async function verifyGlassSources(cdp, report = () => {}) {
   const read = async expression => {
     const result = await cdp.send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true });
     if (result.exceptionDetails) throw new Error(result.exceptionDetails.text);
@@ -28,8 +28,8 @@ export async function verifyGlassSources(cdp) {
         if (now-start < 430) requestAnimationFrame(sample);
         else {
           const image=carousel.querySelector('.home-slide:not([inert]) img');
-          resolve({index:carousel.swiper.realIndex, expected:next,samples,
-            sources:strips.map(strip=>[...strip.querySelectorAll('.glass-optical-plane img')].some(copy=>copy.src===image.currentSrc)),
+          resolve({index:carousel.swiper.realIndex, expected:next,samples,hasCover:Boolean(image),
+            sources:strips.map(strip=>image ? [...strip.querySelectorAll('.glass-optical-plane img')].some(copy=>copy.src===image.currentSrc) : Boolean(strip.querySelector('.glass-optical-plane')?.children.length)),
             controls:[...document.querySelectorAll('.home-header [data-glass-surface]')].map(e=>({
               ready:e.hasAttribute('data-glass-ready'),background:getComputedStyle(e).backgroundColor,
               border:getComputedStyle(e).borderColor,shadow:getComputedStyle(e).boxShadow}))});
@@ -39,6 +39,7 @@ export async function verifyGlassSources(cdp) {
       requestAnimationFrame(sample);
     })`));
   }
+  report(result);
   for (const turn of result) {
     if (turn.index !== turn.expected || turn.sources.length !== 3 || !turn.sources.every(Boolean))
       throw new Error(`Missing carousel glass source at slide ${turn.expected}`);
@@ -46,7 +47,7 @@ export async function verifyGlassSources(cdp) {
       throw new Error(`Duplicate DOM material at slide ${turn.expected}`);
     // A frame may precede the optics RAF; a frozen 50ms tail has a larger error.
     const finalFrames = turn.samples.filter(frame => frame.ms >= 310);
-    if (finalFrames.some(frame => frame.error > .75 || frame.images === 0))
+    if (finalFrames.some(frame => frame.error > .75 || turn.hasCover && frame.images === 0))
       throw new Error(`Unsettled glass source at slide ${turn.expected}`);
   }
   return result;

@@ -37,13 +37,14 @@ test("local reaction toggles are reversible and cannot mutate another event's in
   assert.equal(newReaction.reactions.at(-1)!.count, 1);
   assert.deepEqual(toggleReaction(newReaction, "❤️"), first);
 });
-test("daily overview numbers news and every later module in the same ordered list", async () => {
+test("daily overview numbers editorial sections without including fixed discussion and source modules", async () => {
   const article = (await buildArchive()).articles.find(article => article.date === "2026-09-30")!;
   const html = renderToStaticMarkup(createElement(ReadingGuide, { article, hasWeek: true }));
   assert.ok(html.includes("日报速览"));
   assert.ok(!html.includes(">今日最值得看<"));
   const numbers = [...html.matchAll(/class="guide-number"[^>]*>(\d+)</g)].map(match => Number(match[1]));
-  assert.deepEqual(numbers, Array.from({ length: 10 }, (_, i) => i + 1));
+  assert.deepEqual(numbers, Array.from({ length: 8 }, (_, i) => i + 1));
   for (const event of article.events!.filter(event => event.group === "main")) assert.ok(html.includes(event.judgment));
-  for (const anchor of ["group-brief", "group-paper", "this-week", "sources", "discussion"]) assert.ok(html.includes(`href="#${anchor}"`));
+  for (const anchor of ["group-brief", "group-paper", "this-week"]) assert.ok(html.includes(`href="#${anchor}"`));
+  for (const anchor of ["sources", "discussion"]) assert.ok(!html.includes(`href="#${anchor}"`));
 });

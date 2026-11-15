@@ -50,6 +50,7 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
       frame = 0;
       let current = items[0]?.id;
       for (const item of flattenReadingLinks(items)) {
+        if (item.href) continue;
         const target = document.getElementById(item.id);
         if (target && target.getClientRects().length && headingContentTop(target) <= 140) current = item.id;
       }
@@ -179,7 +180,7 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
   function list(entries: ReadingLink[], depth = 0) {
     return <ul className={depth ? "reading-nav-children" : undefined}>{entries.map(item => {
       const hasActive = item.id === active || flattenReadingLinks(item.children || []).some(child => child.id === active);
-      return <li key={item.id}><a href={`#${item.id}`} aria-current={item.id === active ? "location" : undefined} className={hasActive ? "is-current" : undefined} onClick={event => jump(event, item.id)}><span className="reading-nav-prefix" aria-hidden="true" /><span className="reading-nav-text">{item.title}</span></a>{item.children?.length ? <details className="reading-nav-branch" open={hasActive || undefined}><summary aria-label={`展开${item.title}子目录`}>子目录</summary>{list(item.children, depth + 1)}</details> : null}</li>;
+      return <li key={item.id}><a href={item.href || `#${item.id}`} aria-current={item.id === active ? "location" : undefined} className={hasActive ? "is-current" : undefined} onClick={item.href ? undefined : event => jump(event, item.id)}><span className="reading-nav-prefix" aria-hidden="true" /><span className="reading-nav-text">{item.title}</span></a>{item.children?.length ? <details className="reading-nav-branch" open={hasActive || undefined}><summary aria-label={`展开${item.title}子目录`}>子目录</summary>{list(item.children, depth + 1)}</details> : null}</li>;
     })}</ul>;
   }
   return <div className={`reading-navigator${shown ? " is-open" : ""}`} ref={root} onKeyDown={keys}>

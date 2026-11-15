@@ -1,3 +1,5 @@
+import { updateCoverGlyphContrast } from "./reader-chrome-contrast";
+import { CHROME_FRAME_EVENT, chromeOpticalOpacity } from "./reader-chrome-motion";
 import { createGlassLens, type GlassAppearance, type LensKind, type MaterialPlanes } from "./glass-lens";
 import { attachGeometryMotion, type GeometryAnimator, type LensFrame, type LensPlacement } from "../vendor/glass-hq/src/dom/morph";
 import { attachInteraction, resolveMotion, type SurfaceAnimator } from "../vendor/glass-hq/src/dom/interaction";
@@ -94,6 +96,8 @@ export function startGlassChrome(root: HTMLElement) {
     renderer?.dispose();
     for (const surface of surfaces.values()) {
       delete surface.element.dataset.glassReady;
+      delete surface.element.dataset.coverGlyph;
+      delete surface.element.dataset.glassPending;
       surface.lens.hide();
     }
     report("fallback");
@@ -155,6 +159,8 @@ export function startGlassChrome(root: HTMLElement) {
     surface.fallback?.remove();
     surface.lens.dispose();
     delete surface.element.dataset.glassReady;
+    delete surface.element.dataset.coverGlyph;
+    delete surface.element.dataset.glassPending;
     delete surface.element.dataset.glassAbsorbing;
     surface.element.style.removeProperty("--glass-absorbed");
     surface.content?.style.removeProperty("clip-path");
@@ -244,9 +250,8 @@ export function startGlassChrome(root: HTMLElement) {
       return animation.playState === "running" && Number.isFinite(animation.effect?.getComputedTiming().endTime);
     });
 
-    // The optical strips live outside the header's transform hierarchy. Keep
-    // sampling until its actual CSS transition finishes; the generic 250ms
-    // wake window is shorter than the header's 360ms hide/show transition.
+    // Continue sampling independent interaction and ancestor animations.
+    // Scroll chrome itself uses a synchronous shared frame (chromeFrame).
     const motionHosts = new Set<HTMLElement>();
     for (const element of targets) {
       for (let host: HTMLElement | null = element; host && host !== document.body; host = host.parentElement)
@@ -293,6 +298,13 @@ export function startGlassChrome(root: HTMLElement) {
     refreshSources = false;
     for (const surface of surfaces.values()) {
       const { element, kind, lens, outline } = surface;
+      if (kind === "chrome") {
+        // Decoding a new material is not a capability fallback. Avoid flashing
+        // a second DOM disc while its first optical field is being prepared.
+        if (!failed && !transparency.matches && !element.hasAttribute("data-glass-ready")) element.dataset.glassPending = "";
+        else delete element.dataset.glassPending;
+      }
+      if (kind === "chrome" && (failed || transparency.matches)) delete element.dataset.coverGlyph;
       const box = shapeOf(surface);
       const path = paths.get(surface);
       const a = path?.draw?.a ?? box, b = path?.draw?.b ?? a;
@@ -301,7 +313,9 @@ export function startGlassChrome(root: HTMLElement) {
       const progress = kind === "slider" ? Math.max(0, Math.min(1, Number(element.style.getPropertyValue("--lg-control-progress")))) : 1;
       const transitioning = element.hasAttribute("data-glass-morph");
       const exitAtSource = kind === "menu" && element.hasAttribute("data-ending-style") && !transitioning;
-      const opacity = (outline?.opacity() ?? 1) * progress * (1 - suppressed) * (exitAtSource ? 0 : 1);
+      const chromeQ = kind === "chrome" && element.hasAttribute("data-chrome-motion")
+        ? Number(element.style.getPropertyValue("--reader-chrome-q")) : 1;
+      const opacity = (outline?.opacity() ?? 1) * progress * chromeOpticalOpacity(chromeQ, suppressed) * (exitAtSource ? 0 : 1);
       if (suppressed > 0 && element.style.getPropertyValue("--glass-absorbed") !== String(suppressed)) {
         element.style.setProperty("--glass-absorbed", String(suppressed));
         element.dataset.glassAbsorbing = "";
@@ -345,6 +359,8 @@ export function startGlassChrome(root: HTMLElement) {
         previous ? themeMix * (2 - themeMix) : mix, sources, opacity, changed, glow);
       textPieces += lens.source.visibleTextCount;
       if (!element.hasAttribute("data-glass-ready")) element.dataset.glassReady = "";
+      delete element.dataset.glassPending;
+      if (kind === "chrome") updateCoverGlyphContrast(element, appearance === "dark");
       report("webgl2-svg");
     }
     if (!surfaces.size && !failed) report("idle");
@@ -368,6 +384,11 @@ export function startGlassChrome(root: HTMLElement) {
     attributeFilter: ["class", "style", "hidden", "inert", "aria-hidden", "data-card-pulling", "data-pull-visible", "data-retained",
       "src", "data-glass-surface", "data-ending-style", "data-starting-style", "data-press-phase"] });
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "style"] });
+  const chromeFrame = (event: Event) => {
+    cancelAnimationFrame(frame);
+    draw((event as CustomEvent<number>).detail);
+  };
+  document.addEventListener(CHROME_FRAME_EVENT, chromeFrame);
   const repaint = (event: Event) => {
     if (event.target instanceof Element && event.target.closest("[data-glass-optics], [data-glass-optics-host]")) return;
     refreshSources = true;
@@ -401,6 +422,7 @@ export function startGlassChrome(root: HTMLElement) {
     disposed = true;
     cancelAnimationFrame(frame);
     observer.disconnect();
+    document.removeEventListener(CHROME_FRAME_EVENT, chromeFrame);
     resize.disconnect();
     for (const event of interactionEvents) document.removeEventListener(event, input, true);
     window.removeEventListener("scroll", schedule, true);

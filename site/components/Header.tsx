@@ -262,8 +262,8 @@ export default function Header() {
           <div className="reader-more-content" data-glass-menu-content inert={!interactiveMenu}>{menuLinks}</div>
         </nav>) : <nav ref={navigation} className={mobileOpen ? "is-open" : ""} aria-label="主导航" id="main-nav"
           inert={mobileLayout && !mobileOpen} aria-hidden={mobileLayout && !mobileOpen || undefined}>{menuLinks}</nav>}
-        {article && reader?.canRestart && <button type="button" className="reader-restart" onClick={reader.resetReading}
-          inert={mobileOverlay || cardNavigation?.busy || undefined}>从头开始阅读</button>}
+        {article && <ReaderRestartReminder available={Boolean(reader?.canRestart)} onRestart={() => reader?.resetReading()}
+          inert={mobileOverlay || cardNavigation?.busy || undefined} />}
         <div className="header-actions" inert={cardNavigation?.busy || undefined}>
           {article ? <div className="reader-header-tools" inert={mobileOverlay || undefined}>
             <ReaderFontControl onOpen={() => setPanel(null)}/><ReaderShareControl onOpen={() => setPanel(null)}/>
@@ -291,4 +291,17 @@ export default function Header() {
       <SearchOverlay open={panel === "search"} onClose={() => setPanel(null)} />
     </header>
   </>;
+}
+
+/** Retain the reminder for its short exit after resetReading clears canRestart. */
+function ReaderRestartReminder({ available, onRestart, inert }: { available: boolean; onRestart: () => void; inert?: boolean }) {
+  const [retained, setRetained] = useState(available);
+  useEffect(() => {
+    if (available) { setRetained(true); return; }
+    const timer = window.setTimeout(() => setRetained(false), matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 160);
+    return () => window.clearTimeout(timer);
+  }, [available]);
+  if (!available && !retained) return null;
+  return <button type="button" className="reader-restart" onClick={onRestart}
+    data-restart-exiting={!available || undefined} inert={inert || !available || undefined}>从头开始阅读</button>;
 }

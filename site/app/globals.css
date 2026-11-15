@@ -475,9 +475,9 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,su
 .article-shell .prose { font-size: 17px; line-height: 30.6px; }
 .article-shell .prose a, .guide-judgment a, .guide-context a { color: var(--article-link); text-decoration: none; }
 .article-shell .prose a:hover, .article-shell .prose a:focus-visible, .guide-judgment a:hover, .guide-judgment a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
-.article-date { width: 72px; height: 72px; border-radius: 16px; background: var(--date-day); color: var(--date-ink); top: 294px; box-shadow: var(--article-float-shadow); border: 1px solid var(--date-border); }
+.article-date { width: 72px; height: 72px; border-radius: 16px; background: var(--date-day); color: var(--date-ink); top: 294px; box-shadow: none; border: 0; }
 .article-date span { background: #DA282A; font-size: 14px; padding: 0; line-height: 26px; }
-.article-date strong { font-size: 32px; line-height: 44px; }
+.article-date strong { font-size: 32px; line-height: 46px; }
 .event-guide { border: 0; padding: 36px 0; margin: 0; overflow-wrap: anywhere; }
 .event-guide h2 { font-size: 17px; font-weight: 400; }
 .event-guide ol > li { display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 8px; margin: 20px 0; }
@@ -552,7 +552,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,su
  .article-shell .article-sources .prose { font-size: 13px; line-height: 1.8; }
  .article-date { width: 64px; height: 64px; border-radius: 16px; top: calc(100vw * 9 / 16 - 32px); }
  .article-date span { font-size: 12px; line-height: 24px; }
- .article-date strong { font-size: 28px; line-height: 38px; }
+ .article-date strong { font-size: 28px; line-height: 40px; }
  .event-title, .event-group-title, .this-week h2, .issue-discussion h2 { font-size: 20px; line-height: 28px; margin-bottom: 24px; }
  .news-event .prose h3 { font-size: 18px; }
  .group-brief .event-title { font-size: 18px; }

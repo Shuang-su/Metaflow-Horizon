@@ -1,46 +1,66 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { installReaderSheetDrag } from "../lib/reader-sheet";
+import { canSettleChromeScroll, createReaderChromeMotion } from "../lib/reader-chrome-motion";
 
 export default function ReadingExperience() {
   const pathname = usePathname();
+  const chrome = useRef<ReturnType<typeof createReaderChromeMotion> | null>(null);
+  useLayoutEffect(() => {
+    chrome.current = createReaderChromeMotion();
+    return () => { chrome.current?.dispose(); chrome.current = null; };
+  }, []);
+  useLayoutEffect(() => { chrome.current?.route(pathname); }, [pathname]);
   useEffect(installReaderSheetDrag, []);
   useEffect(() => {
     if (!document.querySelector("[data-reader-article]")) return;
-    const root = document.documentElement;
     const phone = matchMedia("(max-width: 767px)");
     const folded = matchMedia("(vertical-viewport-segments: 2)");
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     let last = window.scrollY;
-    let distance = 0;
+    let settleTimer: ReturnType<typeof setTimeout> | undefined;
     let touchScrolling = false;
+    let scrubbedInput = false;
     let inputUntil = 0;
     function reveal() {
-      delete root.dataset.readerControlsHidden;
-      distance = 0;
+      scrubbedInput = false;
+      chrome.current?.setVisible(true);
+      clearTimeout(settleTimer);
+    }
+    function protectedChrome() {
+      return Boolean(document.querySelector("[data-reader-route-pending], main[data-card-pulling], .reader-header[data-menu-open=true], #reader-font-panel, .reading-navigator.is-open, dialog[open]")
+        || document.activeElement?.matches("[data-reader-scroll-chrome] :focus-visible"));
+    }
+    function mustReveal(y = window.scrollY) {
+      return !phone.matches || folded.matches || y <= 64 || protectedChrome();
+    }
+    function settleInput() {
+      // Recheck live layout and interaction guards after the delay, even if a
+      // touchend arrived after an observer already cancelled an older timer.
+      if (mustReveal()) { reveal(); return; }
+      if (!canSettleChromeScroll(phone.matches, folded.matches, scrubbedInput, touchScrolling)) return;
+      scrubbedInput = false;
+      chrome.current?.settleScroll();
     }
     function update() {
       frame = 0;
       const y = Math.max(0, window.scrollY);
       const delta = y - last;
       last = y;
-      if (!phone.matches || folded.matches || y <= 64) {
+      if (mustReveal(y)) {
         reveal();
         return;
       }
       if (performance.now() > inputUntil || Math.abs(delta) < 1) return;
-      if (document.querySelector("[data-reader-route-pending], main[data-card-pulling], .reader-header[data-menu-open=true], #reader-font-panel, .reading-navigator.is-open, dialog[open]")
-        || document.activeElement?.matches("[data-reader-scroll-chrome] :focus-visible")) {
-        distance = 0;
-        return;
+      if (y > 104 || delta < 0) {
+        chrome.current?.followScroll(delta);
+        scrubbedInput = true;
+        clearTimeout(settleTimer);
+        settleTimer = setTimeout(settleInput, 120);
       }
-      if (Math.sign(distance) !== Math.sign(delta)) distance = 0;
-      distance += delta;
-      if (distance < -14) reveal();
-      else if (distance > 38 && y > 104) root.dataset.readerControlsHidden = "";
     }
     function schedule() {
       if (!frame) frame = requestAnimationFrame(update);
@@ -52,14 +72,20 @@ export default function ReadingExperience() {
       if (event.type === "touchmove") touchScrolling = true;
     }
     function endInput() {
-      if (touchScrolling) inputUntil = performance.now() + 1100;
+      if (!touchScrolling) return;
+      inputUntil = performance.now() + 1100;
       touchScrolling = false;
+      clearTimeout(settleTimer);
+      if (mustReveal()) { reveal(); return; }
+      if (!canSettleChromeScroll(phone.matches, folded.matches, scrubbedInput, touchScrolling)) return;
+      settleTimer = setTimeout(settleInput, 120);
     }
     function resetInput() {
       inputUntil = 0;
       touchScrolling = false;
+      scrubbedInput = false;
       last = window.scrollY;
-      distance = 0;
+      clearTimeout(settleTimer);
     }
     function reset() {
       resetInput();
@@ -73,6 +99,13 @@ export default function ReadingExperience() {
     function revealFocus(event: FocusEvent) {
       if (event.target instanceof Element && event.target.closest("[data-reader-scroll-chrome]")) reveal();
     }
+    const panels = new MutationObserver(records => {
+      if (!records.some(record => record.target instanceof Element &&
+        !record.target.closest("[data-glass-optics], [data-glass-optics-host]"))) return;
+      if (protectedChrome()) reveal();
+    });
+    panels.observe(document.body, { subtree: true, childList: true, attributes: true,
+      attributeFilter: ["data-menu-open", "data-reader-route-pending", "data-card-pulling", "class", "open"] });
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("touchstart", resetInput, { passive: true });
     window.addEventListener("touchmove", markInput, { passive: true });
@@ -86,6 +119,7 @@ export default function ReadingExperience() {
     reduced.addEventListener("change", reset);
     return () => {
       cancelAnimationFrame(frame);
+      panels.disconnect();
       reveal();
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("touchstart", resetInput);

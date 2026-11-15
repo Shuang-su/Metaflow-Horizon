@@ -135,3 +135,32 @@ export async function verifyHomeCarousel(cdp, resize) {
   report.push({ interrupted });
   return report;
 }
+
+/** A carousel mounts disabled during a card return; its live engine must resume. */
+export async function verifyCarouselReturn(cdp) {
+  const evaluate = async expression => {
+    const result = await cdp.send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true });
+    if (result.exceptionDetails) throw new Error(result.exceptionDetails.text);
+    return result.result.value;
+  };
+  const wait = condition => evaluate(`new Promise(resolve => {
+    const start=performance.now(); function frame(){ if (${condition}) resolve(true);
+    else if(performance.now()-start>2500) resolve(false); else requestAnimationFrame(frame); } frame(); })`);
+  const before = await evaluate(`(() => { const c=document.querySelector('#main .home-carousel');
+    const result={date:c.dataset.activeReport,index:c.swiper.realIndex};
+    c.querySelector('.home-slide-link').click(); return result; })()`);
+  if (!await wait(`document.querySelector('.article-back') && !document.documentElement.hasAttribute('data-reader-route-pending')`))
+    throw new Error("Article entry did not finish");
+  await evaluate(`document.querySelector('.article-back').click()`);
+  if (!await wait(`document.querySelector('#main .home-carousel') && !document.documentElement.hasAttribute('data-reader-route-pending')`))
+    throw new Error("Carousel return did not finish");
+  const restored = await evaluate(`(() => { const c=document.querySelector('#main .home-carousel');
+    return {date:c.dataset.activeReport,enabled:c.swiper.enabled,focus:document.activeElement.className}; })()`);
+  if (!restored.enabled || restored.date !== before.date || restored.focus !== "home-slide-link")
+    throw new Error("Returning did not restore an operable carousel: " + JSON.stringify(restored));
+  const next = (before.index + 1) % 5;
+  await evaluate(`document.querySelectorAll('#main .carousel-page')[${next}].click()`);
+  if (!await wait(`document.querySelector('#main .home-carousel').swiper.realIndex === ${next} && !document.querySelector('#main .home-carousel').swiper.animating`))
+    throw new Error("Carousel stayed disabled after returning from reading");
+  return {before,restored,next};
+}

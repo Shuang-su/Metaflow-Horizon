@@ -77,12 +77,9 @@
 }
 @media (max-width: 767px) {
   .reader-header .header-inner { padding: 0 16px; }
-  .reader-header[data-reader-scroll-chrome] {
-    transition: translate .19s cubic-bezier(.2,.75,.3,1);
-  }
   html[data-reader-controls-hidden]:not(:has(main[data-card-pulling], .card-transition-backdrop[data-pull-visible]))
     .reader-header[data-reader-scroll-chrome]:not(:has(:focus-visible)) {
-    translate: 0 calc(-100% - 8px); pointer-events: none;
+    pointer-events: none;
   }
   html[data-reader-controls-hidden]:not(:has(main[data-card-pulling], .card-transition-backdrop[data-pull-visible]))
     .article-interaction-wrap[data-reader-scroll-chrome]:not(:has(:focus-visible)) {
@@ -137,8 +134,8 @@
   .reader-header[data-reader-scroll-chrome], .article-interaction-wrap[data-reader-scroll-chrome] { transition: none; }
 }
 
-.reader-header .reader-chrome-control[data-glass-ready], .reader-header .menu-toggle[data-glass-ready],
-.home-header .header-actions :is(.search-link,.appearance-toggle,.menu-toggle)[data-glass-ready] {
+.reader-header .reader-chrome-control:is([data-glass-ready],[data-glass-pending]), .reader-header .menu-toggle:is([data-glass-ready],[data-glass-pending]),
+.home-header .header-actions :is(.search-link,.appearance-toggle,.menu-toggle):is([data-glass-ready],[data-glass-pending]) {
   /* Fill and rim are composed together by the Glass-HQ optical lens. */
   background: transparent;
   border-color: transparent;
@@ -193,3 +190,45 @@
 @media (min-width: 1280px) {
   .reading-nav-rail:not(.is-open) .reading-nav-panel { background: transparent; }
 }
+
+/* Buttons leave sideways as a group while their header/y anchors stay fixed.
+   transform composes with Glass-HQ's independent press scale/translate. */
+[data-chrome-motion] {
+  position: relative;
+  opacity: var(--reader-chrome-q, 1);
+  transform: translateX(var(--reader-chrome-x, 0px)) scale(var(--reader-chrome-scale, 1));
+  transform-origin: center;
+}
+[data-chrome-motion] > :is(.icon, span):not(.sr-only) { animation: none !important; }
+[data-chrome-old-glyph] {
+  position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
+}
+[data-chrome-old-glyph] > * { animation: none !important; }
+
+/* Dark glass receives a pale transmitted tint, not a second opaque DOM disc. */
+.glass-chrome-tint { transition: flood-color .22s ease; }
+:root[data-theme="dark"] .glass-chrome-tint { flood-color: white; flood-opacity: .14; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .glass-chrome-tint { flood-color: white; flood-opacity: .14; }
+}
+.reader-restart { animation: reader-restart-enter .5s both; transform-origin: center; }
+.reader-restart[data-restart-exiting] { animation: reader-restart-exit .16s ease-in both; pointer-events: none; }
+@keyframes reader-restart-enter {
+  0% { opacity: 0; transform: translateY(-28px) scale(.9); }
+  38% { opacity: 1; transform: translateY(12px) scale(1.04); }
+  62% { transform: translateY(-5px) scale(.98); }
+  82% { transform: translateY(2px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes reader-restart-exit {
+  to { opacity: 0; transform: translateY(-10px) scale(.94); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glass-chrome-tint { transition: none; }
+  .reader-restart, .reader-restart[data-restart-exiting] { animation: none; }
+  .reader-restart[data-restart-exiting] { visibility: hidden; }
+}
+
+/* Only glyph ink adapts over the cover. The optical circle stays single-layer. */
+.reader-header [data-cover-glyph="dark"] { color: #181c1b; }
+.reader-header [data-cover-glyph="light"] { color: #fff; }
