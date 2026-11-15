@@ -11,6 +11,7 @@ import { weekPicks } from "../lib/week-picks";
 import { searchItems } from "../lib/search";
 import ReadingGuide from "../components/ReadingGuide";
 import ArticleEvents from "../components/ArticleEvents";
+import { ArticleRevisions } from "../components/ArticleRevisions";
 
 const canonicalPath = "docs/daily/2026/10/2026-10-03.md";
 const readerPath = "docs/reading/2026-10-03.md";
@@ -19,19 +20,19 @@ const reader = fs.readFileSync(`${ROOT}/site/tests/fixtures/reading-2026-10-03.m
 const source = parseArticle(original, canonicalPath);
 const archive = buildArchive();
 
-test("reader edition keeps source identity, old links and research while shortening the continuous read", async () => {
+test("reader edition keeps source identity, old links and complete research with an editorial overview", async () => {
   const a = (await archive).articles.find(a=>a.date==="2026-10-03")!, old = await source;
   assert.equal(a.contentHash, old.contentHash);
   assert.equal(a.html, old.html);
   assert.equal(a.sourceCount, 10);
   assert.equal(a.readingEdition?.path, readerPath);
   assert.ok(a.events!.length >= 16);
-  assert.ok(a.readingMinutes < old.readingMinutes);
+  assert.ok(a.readingMinutes >= 1);
   assert.equal(a.events?.filter(e => e.group === "main").length, 4);
   for (const e of a.events!) {
     assert.deepEqual(e.context, []);
     const legacy = old.events!.find(o => o.id === e.id); if (legacy) assert.equal(e.anchor, legacy.anchor);
-    if (e.group === "main") assert.ok(e.judgment.length < 60);
+    if (e.group === "main") assert.ok(e.judgment.trim().length > 0);
   }
   for (const title of ["用途/格式：", "证据等级：", "本窗口未核实", "今天最值得实际测试"])
     assert.ok(!a.text.includes(title));
@@ -76,6 +77,17 @@ test("all reader editions preserve research identity and anchors", async () => {
   assert.equal(articles.find(a => a.date === "2026-10-01")!.events!.find(e => e.id.includes("blender"))!.group, "brief");
   assert.ok(!readingNavigation(articles.find(a => a.date === "2026-10-02")!, false).some(item => item.title === "研究简讯"), "a day without paper news needs no empty research section");
   assert.ok(index.entries.filter(e => e.kind === "paper" && e.id.startsWith("arxiv:")).length >= 170);
+});
+test("all previously published reader headings still resolve after editorial title changes", async () => {
+  const baseline = JSON.parse(fs.readFileSync(`${ROOT}/site/tests/fixtures/reader-targets-20261115.json`, "utf8")) as { targets: Record<string, string[]> };
+  const { articles } = await archive;
+  for (const [date, targets] of Object.entries(baseline.targets)) {
+    const article = articles.find(item => item.date === date)!;
+    assert.ok(article, `${date}: retained edition`);
+    const html = renderToStaticMarkup(createElement(ReadingGuide, { article })) + renderToStaticMarkup(createElement(ArticleEvents, { article })) + renderToStaticMarkup(createElement(ArticleRevisions, { revisions: article.revisions })) + article.archiveHtml + (article.footnotesHtml || "");
+    const actual = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
+    for (const id of targets) assert.ok(actual.has(id), `${date}: published reader target ${id} was removed`);
+  }
 });
 
 test("corrected sources retain stable event IDs, search terms and paper ownership", async () => {

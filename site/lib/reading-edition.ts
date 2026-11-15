@@ -7,7 +7,7 @@ import { parseMarkdown } from "./markdown";
 import { imageKey } from "./images";
 import type { CoverRecord } from "./editorial-covers";
 
-type ReaderEvent = Pick<EditorialEvent, "id" | "group" | "judgment"> & Partial<Pick<EditorialEvent, "anchor" | "tags" | "images">> & { source?: string; kind?: Entry["kind"]; sourceRefs?: string[] };
+type ReaderEvent = Pick<EditorialEvent, "id" | "group" | "judgment"> & Partial<Pick<EditorialEvent, "anchor" | "tags" | "images" | "aliases">> & { source?: string; kind?: Entry["kind"]; sourceRefs?: string[] };
 type ParseArticle = (markdown: string, file: string) => Promise<Article>;
 const headingText = (node: RootContent): string => "value" in node ? node.value : "children" in node ? node.children.map(n => headingText(n as RootContent)).join("") : "";
 const idsIn = (html: string) => [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
@@ -49,6 +49,8 @@ export async function applyReadingEdition(
   const summaries = new Map<string, string>();
   const paperSummaries = { ...source.paperSummaries };
   const events: EditorialEvent[] = data.events.map((event: ReaderEvent, index: number) => {
+    if (event.aliases !== undefined && (!Array.isArray(event.aliases) || event.aliases.some(id => typeof id !== "string" || !/^section-[^\s"'<>]+$/.test(id)) || new Set(event.aliases).size !== event.aliases.length))
+      throw Error(`${file}: invalid retained reading heading aliases`);
     const original = source.events?.find(e => e.id === event.id);
     if ((!original && data.version === 1) || assigned.has(event.id)) throw Error(`${file}: unknown or duplicate reading event ${event.id}`);
     if (data.version === 2) {
@@ -75,7 +77,7 @@ export async function applyReadingEdition(
       group: event.group, tags: original?.tags || event.tags!,
       ...(event.judgment ? { judgment: event.judgment } : {}),
       ...((event.images || original?.images) ? { images: event.images || original?.images } : {}), hideFirstHeading: true,
-      aliases: [...new Set([...(original?.aliases || []), ...idsIn(original?.html || "").filter(id => !id.startsWith("user-content-fn"))])],
+      aliases: [...new Set([...(original?.aliases || []), ...(event.aliases || []), ...idsIn(original?.html || "").filter(id => !id.startsWith("user-content-fn"))])],
       blocks: blocks.slice(start, end).map(block => block.key),
     };
   });
