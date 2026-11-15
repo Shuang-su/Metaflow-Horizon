@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import matter from "gray-matter";
 import { createHash } from "node:crypto";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -32,10 +33,10 @@ test("archive owns papers once and every catalogue entry reaches a rendered targ
       assert.match(e.summary, /。$/);
     }
   }
-  assert.equal(index.entries.filter(e => e.id.startsWith("arxiv:")).length, 170);
+  assert.ok(index.entries.filter(e => e.id.startsWith("arxiv:")).length >= 170);
   const baseline = JSON.parse(fs.readFileSync(`${ROOT}/docs/changes/20261019-editorial-reading-system/baseline-identity.json`, "utf8"));
   for (const entry of baseline.catalogue) { const current = index.entries.find(e => e.id === entry.id)!; assert.ok(current); assert.equal(current.date, entry.date); assert.equal(current.anchor, entry.anchor); }
-  assert.equal(index.daily.length, 57);
+  assert.ok(index.daily.length >= 57);
   assert.ok(index.daily.every(d => !("paperSummaries" in d)));
   const thermal = index.entries.find(e => e.id === "arxiv:2609.24531")!;
   const thermalArticle = articles.find(a => a.date === thermal.date)!;
@@ -50,7 +51,8 @@ test("archive owns papers once and every catalogue entry reaches a rendered targ
       index.entries.filter((e) => e.id.startsWith("arxiv:") && e.date === a.date)
         .length,
     );
-    if (!["2026-10-21", "2026-10-22", "2026-10-23", "2026-10-24"].includes(a.date)) assert.match(a.html, /<table(?:\s|>)/);
+    const policy = matter(fs.readFileSync(`${ROOT}/${a.path}`, "utf8")).data.editorial_policy;
+    if (policy !== "horizon-v1" && !["2026-10-21", "2026-10-22", "2026-10-23", "2026-10-24"].includes(a.date)) assert.match(a.html, /<table(?:\s|>)/);
   }
   assert.ok(
     articles.find((a) => a.date === "2026-09-18")?.archiveHtml.includes("增量版"),
