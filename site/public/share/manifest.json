@@ -19,7 +19,7 @@
   "default": {
     "url": "/share/default.png",
     "date": "2026-11-14",
-    "sha256": "12049888ffa3a9b8bbd04c62090df2694fa282c83bf904f20706cf8051336d96"
+    "sha256": "b34270e07451262058432d4745e2416c9d256c6d59b0ea59612cab954a12015c"
   },
   "reports": {
     "2026-09-18": {
@@ -881,8 +881,8 @@
       "title": "SuperSplat 开始编排动态高斯，LichtFeld 把裁剪与文字选区带入主干",
       "contentHash": "fb7f7a6899f56bd6cb79b8a09d801b0243b9651885a71a3436820e960407ba0b",
       "inputHash": "d5ab95b82101eb40f7983545e90781f7a47abbe788d6d45b122ed6c6a0c20daf",
-      "sha256": "12049888ffa3a9b8bbd04c62090df2694fa282c83bf904f20706cf8051336d96",
-      "bytes": 32990
+      "sha256": "b34270e07451262058432d4745e2416c9d256c6d59b0ea59612cab954a12015c",
+      "bytes": 33789
     }
   }
 }
