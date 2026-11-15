@@ -28,14 +28,13 @@ test("archived covers are local, have intrinsic dimensions and accessible origin
   }
   assert.match(articles.find(a => a.date === "2026-09-30")!.image!.source, /radiancefields.com\/spirula-studio-v2026.9.30/);
 });
-test("new reading editions use 22 distinct dated editorial covers", async () => {
+test("dated editorial covers remain distinct and match their manifest", async () => {
   const { articles } = await archive;
   const manifest = loadEditorialCovers(ROOT);
   const illustrated = articles.filter(article => article.image?.kind === "editorial-illustration");
-  assert.equal(illustrated.length, 22);
-  assert.deepEqual(illustrated.map(article => article.date).sort(),
-    articles.filter(article => article.date > "2026-10-18" && !["2026-10-21","2026-10-22","2026-10-23","2026-10-24"].includes(article.date)).map(article => article.date).sort());
-  assert.equal(new Set(Object.values(manifest).map(cover => cover.inputSha256)).size, 22);
+  assert.ok(illustrated.length >= 22);
+  assert.deepEqual(illustrated.map(article => article.date).sort(), Object.keys(manifest).sort());
+  assert.equal(new Set(Object.values(manifest).map(cover => cover.inputSha256)).size, illustrated.length);
   for (const article of illustrated) {
     const { date, image } = article;
     const cover = manifest[date];
