@@ -1,0 +1,20 @@
+{
+  "samples": [
+    {
+      "moving": true,
+      "top": 216,
+      "translate": "0px 65px"
+    },
+    {
+      "moving": true,
+      "top": 198.43386840820312,
+      "translate": "0px 47.4339px"
+    },
+    {
+      "moving": true,
+      "top": 326,
+      "translate": "0px 175px"
+    }
+  ],
+  "input": "CDP native mouse, left button held; drawer regrab and dismissal"
+}
