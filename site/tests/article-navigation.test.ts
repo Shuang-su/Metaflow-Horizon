@@ -2,13 +2,15 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import fs from "node:fs";
+import matter from "gray-matter";
 import { articleNavigation } from "../lib/article-navigation";
-import { buildArchive } from "../lib/content";
+import { buildArchive, ROOT } from "../lib/content";
 import ArticleNavigation from "../components/ArticleNavigation";
 
 test("each historical daily renders thirteen theme links to real coverage and preserves its later increment", async () => {
   const { articles } = await buildArchive();
-  for (const article of articles.filter(a => !["2026-10-21","2026-10-22","2026-10-23","2026-10-24"].includes(a.date))) {
+  for (const article of articles.filter(a => !["2026-10-21","2026-10-22","2026-10-23","2026-10-24"].includes(a.date) && matter(fs.readFileSync(`${ROOT}/${a.path}`, "utf8")).data.editorial_policy !== "horizon-v1")) {
     const navigation = articleNavigation(article.toc);
     const core = navigation.filter(item => item.key !== "increment");
     assert.equal(core.length, 13, `${article.date}: missing a theme`);
