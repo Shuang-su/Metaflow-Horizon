@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-13",
-    "sha256": "a81c9a3029806d5384bd24353af094d7372c2efcb9b9c4273aba45e93bbb8c77"
+    "date": "2026-11-15",
+    "sha256": "2cc7170de890791c562e5b73ff809da2eedf0ecdcae5511c753290988bddff87"
   },
   "reports": {
     "2026-09-18": {
@@ -874,6 +874,15 @@
         "sha256": "6690e5efcd4b317f2a09a23739812271bec878d958eb07f8df483cbfb9207f06",
         "kind": "editorial-illustration"
       }
+    },
+    "2026-11-15": {
+      "date": "2026-11-15",
+      "url": "/share/2026-11-15.png",
+      "title": "NVIDIA 把高斯带入重照明，浏览器开始直接剪辑 4DGS",
+      "contentHash": "47bd961e599732ff7f0dfcae589a81f9b80655d42a3aac1caf18b1ade9f3a4c6",
+      "inputHash": "28f0ecc37f6b9d47fbfa3a8f761a3f8bdf39c3c56e3328a6b41fb7d297a791c0",
+      "sha256": "2cc7170de890791c562e5b73ff809da2eedf0ecdcae5511c753290988bddff87",
+      "bytes": 29115
     }
   }
 }

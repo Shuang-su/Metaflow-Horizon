@@ -1,7 +1,145 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-13",
+  "updatedThrough": "2026-11-15",
   "daily": [
+    {
+      "id": "gsd-2026-11-15",
+      "contentHash": "47bd961e599732ff7f0dfcae589a81f9b80655d42a3aac1caf18b1ade9f3a4c6",
+      "date": "2026-11-15",
+      "title": "Horizon 行业日报 — 2026-11-15",
+      "headline": "NVIDIA 把高斯带入重照明，浏览器开始直接剪辑 4DGS",
+      "summary": "ovrtx 0.7.0 将 Gaussian splat 接入路径追踪光照和实验性 LiDAR；Splattic 公开浏览器 4DGS 编辑链路；Ropedia 则把高斯场景与第一视角任务数据成套发布。三项能力都已经可取用，但分别受预发布、公测和首批子集边界约束。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-15.md",
+      "sourceCount": 1,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0",
+          "anchor": "event-7f163bb6e48f",
+          "kind": "tool",
+          "source": "https://github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0",
+          "title": "NVIDIA 把高斯带入重照明与传感器仿真",
+          "summary": "ovrtx 0.7.0 首次把 Gaussian splat 的漫反射重照明和实验性 LiDAR 放进公开 SDK 发行，但它仍是预发布，重照明也不能去除采集光照。原生消费者必须同步处理类型、结果结构与 ovstage 依赖变化。",
+          "date": "2026-11-15",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.17060",
+          "anchor": "event-655359f62f42",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.17060",
+          "title": "Ropedia 把高斯场景与第一视角任务数据配对",
+          "summary": "Ropedia Xperience 2 把度量尺度扫描、Gaussian splat 与 131 小时第一视角任务录像组织进同一 Physical AI 语料。论文描述 1,589 个场景，但当前 Hugging Face 可见的是 126 场景首批子集，且数据为非商业许可。",
+          "date": "2026-11-15",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "splattic.com/public-beta-4.0.0",
+          "anchor": "event-a004a3852514",
+          "kind": "tool",
+          "source": "https://www.splattic.com/landing/changelog.html",
+          "title": "Splattic 在浏览器里直接剪辑 4DGS",
+          "summary": "Splattic 4.0.0 把 4DGS 裁切、局部删除、简化、拼接和发布放进浏览器，但仍是商业应用公测版。本期未在手机或头显实测，也没有把编辑器与开源 4DGS SDK 混为同一许可。",
+          "date": "2026-11-15",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/nianticlabs/spz/pull/115",
+          "anchor": "event-3cd1a921a84b",
+          "kind": "tool",
+          "source": "https://github.com/nianticlabs/spz/pull/115",
+          "title": "SPZ 找回旧版文件中被丢弃的扩展记录",
+          "summary": "旧 gzip SPZ v1—v3 的内存流不能 seek，导致 extension records 在加载时被拒绝。主干修复并增加 v2/v3 round-trip 测试；基础 splat 数据不在本次缺陷范围内，也还没有新 release tag。",
+          "date": "2026-11-15",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb",
+          "anchor": "event-1c169595cabb",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb",
+          "title": "Spirula 压缩训练掩码并增加 densify 稳定性开关",
+          "summary": "Spirula 把 visibility mask 改成位打包，并重做部分显存与 ETA 预测。作者的 7500 万 pair 示例中单项掩码大幅缩小，但完整进程降幅远小于该比例，不能把局部数字当成端到端显存提升。",
+          "date": "2026-11-15",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 2,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期原始研究记录编辑阅读版。来源和版本状态以当期记录为准，未独立运行软件、下载完整数据集、复现论文实验或进行设备验收。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-15.md",
+        "contentHash": "aea70b13e2595550c5c616714e8f9d4cddba3dc4086d6509a849f716263f1a30"
+      }
+    },
     {
       "id": "gsd-2026-11-13",
       "contentHash": "1799278febe23a5c1a8270ffd71575b038a335d09f6c043a114fd40611030da0",
@@ -16932,6 +17070,104 @@
   ],
   "entries": [
     {
+      "id": "arxiv:2611.17060",
+      "kind": "paper",
+      "date": "2026-11-15",
+      "title": "Ropedia Xperience 2: A Large-Scale, Egocentric and Physically-Interactive Experience Dataset",
+      "summary": "Ropedia Xperience 2 把度量尺度扫描、Gaussian splat 与 131 小时第一视角任务录像组织进同一 Physical AI 语料。论文描述 1,589 个场景，但当前 Hugging Face 可见的是 126 场景首批子集，且数据为非商业许可。",
+      "source": "https://arxiv.org/abs/2611.17060",
+      "anchor": "event-655359f62f42",
+      "topics": [
+        "capture",
+        "industry",
+        "3dgs"
+      ]
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb",
+      "anchor": "event-1c169595cabb",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb",
+      "title": "Spirula 压缩训练掩码并增加 densify 稳定性开关",
+      "summary": "Spirula 把 visibility mask 改成位打包，并重做部分显存与 ETA 预测。作者的 7500 万 pair 示例中单项掩码大幅缩小，但完整进程降幅远小于该比例，不能把局部数字当成端到端显存提升。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/nianticlabs/spz/pull/115",
+      "anchor": "event-3cd1a921a84b",
+      "kind": "tool",
+      "source": "https://github.com/nianticlabs/spz/pull/115",
+      "title": "SPZ 找回旧版文件中被丢弃的扩展记录",
+      "summary": "旧 gzip SPZ v1—v3 的内存流不能 seek，导致 extension records 在加载时被拒绝。主干修复并增加 v2/v3 round-trip 测试；基础 splat 数据不在本次缺陷范围内，也还没有新 release tag。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0",
+      "anchor": "event-7f163bb6e48f",
+      "kind": "tool",
+      "source": "https://github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0",
+      "title": "NVIDIA 把高斯带入重照明与传感器仿真",
+      "summary": "ovrtx 0.7.0 首次把 Gaussian splat 的漫反射重照明和实验性 LiDAR 放进公开 SDK 发行，但它仍是预发布，重照明也不能去除采集光照。原生消费者必须同步处理类型、结果结构与 ovstage 依赖变化。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "splattic.com/public-beta-4.0.0",
+      "anchor": "event-a004a3852514",
+      "kind": "tool",
+      "source": "https://www.splattic.com/landing/changelog.html",
+      "title": "Splattic 在浏览器里直接剪辑 4DGS",
+      "summary": "Splattic 4.0.0 把 4DGS 裁切、局部删除、简化、拼接和发布放进浏览器，但仍是商业应用公测版。本期未在手机或头显实测，也没有把编辑器与开源 4DGS SDK 混为同一许可。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/harry7557558/spirula-studio/releases/tag/v2026.11.12",
       "anchor": "event-06fa9f081d60",
       "kind": "tool",
@@ -29772,6 +30008,27 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-15",
+      "kind": "daily",
+      "title": "NVIDIA 把高斯带入重照明，浏览器开始直接剪辑 4DGS",
+      "summary": "ovrtx 0.7.0 将 Gaussian splat 接入路径追踪光照和实验性 LiDAR；Splattic 公开浏览器 4DGS 编辑链路；Ropedia 则把高斯场景与第一视角任务数据成套发布。三项能力都已经可取用，但分别受预发布、公测和首批子集边界约束。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/15/",
+      "text": "NVIDIA 把高斯带入重照明与传感器仿真\novrtx 0.7.0 首次把 Gaussian splat 的漫反射重照明和实验性 LiDAR 放进公开 SDK 发行，但它仍是预发布，重照明也不能去除采集光照。原生消费者必须同步处理类型、结果结构与 ovstage 依赖变化。\nParticleFieldSHDiffuse.mdl 可让 splat 接收路径追踪光照；实验性 WPM LiDAR 只对带 lidarExtraSignals 的 NuRec 资产有响应。排序、无效位置和 segmentation 也得到修复。最稳妥的采用方式是隔离升级、重编译原生扩展，并用固定资产比较 0.6.x 与 0.7.0。\n发行说明与兼容边界\nRopedia 把高斯场景与第一视角任务数据配对\nRopedia Xperience 2 把度量尺度扫描、Gaussian splat 与 131 小时第一视角任务录像组织进同一 Physical AI 语料。论文描述 1,589 个场景，但当前 Hugging Face 可见的是 126 场景首批子集，且数据为非商业许可。\n单场景可同时提供 PLY、网格、COLMAP 相机、鱼眼图像、遮罩和行为记录，让定位、任务理解、仿真与策略生成共享空间坐标。它的价值不只是新视角合成，而是把“环境是什么”与“人在其中做什么”连起来。\n论文原文 · 首批数据 · 代码\nSplattic 在浏览器里直接剪辑 4DGS\nSplattic 4.0.0 把 4DGS 裁切、局部删除、简化、拼接和发布放进浏览器，但仍是商业应用公测版。本期未在手机或头显实测，也没有把编辑器与开源 4DGS SDK 混为同一许可。\n选区可以跟随 splat 穿过时间，删除可限制在 IN/OUT 范围并保持非破坏；导出覆盖场景 zip、HTML sidecar、AR bundle 和 HTTP Range streaming。团队现在可以拿一段短 .4dgs 做端到端小样，但大文件内存、seek、首帧和移动设备播放仍需自测。\n官方更新记录\nSPZ 找回旧版文件中被丢弃的扩展记录\n旧 gzip SPZ v1—v3 的内存流不能 seek，导致 extension records 在加载时被拒绝。主干修复并增加 v2/v3 round-trip 测试；基础 splat 数据不在本次缺陷范围内，也还没有新 release tag。\n合并记录\nSpirula 压缩训练掩码并增加 densify 稳定性开关\nSpirula 把 visibility mask 改成位打包，并重做部分显存与 ETA 预测。作者的 7500 万 pair 示例中单项掩码大幅缩小，但完整进程降幅远小于该比例，不能把局部数字当成端到端显存提升。\n新增的 densify_min_split_opacity 可以阻止低透明度 splat 继续分裂，但默认关闭，启用后也可能让增长达不到配额。两项都只在主干，适合锁提交 A/B。\n显存与预测提交 · densify 门槛提交"
+    },
+    {
       "id": "gsd-2026-11-13",
       "kind": "daily",
       "title": "SuperSplat 修复模型发雾与透明度导出，SOG v3 工具链同步更新",
@@ -31013,6 +31270,104 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\n利用密集几何先验改善水下稀疏视角高斯重建的初始化。可运行的官方代码尚未明确。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "arxiv:2611.17060",
+      "kind": "paper",
+      "title": "Ropedia Xperience 2: A Large-Scale, Egocentric and Physically-Interactive Experience Dataset",
+      "summary": "Ropedia Xperience 2 把度量尺度扫描、Gaussian splat 与 131 小时第一视角任务录像组织进同一 Physical AI 语料。论文描述 1,589 个场景，但当前 Hugging Face 可见的是 126 场景首批子集，且数据为非商业许可。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "industry",
+        "3dgs"
+      ],
+      "url": "/daily/2026/11/15/#event-655359f62f42",
+      "text": "Ropedia Xperience 2: A Large-Scale, Egocentric and Physically-Interactive Experience Dataset Ropedia Xperience 2 把度量尺度扫描、Gaussian splat 与 131 小时第一视角任务录像组织进同一 Physical AI 语料。论文描述 1,589 个场景，但当前 Hugging Face 可见的是 126 场景首批子集，且数据为非商业许可。 https://arxiv.org/abs/2611.17060 Ropedia 把高斯场景与第一视角任务数据配对 ## Ropedia 把高斯场景与第一视角任务数据配对\n\nRopedia Xperience 2 把度量尺度扫描、Gaussian splat 与 131 小时第一视角任务录像组织进同一 Physical AI 语料。论文描述 1,589 个场景，但当前 Hugging Face 可见的是 126 场景首批子集，且数据为非商业许可。\n\n单场景可同时提供 PLY、网格、COLMAP 相机、鱼眼图像、遮罩和行为记录，让定位、任务理解、仿真与策略生成共享空间坐标。它的价值不只是新视角合成，而是把“环境是什么”与“人在其中做什么”连起来。\n\n[论文原文](https://arxiv.org/abs/2611.17060) · [首批数据](https://huggingface.co/datasets/ropedia-ai/Ropedia-Xperience-2) · [代码](https://github.com/Ropedia/Ropedia-Xperience-2)"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb",
+      "kind": "tool",
+      "title": "Spirula 压缩训练掩码并增加 densify 稳定性开关",
+      "summary": "Spirula 把 visibility mask 改成位打包，并重做部分显存与 ETA 预测。作者的 7500 万 pair 示例中单项掩码大幅缩小，但完整进程降幅远小于该比例，不能把局部数字当成端到端显存提升。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/15/#event-1c169595cabb",
+      "text": "Spirula 压缩训练掩码并增加 densify 稳定性开关 Spirula 把 visibility mask 改成位打包，并重做部分显存与 ETA 预测。作者的 7500 万 pair 示例中单项掩码大幅缩小，但完整进程降幅远小于该比例，不能把局部数字当成端到端显存提升。 https://github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb Spirula 压缩训练掩码并增加 densify 稳定性开关 ## Spirula 压缩训练掩码并增加 densify 稳定性开关\n\nSpirula 把 visibility mask 改成位打包，并重做部分显存与 ETA 预测。作者的 7500 万 pair 示例中单项掩码大幅缩小，但完整进程降幅远小于该比例，不能把局部数字当成端到端显存提升。\n\n新增的 `densify_min_split_opacity` 可以阻止低透明度 splat 继续分裂，但默认关闭，启用后也可能让增长达不到配额。两项都只在主干，适合锁提交 A/B。\n\n[显存与预测提交](https://github.com/harry7557558/spirula-studio/commit/6e4f668402a315e819b78fb7f3e542c910c102fb) · [densify 门槛提交](https://github.com/harry7557558/spirula-studio/commit/6caadf0c1101bf934a58d5ecd16764ed5c9db057)"
+    },
+    {
+      "id": "github.com/nianticlabs/spz/pull/115",
+      "kind": "tool",
+      "title": "SPZ 找回旧版文件中被丢弃的扩展记录",
+      "summary": "旧 gzip SPZ v1—v3 的内存流不能 seek，导致 extension records 在加载时被拒绝。主干修复并增加 v2/v3 round-trip 测试；基础 splat 数据不在本次缺陷范围内，也还没有新 release tag。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/15/#event-3cd1a921a84b",
+      "text": "SPZ 找回旧版文件中被丢弃的扩展记录 旧 gzip SPZ v1—v3 的内存流不能 seek，导致 extension records 在加载时被拒绝。主干修复并增加 v2/v3 round-trip 测试；基础 splat 数据不在本次缺陷范围内，也还没有新 release tag。 https://github.com/nianticlabs/spz/pull/115 SPZ 找回旧版文件中被丢弃的扩展记录 ## SPZ 找回旧版文件中被丢弃的扩展记录\n\n旧 gzip SPZ v1—v3 的内存流不能 seek，导致 extension records 在加载时被拒绝。主干修复并增加 v2/v3 round-trip 测试；基础 splat 数据不在本次缺陷范围内，也还没有新 release tag。\n\n[合并记录](https://github.com/nianticlabs/spz/pull/115)"
+    },
+    {
+      "id": "github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0",
+      "kind": "tool",
+      "title": "NVIDIA 把高斯带入重照明与传感器仿真",
+      "summary": "ovrtx 0.7.0 首次把 Gaussian splat 的漫反射重照明和实验性 LiDAR 放进公开 SDK 发行，但它仍是预发布，重照明也不能去除采集光照。原生消费者必须同步处理类型、结果结构与 ovstage 依赖变化。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/15/#event-7f163bb6e48f",
+      "text": "NVIDIA 把高斯带入重照明与传感器仿真 ovrtx 0.7.0 首次把 Gaussian splat 的漫反射重照明和实验性 LiDAR 放进公开 SDK 发行，但它仍是预发布，重照明也不能去除采集光照。原生消费者必须同步处理类型、结果结构与 ovstage 依赖变化。 https://github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0 NVIDIA 把高斯带入重照明与传感器仿真 ## NVIDIA 把高斯带入重照明与传感器仿真\n\novrtx 0.7.0 首次把 Gaussian splat 的漫反射重照明和实验性 LiDAR 放进公开 SDK 发行，但它仍是预发布，重照明也不能去除采集光照。原生消费者必须同步处理类型、结果结构与 `ovstage` 依赖变化。\n\n`ParticleFieldSHDiffuse.mdl` 可让 splat 接收路径追踪光照；实验性 WPM LiDAR 只对带 `lidarExtraSignals` 的 NuRec 资产有响应。排序、无效位置和 segmentation 也得到修复。最稳妥的采用方式是隔离升级、重编译原生扩展，并用固定资产比较 0.6.x 与 0.7.0。\n\n[发行说明与兼容边界](https://github.com/NVIDIA-Omniverse/ovrtx/releases/tag/v0.7.0)"
+    },
+    {
+      "id": "splattic.com/public-beta-4.0.0",
+      "kind": "tool",
+      "title": "Splattic 在浏览器里直接剪辑 4DGS",
+      "summary": "Splattic 4.0.0 把 4DGS 裁切、局部删除、简化、拼接和发布放进浏览器，但仍是商业应用公测版。本期未在手机或头显实测，也没有把编辑器与开源 4DGS SDK 混为同一许可。",
+      "date": "2026-11-15",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/15/#event-a004a3852514",
+      "text": "Splattic 在浏览器里直接剪辑 4DGS Splattic 4.0.0 把 4DGS 裁切、局部删除、简化、拼接和发布放进浏览器，但仍是商业应用公测版。本期未在手机或头显实测，也没有把编辑器与开源 4DGS SDK 混为同一许可。 https://www.splattic.com/landing/changelog.html Splattic 在浏览器里直接剪辑 4DGS ## Splattic 在浏览器里直接剪辑 4DGS\n\nSplattic 4.0.0 把 4DGS 裁切、局部删除、简化、拼接和发布放进浏览器，但仍是商业应用公测版。本期未在手机或头显实测，也没有把编辑器与开源 4DGS SDK 混为同一许可。\n\n选区可以跟随 splat 穿过时间，删除可限制在 IN/OUT 范围并保持非破坏；导出覆盖场景 zip、HTML sidecar、AR bundle 和 HTTP Range streaming。团队现在可以拿一段短 `.4dgs` 做端到端小样，但大文件内存、seek、首帧和移动设备播放仍需自测。\n\n[官方更新记录](https://www.splattic.com/landing/changelog.html)"
     },
     {
       "id": "github.com/harry7557558/spirula-studio/releases/tag/v2026.11.12",
