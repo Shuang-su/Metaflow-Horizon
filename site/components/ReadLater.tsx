@@ -19,15 +19,17 @@ const railStep = 68;
 export function ReadLaterTrigger({ className, onOpen }: { className?: string; onOpen?: () => void }) {
   const reader = useReader();
   const count = reader?.readLaterIds.length || 0;
+  if (!reader || !count) return null;
+
   return <button type="button" className={`read-later-trigger ${className ?? ""}`} aria-haspopup="dialog"
-    aria-label={count ? `稍后阅读，${count} 篇` : "稍后阅读"} title="稍后阅读"
+    aria-label={`稍后阅读，${count} 篇`} title="稍后阅读"
     onClick={event => {
       triggerPositions.set(event.currentTarget, event.currentTarget.getBoundingClientRect());
-      reader?.openReadLater(event.currentTarget);
+      reader.openReadLater(event.currentTarget);
       onOpen?.();
     }}>
     <Icon name="bookmark"/><span className="read-later-trigger-label">稍后阅读</span>
-    {count > 0 && <span className="read-later-count" aria-hidden="true">{count}</span>}
+    <span className="read-later-count" aria-hidden="true">{count}</span>
   </button>;
 }
 
@@ -47,11 +49,17 @@ function revealBounds(element: HTMLElement, from?: DOMRect) {
   return [`circle(0px at ${x}px ${y}px)`, `circle(${radius + 4}px at ${x}px ${y}px)`];
 }
 
-function visibleTrigger(origin: HTMLElement) {
-  const menu = origin.closest(".site-header")?.querySelector<HTMLElement>("[data-reader-more-trigger]");
-  return [origin, menu, ...document.querySelectorAll<HTMLElement>(".home-read-later-trigger, [data-reader-more-trigger]")]
-    .find(element => element?.isConnected && element.getClientRects().length > 0 &&
-      !element.closest("[inert], [aria-hidden=true]") && getComputedStyle(element).visibility === "visible");
+function isVisible(element: HTMLElement | null): element is HTMLElement {
+  return !!element?.isConnected && element.getClientRects().length > 0 &&
+    !element.closest('[inert], [aria-hidden="true"]') && getComputedStyle(element).visibility === "visible";
+}
+
+function focusReturnTarget(origin: HTMLElement) {
+  if (isVisible(origin)) return origin;
+  const menu = document.querySelector<HTMLElement>("[data-reader-more-trigger]");
+  if (isVisible(menu)) return menu;
+  const brand = document.querySelector<HTMLAnchorElement>(".home-header .brand[href]");
+  return isVisible(brand) ? brand : null;
 }
 
 function ReadLaterRow({ item, revealed, reveal, remove, continueReading }: {
@@ -128,8 +136,7 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
     const unlock = lockDocumentScroll();
     element.showModal();
     closeButton.current?.focus();
-    const rect = triggerPositions.get(origin) || visibleTrigger(origin)?.getBoundingClientRect();
-    triggerPositions.delete(origin);
+    const rect = triggerPositions.get(origin) || (isVisible(origin) ? origin.getBoundingClientRect() : undefined);
     if (!matchMedia(motionPreference).matches) {
       reveal.current = element.animate({ clipPath: revealBounds(element, rect) }, {
         duration: 320, easing: "cubic-bezier(.2,.8,.2,1)",
@@ -142,7 +149,7 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
       element.close();
       unlock();
       if (continueHere.current) { requestReadingResume(continueHere.current); return; }
-      visibleTrigger(origin)?.focus({ preventScroll: true });
+      focusReturnTarget(origin)?.focus({ preventScroll: true });
     };
   }, [origin]);
 
@@ -199,7 +206,7 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
       const next = Math.min(index, (links?.length || 0) - 1);
       (links?.[next] || closeButton.current)?.focus({ preventScroll: true });
     });
-    else if (items.length === 1) closeButton.current?.focus();
+    else if (items.length === 1) closeButton.current?.focus({ preventScroll: true });
   };
 
   function dismiss() {
@@ -208,7 +215,8 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
     if (element.hasAttribute("data-sheet-closing")) return;
     element.dataset.sheetClosing = "";
     delete element.dataset.revealed;
-    const [collapsed, expanded] = revealBounds(element, visibleTrigger(origin)?.getBoundingClientRect());
+    const rect = isVisible(origin) ? origin.getBoundingClientRect() : triggerPositions.get(origin);
+    const [collapsed, expanded] = revealBounds(element, rect);
     const current = getComputedStyle(element).clipPath;
     reveal.current?.cancel();
     reveal.current = element.animate({ clipPath: [current === "none" ? expanded : current, collapsed] }, {
@@ -321,7 +329,7 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
           setActiveId(removed.item.id);
           setRemoved(null);
           setError("");
-          closeButton.current?.focus();
+          closeButton.current?.focus({ preventScroll: true });
         }}>撤销</button>}
         {items.length > 0 && !reduced && <button type="button" onClick={() => { setAll(!all); setOpenRow(null); }}>{all ? "返回封面" : "查看全部"}</button>}
       </footer>
