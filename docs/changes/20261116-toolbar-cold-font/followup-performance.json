@@ -1,0 +1,958 @@
+{
+  "environment": "Mac Chromium 613x939 DPR2; actual mouse down/up 50ms; prediction disabled in cold; new document/app cache; network/GPU process retained",
+  "sets": {
+    "final-font-scroll-pairs": {
+      "first": {
+        "samples": 10,
+        "material": {
+          "median": 100.7000000178814,
+          "p95": 103.69999998211858,
+          "max": 103.69999998211858
+        },
+        "content": {
+          "median": 203.00000002384184,
+          "p95": 228.89999999403955,
+          "max": 228.89999999403955
+        },
+        "interactive": {
+          "median": 326.00000001788135,
+          "p95": 342.6,
+          "max": 342.6
+        },
+        "timeouts": 0,
+        "longFrames": [],
+        "values": [
+          {
+            "firstMaterialMs": 103.00000002384184,
+            "firstContentMs": 203.00000002384184,
+            "interactiveMs": 303.00000002384195,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 87.40000001192095,
+            "firstContentMs": 196.10000001192097,
+            "interactiveMs": 312.40000001192095,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 101.7,
+            "firstContentMs": 226.9,
+            "interactiveMs": 342.6,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 103.69999998211858,
+            "firstContentMs": 203.7999999821186,
+            "interactiveMs": 328.59999998211856,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 95.39999999403956,
+            "firstContentMs": 211.39999999403955,
+            "interactiveMs": 328.69999999403956,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 100.7000000178814,
+            "firstContentMs": 200.60000001788137,
+            "interactiveMs": 326.00000001788135,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 95.89999999403956,
+            "firstContentMs": 228.89999999403955,
+            "interactiveMs": 337.59999999403954,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 95.40000001192097,
+            "firstContentMs": 187.10000001192097,
+            "interactiveMs": 312.500000011921,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 101.7000000119209,
+            "firstContentMs": 201.50000001192092,
+            "interactiveMs": 318.2000000119209,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 96.40000001788138,
+            "firstContentMs": 188.0000000178814,
+            "interactiveMs": 304.8000000178814,
+            "identityChanged": false
+          }
+        ]
+      },
+      "again": {
+        "samples": 10,
+        "material": {
+          "median": 20.09999998211856,
+          "p95": 20.5,
+          "max": 20.5
+        },
+        "content": {
+          "median": 111.6999999821187,
+          "p95": 112.79999999999995,
+          "max": 112.79999999999995
+        },
+        "interactive": {
+          "median": 228.2999999940396,
+          "p95": 236.8999999940395,
+          "max": 236.8999999940395
+        },
+        "timeouts": 0,
+        "longFrames": [],
+        "values": [
+          {
+            "firstMaterialMs": 19.300000005960555,
+            "firstContentMs": 111.00000000596036,
+            "interactiveMs": 227.7000000059604,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 20.39999999403949,
+            "firstContentMs": 112.19999999403944,
+            "interactiveMs": 228.69999999403944,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 19.19999998807907,
+            "firstContentMs": 111.69999998807909,
+            "interactiveMs": 227.99999998807905,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 20.09999998211856,
+            "firstContentMs": 111.6999999821187,
+            "interactiveMs": 211.6999999821187,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 20.199999994039445,
+            "firstContentMs": 110.89999999403948,
+            "interactiveMs": 236.8999999940395,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 19.100000017881484,
+            "firstContentMs": 109.10000001788148,
+            "interactiveMs": 225.90000001788144,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 19.699999994039445,
+            "firstContentMs": 111.39999999403948,
+            "interactiveMs": 228.2999999940396,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 19.700000000000045,
+            "firstContentMs": 110.70000000000005,
+            "interactiveMs": 227.9000000000001,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 20.5,
+            "firstContentMs": 112.79999999999995,
+            "interactiveMs": 229.5999999999999,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 20.20000000596042,
+            "firstContentMs": 111.80000000596056,
+            "interactiveMs": 229.80000000596056,
+            "identityChanged": false
+          }
+        ]
+      }
+    },
+    "final-more-pairs": {
+      "first": {
+        "samples": 10,
+        "material": {
+          "median": 66.2000000119209,
+          "p95": 68.49999999403951,
+          "max": 68.49999999403951
+        },
+        "content": {
+          "median": 161.40000001788138,
+          "p95": 168.80000001192093,
+          "max": 168.80000001192093
+        },
+        "interactive": {
+          "median": 402.39999998211863,
+          "p95": 423.09999999403954,
+          "max": 423.09999999403954
+        },
+        "timeouts": 0,
+        "longFrames": [],
+        "values": [
+          {
+            "firstMaterialMs": 67.30000001192093,
+            "firstContentMs": 168.80000001192093,
+            "interactiveMs": 420.500000011921,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 68.49999999403951,
+            "firstContentMs": 168.19999999403956,
+            "interactiveMs": 418.8999999940395,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 67.39999998211863,
+            "firstContentMs": 160.69999998211858,
+            "interactiveMs": 402.39999998211863,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 66.2000000119209,
+            "firstContentMs": 167.60000001192094,
+            "interactiveMs": 391.40000001192095,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 64.69999999403956,
+            "firstContentMs": 156.29999999403952,
+            "interactiveMs": 423.09999999403954,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 61.10000001788137,
+            "firstContentMs": 161.40000001788138,
+            "interactiveMs": 405.60000001788137,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 53.50000001192092,
+            "firstContentMs": 153.50000001192092,
+            "interactiveMs": 387.2000000119209,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 60.5,
+            "firstContentMs": 161.3,
+            "interactiveMs": 395,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 67.6,
+            "firstContentMs": 167.60000000000002,
+            "interactiveMs": 392.6,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 59.499999982118595,
+            "firstContentMs": 159.19999998211858,
+            "interactiveMs": 398.89999998211863,
+            "identityChanged": false
+          }
+        ]
+      },
+      "again": {
+        "samples": 10,
+        "material": {
+          "median": 22.60000000596051,
+          "p95": 26.399999988079117,
+          "max": 26.399999988079117
+        },
+        "content": {
+          "median": 114.30000000596056,
+          "p95": 125.39999998807912,
+          "max": 125.39999998807912
+        },
+        "interactive": {
+          "median": 358.70000002384177,
+          "p95": 373.99999998211865,
+          "max": 373.99999998211865
+        },
+        "timeouts": 0,
+        "longFrames": [],
+        "values": [
+          {
+            "firstMaterialMs": 22.60000000596051,
+            "firstContentMs": 114.30000000596056,
+            "interactiveMs": 360.5000000059604,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 26.399999982118516,
+            "firstContentMs": 117.99999998211864,
+            "interactiveMs": 353.7999999821186,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 17.799999999999955,
+            "firstContentMs": 109.40000000000008,
+            "interactiveMs": 347.20000000000005,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 20.40000001788144,
+            "firstContentMs": 111.40000001788144,
+            "interactiveMs": 345.6000000178815,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 24.09999998807916,
+            "firstContentMs": 125.39999998807912,
+            "interactiveMs": 365.699999988079,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 26.100000023841854,
+            "firstContentMs": 118.00000002384196,
+            "interactiveMs": 358.70000002384177,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 20.20000000596042,
+            "firstContentMs": 111.00000000596036,
+            "interactiveMs": 353.5000000059604,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 26.399999988079117,
+            "firstContentMs": 117.49999998807904,
+            "interactiveMs": 343.19999998807907,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 20.299999982118607,
+            "firstContentMs": 111.09999998211856,
+            "interactiveMs": 373.99999998211865,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 22.199999994039445,
+            "firstContentMs": 113.39999999403948,
+            "interactiveMs": 371.9999999940396,
+            "identityChanged": false
+          }
+        ]
+      }
+    },
+    "more-cold-pairs": {
+      "first": {
+        "samples": 10,
+        "material": {
+          "median": 68.30000001192093,
+          "p95": 88.60000000596051,
+          "max": 88.60000000596051
+        },
+        "content": {
+          "median": 259.5000000059605,
+          "p95": 346.30000000596044,
+          "max": 346.30000000596044
+        },
+        "interactive": {
+          "median": 729.900000011921,
+          "p95": 896.1000000059605,
+          "max": 896.1000000059605
+        },
+        "timeouts": 0,
+        "longFrames": [
+          {
+            "trial": 0,
+            "at": 1118.7,
+            "dt": 59.100000000000136
+          },
+          {
+            "trial": 1,
+            "at": 755.9,
+            "dt": 58.39999999999998
+          },
+          {
+            "trial": 1,
+            "at": 855.8,
+            "dt": 50.09999999999991
+          },
+          {
+            "trial": 2,
+            "at": 793.2,
+            "dt": 54.5
+          },
+          {
+            "trial": 2,
+            "at": 851.2,
+            "dt": 58
+          },
+          {
+            "trial": 4,
+            "at": 847.4,
+            "dt": 62.69999999999993
+          },
+          {
+            "trial": 4,
+            "at": 905.6,
+            "dt": 58.200000000000045
+          },
+          {
+            "trial": 4,
+            "at": 1001.1,
+            "dt": 53.700000000000045
+          },
+          {
+            "trial": 5,
+            "at": 831.1,
+            "dt": 66.70000000000005
+          },
+          {
+            "trial": 5,
+            "at": 897.7,
+            "dt": 66.60000000000002
+          },
+          {
+            "trial": 6,
+            "at": 815.1,
+            "dt": 66.80000000000007
+          },
+          {
+            "trial": 6,
+            "at": 873.3,
+            "dt": 58.19999999999993
+          },
+          {
+            "trial": 6,
+            "at": 923.4,
+            "dt": 50.10000000000002
+          },
+          {
+            "trial": 7,
+            "at": 718.3,
+            "dt": 50.39999999999998
+          },
+          {
+            "trial": 8,
+            "at": 798,
+            "dt": 58.299999999999955
+          },
+          {
+            "trial": 9,
+            "at": 739.9,
+            "dt": 50.39999999999998
+          },
+          {
+            "trial": 9,
+            "at": 1006.6,
+            "dt": 83.39999999999998
+          },
+          {
+            "trial": 9,
+            "at": 1097.9,
+            "dt": 91.30000000000008
+          },
+          {
+            "trial": 9,
+            "at": 1164.7,
+            "dt": 66.79999999999995
+          }
+        ],
+        "values": [
+          {
+            "firstMaterialMs": 88.60000000596051,
+            "firstContentMs": 259.5000000059605,
+            "interactiveMs": 501.0000000059604,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 68.19999998807907,
+            "firstContentMs": 235.2999999880791,
+            "interactiveMs": 709.999999988079,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 68.30000001192093,
+            "firstContentMs": 242.90000001192095,
+            "interactiveMs": 729.900000011921,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 59.50000001192092,
+            "firstContentMs": 226.40000001192095,
+            "interactiveMs": 476.500000011921,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 68.59999998807905,
+            "firstContentMs": 243.59999998807905,
+            "interactiveMs": 743.2999999880791,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 68.49999997615816,
+            "firstContentMs": 260.1999999761581,
+            "interactiveMs": 735.7999999761581,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 68.09999998807905,
+            "firstContentMs": 284.7999999880791,
+            "interactiveMs": 768.099999988079,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 85.50000002384184,
+            "firstContentMs": 285.60000002384186,
+            "interactiveMs": 551.5000000238418,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 61.799999988079094,
+            "firstContentMs": 227.59999998807905,
+            "interactiveMs": 520.1999999880791,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 63.00000000596049,
+            "firstContentMs": 346.30000000596044,
+            "interactiveMs": 896.1000000059605,
+            "identityChanged": false
+          }
+        ]
+      },
+      "again": {
+        "samples": 10,
+        "material": {
+          "median": 29.200000017881393,
+          "p95": 36.699999994039445,
+          "max": 36.699999994039445
+        },
+        "content": {
+          "median": 162.9000000000001,
+          "p95": 232.4000000059605,
+          "max": 232.4000000059605
+        },
+        "interactive": {
+          "median": 515.5000000059604,
+          "p95": 850.1000000059603,
+          "max": 850.1000000059603
+        },
+        "timeouts": 0,
+        "longFrames": [
+          {
+            "trial": 2,
+            "at": 2521.8,
+            "dt": 58
+          },
+          {
+            "trial": 2,
+            "at": 2577.3,
+            "dt": 55.5
+          },
+          {
+            "trial": 3,
+            "at": 2305,
+            "dt": 58.80000000000018
+          },
+          {
+            "trial": 3,
+            "at": 2370.7,
+            "dt": 65.69999999999982
+          },
+          {
+            "trial": 3,
+            "at": 2421.6,
+            "dt": 50.90000000000009
+          },
+          {
+            "trial": 4,
+            "at": 2138.7,
+            "dt": 50.79999999999973
+          },
+          {
+            "trial": 7,
+            "at": 2335.1,
+            "dt": 58.40000000000009
+          },
+          {
+            "trial": 7,
+            "at": 2443.4,
+            "dt": 58.30000000000018
+          },
+          {
+            "trial": 9,
+            "at": 2968.5,
+            "dt": 66.59999999999991
+          },
+          {
+            "trial": 9,
+            "at": 3077.4,
+            "dt": 66.70000000000027
+          },
+          {
+            "trial": 9,
+            "at": 3135.7,
+            "dt": 58.29999999999973
+          },
+          {
+            "trial": 9,
+            "at": 3219,
+            "dt": 83.30000000000018
+          },
+          {
+            "trial": 9,
+            "at": 3318.9,
+            "dt": 99.90000000000008
+          },
+          {
+            "trial": 9,
+            "at": 3410.7,
+            "dt": 91.79999999999971
+          }
+        ],
+        "values": [
+          {
+            "firstMaterialMs": 25.199999999999815,
+            "firstContentMs": 141.80000000000018,
+            "interactiveMs": 383.4000000000001,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 25.299999976158233,
+            "firstContentMs": 150.19999997615832,
+            "interactiveMs": 407.6999999761583,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 23.499999994039623,
+            "firstContentMs": 148.59999999403954,
+            "interactiveMs": 644.3999999940397,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 28.700000000000045,
+            "firstContentMs": 162.9000000000001,
+            "interactiveMs": 679.4000000000001,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 32.60000000596028,
+            "firstContentMs": 232.4000000059605,
+            "interactiveMs": 515.5000000059604,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 36.699999994039445,
+            "firstContentMs": 161.59999999403954,
+            "interactiveMs": 428.29999999403935,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 32.30000000000018,
+            "firstContentMs": 182.4000000000001,
+            "interactiveMs": 459.0999999999999,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 29.200000017881393,
+            "firstContentMs": 145.90000001788144,
+            "interactiveMs": 632.4000000178812,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 26.29999998807898,
+            "firstContentMs": 185.09999998807916,
+            "interactiveMs": 431.3999999880789,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 33.400000005960464,
+            "firstContentMs": 166.50000000596037,
+            "interactiveMs": 850.1000000059603,
+            "identityChanged": false
+          }
+        ]
+      }
+    },
+    "more-dedup-pairs": {
+      "first": {
+        "samples": 10,
+        "material": {
+          "median": 61.099999999999994,
+          "p95": 85.70000000596042,
+          "max": 85.70000000596042
+        },
+        "content": {
+          "median": 161.2,
+          "p95": 186.1000000059605,
+          "max": 186.1000000059605
+        },
+        "interactive": {
+          "median": 402.4,
+          "p95": 619.5999999940395,
+          "max": 619.5999999940395
+        },
+        "timeouts": 0,
+        "longFrames": [
+          {
+            "trial": 2,
+            "at": 690.4,
+            "dt": 58.19999999999993
+          },
+          {
+            "trial": 2,
+            "at": 748.7,
+            "dt": 58.30000000000007
+          },
+          {
+            "trial": 8,
+            "at": 669.1,
+            "dt": 53.700000000000045
+          },
+          {
+            "trial": 8,
+            "at": 728,
+            "dt": 58.89999999999998
+          },
+          {
+            "trial": 8,
+            "at": 780.6,
+            "dt": 52.60000000000002
+          }
+        ],
+        "values": [
+          {
+            "firstMaterialMs": 85.70000000596042,
+            "firstContentMs": 186.1000000059605,
+            "interactiveMs": 419.5000000059605,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 67.90000000596046,
+            "firstContentMs": 167.90000000596046,
+            "interactiveMs": 398.8000000059605,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 53.099999994039536,
+            "firstContentMs": 153.19999999403956,
+            "interactiveMs": 619.5999999940395,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 53.30000000596047,
+            "firstContentMs": 153.30000000596044,
+            "interactiveMs": 386.6000000059605,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 60.60000000000002,
+            "firstContentMs": 160.10000000000002,
+            "interactiveMs": 402.4,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 62.200000011920906,
+            "firstContentMs": 162.2000000119209,
+            "interactiveMs": 403.40000001192095,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 69.1000000178814,
+            "firstContentMs": 169.0000000178814,
+            "interactiveMs": 393.50000001788135,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 60.90000001788138,
+            "firstContentMs": 161.10000001788137,
+            "interactiveMs": 394.60000001788137,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 52.300000017881416,
+            "firstContentMs": 143.2000000178814,
+            "interactiveMs": 619.2000000178814,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 61.099999999999994,
+            "firstContentMs": 161.2,
+            "interactiveMs": 394.5,
+            "identityChanged": false
+          }
+        ]
+      },
+      "again": {
+        "samples": 10,
+        "material": {
+          "median": 26.70000000596042,
+          "p95": 32.10000000596051,
+          "max": 32.10000000596051
+        },
+        "content": {
+          "median": 122.80000000596056,
+          "p95": 131.70000000596042,
+          "max": 131.70000000596042
+        },
+        "interactive": {
+          "median": 360.3000000238419,
+          "p95": 597.1999999880791,
+          "max": 597.1999999880791
+        },
+        "timeouts": 0,
+        "longFrames": [
+          {
+            "trial": 2,
+            "at": 2250.6,
+            "dt": 55.79999999999973
+          }
+        ],
+        "values": [
+          {
+            "firstMaterialMs": 24.900000005960464,
+            "firstContentMs": 116.70000000596042,
+            "interactiveMs": 358.5000000059604,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 32.10000000596051,
+            "firstContentMs": 131.70000000596042,
+            "interactiveMs": 364.6000000059605,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 26.29999998807898,
+            "firstContentMs": 117.99999998807904,
+            "interactiveMs": 597.1999999880791,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 27.799999982118607,
+            "firstContentMs": 127.7999999821186,
+            "interactiveMs": 361.09999998211856,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 26.900000023841812,
+            "firstContentMs": 126.00000002384196,
+            "interactiveMs": 360.3000000238419,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 22.20000000596042,
+            "firstContentMs": 122.20000000596042,
+            "interactiveMs": 347.0000000059604,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 22.800000005960555,
+            "firstContentMs": 122.80000000596056,
+            "interactiveMs": 347.80000000596056,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 17.70000001192102,
+            "firstContentMs": 109.30000001192091,
+            "interactiveMs": 351.000000011921,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 31.30000001192093,
+            "firstContentMs": 123.00000001192096,
+            "interactiveMs": 364.700000011921,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 26.70000000596042,
+            "firstContentMs": 118.40000000596046,
+            "interactiveMs": 351.7000000059604,
+            "identityChanged": false
+          }
+        ]
+      }
+    },
+    "stream-scroll-batch": {
+      "first": {
+        "samples": 10,
+        "material": {
+          "median": 99.89999999403956,
+          "p95": 161.20000000596042,
+          "max": 161.20000000596042
+        },
+        "content": {
+          "median": 202.6,
+          "p95": 318.500000011921,
+          "max": 318.500000011921
+        },
+        "interactive": {
+          "median": 313.10000001788137,
+          "p95": 418.500000011921,
+          "max": 418.500000011921
+        },
+        "timeouts": 0,
+        "longFrames": [
+          {
+            "trial": 0,
+            "at": 518.1,
+            "dt": 124.8
+          }
+        ],
+        "values": [
+          {
+            "firstMaterialMs": 93.7000000119209,
+            "firstContentMs": 318.500000011921,
+            "interactiveMs": 418.500000011921,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 161.20000000596042,
+            "firstContentMs": 253.4000000059605,
+            "interactiveMs": 378.40000000596046,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 103.60000000000002,
+            "firstContentMs": 202.6,
+            "interactiveMs": 311.70000000000005,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 84.99999998807908,
+            "firstContentMs": 185.39999998807903,
+            "interactiveMs": 318.3999999880791,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 88.30000001788142,
+            "firstContentMs": 196.40000001788135,
+            "interactiveMs": 313.10000001788137,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 103.29999999403952,
+            "firstContentMs": 211.4999999940395,
+            "interactiveMs": 336.9999999940395,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 103.00000002384184,
+            "firstContentMs": 203.10000002384183,
+            "interactiveMs": 311.8000000238419,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 87.10000001788137,
+            "firstContentMs": 179.40000001788138,
+            "interactiveMs": 304.8000000178814,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 99.89999999403956,
+            "firstContentMs": 191.69999999403956,
+            "interactiveMs": 308.3999999940395,
+            "identityChanged": false
+          },
+          {
+            "firstMaterialMs": 95.7999999880791,
+            "firstContentMs": 186.69999998807907,
+            "interactiveMs": 287.59999998807905,
+            "identityChanged": false
+          }
+        ]
+      }
+    }
+  }
+}

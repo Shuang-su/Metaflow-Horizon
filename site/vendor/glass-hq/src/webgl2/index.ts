@@ -63,7 +63,14 @@ export class WebGL2MaterialRenderer implements MaterialBackend {
       }catch(e){reject(e);}
     });
   }
-  private trace(request:Request,name:string){const at=performance.now();request.options.trace?.(name,{requestId:request.options.requestId,absoluteTime:performance.timeOrigin+at},at);}
+  private trace(request:Request,name:string,detail:Record<string,unknown>={}){
+    if(!request.options.trace)return;
+    const at=performance.now();request.options.trace(name,{requestId:request.options.requestId,absoluteTime:performance.timeOrigin+at,...detail},at);
+  }
+  private traceBatch(requests:Request[],name:string,detail:Record<string,unknown>){
+    const at=performance.now();
+    for(const request of requests)request.options.trace?.(name,{requestId:request.options.requestId,absoluteTime:performance.timeOrigin+at,...detail},at);
+  }
   private flush(){
     if(this.dead)return;
     this.queue.sort((a,b)=>(a.options.priority??0)-(b.options.priority??0)||a.started-b.started);
@@ -119,8 +126,24 @@ export class WebGL2MaterialRenderer implements MaterialBackend {
       }
       requests.forEach(s=>this.trace(s,"gpu-fence-ready"));
       requests.forEach(s=>this.trace(s,"gpu-readback-start"));
-      const atlas=new Uint8Array(width*height*4);gl.bindBuffer(gl.PIXEL_PACK_BUFFER,slot.pbo);gl.getBufferSubData(gl.PIXEL_PACK_BUFFER,0,atlas);gl.bindBuffer(gl.PIXEL_PACK_BUFFER,null);
-      requests.forEach((s,i)=>{const pixels=new Uint8Array(s.columns*s.rows*2*4);for(let y=0;y<s.rows*2;y++){const from=(height-1-bands[i]-y)*width*4;pixels.set(atlas.subarray(from,from+s.columns*4),y*s.columns*4);}this.trace(s,"gpu-readback-end");s.resolve({width:s.columns,height:s.rows,pixels,duration:performance.now()-s.started});});
+      // Fine-grained readback diagnostics are opt-in. Production pays no
+      // additional performance.now() calls or per-band timing allocations.
+      const tracing=requests.some(request=>Boolean(request.options.trace));
+      if(tracing)this.traceBatch(requests,"gpu-atlas-allocation-start",{width,height,bytes:width*height*4});
+      const atlas=new Uint8Array(width*height*4);
+      if(tracing)this.traceBatch(requests,"gpu-atlas-allocation-end",{width,height,bytes:atlas.byteLength});
+      gl.bindBuffer(gl.PIXEL_PACK_BUFFER,slot.pbo);
+      if(tracing)this.traceBatch(requests,"gpu-get-buffer-sub-data-start",{bytes:atlas.byteLength});
+      gl.getBufferSubData(gl.PIXEL_PACK_BUFFER,0,atlas);
+      if(tracing)this.traceBatch(requests,"gpu-get-buffer-sub-data-end",{bytes:atlas.byteLength});
+      gl.bindBuffer(gl.PIXEL_PACK_BUFFER,null);
+      requests.forEach((s,i)=>{
+        if(tracing)this.trace(s,"gpu-band-unpack-start",{band:i,width:s.columns,height:s.rows*2,bytes:s.columns*s.rows*2*4,includesAllocation:true});
+        const pixels=new Uint8Array(s.columns*s.rows*2*4);
+        for(let y=0;y<s.rows*2;y++){const from=(height-1-bands[i]-y)*width*4;pixels.set(atlas.subarray(from,from+s.columns*4),y*s.columns*4);}
+        if(tracing)this.trace(s,"gpu-band-unpack-end",{band:i,width:s.columns,height:s.rows*2,bytes:pixels.byteLength,includesAllocation:true});
+        this.trace(s,"gpu-readback-end");s.resolve({width:s.columns,height:s.rows,pixels,duration:performance.now()-s.started});
+      });
     }catch(e){requests.forEach(s=>{this.trace(s,"gpu-failed");s.reject(e instanceof Error?e:new Error(String(e)));});}
     finally{this.batches--;requests.forEach(s=>this.pending.delete(s));if(slot){if(slot.sync)this.gl.deleteSync(slot.sync);slot.sync=null;slot.busy=false;this.gl.deleteTexture(slot.texture);this.gl.deleteFramebuffer(slot.fbo);this.gl.deleteBuffer(slot.pbo);this.slots=this.slots.filter(s=>s!==slot);if(!this.dead){const scratch=this.slots.reduce((n,s)=>n+s.width*s.height*8,0);reserveGlassMemory('map-renderer',64*64*16+scratch,0,scratch);}}if(!this.dead)queueMicrotask(()=>this.flush());}
   }

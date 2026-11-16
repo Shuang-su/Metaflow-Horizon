@@ -43,3 +43,22 @@ headroom. Traces use per-request IDs and absolute monotonic timestamps. Worker
 elapsed slices and Promise waits are wall-clock durations, not CPU ownership.
 Cold diagnostic mode disables predictive prewarming; it does not claim that
 browser network caches or the GPU process were reset.
+
+Geometry planning now publishes confirmed prefixes after the first valid union,
+then coalesces further progress by work slice. The complete result and original
+fixture remain identical. Motion uses the original progress coordinate, holds
+the last complete frame at an unfinished frontier, and preserves shape identity
+when the final path arrives. Plain become paths without union are deferred
+cooperative tasks; expensive traced paths remain in the dedicated Worker.
+
+The application resolves resting menu dimensions with the same fractional
+layout measurement as the planned endpoint. Its interaction gate accepts the
+first spring frame containing the content, including normal outward overshoot;
+spring duration, bounce and contour arithmetic are unchanged. Opt-in readback
+traces distinguish atlas allocation, getBufferSubData and band unpacking.
+
+Reference-driven optical tuning is in the application lens/CSS adapter: a small
+increase in background preblur, reduced long-rim compositing gain, and separate
+More tint. It does not lower resting DPR, blur the rim texture, modify the shader,
+or remove refraction. HDR appearance and physical gesture acceptance remain
+device-specific checks.

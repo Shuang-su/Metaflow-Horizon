@@ -13,13 +13,16 @@ export async function waitGlassHydrated(cdp) {
   return response.result.value;
 }
 
-export async function runGlassMenuTrial(cdp, pressMs=50) {
+export async function runGlassMenuTrial(cdp, pressMs=50, kind="font") {
+  if (kind !== "font" && kind !== "more") throw new Error("Unknown reader menu");
+  const triggerId=kind === "font" ? "reader-font-trigger" : "header-menu-trigger";
+  const panelId=kind === "font" ? "reader-font-panel" : "main-nav";
   const read=async expression=>{
     const result=await cdp.send('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});
     if(result.exceptionDetails)throw new Error(JSON.stringify(result.exceptionDetails));return result.result.value;
   };
   const box=await read(`(()=>{
-    const button=document.querySelector('#reader-font-trigger'),root=document.querySelector('[data-glass-optics]');
+    const button=document.querySelector('#${triggerId}'),root=document.querySelector('[data-glass-optics]');
     if(button.getAttribute('aria-expanded')==='true')throw new Error('Trial requires a closed menu');
     const before=root.glassDiagnostics(),rect=button.getBoundingClientRect();
     window.__glassMenuTrial={before,url:location.href,title:document.title,origin:performance.timeOrigin,
@@ -30,7 +33,7 @@ export async function runGlassMenuTrial(cdp, pressMs=50) {
       trial.clickedAt=performance.now();let previous=trial.clickedAt;
       function sample(now){
         const elapsed=now-trial.clickedAt;trial.frames.push({at:now,dt:now-previous});previous=now;
-        const panel=document.querySelector('#reader-font-panel'),lens=document.querySelector('[data-glass-lens=menu]');
+        const panel=document.querySelector('#${panelId}'),lens=document.querySelector('[data-glass-lens=menu]');
         if(trial.firstMaterialMs===null&&lens&&getComputedStyle(lens).visibility==='visible'&&parseFloat(getComputedStyle(lens).opacity)>.01)trial.firstMaterialMs=elapsed;
         if(trial.firstContentMs===null&&panel&&parseFloat(panel.style.getPropertyValue('--lg-morph'))>.01)trial.firstContentMs=elapsed;
         if(panel&&panel.getAttribute('aria-hidden')!=='true'){

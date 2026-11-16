@@ -113,6 +113,8 @@ const layoutSize = (element: Element) => getLayoutSize(element as HTMLElement);
 const moved = (a: Box, b: Box) => Math.hypot(a.left - b.left, a.top - b.top) > 1 || resized(a, b);
 const resized = (a: Box, b: Box) => Math.abs(a.width - b.width) > 0.5 || Math.abs(a.height - b.height) > 0.5;
 interface Plan {
+  /** A streamed prefix cannot extrapolate beyond its last known stop. */
+  complete?: boolean;
   endpoints: MorphEndpoints;
   stops: MorphStop[];
   shapes: LensWaypoint[];
@@ -247,14 +249,28 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
     const neck = options.neck ?? 18;
     activePlanRequest = planEntry;
     const controller = planning = new AbortController();
-    void requestMorphPlan(endpoints, neck > 0 ? drop : undefined, { dpr: 1, restDpr: dpr(), neck, stops: stopCount(neck > 0 ? 14 : 10) }, { signal: controller.signal }).then(stops => {
+    const accept = (stops: MorphStop[], complete: boolean) => {
       if (disposed || planning !== controller) return;
-      planning = undefined; activePlanRequest = undefined;
+      // A restarted/cancelled stream may repeat earlier stops. Keep the
+      // longer visible prefix while the new worker catches up.
+      if (!complete && plan?.complete === false && stops.length <= plan.stops.length) return;
       if (morph === "become" && glass) { const size = layoutSize(glass); if (size.width && size.height) Object.assign(stops[0]!.shape, { width: size.width, height: size.height }); }
-      Object.assign(stops.at(-1)!.shape, { width: to.width, height: to.height });
+      if (complete) Object.assign(stops.at(-1)!.shape, { width: to.width, height: to.height });
+      // The service preserves identities during one stream. A resumed stream
+      // also retains already prepared shapes when their exact geometry agrees.
+      for (let i = 0; i < stops.length; i++) {
+        const prior = plan?.stops[i], stop = stops[i]!;
+        if (prior?.p === stop.p && prior.shape !== stop.shape && JSON.stringify(prior.shape) === JSON.stringify(stop.shape)) stop.shape = prior.shape;
+      }
       const joined = neck > 0 && drop ? glass ?? undefined : undefined;
-      plan = { endpoints, stops, shapes: stops.map(stop => stop.shape), glass: morph === "become" ? glass ?? undefined : joined, glassRect: joined && drop ? { left: drop.left, top: drop.top, width: drop.width, height: drop.height } : undefined };
+      plan = { complete, endpoints, stops, shapes: stops.map(stop => stop.shape), glass: morph === "become" ? glass ?? undefined : joined, glassRect: joined && drop ? { left: drop.left, top: drop.top, width: drop.width, height: drop.height } : undefined };
       wake();
+    };
+    void requestMorphPlan(endpoints, neck > 0 ? drop : undefined, { dpr: 1, restDpr: dpr(), neck, stops: stopCount(neck > 0 ? 14 : 10) }, {
+      signal: controller.signal, onProgress: stops => accept(stops, false),
+    }).then(stops => {
+      accept(stops, true);
+      if (planning === controller) { planning = undefined; activePlanRequest = undefined; }
     }, error => {
       if (disposed || planning !== controller) return;
       planning = undefined; activePlanRequest = undefined;
@@ -267,7 +283,8 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
   };
   /** Only the adjacent pair about to be drawn gates progress. */
   const readyAt = (p: number) => {
-    if (planning || !plan) return false;
+    if (!plan || (planning && plan.complete !== false)) return false;
+    if (plan.complete === false && p > plan.stops.at(-1)!.p + 1e-9) return false;
     if (!options.prepared) return true;
     const draw = morphDraw(plan.stops, Math.max(plan.stops[0]!.p, p));
     if (!draw) return false;
@@ -389,7 +406,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
       // Closing may interrupt the original map preparation. Reopening keeps
       // this outline in place until its adjacent pair is ready, without
       // spending its entrance while maps still arrive.
-      if (!plan && options.motion() === "full") { resolve(); if (!materialize) planEntry(); }
+      if ((!plan || plan.complete === false) && options.motion() === "full") { resolve(); if (!materialize) planEntry(); }
       waiting = options.motion() === "full" && (planning || (plan && !ready())) ? performance.now() : 0;
       element.dataset.glassMorph = "enter";
     }
@@ -534,7 +551,11 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
       progress.step(dt);
       // Missing maps retain the previous complete frame and spring state.
       if (plan && options.motion() === "full" && !readyAt(progress.value)) {
-        progress.value = oldValue; progress.velocity = oldVelocity;
+        progress.value = oldValue;
+        // At an unfinished frontier a reversing spring can still carry
+        // outward velocity. Let that velocity turn while holding the frame;
+        // restoring it forever would deadlock an exit after cancelling work.
+        if (!exiting) progress.velocity = oldVelocity;
         if (exiting) holding?.pause();
         return true;
       }
@@ -604,7 +625,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
     geometry: () => lastFrame,
     detachedSource: () => !closed && morph === "detach" && glass?.isConnected && plan?.stops.some((stop) => stop.absorbs) ? glass : undefined,
     waypoints: () => plan?.shapes ?? [],
-    pending: () => waiting > 0,
+    pending: () => waiting > 0 || (!closed && plan?.complete === false),
     positioning: () => entering,
     opacity() {
       // Waiting for placement, or parked at the source after an exit.

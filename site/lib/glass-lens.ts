@@ -150,11 +150,12 @@ function attribute(node: Element, name: string, value: string | number) {
 
 /** Both prepared shapes feed the same filter. Blending the fields before
  * displacement keeps the outline, light and background in a single paint. */
-export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: () => void = () => {}) {
+export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: () => void = () => {}, profile?: "more") {
   const id = `reader-glass-${++serial}`;
   const strip = document.createElement("div");
   strip.className = "glass-optical-strip";
   strip.dataset.glassLens = kind;
+  if (profile) strip.dataset.glassProfile = profile;
   strip.style.visibility = "hidden";
   const plane = document.createElement("div");
   plane.className = "glass-optical-plane";
@@ -186,7 +187,9 @@ export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: ()
   }
   const field = pair("field");
   const rim = pair("rim");
-  const blur = kind === "slider" ? .35 : kind === "menu" ? 6 : kind === "toolbar" ? 1.2 : .95;
+  // Optical preblur softens the background's small text; it does not blur the
+  // DPR-aware rim or change Glass-HQ's field/contour sampling.
+  const blur = kind === "slider" ? .35 : kind === "menu" ? 6 : kind === "toolbar" ? 1.8 : 1.35;
   const refraction = kind === "slider" ? 10 : kind === "menu" ? 22 : kind === "toolbar" ? 26 : 32;
   const displacement = svg("feDisplacementMap", { in: "soft", in2: "field", scale: refraction,
     xChannelSelector: "R", yChannelSelector: "G", result: "refracted" });
@@ -200,11 +203,17 @@ export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: ()
   if (kind !== "slider") {
     // Fill, refraction and rim share the same field coverage and opacity.
     // Ready controls must not add a second DOM-painted disc or capsule.
-    filter.append(svg("feFlood", { class: `glass-${kind}-tint`, result: "tint" }),
+    filter.append(svg("feFlood", { class: `glass-${kind}-tint${profile === "more" ? " glass-more-tint" : ""}`, result: "tint" }),
       svg("feComposite", { in: "tint", in2: "field", operator: "in", result: "tinted" }));
     merge.append(svg("feMergeNode", { in: "tinted" }));
   }
-  merge.append(svg("feMergeNode", { in: "rim" }));
+  // Retain the original highlight shape and sharpness, but avoid turning the
+  // long capsule's upper/lower reflections into a bright wire outline.
+  const rimGain = kind === "toolbar" ? .8 : kind === "menu" ? .85 : 1;
+  const rimLight = svg("feComponentTransfer", { in: "rim", result: "rimLight" });
+  rimLight.append(svg("feFuncA", { type: "linear", slope: rimGain }));
+  filter.append(rimLight);
+  merge.append(svg("feMergeNode", { in: "rimLight" }));
   filter.append(merge);
   const defs = svg("defs", {});
   defs.append(filter);

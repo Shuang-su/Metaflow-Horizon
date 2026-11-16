@@ -1,3 +1,4 @@
+import { paintReaderToolbarMotion, clearReaderToolbarMotion } from "./reader-toolbar-motion";
 import { readerFrame } from "./reader-frame";
 
 /** One reversible clock for DOM chrome and its separately hosted optical lens. */
@@ -96,6 +97,7 @@ export function createReaderChromeMotion() {
       }
       if (!element.hasAttribute("data-chrome-motion")) element.dataset.chromeMotion = "";
     }
+    paintReaderToolbarMotion(document, q, chromeVisibilityScale(q));
     for (const { live, ghost } of glyphs) {
       live.style.opacity = `calc(${route.glyph} * var(--lg-morph-source, 1))`;
       live.style.filter = `blur(${4 * (1 - route.glyph)}px)`;
@@ -169,6 +171,7 @@ export function createReaderChromeMotion() {
   return {
     route, setVisible, followScroll,
     dispose() {
+      clearReaderToolbarMotion(document);
       releaseFrame(); observer.disconnect(); clearGlyphs(); reduced.removeEventListener("change", preferences);
       root.removeAttribute("data-reader-controls-hidden");
       for (const element of controls()) {

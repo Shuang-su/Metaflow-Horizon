@@ -7,11 +7,12 @@ export interface PlanWorkOptions {
   yieldTask?: () => Promise<void>;
   budgetMs?: number;
   onSlice?: (duration: number) => void;
+  onProgress?: (stops: readonly MorphStop[]) => void;
 }
 /** Run the original trace in bounded chunks. Even the first chunk is deferred. */
 export async function traceMorphAsync(e: MorphEndpoints, glass: MorphGlass | undefined, options: MorphPlanOptions, work: PlanWorkOptions = {}): Promise<MorphStop[]> {
   const pause = work.yieldTask ?? (() => new Promise<void>(resolve => setTimeout(resolve, 0)));
-  const steps = traceMorphSteps(e, glass, options);
+  const steps = traceMorphSteps(e, glass, options, work.onProgress);
   try {
     for (;;) {
       await pause();

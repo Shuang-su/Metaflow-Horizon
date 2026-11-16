@@ -39,7 +39,7 @@ export function startGlassDiagnostics() {
     traceGlass(message.name, message.detail);
   };
   const input = (event: Event) => {
-    if (event.target instanceof Element && event.target.closest("#reader-font-trigger, #reader-font-panel")) {
+    if (event.target instanceof Element && event.target.closest("#reader-font-trigger, #reader-font-panel, #header-menu-trigger, .reader-more-menu")) {
       const pointer = event as PointerEvent;
       traceGlass(event.type, { target: event.target.closest("[id]")?.id, pointerType: pointer.pointerType });
     }

@@ -43,9 +43,19 @@ test("bundled Worker preserves original synchronous stops and outlines exactly",
   const worker = new BundledWorker();
   const service = createMorphPlanService({ workerFactory: () => worker });
   try {
-    assert.deepEqual(normalized(await service.request(endpoints, glass, options)), normalized(planMorph(endpoints, glass, options)));
+    const prefixes: import("../vendor/glass-hq/src/core/morph-path").MorphStop[][] = [];
+    let completed = false;
+    const result = await service.request(endpoints, glass, options, { onProgress: stops => { assert.equal(completed, false); prefixes.push(stops); } });
+    completed = true;
+    assert.deepEqual(normalized(result), normalized(planMorph(endpoints, glass, options)));
+    assert.equal(prefixes[0].length, 2, "first material pair arrives before the complete plan");
+    for (const prefix of prefixes) {
+      assert.deepEqual(normalized(prefix), normalized(result.slice(0, prefix.length)));
+      prefix.forEach((stop, index) => assert.equal(stop, result[index], "partial/final stop identity is stable"));
+    }
+    assert.ok(prefixes.length > 1);
     assert.equal(worker.timers, 0, "Worker uses posted tasks rather than clamped nested timers");
-    const timing = worker.replies[0].timing!;
+    const timing = worker.replies.find(reply => reply.timing)?.timing!;
     assert.equal(timing.scheduler, "message-channel");
     assert.ok(Number(timing.slices) > 1);
     assert.ok(Number(timing.workerReceivedAt) <= Number(timing.workerStartedAt));
@@ -243,6 +253,76 @@ test("motion starts with two maps, holds a complete frame, reverses and ignores 
     movingPanel.box.top += 2; moving.frame(time += 16);
     assert.equal(moving.positioning(), false, "existing greater-than-eight-frame fallback remains bounded");
     moving.dispose();
+    disposeMorphPlans();
+    type Stops = import("../vendor/glass-hq/src/core/morph-path").MorphStop[];
+    class ControlledWorker {
+      static instance: ControlledWorker;
+      onmessage: ((event: MessageEvent) => void) | null = null;
+      onerror: ((event: ErrorEvent) => void) | null = null;
+      id = 0; stops: Stops = []; cancelled: number[] = [];
+      constructor() { ControlledWorker.instance = this; }
+      postMessage(data: { id: number; cancel?: boolean; endpoints: MorphEndpoints; glass?: MorphGlass; options: typeof options }) {
+        if (data.cancel) { this.cancelled.push(data.id); return; }
+        this.id = data.id; this.stops = planMorph(data.endpoints, data.glass, data.options);
+      }
+      prefix(count: number) { this.onmessage?.({ data: { id: this.id, progress: this.stops.slice(0, count) } } as MessageEvent); }
+      complete() { this.onmessage?.({ data: { id: this.id, stops: this.stops } } as MessageEvent); }
+      terminate() {}
+    }
+    Object.defineProperty(globalThis, "Worker", { configurable: true, value: ControlledWorker });
+    const streamedPanel = new ElementFixture({ ...endpoints.to, height: 400 });
+    const streamed = attachGeometryMotion(streamedPanel as unknown as HTMLElement, { from: () => source as unknown as Element, morph: "detach", radius: 24, neck: 36, motion: () => "full", prepared: () => true });
+    const streamObserver = observers.at(-1)!;
+    streamed.frame(time += 16); streamed.frame(time += 16);
+    let worker = ControlledWorker.instance;
+    worker.prefix(2);
+    streamed.frame(time += 16);
+    assert.ok(streamed.geometry()?.draw, "first two stops can draw without the remaining geometry");
+    assert.equal(streamed.pending(), true, "partial geometry must not open interactive content");
+    worker.prefix(5);
+    for (let i = 0; i < 30; i++) streamed.frame(time += 16);
+    const frontier = streamed.geometry()!;
+    assert.ok(frontier.draw);
+    const frontierContent = streamedPanel.values.get("--lg-morph");
+    streamed.frame(time += 16);
+    assert.equal(streamed.geometry(), frontier, "at the unfinished boundary retain the complete prior frame");
+    assert.equal(streamedPanel.values.get("--lg-morph"), frontierContent);
+    assert.equal(streamed.pending(), true);
+    const oldShapes = streamed.waypoints().slice();
+    const firstRequest = worker.id;
+    streamedPanel.attrs.add("data-ending-style"); streamObserver();
+    time = performance.now(); // exit() explicitly starts its hold on the real clock.
+    assert.ok(worker.cancelled.includes(firstRequest));
+    for (let i = 0; i < 120; i++) streamed.frame(time += 1);
+    const reversed = streamed.geometry()!;
+    assert.ok(reversed.draw, "partial path reverses using its existing material");
+    assert.ok(reversed.width < frontier.width, "outward velocity must turn even when a cancelled prefix blocks further expansion");
+    streamedPanel.attrs.delete("data-ending-style"); streamObserver();
+    assert.ok(worker.id > firstRequest, "reopen requests completion of the cancelled partial path");
+    worker.prefix(2);
+    assert.equal(streamed.waypoints().length, 5, "short restarted prefix cannot replace a longer visible prefix");
+    worker.prefix(7);
+    oldShapes.forEach((shape, index) => assert.equal(streamed.waypoints()[index], shape));
+    streamed.frame(time += 16);
+    const beforeFreeze = streamed.geometry()!;
+    await lifecycleEvent("pagehide");
+    await lifecycleEvent("pageshow");
+    worker = ControlledWorker.instance;
+    assert.equal(streamed.geometry(), beforeFreeze, "BFCache keeps the complete visible partial frame");
+    assert.equal(streamed.waypoints().length, 7);
+    worker.prefix(2);
+    assert.equal(streamed.waypoints().length, 7, "restored worker cannot regress the known prefix");
+    worker.prefix(9);
+    streamed.frame(time += 16);
+    const beforeFinal = streamed.geometry()!;
+    worker.complete();
+    await Promise.resolve(); await Promise.resolve();
+    streamed.frame(time);
+    assert.equal(streamed.pending(), false);
+    assert.deepEqual(streamed.geometry(), beforeFinal, "final completion does not renormalize progress or jump the frame");
+    for (let i = 0; i < 100; i++) streamed.frame(time += 16);
+    assert.equal(streamed.opacity(), 1);
+    streamed.dispose(); disposeMorphPlans();
     assert.equal(lifecycle.get("pageshow")?.size, 0);
     assert.equal([...lifecycle.get("pagehide")!].filter(item => item.capture).length, 0, "dispose removes the capture listener with matching options");
     disposeMorphPlans();
@@ -330,4 +410,42 @@ test("pagehide disposes shared Worker/cache and restored pages lazily recreate; 
     disposeMorphPlans();
     for (const [key, descriptor] of descriptors) { if (descriptor) Object.defineProperty(globalThis, key, descriptor); else Reflect.deleteProperty(globalThis, key); }
   }
+});
+
+
+test("no-union plans avoid Worker startup but remain deferred, chunkable, cancellable and exact", async () => {
+  let workers = 0, pauses = 0;
+  const traces: { name: string; detail: Record<string, unknown> }[] = [];
+  const service = createMorphPlanService({ workerFactory: () => { workers++; return new BundledWorker(); },
+    yieldTask: async () => { pauses++; }, onTrace: (name, detail) => traces.push({ name, detail }) });
+  try {
+    const pending = service.request(endpoints, undefined, { ...options, neck: 0, stops: 5 });
+    assert.equal(traces.some(event => event.name === "plan-local-complete"), false);
+    const stops = await pending;
+    assert.deepEqual(stops, planMorph(endpoints, undefined, { ...options, neck: 0, stops: 5 }));
+    assert.equal(workers, 0); assert.ok(pauses >= 1);
+    const completed = traces.find(event => event.name === "plan-local-complete")!.detail;
+    assert.equal(completed.stops, 5); assert.equal(completed.outlinePoints, 0);
+    const controller = new AbortController();
+    const cancelled = service.request({ ...endpoints, to: { ...endpoints.to, height: 701 } }, undefined, options, { signal: controller.signal });
+    controller.abort(); await assert.rejects(cancelled, { name: "AbortError" });
+    // Zero budget forces one generator batch per pause and proves plain-path
+    // work itself has checkpoints, not just a deferred monolithic callback.
+    let batches = 0;
+    await traceMorphAsync(endpoints, undefined, options, { budgetMs: 0, yieldTask: async () => { batches++; } });
+    assert.ok(batches > 10);
+  } finally { service.dispose(); }
+});
+
+
+test("streamed fallback prefixes are final-path prefixes and no-union fallback publishes none", async () => {
+  const received: import("../vendor/glass-hq/src/core/morph-path").MorphStop[][] = [];
+  const result = await traceMorphAsync(endpoints, glass, options, { yieldTask: async () => {}, onProgress: stops => received.push([...stops]) });
+  assert.equal(received[0].length, 2);
+  received.forEach(stops => assert.deepEqual(stops, result.slice(0, stops.length)));
+  let reports = 0;
+  const separate = { ...glass, left: 1000, top: 1000 };
+  const plain = await traceMorphAsync(endpoints, separate, options, { yieldTask: async () => {}, onProgress: () => reports++ });
+  assert.equal(reports, 0, "do not promise an inside stop before a valid union exists");
+  assert.deepEqual(plain, planMorph(endpoints, separate, options));
 });

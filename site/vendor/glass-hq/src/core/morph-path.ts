@@ -179,10 +179,12 @@ function traceMorph(e: MorphEndpoints, glass: MorphGlass | undefined, options: M
 }
 
 /** Original planner, cooperatively iterable without changing its contours. */
-export function* traceMorphSteps(e: MorphEndpoints, glass: MorphGlass | undefined, options: MorphPlanOptions): Generator<void, MorphStop[], void> {
+export function* traceMorphSteps(e: MorphEndpoints, glass: MorphGlass | undefined, options: MorphPlanOptions,
+  onProgress?: (stops: readonly MorphStop[]) => void): Generator<void, MorphStop[], void> {
   const { stops: count = 14, unions = 16, neck = 18, dpr = 1, restDpr = dpr } = options;
   const fine = 240;
-  const shapes = Array.from({ length: fine + 1 }, (_, i) => morphShape(e, i / fine));
+  const shapes: MorphShape[] = [];
+  for (let i = 0; i <= fine; i++) { if (i % 32 === 0) yield; shapes.push(morphShape(e, i / fine)); }
   const plain = (p: number, s: MorphShape, exact: boolean): MorphStop => {
     const width = exact ? s.width : Math.max(1, Math.round(s.width)), height = exact ? s.height : Math.max(1, Math.round(s.height));
     const radius = round(Math.min(s.radius, width / 2, height / 2), 0.5);
@@ -192,10 +194,14 @@ export function* traceMorphSteps(e: MorphEndpoints, glass: MorphGlass | undefine
   const result: MorphStop[] = [];
   // Distance travelled along the path, for even spacing.
   const travelled = [0];
-  for (let i = 1; i <= fine; i++) travelled.push(travelled[i - 1]! + shapeDistance(shapes[i]!, shapes[i - 1]!));
+  for (let i = 1; i <= fine; i++) {
+    if (i % 32 === 0) yield;
+    travelled.push(travelled[i - 1]! + shapeDistance(shapes[i]!, shapes[i - 1]!));
+  }
   const total = travelled[fine]!;
   let next = 1;
   for (let i = 1; i < fine && total > 0; i++) {
+    if (i % 32 === 0) yield;
     if (travelled[i]! >= total * next / (count - 1) && next < count - 1) { result.push(plain(i / fine, shapes[i]!, false)); next++; }
   }
   const first: MorphStop = { p: 0, shape: { width: e.from.width, height: e.from.height, radius: e.fromRadius, dpr: restDpr, resting: true }, absorbs: false };
@@ -226,6 +232,9 @@ export function* traceMorphSteps(e: MorphEndpoints, glass: MorphGlass | undefine
     const left = Math.floor(Math.min(...outline.map(([x]) => x))), top = Math.floor(Math.min(...outline.map(([, y]) => y)));
     const right = Math.ceil(Math.max(...outline.map(([x]) => x))), bottom = Math.ceil(Math.max(...outline.map(([, y]) => y)));
     traced.push({ p, shape: { width: right - left, height: bottom - top, radius: 0, outline: outline.map(([x, y]): ShapePoint => [x - left, y - top]), dpr }, box: { left, top, width: right - left, height: bottom - top }, absorbs: true });
+    // Only a confirmed union makes `inside` an immutable part of the final
+    // path. Before this point all unions might fail and use the plain path.
+    onProgress?.([inside, ...traced]);
   }
   if (!traced.length) return [first, ...result, last];
   // Once pinched off, the drop is its own shape from where it parted.

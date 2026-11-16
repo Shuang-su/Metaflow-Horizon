@@ -14,6 +14,8 @@ import { shapeClip } from "../vendor/glass-hq/src/core/shape";
 import type { MorphGeometry } from "../vendor/glass-hq/src/core/morph-path";
 import { WebGL2MaterialRenderer } from "../vendor/glass-hq/src/webgl2/index";
 import { disposeMorphPlans } from "../vendor/glass-hq/src/dom/morph-plan";
+import { getLayoutSize } from "../vendor/lisse-core/index.js";
+import { glassMenuContainsContent } from "./glass-menu-ready";
 
 const selector = "[data-glass-surface]";
 const maximumSurfaces = 12;
@@ -58,8 +60,12 @@ function visible(element: HTMLElement) {
 function shapeOf(surface: Surface): LensPlacement {
   const { element, kind } = surface;
   const box = element.getBoundingClientRect();
-  const width = Math.max(1, element.offsetWidth);
-  const height = Math.max(1, element.offsetHeight);
+  // Match the exact fractional endpoint used by morph planning. Rounding a
+  // large menu to offsetHeight creates a second multi-megabyte resting map,
+  // needlessly evicting the very intermediate maps needed by its animation.
+  const layout = kind === "menu" ? getLayoutSize(element) : undefined;
+  const width = Math.max(1, layout?.width ?? element.offsetWidth);
+  const height = Math.max(1, layout?.height ?? element.offsetHeight);
   // The thumb's shell grows on press. Its optical map is constant and is
   // stretched to the live outline, including the last release frame.
   const shape = kind === "slider" ? { width: 50, height: 28, radius: "capsule" as const }
@@ -100,7 +106,7 @@ export function startGlassChrome(root: HTMLElement) {
   let measuredFrames = 0;
   let paintedFrames = 0;
   let sourceCaptureMs = 0;
-  let fontPrewarmShapes: readonly MorphGeometry[] = [];
+  const menuPrewarmShapes = new Map<string, readonly MorphGeometry[]>();
   let warmedAppearance: GlassAppearance | undefined;
   let warmedDpr = 0;
   let motionRest = false;
@@ -134,7 +140,7 @@ export function startGlassChrome(root: HTMLElement) {
   }
 
   function makeSurface(element: HTMLElement, kind: LensKind, host: HTMLElement) {
-    const surface: Surface = { element, host, kind, lens: createGlassLens(host, kind, () => fallback("filter-resource")), entered: false };
+    const surface: Surface = { element, host, kind, lens: createGlassLens(host, kind, () => fallback("filter-resource"), element.matches(".reader-more-menu") ? "more" : undefined), entered: false };
     if (kind === "slider") surface.releaseControl = attachNativeControlMotion(element, "full", true);
     if (kind === "menu") {
       surface.trigger = document.getElementById(element.dataset.glassMorphFrom || "");
@@ -220,10 +226,10 @@ export function startGlassChrome(root: HTMLElement) {
     materials?.beginFrame();
     const theme = document.documentElement.dataset.theme;
     appearance = theme === "light" || theme === "dark" ? theme : preference.matches ? "dark" : "light";
-    if (!document.getElementById("reader-font-trigger")) fontPrewarmShapes = [];
+    for (const sourceId of menuPrewarmShapes.keys()) if (!document.getElementById(sourceId)) menuPrewarmShapes.delete(sourceId);
     const currentDpr = Math.min(devicePixelRatio || 1, 2);
-    if (!glassColdStart() && fontPrewarmShapes.length && (appearance !== warmedAppearance || currentDpr !== warmedDpr)) {
-      materials?.prewarm(fontPrewarmShapes, appearance, currentDpr);
+    if (!glassColdStart() && menuPrewarmShapes.size && (appearance !== warmedAppearance || currentDpr !== warmedDpr)) {
+      for (const shapes of menuPrewarmShapes.values()) materials?.prewarm(shapes, appearance, currentDpr);
       warmedAppearance = appearance; warmedDpr = currentDpr;
     }
     const controls = new Set(Array.from(document.querySelectorAll<HTMLElement>("[data-glass-interactive]"))
@@ -308,10 +314,11 @@ export function startGlassChrome(root: HTMLElement) {
       const menuBox = path && surface.element.dataset.glassMorphMode === "become"
         ? surface.element.getBoundingClientRect() : undefined;
       const positionReady = !menuBox || !path ||
-        (Math.abs(path.left - menuBox.left) < 1 && Math.abs(path.width - menuBox.width) < 1);
+        glassMenuContainsContent(path, menuBox);
       if (!surface.entered && !outline.positioning() && !outline.pending() && contentReady && positionReady
           && !surface.element.hasAttribute("data-ending-style") && !surface.element.hasAttribute("data-starting-style")) {
         surface.entered = true;
+        traceGlass("menu:interactive", { id:surface.element.id, reveal, positionReady });
         surface.element.dispatchEvent(new CustomEvent("glass:entered"));
       }
     }
@@ -421,8 +428,8 @@ export function startGlassChrome(root: HTMLElement) {
       else viewportTrackingUntil = 0;
     }
     const keepMoving = moving || now < motionUntil;
-    const fontTrigger = document.getElementById("reader-font-trigger");
-    const atRest = !keepMoving && fontTrigger !== null && isGlassMenuSourceAtRest(fontTrigger);
+    const menuTriggers = ["reader-font-trigger", "header-menu-trigger"].map(id => document.getElementById(id)).filter((element): element is HTMLElement => element !== null);
+    const atRest = !keepMoving && menuTriggers.some(isGlassMenuSourceAtRest);
     if (atRest && !motionRest) document.dispatchEvent(new Event(READER_GLASS_MOTION_REST));
     motionRest = atRest;
     return keepMoving;
@@ -470,13 +477,15 @@ export function startGlassChrome(root: HTMLElement) {
   observer.observe(document.documentElement, { attributes: true, attributeOldValue: true, attributeFilter: ["data-theme", "style"] });
   const releaseMeasure = readerFrame.subscribe("measure", draw);
   const releasePaint = readerFrame.subscribe("paint", paint);
-  const prewarmFont = (event: Event) => {
+  const prewarmMenu = (event: Event) => {
     if (glassColdStart()) return;
-    fontPrewarmShapes = (event as CustomEvent<{ shapes: readonly MorphGeometry[] }>).detail.shapes;
+    const { sourceId, shapes } = (event as CustomEvent<{ sourceId: string; shapes: readonly MorphGeometry[] }>).detail;
+    if (!sourceId || !document.getElementById(sourceId)) return;
+    menuPrewarmShapes.set(sourceId, shapes);
     warmedAppearance = undefined;
     schedule();
   };
-  document.addEventListener("reader-glass-prewarm", prewarmFont);
+  document.addEventListener("reader-glass-prewarm", prewarmMenu);
   document.addEventListener("glass-plan-ready", schedule);
   const repaint = (event: Event) => {
     if (event.target instanceof Element && event.target.closest("[data-glass-optics], [data-glass-optics-host]")) return;
@@ -535,7 +544,7 @@ export function startGlassChrome(root: HTMLElement) {
     releaseMeasure(); releasePaint(); releaseDiagnostics(); clearTimeout(warmTimer);
     observer.disconnect();
     delete (root as DebugRoot).glassDiagnostics;
-    document.removeEventListener("reader-glass-prewarm", prewarmFont);
+    document.removeEventListener("reader-glass-prewarm", prewarmMenu);
     document.removeEventListener("glass-plan-ready", schedule);
     resize.disconnect();
     for (const event of interactionEvents) document.removeEventListener(event, input, true);

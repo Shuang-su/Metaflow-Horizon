@@ -15,6 +15,8 @@ import { ReadLaterTrigger } from "./ReadLater";
 import { rememberSearch, searchTerm } from "../lib/search-history";
 import { lockDocumentScroll } from "../lib/scroll-lock";
 import { setCarouselAutoplay, useCarouselAutoplay } from "../lib/carousel-autoplay";
+import { glassColdStart } from "../lib/glass-diagnostics";
+import { canFinishGlassMenuWithoutMotion, installGlassMenuPrewarm } from "../lib/glass-menu-prewarm";
 import { transitionContent } from "../lib/content-transition";
 
 type Panel = "mobile" | "topics" | "theme" | "search" | null;
@@ -33,6 +35,7 @@ export default function Header() {
   const [panel, setPanel] = useState<Panel>(null);
   const [readerMenuMounted, setReaderMenuMounted] = useState(false);
   const [readerMenuReady, setReaderMenuReady] = useState(false);
+  const [readerMenuPrediction, setReaderMenuPrediction] = useState(false);
   const [theme, setTheme] = useState<Theme>("system");
   const [mobileLayout, setMobileLayout] = useState(false);
   const [phoneLayout, setPhoneLayout] = useState(false);
@@ -48,6 +51,7 @@ export default function Header() {
   fixedChrome.current = immersive || collection;
   const header = useRef<HTMLElement>(null);
   const navigation = useRef<HTMLElement>(null);
+  const menuTrigger = useRef<HTMLButtonElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const currentPanel = useRef(panel);
   const readingDestination = useRef<number | null>(null);
@@ -134,6 +138,22 @@ export default function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    setReaderMenuPrediction(false);
+    if (!article || glassColdStart()) return;
+    let idle: number | undefined;
+    const timer = window.setTimeout(() => {
+      if ("requestIdleCallback" in window) idle = window.requestIdleCallback(() => setReaderMenuPrediction(true), { timeout: 500 });
+      else setReaderMenuPrediction(true);
+    }, 200);
+    return () => { window.clearTimeout(timer); if (idle !== undefined) window.cancelIdleCallback(idle); };
+  }, [article, pathname]);
+
+  useLayoutEffect(() => {
+    if (!article || readerMenuMounted || !readerMenuPrediction || !menuTrigger.current || !navigation.current) return;
+    return installGlassMenuPrewarm(menuTrigger.current, navigation.current, { morph: "become" });
+  }, [article, readerMenuMounted, readerMenuPrediction]);
+
   useLayoutEffect(() => {
     const element = navigation.current;
     if (!article || !readerMenuMounted || !element) return;
@@ -144,7 +164,9 @@ export default function Header() {
     };
     if (!mobileOpen && matchMedia("(prefers-reduced-motion: reduce)").matches) { finish(); return; }
     element.addEventListener(eventName, finish, { once: true });
-    const timeout = window.setTimeout(finish, 750);
+    const timeout = window.setTimeout(() => {
+      if (canFinishGlassMenuWithoutMotion(element)) finish();
+    }, 750);
     return () => {
       element.removeEventListener(eventName, finish);
       window.clearTimeout(timeout);
@@ -273,11 +295,13 @@ export default function Header() {
           {!article && <Link href="/" className="brand" aria-label="metaflow horizon 首页" onClick={() => setPanel(null)}><BrandMark /><span>metaflow horizon</span></Link>}
           {home && <div id="home-feed-control" aria-hidden={mobileOpen || undefined} />}
         </div>
-        {article ? (readerMenuMounted && <nav ref={navigation} className="reader-more-menu" aria-label="主导航" id="main-nav"
-          aria-hidden={!interactiveMenu || undefined}
-          data-glass-surface="menu" data-glass-morph-from="header-menu-trigger" data-glass-morph-mode="become"
-          data-ending-style={!mobileOpen ? "" : undefined}
-          data-menu-opening={mobileOpen && !readerMenuReady ? "" : undefined}>
+        {article ? ((readerMenuMounted || readerMenuPrediction) && <nav key={readerMenuMounted ? "reader-more-active" : "reader-more-prediction"} ref={navigation} className="reader-more-menu" aria-label="主导航" id={readerMenuMounted ? "main-nav" : undefined}
+          aria-hidden={!interactiveMenu || undefined} inert={!readerMenuMounted || undefined}
+          style={!readerMenuMounted ? { visibility: "hidden", pointerEvents: "none" } : undefined}
+          data-glass-menu-prewarm={!readerMenuMounted ? "" : undefined}
+          data-glass-surface={readerMenuMounted ? "menu" : undefined} data-glass-morph-from={readerMenuMounted ? "header-menu-trigger" : undefined} data-glass-morph-mode="become"
+          data-ending-style={readerMenuMounted && !mobileOpen ? "" : undefined}
+          data-menu-opening={readerMenuMounted && mobileOpen && !readerMenuReady ? "" : undefined}>
           <div className="reader-more-content" data-glass-menu-content inert={!interactiveMenu}>{menuLinks}</div>
         </nav>) : <nav ref={navigation} className={mobileOpen ? "is-open" : ""} aria-label="主导航" id="main-nav"
           inert={mobileLayout && !mobileOpen} aria-hidden={mobileLayout && !mobileOpen || undefined}>{menuLinks}</nav>}
@@ -300,7 +324,7 @@ export default function Header() {
             </div>
             <Link className="subscribe-link desktop-action" href="/subscribe/" onClick={() => setPanel(null)} inert={mobileLayout && mobileOpen}>订阅</Link>
           </>}
-          <button id="header-menu-trigger" className={`menu-toggle${article ? " lg-surface" : ""}`} data-reader-more-trigger
+          <button ref={menuTrigger} id="header-menu-trigger" className={`menu-toggle${article ? " lg-surface" : ""}`} data-reader-more-trigger
             data-lg-container-radius="circle" data-glass-surface={immersive ? "" : undefined} data-glass-interactive={immersive ? "" : undefined}
             aria-label={mobileOpen ? "关闭导航" : "打开导航"} aria-expanded={mobileOpen} aria-controls={!article || readerMenuMounted ? "main-nav" : undefined} onClick={(e) => toggle("mobile", e.currentTarget)}>
             <span className="header-menu-glyph" key={mobileOpen ? "close" : immersive ? "more" : "grid"}><Icon name={mobileOpen ? "close" : immersive ? "more" : "grid"} /></span>

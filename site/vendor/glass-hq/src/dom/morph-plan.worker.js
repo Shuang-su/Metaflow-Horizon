@@ -205,10 +205,14 @@ function morphShape(e, p) {
 }
 var neckWidth = (p, neck) => neck * (1 - smoothstep(0.3, 0.95, p));
 var round = (v, unit) => Math.round(v / unit) * unit;
-function* traceMorphSteps(e, glass, options) {
+function* traceMorphSteps(e, glass, options, onProgress) {
   const { stops: count = 14, unions = 16, neck = 18, dpr = 1, restDpr = dpr } = options;
   const fine = 240;
-  const shapes = Array.from({ length: fine + 1 }, (_, i) => morphShape(e, i / fine));
+  const shapes = [];
+  for (let i = 0; i <= fine; i++) {
+    if (i % 32 === 0) yield;
+    shapes.push(morphShape(e, i / fine));
+  }
   const plain = (p, s, exact) => {
     const width = exact ? s.width : Math.max(1, Math.round(s.width)), height = exact ? s.height : Math.max(1, Math.round(s.height));
     const radius = round(Math.min(s.radius, width / 2, height / 2), 0.5);
@@ -217,10 +221,14 @@ function* traceMorphSteps(e, glass, options) {
   };
   const result = [];
   const travelled = [0];
-  for (let i = 1; i <= fine; i++) travelled.push(travelled[i - 1] + shapeDistance(shapes[i], shapes[i - 1]));
+  for (let i = 1; i <= fine; i++) {
+    if (i % 32 === 0) yield;
+    travelled.push(travelled[i - 1] + shapeDistance(shapes[i], shapes[i - 1]));
+  }
   const total = travelled[fine];
   let next = 1;
   for (let i = 1; i < fine && total > 0; i++) {
+    if (i % 32 === 0) yield;
     if (travelled[i] >= total * next / (count - 1) && next < count - 1) {
       result.push(plain(i / fine, shapes[i], false));
       next++;
@@ -256,6 +264,7 @@ function* traceMorphSteps(e, glass, options) {
     const left = Math.floor(Math.min(...outline.map(([x]) => x))), top = Math.floor(Math.min(...outline.map(([, y]) => y)));
     const right = Math.ceil(Math.max(...outline.map(([x]) => x))), bottom = Math.ceil(Math.max(...outline.map(([, y]) => y)));
     traced.push({ p, shape: { width: right - left, height: bottom - top, radius: 0, outline: outline.map(([x, y]) => [x - left, y - top]), dpr }, box: { left, top, width: right - left, height: bottom - top }, absorbs: true });
+    onProgress?.([inside, ...traced]);
   }
   if (!traced.length) return [first, ...result, last];
   const parted = plain(Math.min(1, (end + 1) / fine), shapes[Math.min(fine, end + 1)], false);
@@ -267,7 +276,7 @@ function* traceMorphSteps(e, glass, options) {
 var abortPlanError = () => new DOMException("Morph plan cancelled", "AbortError");
 async function traceMorphAsync(e, glass, options, work = {}) {
   const pause = work.yieldTask ?? (() => new Promise((resolve) => setTimeout(resolve, 0)));
-  const steps = traceMorphSteps(e, glass, options);
+  const steps = traceMorphSteps(e, glass, options, work.onProgress);
   try {
     for (; ; ) {
       await pause();
@@ -311,6 +320,12 @@ scope.onmessage = ({ data }) => {
   const received = performance.now();
   let started;
   let slices = 0, maxSliceMs = 0, computeMs = 0;
+  let sentPrefix = false, pendingPrefix;
+  const publishPrefix = (stops) => scope.postMessage({
+    id: data.id,
+    progress: stops,
+    workerProgressAt: performance.timeOrigin + performance.now()
+  });
   const timing = () => {
     const completed = performance.now();
     return {
@@ -331,13 +346,27 @@ scope.onmessage = ({ data }) => {
       await yieldWorkerTask();
       started ??= performance.now();
     },
+    onProgress(stops) {
+      if (!sentPrefix) {
+        sentPrefix = true;
+        publishPrefix(stops);
+      } else pendingPrefix = stops;
+    },
     onSlice(ms) {
       slices++;
       computeMs += ms;
       maxSliceMs = Math.max(maxSliceMs, ms);
+      if (pendingPrefix) {
+        publishPrefix(pendingPrefix);
+        pendingPrefix = void 0;
+      }
     }
   }).then(
-    (stops) => scope.postMessage({ id: data.id, stops, timing: timing() }),
+    (stops) => scope.postMessage({ id: data.id, stops, timing: {
+      ...timing(),
+      stops: stops.length,
+      outlinePoints: stops.reduce((sum, stop) => sum + (stop.shape.outline?.length ?? 0), 0)
+    } }),
     (error) => scope.postMessage({ id: data.id, error: String(error), aborted: controller.signal.aborted, timing: timing() })
   ).finally(() => {
     jobs.delete(data.id);

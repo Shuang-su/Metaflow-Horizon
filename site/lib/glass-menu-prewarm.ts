@@ -6,8 +6,8 @@ import { webkit } from "../vendor/glass-hq/src/dom/engine";
 
 export const READER_GLASS_PREWARM = "reader-glass-prewarm";
 export const READER_GLASS_MOTION_REST = "reader-glass-motion-rest";
-export type GlassMenuPrewarmDetail = { shapes: readonly MorphGeometry[] };
-type PredictionOptions = { webkit?: boolean; dpr?: number; signal?: AbortSignal };
+export type GlassMenuPrewarmDetail = { sourceId: string; shapes: readonly MorphGeometry[] };
+type PredictionOptions = { webkit?: boolean; dpr?: number; signal?: AbortSignal; morph?: "detach" | "become" };
 const boxOf = (element: HTMLElement): Box => {
   const { left, top, width, height } = element.getBoundingClientRect();
   return { left, top, width, height };
@@ -38,8 +38,8 @@ export function isGlassMenuSourceAtRest(source: HTMLElement) {
     Math.abs(bounds.width - size.width) <= .01 && Math.abs(bounds.height - size.height) <= .01;
 }
 
-/** Matches attachGeometryMotion's font-menu detach plan, including its traced
- * neck and exact layout endpoint. The hidden panel has real content and CSS;
+/** Matches attachGeometryMotion's detach/become plan, including the native
+ * neck choice and exact layout endpoint. The hidden panel has real content and CSS;
  * no menu height or rounded endpoint is estimated from text or constants. */
 export async function predictGlassMenuShapes(source: HTMLElement, panel: HTMLElement, options: PredictionOptions = {}): Promise<readonly MorphGeometry[]> {
   if (glassColdStart() || !isGlassMenuSourceAtRest(source)) return [];
@@ -51,7 +51,11 @@ export async function predictGlassMenuShapes(source: HTMLElement, panel: HTMLEle
   const dpr = Math.min(Math.max(Number.isFinite(requestedDpr) ? requestedDpr : 1, 1), 2);
   const endpoints = { from, fromRadius: "circle" as const, to, toRadius: 24, along: openingAxis(from, to) };
   const glass = { ...from, radius: "circle" as const, layoutWidth: sourceSize.width, layoutHeight: sourceSize.height };
-  const stops = await requestMorphPlan(endpoints, glass, { dpr: 1, restDpr: dpr, neck: 36, stops: (options.webkit ?? webkit) ? 7 : 14 }, { signal: options.signal });
+  const become = options.morph === "become";
+  const neck = become ? 0 : 36;
+  const count = become ? 10 : 14;
+  const stops = await requestMorphPlan(endpoints, become ? undefined : glass, { dpr: 1, restDpr: dpr, neck,
+    stops: (options.webkit ?? webkit) ? Math.max(4, Math.round(count / 2)) : count }, { signal: options.signal });
   const last = stops.at(-1);
   if (last) Object.assign(last.shape, { width: targetSize.width, height: targetSize.height });
   return stops.map(stop => stop.shape);
@@ -60,7 +64,7 @@ export async function predictGlassMenuShapes(source: HTMLElement, panel: HTMLEle
 /** Predict only at layout boundaries, never on scroll. ResizeObserver covers
  * text/font reflow; the normalized signature ignores joint viewport movement. */
 export function installGlassMenuPrewarm(source: HTMLElement, panel: HTMLElement,
-  options: { predict?: typeof predictGlassMenuShapes; cold?: () => boolean } = {}) {
+  options: { predict?: typeof predictGlassMenuShapes; cold?: () => boolean; morph?: "detach" | "become" } = {}) {
   const cold = options.cold ?? glassColdStart;
   if (cold()) return () => {};
   const planner = options.predict ?? predictGlassMenuShapes;
@@ -80,12 +84,12 @@ export function installGlassMenuPrewarm(source: HTMLElement, panel: HTMLElement,
     if (next === signature) return;
     const current = version, controller = pending = new AbortController();
     const dpr = typeof devicePixelRatio === "number" ? devicePixelRatio : 1;
-    void planner(source, panel, { dpr, signal: controller.signal }).then(shapes => {
+    void planner(source, panel, { dpr, signal: controller.signal, morph: options.morph }).then(shapes => {
       if (disposed || cold() || current !== version || controller.signal.aborted || !shapes.length ||
           !panel.isConnected || !isGlassMenuSourceAtRest(source)) return;
       if (layoutSignature() !== next) { schedule(); return; }
       signature = next; pending = undefined;
-      document.dispatchEvent(new CustomEvent<GlassMenuPrewarmDetail>(READER_GLASS_PREWARM, { detail: { shapes } }));
+      document.dispatchEvent(new CustomEvent<GlassMenuPrewarmDetail>(READER_GLASS_PREWARM, { detail: { sourceId: source.id || (options.morph === "become" ? "header-menu-trigger" : "reader-font-trigger"), shapes } }));
     }, error => {
       if (!disposed && current === version && error?.name !== "AbortError") traceGlass("menu-prewarm-failure", { error: String(error) });
       if (pending === controller) pending = undefined;

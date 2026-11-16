@@ -4,6 +4,7 @@ import { predictGlassMenuShapes, installGlassMenuPrewarm, READER_GLASS_PREWARM, 
 import { openingAxis, planMorph, type Box } from "../vendor/glass-hq/src/core/morph-path";
 
 class FixtureElement {
+  id = "";
   isConnected = true;
   hidden = false;
   pressed = false;
@@ -242,3 +243,24 @@ test("motion timeout cannot expose content or finish a return while geometry/mat
   attributes.add("data-glass-morph");
   assert.equal(canFinishGlassMenuWithoutMotion(panel), false, "active return keeps its completion event");
 });
+
+
+test("More become prediction matches native neck-zero plan, with source-specific event identity", () => withDOM(async ({ events, install, flush }) => {
+  const { source, panel } = pair(); source.id = "header-menu-trigger";
+  panel.box.height = panel.layout.height = 700;
+  for (const engine of [true, false]) {
+    const actual = await predictGlassMenuShapes(element(source), element(panel), { morph: "become", webkit: engine, dpr: 2 });
+    const expected = planMorph({ from: source.box, fromRadius: "circle", to: panel.box, toRadius: 24,
+      along: openingAxis(source.box, panel.box) }, undefined, { dpr: 1, restDpr: 2, neck: 0, stops: engine ? 5 : 10 }).map(stop => stop.shape);
+    assert.deepEqual(actual, expected);
+    assert.equal(actual.length, engine ? 5 : 10);
+    assert.ok(actual.every(shape => !shape.outline), "become has no detached union contour to trace");
+    assert.equal(actual[0].dpr, 2); assert.equal(actual.at(-1)?.dpr, 2);
+  }
+  const cleanup = install(element(source), element(panel), { morph: "become" });
+  await flush();
+  assert.equal(events.length, 1);
+  assert.equal((events[0] as CustomEvent).detail.sourceId, "header-menu-trigger");
+  assert.ok((events[0] as CustomEvent).detail.shapes.every((shape: { outline?: unknown }) => !shape.outline));
+  cleanup();
+}));
