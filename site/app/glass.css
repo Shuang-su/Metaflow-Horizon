@@ -12,7 +12,10 @@
   contain: strict;
   overflow: clip;
   pointer-events: none;
+  /* Fail closed until a real Glass-HQ contour is installed by the lens. */
+  clip-path: polygon(0 0, 0 0, 0 0);
 }
+.glass-optical-definitions { width: 0; height: 0; overflow: hidden; pointer-events: none; }
 .glass-optical-plane {
   position: absolute;
   inset: 0;

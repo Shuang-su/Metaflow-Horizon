@@ -78,7 +78,7 @@ export function updateCoverGlyphContrast(element: HTMLElement, darkTheme: boolea
   if (brightness === null) { reset(); return; }
   // The existing cover mask fades into the theme; do not keep dark glyphs
   // after the image detail has faded out under the controls.
-  const alpha = cover.hasAttribute("data-reader-cover") ? coverMaskAlpha((cy - imageBox.top) / imageBox.height) : 1;
+  const alpha = coverMaskAlpha((cy - clip.top) / clip.height);
   if (alpha < .1) { reset(); return; }
   const background = getComputedStyle(document.body).backgroundColor.match(/[\d.]+/g)?.map(Number);
   const backgroundBrightness = background && background.length >= 3 && (background[3] ?? 1) > .9

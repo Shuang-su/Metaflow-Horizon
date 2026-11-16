@@ -8,10 +8,6 @@ const selector = ".reader-header :is(.reader-chrome-control,.menu-toggle), .home
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const ease = (value: number) => value * value * (3 - 2 * value);
 
-export function canSettleChromeScroll(phone: boolean, folded: boolean, scrubbed: boolean, touching: boolean) {
-  return phone && !folded && scrubbed && !touching;
-}
-
 export class ChromeVisibility {
   value = 1;
   target = 1;
@@ -62,7 +58,6 @@ export function createReaderChromeMotion() {
   let frame = 0;
   let routeStart: number | undefined;
   let pathname: string | undefined;
-  let scrollDirection = 1;
   let snapshots = new Map<string, Node>();
   let glyphs: Glyph[] = [];
   const controls = () => Array.from(document.querySelectorAll<HTMLElement>(selector))
@@ -125,13 +120,11 @@ export function createReaderChromeMotion() {
   }
   function followScroll(delta: number) {
     if (!delta) return;
-    scrollDirection = Math.sign(delta);
     if (reduced.matches) { setVisible(delta < 0, true); return; }
     const q = visibility.follow(delta, performance.now());
-    root.toggleAttribute("data-reader-controls-hidden", q < 1);
+    root.toggleAttribute("data-reader-controls-hidden", q <= .001);
     repaint();
   }
-  function settleScroll() { setVisible(scrollDirection < 0); }
   function route(next: string) {
     if (pathname === next) return;
     const initial = pathname === undefined;
@@ -175,7 +168,7 @@ export function createReaderChromeMotion() {
   }
   reduced.addEventListener("change", preferences);
   return {
-    route, setVisible, followScroll, settleScroll,
+    route, setVisible, followScroll,
     dispose() {
       cancelAnimationFrame(frame); observer.disconnect(); clearGlyphs(); reduced.removeEventListener("change", preferences);
       root.removeAttribute("data-reader-controls-hidden");

@@ -70,6 +70,7 @@ function backdropRoots() {
 }
 
 export function startGlassChrome(root: HTMLElement) {
+  delete root.dataset.glassFailure;
   const surfaces = new Map<HTMLElement, Surface>();
   const interactions = new Map<HTMLElement, SurfaceAnimator>();
   const cache = new Map<string, Material>();
@@ -89,9 +90,10 @@ export function startGlassChrome(root: HTMLElement) {
   function report(state: string) {
     if (root.dataset.glassState !== state) root.dataset.glassState = state;
   }
-  function fallback() {
+  function fallback(reason = "material-or-context") {
     if (disposed || failed) return;
     failed = true;
+    root.dataset.glassFailure = reason;
     cache.clear();
     renderer?.dispose();
     for (const surface of surfaces.values()) {
@@ -123,13 +125,14 @@ export function startGlassChrome(root: HTMLElement) {
           image.src = url;
           return image.decode();
         }));
+        if (disposed || failed) return;
         entry.maps = { field, rim };
         schedule();
-      }).catch(fallback);
+      }).catch(() => fallback("material-resource"));
   }
 
   function makeSurface(element: HTMLElement, kind: LensKind, host: HTMLElement) {
-    const surface: Surface = { element, kind, lens: createGlassLens(host, kind), entered: false };
+    const surface: Surface = { element, kind, lens: createGlassLens(host, kind, () => fallback("filter-resource")), entered: false };
     if (kind === "slider") surface.releaseControl = attachNativeControlMotion(element, "full", true);
     if (kind === "menu") {
       surface.trigger = document.getElementById(element.dataset.glassMorphFrom || "");
@@ -355,13 +358,18 @@ export function startGlassChrome(root: HTMLElement) {
       const previous = !path && surface.previousMaps;
       const glow = kind === "toolbar" ? Array.from(element.querySelectorAll<HTMLElement>("[data-glass-interactive]"))
         .reduce((value, control) => Math.max(value, Number(control.style.getPropertyValue("--lg-glow"))), 0) : 0;
-      pieces += lens.paint({ placement: a, maps: previous || aMaps }, { placement: b, maps: bMaps },
-        previous ? themeMix * (2 - themeMix) : mix, sources, opacity, changed, glow);
+      try {
+        pieces += lens.paint({ placement: a, maps: previous || aMaps }, { placement: b, maps: bMaps },
+          previous ? themeMix * (2 - themeMix) : mix, sources, opacity, changed, glow);
+      } catch {
+        fallback("lens-binding-or-paint");
+        continue;
+      }
       textPieces += lens.source.visibleTextCount;
       if (!element.hasAttribute("data-glass-ready")) element.dataset.glassReady = "";
       delete element.dataset.glassPending;
       if (kind === "chrome") updateCoverGlyphContrast(element, appearance === "dark");
-      report("webgl2-svg");
+      report("webgl2-html");
     }
     if (!surfaces.size && !failed) report("idle");
     if (root.dataset.glassPieces !== String(pieces)) root.dataset.glassPieces = String(pieces);

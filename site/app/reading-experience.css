@@ -105,3 +105,4 @@ dialog:modal ~ .reading-navigator .reading-nav-panel { pointer-events: none; }
   .search-overlay::backdrop, :is(.reader-dialog-share, .reader-dialog-discussion)::backdrop { transition: none; }
   .reader-sheet-handle, .read-later-handle { display: none; }
 }
+[data-reader-focus-target]:focus { outline: none; }

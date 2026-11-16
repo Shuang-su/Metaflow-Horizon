@@ -2,7 +2,15 @@ export type OpticalBox = { left: number; top: number; width: number; height: num
 
 const excluded = "script, style, link, svg, iframe, object, embed, canvas, audio, video, dialog, [data-glass-surface], [data-glass-optics], [data-no-optical-source]";
 const typeStyles = ["font", "font-kerning", "font-variant", "font-feature-settings", "font-optical-sizing", "letter-spacing", "line-height", "text-align", "text-decoration", "text-indent", "text-transform", "text-wrap", "white-space", "word-break", "overflow-wrap", "direction", "color"];
-const boxStyles = ["background-color", "background-image", "background-size", "background-position", "background-repeat", "border-radius", "border", "padding", "object-fit", "object-position", "overflow", "opacity", "box-sizing", "mask-image"];
+const boxStyles = ["background-color", "background-image", "background-size", "background-position", "background-repeat", "border-radius", "border", "padding", "object-fit", "object-position", "overflow", "opacity", "box-sizing"];
+const maskStyles = ["mask-image", "mask-mode", "mask-size", "mask-position", "mask-repeat", "mask-origin", "mask-clip", "mask-composite",
+  "-webkit-mask-image", "-webkit-mask-size", "-webkit-mask-position", "-webkit-mask-repeat", "-webkit-mask-origin", "-webkit-mask-clip", "-webkit-mask-composite"];
+function hasMask(style: CSSStyleDeclaration) {
+  return ["mask-image", "-webkit-mask-image"].some(property => {
+    const value = style.getPropertyValue(property);
+    return value && value !== "none";
+  });
+}
 const leaf = "p, h1, h2, h3, h4, h5, h6, pre, figcaption, dt, dd, blockquote, td, th, li";
 const maxPieces = 96;
 
@@ -34,7 +42,7 @@ function inlineCopy(source: Node): Node | null {
     const image = document.createElement("img");
     image.alt = "";
     image.src = source.currentSrc || source.src;
-    copyStyles(getComputedStyle(source), image, [...typeStyles, ...boxStyles, "width", "height", "vertical-align"]);
+    copyStyles(getComputedStyle(source), image, [...typeStyles, ...boxStyles, ...maskStyles, "width", "height", "vertical-align"]);
     return image;
   }
   const tag = ["BR", "WBR"].includes(source.tagName) ? source.tagName : "span";
@@ -107,6 +115,9 @@ export class OpticalSource {
         const property = key as keyof typeof values;
         if (group.node.style[property] !== value) group.node.style[property] = value;
       }
+      // Keep ancestor masks on their own sized coordinate system. A stable
+      // cover wrapper can mask its independently blurred/transformed image.
+      copyStyles(style, group.node, maskStyles);
       activeGroups.add(source);
       const frame = { group, children: [], left: rect.left, top: rect.top, scaleX, scaleY };
       frames.push(frame);
@@ -143,6 +154,8 @@ export class OpticalSource {
       // descendants, rather than being multiplied onto each flattened piece.
       if (entry.node.style.opacity !== "1") entry.node.style.opacity = "1";
       if (entry.node.style.filter !== "none") entry.node.style.filter = "none";
+      if (entry.node.style.maskImage !== "none") entry.node.style.maskImage = "none";
+      if (entry.node.style.webkitMaskImage !== "none") entry.node.style.webkitMaskImage = "none";
       // Rectangular overflow clipping still prunes neighbouring slides. Actual
       // clip-paths stay on their sized groups, including calc() and round radii.
       const inset = (value: number, ratio: number) => `${Math.max(0, value / (ratio || 1)).toFixed(3)}px`;
@@ -170,7 +183,7 @@ export class OpticalSource {
       // Keep only effect-bearing ancestors. The normal document stays flat and
       // only visible pieces are cloned; ordinary offscreen branches stay pruned.
       const grouped = style.display !== "contents" && rect.width > 0 && rect.height > 0 &&
-        (Number(style.opacity) < 1 || style.filter !== "none" || style.clipPath !== "none");
+        (Number(style.opacity) < 1 || style.filter !== "none" || style.clipPath !== "none" || hasMask(style));
       const frame = grouped ? effectGroup(node, rect, style, parent) : parent;
       const text = Array.from(node.childNodes).some(child => child.nodeType === Node.TEXT_NODE && child.textContent?.trim());
       const hasBlockChildren = node.querySelector(":scope > p, :scope > li, :scope > ul, :scope > ol, :scope > div");

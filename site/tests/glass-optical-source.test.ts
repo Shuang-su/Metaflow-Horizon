@@ -187,3 +187,25 @@ test("effect groups preserve the 96-piece sampling boundary", () => withOpticalD
   assert.equal(optics.update([asElement(source)], region), 96);
   assert.equal(layer.children[0].children.length, 96);
 }));
+
+test("a stable cover wrapper masks its moving blurred child once in wrapper coordinates", () => withOpticalDOM(() => {
+  const mask = "linear-gradient(black 42%, transparent 100%)";
+  const wrapper = new FixtureElement(region, { maskImage: mask, WebkitMaskImage: mask, maskSize: "100% 100%", maskPosition: "0% 0%", maskRepeat: "no-repeat" });
+  const image = new FixtureElement({ left: 0, top: 12, width: 100, height: 100 }, { backgroundColor: "red", filter: "blur(6px)" });
+  wrapper.append(image);
+  const layer = new FixtureElement();
+  const optics = new OpticalSource(asElement(layer));
+  assert.equal(optics.update([asElement(wrapper)], region), 1);
+  const maskGroup = layer.children[0], blurGroup = maskGroup.children[0], piece = blurGroup.children[0];
+  assert.equal(maskGroup.style.getPropertyValue("mask-image"), mask);
+  assert.equal(maskGroup.style.getPropertyValue("-webkit-mask-image"), mask);
+  assert.equal(maskGroup.style.getPropertyValue("mask-size"), "100% 100%");
+  assert.equal(maskGroup.style.getPropertyValue("mask-repeat"), "no-repeat");
+  assert.equal(blurGroup.style.transform, "translate(0px, 12px) scale(1, 1)");
+  assert.equal(blurGroup.style.filter, "blur(6px)");
+  assert.equal(piece.style.maskImage, "none");
+  wrapper.computed.maskImage = "none";
+  wrapper.computed.setProperty("-webkit-mask-image", "none");
+  optics.update([asElement(wrapper)], region);
+  assert.equal(layer.children[0], blurGroup, "a removed ancestor mask does not leave a stale masked replica");
+}));

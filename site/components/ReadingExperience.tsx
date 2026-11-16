@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { installReaderSheetDrag } from "../lib/reader-sheet";
-import { canSettleChromeScroll, createReaderChromeMotion } from "../lib/reader-chrome-motion";
+import { createReaderChromeMotion } from "../lib/reader-chrome-motion";
 
 export default function ReadingExperience() {
   const pathname = usePathname();
@@ -20,81 +20,61 @@ export default function ReadingExperience() {
     const folded = matchMedia("(vertical-viewport-segments: 2)");
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
-    let last = window.scrollY;
-    let settleTimer: ReturnType<typeof setTimeout> | undefined;
-    let touchScrolling = false;
-    let scrubbedInput = false;
-    let inputUntil = 0;
-    function reveal() {
-      scrubbedInput = false;
-      chrome.current?.setVisible(true);
-      clearTimeout(settleTimer);
-    }
+    let last = Math.max(0, window.scrollY);
+    let width = window.innerWidth;
+    let orientation = screen.orientation?.angle;
+    let programmatic = false;
+    function reveal() { chrome.current?.setVisible(true); }
     function protectedChrome() {
       return Boolean(document.querySelector("[data-reader-route-pending], main[data-card-pulling], .reader-header[data-menu-open=true], #reader-font-panel, .reading-navigator.is-open, dialog[open]")
         || document.activeElement?.matches("[data-reader-scroll-chrome] :focus-visible"));
-    }
-    function mustReveal(y = window.scrollY) {
-      return !phone.matches || folded.matches || y <= 64 || protectedChrome();
-    }
-    function settleInput() {
-      // Recheck live layout and interaction guards after the delay, even if a
-      // touchend arrived after an observer already cancelled an older timer.
-      if (mustReveal()) { reveal(); return; }
-      if (!canSettleChromeScroll(phone.matches, folded.matches, scrubbedInput, touchScrolling)) return;
-      scrubbedInput = false;
-      chrome.current?.settleScroll();
     }
     function update() {
       frame = 0;
       const y = Math.max(0, window.scrollY);
       const delta = y - last;
       last = y;
-      if (mustReveal(y)) {
+      if (!phone.matches || folded.matches || y === 0 || protectedChrome() || (visualViewport?.scale ?? 1) > 1.01) {
         reveal();
         return;
       }
-      if (performance.now() > inputUntil || Math.abs(delta) < 1) return;
-      if (y > 104 || delta < 0) {
-        chrome.current?.followScroll(delta);
-        scrubbedInput = true;
-        clearTimeout(settleTimer);
-        settleTimer = setTimeout(settleInput, 120);
-      }
+      if (programmatic || !delta) return;
+      // Keep every fractional CSS pixel. There is no release timer: a pause at
+      // any progress remains paused until content actually moves again.
+      chrome.current?.followScroll(delta);
     }
-    function schedule() {
-      if (!frame) frame = requestAnimationFrame(update);
+    function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+    function userInput(event: Event) {
+      if (event.defaultPrevented) return;
+      if (programmatic) { programmatic = false; last = Math.max(0, scrollY); }
     }
-    function markInput(event: Event) {
-      if (event.defaultPrevented || (event.target instanceof Element &&
-        event.target.closest(".site-header, dialog, .article-interaction-wrap, .reading-nav-panel"))) return;
-      inputUntil = performance.now() + 1100;
-      if (event.type === "touchmove") touchScrolling = true;
-    }
-    function endInput() {
-      if (!touchScrolling) return;
-      inputUntil = performance.now() + 1100;
-      touchScrolling = false;
-      clearTimeout(settleTimer);
-      if (mustReveal()) { reveal(); return; }
-      if (!canSettleChromeScroll(phone.matches, folded.matches, scrubbedInput, touchScrolling)) return;
-      settleTimer = setTimeout(settleInput, 120);
-    }
-    function resetInput() {
-      inputUntil = 0;
-      touchScrolling = false;
-      scrubbedInput = false;
-      last = window.scrollY;
-      clearTimeout(settleTimer);
-    }
-    function reset() {
-      resetInput();
+    function jump() {
+      programmatic = true;
+      last = Math.max(0, scrollY);
       reveal();
     }
+    function scrollEnd() {
+      if (programmatic) { programmatic = false; last = Math.max(0, scrollY); }
+    }
+    function resize() {
+      const nextOrientation = screen.orientation?.angle;
+      // Safari's address bar changes height while scrolling. That is neither
+      // a new gesture nor a new reading layout, so do not reset q or last Y.
+      if (width !== innerWidth || orientation !== nextOrientation) {
+        width = innerWidth; orientation = nextOrientation;
+        last = Math.max(0, scrollY); programmatic = false;
+        chrome.current?.setVisible(true, true);
+      }
+      schedule();
+    }
+    function layoutChange() {
+      last = Math.max(0, scrollY);
+      chrome.current?.setVisible(true, true);
+    }
     function keys(event: KeyboardEvent) {
-      if (event.defaultPrevented || !["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) return;
+      if (!["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) return;
       if (event.target instanceof Element && event.target.closest("input, textarea, select, [contenteditable]")) return;
-      markInput(event);
+      userInput(event);
     }
     function revealFocus(event: FocusEvent) {
       if (event.target instanceof Element && event.target.closest("[data-reader-scroll-chrome]")) reveal();
@@ -102,36 +82,36 @@ export default function ReadingExperience() {
     const panels = new MutationObserver(records => {
       if (!records.some(record => record.target instanceof Element &&
         !record.target.closest("[data-glass-optics], [data-glass-optics-host]"))) return;
-      if (protectedChrome()) reveal();
+      if (protectedChrome()) { last = Math.max(0, scrollY); reveal(); }
     });
     panels.observe(document.body, { subtree: true, childList: true, attributes: true,
       attributeFilter: ["data-menu-open", "data-reader-route-pending", "data-card-pulling", "class", "open"] });
     window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("touchstart", resetInput, { passive: true });
-    window.addEventListener("touchmove", markInput, { passive: true });
-    window.addEventListener("touchend", endInput, { passive: true });
-    window.addEventListener("touchcancel", endInput, { passive: true });
-    window.addEventListener("wheel", markInput, { passive: true });
+    window.addEventListener("scrollend", scrollEnd);
+    window.addEventListener("touchstart", userInput, { passive: true });
+    window.addEventListener("wheel", userInput, { passive: true });
     window.addEventListener("keydown", keys);
-    window.addEventListener("reading-navigation-jump", reset);
-    window.addEventListener("resize", reset);
+    window.addEventListener("reading-navigation-jump", jump);
+    window.addEventListener("reading-position-align", jump);
+    window.addEventListener("resize", resize);
+    visualViewport?.addEventListener("resize", resize);
     document.addEventListener("focusin", revealFocus);
-    reduced.addEventListener("change", reset);
+    folded.addEventListener("change", layoutChange);
+    reduced.addEventListener("change", layoutChange);
     return () => {
-      cancelAnimationFrame(frame);
-      panels.disconnect();
-      reveal();
+      cancelAnimationFrame(frame); panels.disconnect();
       window.removeEventListener("scroll", schedule);
-      window.removeEventListener("touchstart", resetInput);
-      window.removeEventListener("touchmove", markInput);
-      window.removeEventListener("touchend", endInput);
-      window.removeEventListener("touchcancel", endInput);
-      window.removeEventListener("wheel", markInput);
+      window.removeEventListener("scrollend", scrollEnd);
+      window.removeEventListener("touchstart", userInput);
+      window.removeEventListener("wheel", userInput);
       window.removeEventListener("keydown", keys);
-      window.removeEventListener("reading-navigation-jump", reset);
-      window.removeEventListener("resize", reset);
+      window.removeEventListener("reading-navigation-jump", jump);
+      window.removeEventListener("reading-position-align", jump);
+      window.removeEventListener("resize", resize);
+      visualViewport?.removeEventListener("resize", resize);
       document.removeEventListener("focusin", revealFocus);
-      reduced.removeEventListener("change", reset);
+      folded.removeEventListener("change", layoutChange);
+      reduced.removeEventListener("change", layoutChange);
     };
   }, [pathname]);
 
@@ -149,6 +129,8 @@ export default function ReadingExperience() {
     ambient.className = "reader-cover-ambient";
     ambient.setAttribute("aria-hidden", "true");
     cover.prepend(ambient);
+    // Basic fading is CSS-only; this marker identifies the optional live effects.
+    cover.dataset.readerCover = "";
     function sample() {
       if (!image!.complete || !image!.naturalWidth) return;
       const source = image!.currentSrc || image!.src;
@@ -179,7 +161,6 @@ export default function ReadingExperience() {
         // External images without CORS keep the same fade with the theme surface.
         cover!.style.removeProperty("--cover-hue");
       }
-      cover!.dataset.readerCover = "";
       schedule();
     }
     function update() {
@@ -198,8 +179,9 @@ export default function ReadingExperience() {
       cover!.style.setProperty("--cover-ambient-y", `${Math.round(Math.min(overlap, height) * (reduced.matches ? 0 : .28))}px`);
     }
     function schedule() { if (!frame) frame = requestAnimationFrame(update); }
-    const failed = () => { delete cover!.dataset.readerCover; properties.forEach(property => cover!.style.removeProperty(property)); };
+    const failed = () => { properties.forEach(property => cover!.style.removeProperty(property)); };
     sample();
+    schedule();
     image.addEventListener("load", sample);
     image.addEventListener("error", failed);
     addEventListener("scroll", schedule, { passive: true });
