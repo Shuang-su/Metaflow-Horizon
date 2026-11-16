@@ -108,11 +108,15 @@ function ReadLaterRow({ item, revealed, reveal, remove, continueReading }: {
   </li>;
 }
 
-export default function ReadLater({ origin, items, close, removeItem, restoreItem }: {
+export default function ReadLater({ origin, items, close, removeItem, restoreItem, kind = "readLater", storageNotice = "" }: {
+  storageNotice?: string;
+  kind?: "readLater" | "favorites";
   origin: HTMLElement; items: ReadLaterArticle[]; close: () => void; removeItem: (id: string) => boolean;
   restoreItem: (id: string, previous?: string, next?: string) => boolean;
 }) {
   const title = useId();
+  const favorites = kind === "favorites";
+  const label = favorites ? "收藏" : "稍后阅读";
   const dialog = useRef<HTMLDialogElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
   const selector = useRef<HTMLDivElement>(null);
@@ -128,7 +132,7 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
   const [error, setError] = useState("");
   const activeIndex = Math.max(0, items.findIndex(item => item.id === activeId));
   const active = items[activeIndex];
-  const list = all || reduced;
+  const list = favorites || all || reduced;
 
   useLayoutEffect(() => {
     const element = dialog.current;
@@ -238,18 +242,19 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
     close();
   }
 
-  return createPortal(<dialog ref={dialog} className="read-later-dialog" data-sheet-drag aria-labelledby={title}
+  return createPortal(<dialog ref={dialog} className={`read-later-dialog${favorites ? " favorites-dialog" : ""}`} data-sheet-drag aria-labelledby={title}
     onCancel={event => { event.preventDefault(); dismiss(); }}
     onClick={event => { if (event.target === event.currentTarget) dismiss(); }}>
     <div className="reader-dialog-content read-later-content">
-      {active?.cover && <img key={active.id} className="read-later-art" src={active.cover} alt="" aria-hidden="true"
+      {!favorites && active?.cover && <img key={active.id} className="read-later-art" src={active.cover} alt="" aria-hidden="true"
         onError={event => { event.currentTarget.hidden = true; }}/>}
       <div className="read-later-handle" data-sheet-handle aria-hidden="true"/>
       <header className="reader-dialog-header">
-        <h2 id={title}>稍后阅读 {items.length > 0 && <span className="read-later-count">{items.length}</span>}</h2>
-        <button ref={closeButton} type="button" className="reader-dialog-close" aria-label="关闭稍后阅读" data-sheet-close onClick={dismiss}><Icon name="close"/></button>
+        <h2 id={title}>{label} {items.length > 0 && <span className="read-later-count">{items.length}</span>}</h2>
+        <button ref={closeButton} type="button" className="reader-dialog-close" aria-label={`关闭${label}`} data-sheet-close onClick={dismiss}><Icon name="close"/></button>
       </header>
-      {!active ? <div className="read-later-empty"><Icon name="bookmark"/><p>还没有待阅读的文章</p><span>点击文章里的书签，将它加入稍后阅读。</span></div> : list ? (
+      {storageNotice && <p className="saved-storage-notice" role="status">{storageNotice}</p>}
+      {!active ? <div className="read-later-empty"><Icon name="bookmark"/><p>{favorites ? "还没有收藏的文章" : "还没有待阅读的文章"}</p><span>{favorites ? "点击文章底部的书签，将它加入收藏。" : "从文章更多菜单加入，或侧滑返回时拖入右下角托盘。"}</span></div> : list ? (
         <ol className="read-later-list">{items.map(item => <ReadLaterRow key={item.id} item={item}
           revealed={openRow === item.id} reveal={open => setOpenRow(open ? item.id : null)} remove={() => remove(item)} continueReading={continueReading}/>)}</ol>
       ) : (
@@ -268,7 +273,7 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
               <button type="button" aria-label="下一篇" disabled={activeIndex === items.length - 1} onClick={() => move(1)}><Icon name="chevron"/></button>
             </div>}
           </div>
-          <div ref={selector} tabIndex={0} className="read-later-track" role="group" aria-label="收藏封面，用上下方向键浏览"
+          <div ref={selector} tabIndex={0} className="read-later-track" role="group" aria-label="稍后阅读封面，用上下方向键浏览"
             onKeyDown={event => {
               if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
               event.preventDefault();
@@ -331,7 +336,7 @@ export default function ReadLater({ origin, items, close, removeItem, restoreIte
           setError("");
           closeButton.current?.focus({ preventScroll: true });
         }}>撤销</button>}
-        {items.length > 0 && !reduced && <button type="button" onClick={() => { setAll(!all); setOpenRow(null); }}>{all ? "返回封面" : "查看全部"}</button>}
+        {items.length > 0 && !reduced && !favorites && <button type="button" onClick={() => { setAll(!all); setOpenRow(null); }}>{all ? "返回封面" : "查看全部"}</button>}
       </footer>
     </div>
   </dialog>, document.body);

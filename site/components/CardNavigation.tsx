@@ -10,6 +10,9 @@ import { CardBackdrop } from "../lib/card-transition-backdrop";
 import { attachPullDismiss } from "../lib/card-pull-dismiss";
 import { readingHashTarget } from "../lib/reading-navigation";
 import { hierarchyPath, isHierarchyLink } from "../lib/reading-hierarchy";
+import { useReader } from "./ReaderProvider";
+import Icon from "./Icon";
+import { focusReadingTarget } from "../lib/reading-focus";
 import { READER_ROUTE_READY } from "../lib/reading-progress";
 
 type Transaction = {
@@ -27,6 +30,16 @@ const linksIn = (root: HTMLElement) => root.matches("a[href]") ? [root] : [...ro
 const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export default function CardNavigation({ children }: { children: ReactNode }) {
+  const reader = useReader();
+  const readerRef = useRef(reader);
+  readerRef.current = reader;
+  const dropTarget = useRef<HTMLDivElement>(null);
+  const [dropNotice, setDropNotice] = useState("");
+  useEffect(() => {
+    if (!dropNotice) return;
+    const timer = setTimeout(() => setDropNotice(""), 4000);
+    return () => clearTimeout(timer);
+  }, [dropNotice]);
   const router = useRouter(), pathname = usePathname();
   const layer = useRef<HTMLDivElement>(null), animator = useRef<CardAnimator | null>(null);
   const backdropLayer = useRef<HTMLDivElement>(null), backdrop = useRef<CardBackdrop | null>(null);
@@ -245,8 +258,10 @@ export default function CardNavigation({ children }: { children: ReactNode }) {
       eligible: () => {
         const saved = retained.current;
         const marker = active.current;
-        return !pending.current && Boolean(saved && marker && saved.article === marker.id &&
-          navigationStore().get(saved.source)?.originKey && backdropLayer.current?.dataset.retained && main.querySelector(".article-shell"));
+        const source = saved && navigationStore().get(saved.source);
+        return !pending.current && Boolean(saved && marker && source && saved.article === marker.id &&
+          source.marker.session === marker.session && sitePath(source.url) && source.originKey &&
+          backdropLayer.current?.dataset.retained && main.querySelector(".article-shell"));
       },
       show: (visible) => {
         if (visible && main.dataset.cardPulling === "right") document.documentElement.dataset.cardGlassHold = "";
@@ -270,6 +285,25 @@ export default function CardNavigation({ children }: { children: ReactNode }) {
           visual.elevation = 1;
         }
         returnToSource(visual);
+      },
+      drop: {
+        paint: value => {
+          const target = dropTarget.current;
+          if (!target) return;
+          target.dataset.visible = String(Boolean(value && value.progress > 0));
+          target.dataset.selected = String(Boolean(value?.selected));
+          if (!value) return;
+          target.style.setProperty("--drop-progress", String(value.progress));
+          target.style.setProperty("--drop-radius", `${value.radius}px`);
+          target.style.setProperty("--drop-bottom", `${value.bottom}px`);
+        },
+        save: () => {
+          const current = readerRef.current;
+          if (!current?.article || !current.addReadLater(current.article.id)) return false;
+          setDropNotice("已加入稍后阅读");
+          return true;
+        },
+        failure: () => setDropNotice("浏览器暂时无法保存稍后阅读，文章仍保留在当前页"),
       },
       swipe: () => returnToSource(null, true),
       invalidate: () => { retained.current = null; backdrop.current?.clear(); },
@@ -353,7 +387,7 @@ export default function CardNavigation({ children }: { children: ReactNode }) {
           if (pending.current?.token !== transaction.token) return;
           finish();
           // Focusing before hiding the real title for the proxy makes browsers blur it.
-          if (focus?.isConnected) { if (!focus.matches("a, button")) focus.tabIndex = -1; focus.focus({ preventScroll: true }); }
+          if (focus?.isConnected) focusReadingTarget(focus);
           routeReady(transaction.kind);
         };
         const starting = animator.current?.current() || transaction.visual;
@@ -421,7 +455,12 @@ export default function CardNavigation({ children }: { children: ReactNode }) {
     };
     const scroll = () => { if (!restoring.current && pending.current && Math.abs(scrollY - animatedScroll.current) > 1 && layer.current?.dataset.state !== "waiting") cancelVisual(); };
     const keys = (event: KeyboardEvent) => { if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) userInput(); };
+    let viewportWidth = innerWidth;
+    let orientation = screen.orientation?.angle;
     const resize = () => {
+      const angle = screen.orientation?.angle;
+      if (Math.abs(viewportWidth - innerWidth) <= 1 && angle === orientation) return;
+      viewportWidth = innerWidth; orientation = angle;
       const transaction = pending.current;
       if (!transaction) return;
       transaction.cancelled = true; transaction.resized = true;
@@ -430,7 +469,7 @@ export default function CardNavigation({ children }: { children: ReactNode }) {
       restoring.current = true;
       clearVisual(); cancelAnimationFrame(frame.current);
       // Keep the navigation alive until its destination is settled and focused.
-      // A new layout can move a restored list entry, including on height changes.
+      // A width or orientation change can move a restored list entry.
       // If the route is still loading, its normal arrival performs this same work.
       if (transaction.arrived) arrive();
     };
@@ -458,6 +497,10 @@ export default function CardNavigation({ children }: { children: ReactNode }) {
 
   return <NavigationContext.Provider value={{ busy, returnHref: source?.url ? nextHref(source.url) : "/daily/", hasSource: Boolean(source), contextPath, navigateHierarchy, navigate, back }}>
     {children}<div ref={backdropLayer} className="card-transition-backdrop" aria-hidden="true" inert />
+    <div ref={dropTarget} className="read-later-drop-target" data-visible="false" data-selected="false" aria-hidden="true">
+      <span><Icon name="tray"/><span className="drop-idle-label">加入稍后阅读</span><span className="drop-selected-label">松手加入</span></span>
+    </div>
+    <p className="read-later-drop-notice" role="status">{dropNotice}</p>
     <div ref={layer} className="card-transition-layer" data-state="idle" aria-hidden="true" inert />
   </NavigationContext.Provider>;
 }

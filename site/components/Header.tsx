@@ -29,6 +29,7 @@ const routes: { href: string; label: string; icon: IconName }[] = [
 ];
 
 export default function Header() {
+  const [saveNotice, setSaveNotice] = useState("");
   const [panel, setPanel] = useState<Panel>(null);
   const [readerMenuMounted, setReaderMenuMounted] = useState(false);
   const [readerMenuReady, setReaderMenuReady] = useState(false);
@@ -58,6 +59,7 @@ export default function Header() {
 
   useEffect(() => {
     setPanel(null);
+    setSaveNotice("");
     setReaderMenuMounted(false);
     setReaderMenuReady(false);
     readingDestination.current = null;
@@ -234,7 +236,16 @@ export default function Header() {
     <div className="mobile-nav-extra">
       <Link href="/topics/" onClick={() => setPanel(null)}><Icon name="layers" />主题<Icon name="chevron" /></Link>
       <Link href="/subscribe/" onClick={() => setPanel(null)}><Icon name="external" />订阅 horizon<Icon name="chevron" /></Link>
+      <button type="button" className="reader-menu-read-later" aria-haspopup="dialog" onClick={event => {
+        reader?.openFavorites(event.currentTarget); setPanel(null);
+      }}><Icon name="bookmark"/>收藏{Boolean(reader?.favoriteIds.length) && <span className="read-later-count">{reader?.favoriteIds.length}</span>}</button>
       <ReadLaterTrigger className="reader-menu-read-later" onOpen={() => setPanel(null)} />
+      {reader?.article && <button type="button" className="reader-menu-read-later" onClick={() => {
+        if (!reader.article) return;
+        setSaveNotice(reader.addReadLater(reader.article.id) ? "已加入稍后阅读" : "浏览器暂时无法保存稍后阅读");
+      }}><Icon name="paper"/>{reader.readLaterIds.includes(reader.article.id) ? "已加入稍后阅读" : "加入稍后阅读"}</button>}
+      {reader?.savedStorageNotice && <p className="reader-save-notice" role="status">{reader.savedStorageNotice}</p>}
+      {saveNotice && <p className="reader-save-notice" role="status">{saveNotice}</p>}
       <div className="mobile-theme-control">
         <span id="mobile-theme-label">外观</span>
         <div className="mobile-theme-options" role="group" aria-labelledby="mobile-theme-label">

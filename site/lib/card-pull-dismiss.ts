@@ -39,17 +39,29 @@ export function shouldDismiss(distance: number, velocity: number, acceleration =
   return distance + prediction >= 116;
 }
 
+export type DropFrame = { x: number; y: number; distance: number; progress: number; radius: number; visibleRadius: number; bottom: number; selected: boolean };
+export function readLaterDropFrame(distance: number, width: number, bottom: number, x: number, y: number): DropFrame {
+  const progress = Math.max(0, Math.min(1, (distance / width - .15) / .45));
+  const radius = width * .38;
+  const visibleRadius = radius * progress;
+  const selected = progress > 0 && x <= width && y <= bottom && x >= width - visibleRadius && y >= bottom - visibleRadius &&
+    Math.hypot(width - x, bottom - y) <= visibleRadius;
+  return { x, y, distance, progress, radius, visibleRadius, bottom, selected };
+}
+export function viewportWidthChanged(previous: number, next: number) { return Math.abs(previous - next) > 1; }
+
 type Options = {
   eligible: () => boolean;
   show: (visible: boolean) => void;
   commit: (geometry: ReturnType<typeof pullGeometry>) => void;
   swipe: () => void;
   invalidate: () => void;
+  drop?: { paint: (frame: DropFrame | null) => void; save: () => boolean; failure: () => void };
 };
 
 type Gesture = {
   id: number; x: number; y: number; top: number; scroll: number;
-  distance: number; samples: Sample[]; direction?: Direction;
+  distance: number; clientX: number; clientY: number; samples: Sample[]; direction?: Direction;
 };
 
 export function attachPullDismiss(main: HTMLElement, options: Options) {
@@ -58,6 +70,10 @@ export function attachPullDismiss(main: HTMLElement, options: Options) {
   let gesture: Gesture | null = null;
   let animation: ReturnType<typeof animate> | null = null;
   let frame = 0;
+  let viewportWidth = innerWidth;
+  let orientation = screen.orientation?.angle;
+  const dropFrame = (current: Gesture) => readLaterDropFrame(current.distance, innerWidth,
+    (window.visualViewport?.offsetTop || 0) + (window.visualViewport?.height || innerHeight), current.clientX, current.clientY);
   function paint(distance: number, direction: Direction) {
     const geometry = direction === "down" ? pullGeometry(distance, innerWidth, innerHeight) : null;
     main.style.setProperty("--card-pull-x", `${direction === "right" ? distance : 0}px`);
@@ -72,6 +88,7 @@ export function attachPullDismiss(main: HTMLElement, options: Options) {
     gesture = null;
     delete main.dataset.cardPulling;
     for (const name of ["x", "y", "scale", "radius"]) main.style.removeProperty(`--card-pull-${name}`);
+    options.drop?.paint(null);
     options.show(false);
   }
   function blocked() {
@@ -91,7 +108,7 @@ export function attachPullDismiss(main: HTMLElement, options: Options) {
     const touch = event.touches[0];
     if (touch.clientX < 24 || touch.clientX > innerWidth - 24) return;
     gesture = { id: touch.identifier, x: touch.clientX, y: touch.clientY, top: main.getBoundingClientRect().top,
-      scroll: scrollY, distance: 0, samples: [{ distance: 0, time: event.timeStamp }] };
+      scroll: scrollY, distance: 0, clientX: touch.clientX, clientY: touch.clientY, samples: [{ distance: 0, time: event.timeStamp }] };
   }
   function move(event: TouchEvent) {
     const current = gesture;
@@ -114,22 +131,39 @@ export function attachPullDismiss(main: HTMLElement, options: Options) {
     const direction = current.direction;
     const position = (direction === "down" ? y : x) - slop;
     current.distance = Math.max(0, position);
+    current.clientX = touch.clientX; current.clientY = touch.clientY;
     current.samples = current.samples.filter(sample => event.timeStamp - sample.time <= 100);
     current.samples.push({ distance: position, time: event.timeStamp });
     cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(() => paint(current.distance, direction));
+    frame = requestAnimationFrame(() => {
+      paint(current.distance, direction);
+      options.drop?.paint(direction === "right" ? dropFrame(current) : null);
+    });
   }
   function end(event: TouchEvent) {
     const current = gesture;
-    if (!current || !Array.from(event.changedTouches).some(touch => touch.identifier === current.id)) return;
+    const release = current && Array.from(event.changedTouches).find(touch => touch.identifier === current.id);
+    if (!current || !release) return;
     gesture = null;
     const direction = current.direction;
     if (!direction) return;
     cancelAnimationFrame(frame);
+    current.clientX = release.clientX; current.clientY = release.clientY;
+    current.distance = Math.max(0, (direction === "right" ? release.clientX - current.x : release.clientY - current.y) - slop);
+    const drop = direction === "right" && options.drop ? dropFrame(current) : null;
+    options.drop?.paint(drop);
+    let saved = false;
+    let failed = false;
+    if (!blocked() && drop?.selected) {
+      try { saved = options.drop!.save(); } catch { saved = false; }
+      failed = !saved;
+      if (failed) options.drop!.failure();
+    }
     const { velocity, acceleration } = pullKinematics(current.samples, event.timeStamp);
-    if (!blocked() && shouldDismiss(current.distance, velocity, acceleration)) {
+    if (!failed && !blocked() && (saved || shouldDismiss(current.distance, velocity, acceleration))) {
       paint(current.distance, direction);
       if (direction === "right") {
+        options.drop?.paint(null);
         animation = animate(current.distance, innerWidth, { duration: .18, ease: [0.18, 0.76, 0.38, 1],
           onUpdate: distance => paint(distance, direction),
           onComplete: () => {
@@ -147,9 +181,18 @@ export function attachPullDismiss(main: HTMLElement, options: Options) {
       return;
     }
     animation = animate(current.distance, 0, { type: "spring", stiffness: 390, damping: 32,
-      onUpdate: distance => paint(distance, direction), onComplete: abort });
+      onUpdate: distance => {
+        paint(distance, direction);
+        if (direction === "right") options.drop?.paint({ ...dropFrame({ ...current, distance }), selected: false });
+      }, onComplete: abort });
   }
-  const resize = () => { abort(); options.invalidate(); };
+  const resize = () => {
+    const angle = screen.orientation?.angle;
+    if (viewportWidthChanged(viewportWidth, innerWidth) || angle !== orientation) {
+      viewportWidth = innerWidth; orientation = angle; abort(); options.invalidate();
+    } else if (gesture?.direction === "right") options.drop?.paint(dropFrame(gesture));
+  };
+  const pagehide = () => { abort(); options.invalidate(); };
   const viewport = window.visualViewport;
   main.addEventListener("touchstart", start, { passive: true });
   main.addEventListener("touchmove", move, { passive: false });
@@ -158,8 +201,9 @@ export function attachPullDismiss(main: HTMLElement, options: Options) {
   const escape = (event: KeyboardEvent) => { if (event.key === "Escape") abort(); };
   window.addEventListener("keydown", escape);
   window.addEventListener("resize", resize);
-  window.addEventListener("pagehide", resize);
-  viewport?.addEventListener("resize", abort);
+  window.addEventListener("pagehide", pagehide);
+  viewport?.addEventListener("resize", resize);
+  screen.orientation?.addEventListener("change", resize);
   mobile.addEventListener("change", abort);
   document.addEventListener("visibilitychange", abort);
   motion.addEventListener("change", abort);
@@ -171,8 +215,9 @@ export function attachPullDismiss(main: HTMLElement, options: Options) {
     main.removeEventListener("touchcancel", abort);
     window.removeEventListener("keydown", escape);
     window.removeEventListener("resize", resize);
-    window.removeEventListener("pagehide", resize);
-    viewport?.removeEventListener("resize", abort);
+    window.removeEventListener("pagehide", pagehide);
+    viewport?.removeEventListener("resize", resize);
+    screen.orientation?.removeEventListener("change", resize);
     mobile.removeEventListener("change", abort);
     document.removeEventListener("visibilitychange", abort);
     motion.removeEventListener("change", abort);

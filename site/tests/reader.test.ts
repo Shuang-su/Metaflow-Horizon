@@ -7,7 +7,7 @@ import { sourceBlocks } from "../lib/editorial";
 import { parseMarkdown } from "../lib/markdown";
 import { giscusCount, readerFontSize, readerShareUrl, readerThreadTerm, restoreReaderScroll } from "../lib/reader";
 import type { ReaderIdentity } from "../lib/reader";
-import { READ_LATER_KEY, readSavedArticles, writeSavedArticles } from "../lib/read-later";
+import { SAVED_ARTICLES_KEY, readSavedCollections, writeSavedCollections } from "../lib/read-later";
 
 const article: ReaderIdentity = { id: "gsd-2026-10-31", title: "日报", url: "/daily/2026/10/31/", kind: "daily", date: "2026-10-31" };
 
@@ -93,9 +93,9 @@ test("read later migrates known bookmarks atomically and does not resurrect remo
     getItem: (key: string) => entries.get(key) ?? null,
     setItem: (key: string, value: string) => entries.set(key, value),
   } as unknown as Storage;
-  assert.deepEqual(readSavedArticles(storage, [article]), [article.id]);
-  assert.deepEqual(JSON.parse(entries.get(READ_LATER_KEY)!), { migrated: true, ids: [article.id] });
-  writeSavedArticles(storage, []);
-  assert.deepEqual(readSavedArticles(storage, [article]), []);
+  assert.deepEqual(readSavedCollections(storage, [article]).readLaterIds, [article.id]);
+  assert.deepEqual(JSON.parse(entries.get(SAVED_ARTICLES_KEY)!), { version: 2, migrated: true, readLaterIds: [article.id], favoriteIds: [article.id] });
+  writeSavedCollections(storage, { version: 2, migrated: true, readLaterIds: [], favoriteIds: [article.id] });
+  assert.deepEqual(readSavedCollections(storage, [article]).readLaterIds, []);
   assert.equal(entries.get("gsd:reading-bookmark:v1:" + article.id), "1");
 });
