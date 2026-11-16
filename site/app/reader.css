@@ -1,17 +1,20 @@
 :root { --reader-default-font: 17px; }
 @media (max-width: 767px) { :root { --reader-default-font: 15px; } }
-body:has([data-reader-article]) :is(.article-shell, .weekly-shell) .prose {
+body:has([data-reader-article]) :is(.article-shell, .weekly-shell) :is(.prose, .prose .deep-reading) {
   font-size: var(--reader-font-size, var(--reader-default-font));
   line-height: 1.8;
 }
-body:has([data-reader-article]) :is(.article-shell, .weekly-shell) .prose :is(p, li, blockquote, td, th) {
+body:has([data-reader-article]) :is(.article-shell, .weekly-shell) .prose :is(p, li, blockquote, td, th, figcaption, .footnotes) {
   font-size: inherit;
 }
 body:has([data-reader-article]) :is(.article-shell, .weekly-shell) :is(.prose h2, .event-title, .event-group-title) {
-  font-size: calc(var(--reader-font-size, var(--reader-default-font)) * 1.4);
+  font-size: calc(var(--reader-default-font) * 1.4);
 }
 body:has([data-reader-article]) :is(.article-shell, .weekly-shell) .prose :is(h3, h4, h5, h6) {
-  font-size: calc(var(--reader-font-size, var(--reader-default-font)) * 1.18);
+  font-size: calc(var(--reader-default-font) * 1.18);
+}
+body:has([data-reader-article]) :is(.article-shell, .weekly-shell) .prose h1 {
+  font-size: calc(var(--reader-default-font) * 2);
 }
 .reader-font-control { position: relative; }
 .reader-font-panel {
@@ -21,6 +24,12 @@ body:has([data-reader-article]) :is(.article-shell, .weekly-shell) .prose :is(h3
   width: min(304px, calc(100% - 24px));
   border-radius: 24px;
   color: var(--ink);
+}
+/* Layout-only prediction uses the identical panel CSS without any visible,
+   focusable or optical surface. Never use display:none: dimensions are real. */
+.reader-font-panel[data-glass-menu-prewarm] {
+  visibility: hidden;
+  pointer-events: none;
 }
 .reader-font-panel::before {
   position: absolute;
@@ -224,7 +233,7 @@ body:has([data-reader-article]) :is(.article-shell, .weekly-shell) .prose :is(h3
   color: var(--ink);
   background: var(--bg);
   box-shadow: var(--article-float-shadow);
-  font-size: 14px;
+  font-size: var(--reader-font-size, var(--reader-default-font));
   line-height: 1.6;
 }
 .reader-footnote-popover p:first-child { margin-top: 0; }

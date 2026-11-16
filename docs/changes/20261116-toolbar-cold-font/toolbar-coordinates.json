@@ -1,0 +1,80 @@
+[
+  {
+    "height": 939,
+    "samples": [
+      {
+        "dx": 0,
+        "dy": 0,
+        "hostIsSibling": true,
+        "transform": "",
+        "visibility": "visible"
+      },
+      {
+        "dx": 0.001983642578125,
+        "dy": 0.001129150390625,
+        "hostIsSibling": true,
+        "transform": "translateX(-50%) translateY(-25px) scale(.85)",
+        "visibility": "visible"
+      },
+      {
+        "dx": 0.0042972564697265625,
+        "dy": 0.00274658203125,
+        "hostIsSibling": true,
+        "transform": "translateX(-50%) translateY(12px) scale(1.05)",
+        "visibility": "visible"
+      }
+    ]
+  },
+  {
+    "height": 820,
+    "samples": [
+      {
+        "dx": 0,
+        "dy": 0,
+        "hostIsSibling": true,
+        "transform": "",
+        "visibility": "visible"
+      },
+      {
+        "dx": 0.001983642578125,
+        "dy": 0.001129150390625,
+        "hostIsSibling": true,
+        "transform": "translateX(-50%) translateY(-25px) scale(.85)",
+        "visibility": "visible"
+      },
+      {
+        "dx": 0.0042972564697265625,
+        "dy": 0.00274658203125,
+        "hostIsSibling": true,
+        "transform": "translateX(-50%) translateY(12px) scale(1.05)",
+        "visibility": "visible"
+      }
+    ]
+  },
+  {
+    "height": 939,
+    "samples": [
+      {
+        "dx": 0,
+        "dy": 0,
+        "hostIsSibling": true,
+        "transform": "",
+        "visibility": "visible"
+      },
+      {
+        "dx": 0.001983642578125,
+        "dy": 0.001129150390625,
+        "hostIsSibling": true,
+        "transform": "translateX(-50%) translateY(-25px) scale(.85)",
+        "visibility": "visible"
+      },
+      {
+        "dx": 0.0042972564697265625,
+        "dy": 0.00274658203125,
+        "hostIsSibling": true,
+        "transform": "translateX(-50%) translateY(12px) scale(1.05)",
+        "visibility": "visible"
+      }
+    ]
+  }
+]

@@ -12,7 +12,10 @@
   contain: strict;
   overflow: clip;
   pointer-events: none;
+  /* Fail closed until a real Glass-HQ contour is installed by the lens. */
+  clip-path: polygon(0 0, 0 0, 0 0);
 }
+.glass-optical-definitions { width: 0; height: 0; overflow: hidden; pointer-events: none; }
 .glass-optical-plane {
   position: absolute;
   inset: 0;
@@ -22,8 +25,13 @@
 }
 [data-glass-lens="slider"] .glass-optical-plane { background: var(--font-panel-bg, var(--bg)); }
 .glass-menu-tint { flood-color: var(--surface); flood-opacity: .64; }
+.glass-more-tint { flood-opacity: .58; }
 .glass-chrome-tint { flood-color: var(--bg); flood-opacity: .14; }
 .glass-toolbar-tint { flood-color: var(--bg); flood-opacity: .24; }
+:root[data-theme="dark"] .glass-toolbar-tint { flood-color: white; flood-opacity: .10; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .glass-toolbar-tint { flood-color: white; flood-opacity: .10; }
+}
 .glass-menu-fallback {
   position: fixed; pointer-events: none;
   background: color-mix(in srgb, var(--surface) 64%, transparent);

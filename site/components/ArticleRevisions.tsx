@@ -2,6 +2,7 @@
 
 import type { ArticleRevision } from "../lib/types";
 import { pushArticleHash } from "../lib/card-navigation";
+import { focusReadingTarget } from "../lib/reading-focus";
 import ArticleBody from "./ArticleBody";
 
 export function ArticleRevisionLinks({ revisions }: { revisions?: ArticleRevision[] }) {
@@ -19,8 +20,8 @@ export function ArticleRevisionLinks({ revisions }: { revisions?: ArticleRevisio
       if (location.hash !== hash) pushArticleHash(revision.id);
       window.dispatchEvent(new CustomEvent("reading-navigation-jump", { detail: { top } }));
       window.scrollTo({ top, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
-      target.focus({ preventScroll: true });
-    }}><time dateTime={revision.date}>{revision.date}</time><span className="sr-only"> {revision.title}</span></a>)}
+      focusReadingTarget(target);
+    }}><time dateTime={revision.date}>{revision.date}</time><span> {revision.title}</span></a>)}
   </nav>;
 }
 

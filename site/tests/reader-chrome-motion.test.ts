@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { ChromeVisibility, chromeRouteFrame, chromeVisibilityScale, chromeOpticalOpacity, chromeExitOffset, canSettleChromeScroll } from "../lib/reader-chrome-motion";
+import { ChromeVisibility, chromeRouteFrame, chromeVisibilityScale, chromeOpticalOpacity, chromeExitOffset } from "../lib/reader-chrome-motion";
 
-test("scroll chrome settles with uniform scale and reaches each endpoint in 180ms", () => {
+test("explicit visibility changes use uniform scale and finish in 180ms", () => {
   const state = new ChromeVisibility();
   state.set(false, 0);
   assert.equal(state.sample(90), .5);
@@ -86,24 +86,16 @@ test("the complete right group exits using a single shared displacement and stab
 });
 
 
-test("touch release cannot hide chrome outside a phone layout or in folded layout", () => {
-  assert.equal(canSettleChromeScroll(false, false, true, false), false, "desktop/tablet touch scroll");
-  assert.equal(canSettleChromeScroll(true, true, true, false), false, "folded phone touch scroll");
-  assert.equal(canSettleChromeScroll(false, true, true, false), false, "folded tablet");
-});
-
-test("horizontal touch movement without a real chrome scrub never schedules settle", () => {
-  assert.equal(canSettleChromeScroll(true, false, false, false), false);
-  assert.equal(canSettleChromeScroll(true, false, false, true), false);
-  assert.equal(canSettleChromeScroll(true, false, true, true), false, "hold remains directly driven");
-  assert.equal(canSettleChromeScroll(true, false, true, false), true, "actual phone scrub can settle on release");
-});
-
-test("a pending settle rechecks live layout instead of remembering touchend eligibility", () => {
-  let phone = true, folded = false;
-  assert.equal(canSettleChromeScroll(phone, folded, true, false), true);
-  phone = false;
-  assert.equal(canSettleChromeScroll(phone, folded, true, false), false);
-  phone = true; folded = true;
-  assert.equal(canSettleChromeScroll(phone, folded, true, false), false);
+test("scroll progress is independent of event rate and retains fractional distances", () => {
+  const a = new ChromeVisibility(), b = new ChromeVisibility(), c = new ChromeVisibility();
+  for (let i = 0; i < 32; i++) a.follow(.5, i * 10);
+  for (let i = 0; i < 16; i++) b.follow(1, i * 300);
+  c.follow(16, 100);
+  assert.equal(a.value, .75);
+  assert.equal(a.value, b.value);
+  assert.equal(a.value, c.value);
+  assert.equal(a.sample(10_000), .75, "elapsed time alone must not finish a scrub");
+  for (let i = 0; i < 16; i++) a.follow(-.5, 10_000 + i * 50);
+  assert.equal(a.value, .875);
+  assert.equal(a.sample(60_000), .875);
 });

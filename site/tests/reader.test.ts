@@ -7,13 +7,14 @@ import { sourceBlocks } from "../lib/editorial";
 import { parseMarkdown } from "../lib/markdown";
 import { giscusCount, readerFontSize, readerShareUrl, readerThreadTerm, restoreReaderScroll } from "../lib/reader";
 import type { ReaderIdentity } from "../lib/reader";
-import { READ_LATER_KEY, readSavedArticles, writeSavedArticles } from "../lib/read-later";
+import { SAVED_ARTICLES_KEY, readSavedCollections, writeSavedCollections } from "../lib/read-later";
 
 const article: ReaderIdentity = { id: "gsd-2026-10-31", title: "日报", url: "/daily/2026/10/31/", kind: "daily", date: "2026-10-31" };
 
 test("reader preferences and sharing retain safe defaults and local preview destinations", () => {
   for (const input of [null, "", "13", "14.5", "25", "NaN"]) assert.equal(readerFontSize(input), null);
-  for (const size of [14, 17, 24]) assert.equal(readerFontSize(String(size)), size);
+  for (const size of [14, 17, 20]) assert.equal(readerFontSize(String(size)), size);
+  for (const size of [21, 22, 23, 24]) assert.equal(readerFontSize(String(size)), 20);
   assert.equal(readerShareUrl(article, new URL("https://metaflow.shuang-su.com/horizon/daily/2026/10/31?giscus=abc#section")), "https://metaflow.shuang-su.com/horizon/daily/2026/10/31/");
   assert.equal(readerShareUrl(article, new URL("http://127.0.0.1:4388/horizon/daily/2026/10/31/?commentFixture=mixed#section")), "http://127.0.0.1:4388/horizon/daily/2026/10/31/");
   assert.equal(readerThreadTerm(article), "gsd-2026-10-31::daily");
@@ -93,9 +94,9 @@ test("read later migrates known bookmarks atomically and does not resurrect remo
     getItem: (key: string) => entries.get(key) ?? null,
     setItem: (key: string, value: string) => entries.set(key, value),
   } as unknown as Storage;
-  assert.deepEqual(readSavedArticles(storage, [article]), [article.id]);
-  assert.deepEqual(JSON.parse(entries.get(READ_LATER_KEY)!), { migrated: true, ids: [article.id] });
-  writeSavedArticles(storage, []);
-  assert.deepEqual(readSavedArticles(storage, [article]), []);
+  assert.deepEqual(readSavedCollections(storage, [article]).readLaterIds, [article.id]);
+  assert.deepEqual(JSON.parse(entries.get(SAVED_ARTICLES_KEY)!), { version: 2, migrated: true, readLaterIds: [article.id], favoriteIds: [article.id] });
+  writeSavedCollections(storage, { version: 2, migrated: true, readLaterIds: [], favoriteIds: [article.id] });
+  assert.deepEqual(readSavedCollections(storage, [article]).readLaterIds, []);
   assert.equal(entries.get("gsd:reading-bookmark:v1:" + article.id), "1");
 });

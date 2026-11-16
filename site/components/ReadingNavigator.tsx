@@ -1,4 +1,6 @@
 "use client";
+
+import { focusReadingTarget } from "../lib/reading-focus";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { MouseEvent, KeyboardEvent } from "react";
 import { flattenReadingLinks, type ReadingLink } from "../lib/reading-navigation";
@@ -145,7 +147,7 @@ export default function ReadingNavigator({ items }: { items: ReadingLink[] }) {
     const top = Math.max(0, Math.min(destination, document.documentElement.scrollHeight - window.innerHeight));
     window.dispatchEvent(new CustomEvent("reading-navigation-jump", { detail: { top } }));
     window.scrollTo({ top, behavior });
-    target.setAttribute("tabindex", "-1"); target.focus({ preventScroll: true });
+    focusReadingTarget(target);
     setActive(id);
   }, []);
   useLayoutEffect(() => registerDirectory?.({ items, active, jump: goTo }), [registerDirectory, items, active, goTo]);

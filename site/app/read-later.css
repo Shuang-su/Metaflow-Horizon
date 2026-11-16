@@ -316,3 +316,67 @@
   .read-later-thumbnail[aria-pressed="true"] { outline: 2px solid Highlight; }
   .read-later-art { display: none; }
 }
+
+/* A viewport-fixed quarter circle, above the translated article. */
+.read-later-drop-target {
+  position: fixed;
+  z-index: 76;
+  top: calc(var(--drop-bottom, 100dvh) - var(--drop-radius, 38vw));
+  right: 0;
+  width: var(--drop-radius, 38vw);
+  height: var(--drop-radius, 38vw);
+  border-radius: 100% 0 0 0;
+  background: #42454b;
+  color: #fff;
+  pointer-events: none;
+  opacity: var(--drop-progress, 0);
+  transform-origin: right bottom;
+  transform: scale(var(--drop-progress, 0));
+  contain: layout style;
+}
+.read-later-drop-target[data-visible="false"] { visibility: hidden; }
+.read-later-drop-target > span {
+  position: absolute;
+  right: max(15vw, calc(env(safe-area-inset-right) + 30px));
+  bottom: max(13vw, calc(env(safe-area-inset-bottom) + 10px));
+  translate: 50% 0;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  font-size: clamp(11px, 3vw, 14px);
+  white-space: nowrap;
+}
+.read-later-drop-target .icon { width: 24px; height: 24px; }
+.read-later-drop-target[data-selected="true"] {
+  background: #626874;
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 42%), 0 0 20px rgb(255 255 255 / 15%);
+}
+.read-later-drop-target[data-selected="true"] > span {
+  transform: translate(-2px, -2px) scale(1.025);
+}
+.drop-selected-label { display: none; }
+.read-later-drop-target[data-selected="true"] .drop-selected-label { display: inline; }
+.read-later-drop-target[data-selected="true"] .drop-idle-label { display: none; }
+.read-later-drop-notice {
+  position: fixed;
+  z-index: 98;
+  inset-inline: 20px;
+  bottom: max(85px, calc(env(safe-area-inset-bottom) + 70px));
+  width: fit-content;
+  max-width: calc(100% - 40px);
+  margin-inline: auto;
+  border-radius: 14px;
+  padding: 10px 16px;
+  background: #30343b;
+  color: white;
+  font-size: 13px;
+  pointer-events: none;
+}
+.read-later-drop-notice:empty { display: none; }
+.reader-save-notice { margin: 0; font-size: 12px; color: var(--muted); }
+.favorites-dialog { background: var(--bg); color: var(--ink); --read-later-quiet: var(--muted); --read-later-border: var(--line); --read-later-glass: var(--surface); }
+.favorites-dialog .read-later-row { border: 1px solid var(--line); }
+.favorites-dialog .read-later-footer button { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .read-later-drop-target { display: none; } }
+
+.saved-storage-notice { margin: 4px 20px 12px; color: var(--read-later-quiet); font-size: 12px; line-height: 1.5; }

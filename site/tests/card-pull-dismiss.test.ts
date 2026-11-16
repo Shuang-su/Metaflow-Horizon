@@ -33,3 +33,35 @@ test("recent samples identify acceleration, braking and a hold before release", 
   assert.equal(shouldDismiss(62, brake.velocity, brake.acceleration), false);
   assert.deepEqual(pullKinematics(samples([0, 4, 11, 30, 62]), 140), { velocity: 0, acceleration: 0 });
 });
+
+test("drop tray follows reference progress and uses the circular target, not its bounding square", async () => {
+  const { readLaterDropFrame } = await import("../lib/card-pull-dismiss");
+  assert.equal(readLaterDropFrame(63, 420, 840, 400, 800).progress, 0);
+  const revealed = readLaterDropFrame(252, 420, 840, 400, 800);
+  assert.ok(Math.abs(revealed.progress - 1) < .00001);
+  assert.equal(revealed.radius, 159.6);
+  assert.equal(revealed.selected, true);
+  assert.equal(readLaterDropFrame(252, 420, 840, 270, 690).selected, false);
+  assert.equal(readLaterDropFrame(252, 420, 840, 400, 600).selected, false);
+  assert.equal(readLaterDropFrame(20, 420, 840, 400, 800).selected, false);
+});
+
+test("width threshold ignores browser height changes but detects reflow", async () => {
+  const { viewportWidthChanged } = await import("../lib/card-pull-dismiss");
+  assert.equal(viewportWidthChanged(420, 420), false);
+  assert.equal(viewportWidthChanged(420, 420.5), false);
+  assert.equal(viewportWidthChanged(420, 840), true);
+});
+
+
+test("half-revealed tray only selects inside its visible growing radius", async () => {
+  const { readLaterDropFrame } = await import("../lib/card-pull-dismiss");
+  const partial = readLaterDropFrame(157.5, 420, 840, 320, 800);
+  assert.ok(Math.abs(partial.progress - .5) < .00001);
+  assert.ok(Math.abs(partial.visibleRadius - 79.8) < .00001);
+  assert.ok(Math.hypot(420 - partial.x, 840 - partial.y) < partial.radius);
+  assert.equal(partial.selected, false);
+  assert.equal(readLaterDropFrame(157.5, 420, 840, 390, 800).selected, true);
+  assert.equal(readLaterDropFrame(252, 420, 840, 320, 800).selected, true);
+  assert.equal(readLaterDropFrame(100, 420, 840, 390, 800).selected, false);
+});

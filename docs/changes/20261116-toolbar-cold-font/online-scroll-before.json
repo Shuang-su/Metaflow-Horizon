@@ -1,0 +1,146 @@
+{
+  "implementation": "2798315",
+  "scenario": "online preview cold font menu with concurrent 2px per RAF background scroll for 45 frames; actual mouse press 50ms; app cache empty, network/GPU process retained",
+  "samples": [
+    {
+      "trial": 0,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 1218.2999999821186
+      },
+      "firstMaterialMs": 155.10000001788148,
+      "firstContentMs": 262.90000001788144,
+      "interactiveMs": 380.1000000178815,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 1,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 371.7000000178814
+      },
+      "firstMaterialMs": 150.2999999821186,
+      "firstContentMs": 250.69999998211856,
+      "interactiveMs": 342.1999999821186,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 2,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 651.5
+      },
+      "firstMaterialMs": 166.69999998807907,
+      "firstContentMs": 283.09999998807916,
+      "interactiveMs": 400.0999999880792,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 3,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 328
+      },
+      "firstMaterialMs": 175,
+      "firstContentMs": 274.6,
+      "interactiveMs": 383.4,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 4,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 934.4000000059604
+      },
+      "firstMaterialMs": 177.70000001192102,
+      "firstContentMs": 277.500000011921,
+      "interactiveMs": 402.6000000119209,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 5,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 323.89999997615814
+      },
+      "firstMaterialMs": 225.3000000238419,
+      "firstContentMs": 324.4000000238418,
+      "interactiveMs": 425.2000000238419,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 6,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 312.40000000596046
+      },
+      "firstMaterialMs": 182.10000001192088,
+      "firstContentMs": 290.6000000119209,
+      "interactiveMs": 407.300000011921,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 7,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 308.2999999821186
+      },
+      "firstMaterialMs": 178.3000000238419,
+      "firstContentMs": 270.10000002384186,
+      "interactiveMs": 386.7000000238419,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 8,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 345.19999998807907
+      },
+      "firstMaterialMs": 157.79999999999995,
+      "firstContentMs": 250.29999999999995,
+      "interactiveMs": 367.1,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    },
+    {
+      "trial": 9,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 312.5
+      },
+      "firstMaterialMs": 177.79999999999995,
+      "firstContentMs": 268.70000000000005,
+      "interactiveMs": 386,
+      "identityChanged": false,
+      "timeout": false,
+      "longFrames": []
+    }
+  ]
+}

@@ -1,0 +1,550 @@
+{
+  "environment": "Mac Chromium via CUA/CDP, matched 566x939 DPR2, 40 synthetic scroll frames; intervals include diagnostic wrappers and are not iPhone frame rates",
+  "baseline": [
+    {
+      "frames": 40,
+      "rectCalls": 14505,
+      "computedStyleCalls": 5117,
+      "materialReadbacks": 0,
+      "intervalMedian": 11.100000023841858,
+      "intervalP95": 21.80000001192093,
+      "intervalMax": 23.900000005960464,
+      "longFrames": []
+    },
+    {
+      "frames": 40,
+      "rectCalls": 14505,
+      "computedStyleCalls": 5117,
+      "materialReadbacks": 0,
+      "intervalMedian": 10.199999988079073,
+      "intervalP95": 18.5,
+      "intervalMax": 21.30000001192093,
+      "longFrames": []
+    },
+    {
+      "frames": 40,
+      "rectCalls": 14505,
+      "computedStyleCalls": 5117,
+      "materialReadbacks": 0,
+      "intervalMedian": 10.699999988079073,
+      "intervalP95": 18.099999994039536,
+      "intervalMax": 20.19999998807907,
+      "longFrames": []
+    }
+  ],
+  "intermediateFirstRun": {
+    "frames": 40,
+    "rectCalls": 4545,
+    "computedStyleCalls": 2068,
+    "materialReadbacks": 0,
+    "intervalMedian": 8.400000005960464,
+    "intervalMax": 558.4000000059605,
+    "frameDelta": 39,
+    "sourceCaptureDelta": 39,
+    "paintDelta": 39,
+    "materialGenerationDelta": 0
+  },
+  "finalRuns": [
+    {
+      "frames": 40,
+      "rectCalls": 3824,
+      "computedStyleCalls": 2456,
+      "materialReadbacks": 0,
+      "intervalMedian": 8.5,
+      "intervalP95": 12.299999982118608,
+      "intervalMax": 13.900000005960464,
+      "longFrames": [],
+      "frameDelta": 39,
+      "sourceCaptureDelta": 39,
+      "paintDelta": 39,
+      "materialGenerationDelta": 0
+    },
+    {
+      "frames": 40,
+      "rectCalls": 4545,
+      "computedStyleCalls": 2073,
+      "materialReadbacks": 0,
+      "intervalMedian": 8.299999982118607,
+      "intervalP95": 9.300000011920927,
+      "intervalMax": 9.599999994039536,
+      "longFrames": [],
+      "frameDelta": 39,
+      "sourceCaptureDelta": 39,
+      "paintDelta": 39,
+      "materialGenerationDelta": 0
+    },
+    {
+      "frames": 40,
+      "rectCalls": 4545,
+      "computedStyleCalls": 2073,
+      "materialReadbacks": 0,
+      "intervalMedian": 8.300000011920929,
+      "intervalP95": 9.799999982118608,
+      "intervalMax": 14.900000005960464,
+      "longFrames": [],
+      "frameDelta": 39,
+      "sourceCaptureDelta": 39,
+      "paintDelta": 39,
+      "materialGenerationDelta": 0
+    }
+  ],
+  "menuStages": {
+    "baselineCold": {
+      "firstMaterialMs": 139.80000001192093,
+      "interactiveMs": 351.5
+    },
+    "intermediateCold": {
+      "firstMaterialMs": 351.09999999403954,
+      "interactiveMs": 543.6999999880791,
+      "before": {
+        "generated": 4,
+        "renderMs": 59.09999996423721,
+        "encodeMs": 103.40000000596046,
+        "decodeMs": 10.900000005960464,
+        "encodingMode": "worker",
+        "failures": 0
+      },
+      "after": {
+        "generated": 23,
+        "renderMs": 827.6999999582767,
+        "encodeMs": 302.40000000596046,
+        "decodeMs": 558.7999999821186,
+        "encodingMode": "worker",
+        "failures": 0
+      }
+    },
+    "intermediateWarm": {
+      "firstMaterialMs": 31.80000001192093,
+      "interactiveMs": 239.5,
+      "before": {
+        "generated": 23,
+        "renderMs": 827.6999999582767,
+        "encodeMs": 302.40000000596046,
+        "decodeMs": 558.7999999821186,
+        "encodingMode": "worker",
+        "failures": 0
+      },
+      "after": {
+        "generated": 23,
+        "renderMs": 827.6999999582767,
+        "encodeMs": 302.40000000596046,
+        "decodeMs": 558.7999999821186,
+        "encodingMode": "worker",
+        "failures": 0
+      }
+    },
+    "initialPreheated": {
+      "firstMaterialMs": 30.700000017881393,
+      "interactiveMs": 215.2000000178814,
+      "before": {
+        "generated": 21,
+        "renderMs": 142.69999992847443,
+        "encodeMs": 113.50000002980232,
+        "decodeMs": 20.599999994039536,
+        "encodingMode": "worker",
+        "failures": 0
+      },
+      "after": {
+        "generated": 23,
+        "renderMs": 184.29999995231628,
+        "encodeMs": 124.30000001192091,
+        "decodeMs": 27.100000023841854,
+        "encodingMode": "worker",
+        "failures": 0
+      }
+    },
+    "actualMousePress": {}
+  },
+  "finalPreheatedMenu": {
+    "firstMaterialMs": 31.900000005960464,
+    "interactiveMs": 222.4000000059605,
+    "before": {
+      "generated": 21,
+      "renderMs": 170.5999999344349,
+      "encodeMs": 178.19999998807907,
+      "decodeMs": 20.399999976158146,
+      "encodingMode": "worker",
+      "failures": 0
+    },
+    "after": {
+      "generated": 23,
+      "renderMs": 204.1999998986721,
+      "encodeMs": 201.9000000059605,
+      "decodeMs": 28.399999976158146,
+      "encodingMode": "worker",
+      "failures": 0
+    }
+  },
+  "dpr": {
+    "method": "CDP DPR override plus resize event (IAB does not emit resolution media change for DPR-only override)",
+    "results": [
+      {
+        "dpr": 1,
+        "dimensions": [
+          [
+            48,
+            48
+          ],
+          [
+            48,
+            48
+          ]
+        ],
+        "failures": 0
+      },
+      {
+        "dpr": 2,
+        "dimensions": [
+          [
+            96,
+            96
+          ],
+          [
+            96,
+            96
+          ]
+        ],
+        "failures": 0
+      },
+      {
+        "dpr": 3,
+        "dimensions": [
+          [
+            96,
+            96
+          ],
+          [
+            96,
+            96
+          ]
+        ],
+        "failures": 0
+      }
+    ]
+  },
+  "reader": {
+    "alignment": 1,
+    "controls": [
+      {
+        "background": "rgba(0, 0, 0, 0)",
+        "height": 43.55999755859375,
+        "shadow": "none",
+        "width": 43.55999755859375
+      },
+      {
+        "background": "rgba(0, 0, 0, 0)",
+        "height": 43.55999755859375,
+        "shadow": "none",
+        "width": 43.560028076171875
+      },
+      {
+        "background": "rgba(0, 0, 0, 0)",
+        "height": 43.55999755859375,
+        "shadow": "none",
+        "width": 43.56005859375
+      },
+      {
+        "background": "rgba(0, 0, 0, 0)",
+        "height": 43.55999755859375,
+        "shadow": "none",
+        "width": 43.56005859375
+      }
+    ],
+    "fast": 0.75,
+    "optical": {
+      "clipped": true,
+      "coverMask": "linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 42%, rgba(0, 0, 0, 0.88) 61%, rgba(0, 0, 0, 0.28) 83%, rgba(0, 0, 0, 0) 100%)",
+      "foreignObjects": 0,
+      "state": "webgl2-html"
+    },
+    "paused": 0.75,
+    "reversed": 0.875,
+    "slow": 0.75
+  },
+  "carousel": [
+    {
+      "viewport": [
+        477,
+        939
+      ],
+      "flick": [
+        "2026-11-16",
+        "2026-11-15"
+      ],
+      "held": "2026-11-15",
+      "long": [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "lines": [
+        16,
+        8,
+        2
+      ],
+      "badge": [
+        "0px",
+        "none"
+      ]
+    },
+    {
+      "viewport": [
+        495,
+        879
+      ],
+      "flick": [
+        "2026-11-16",
+        "2026-11-15"
+      ],
+      "held": "2026-11-15",
+      "long": [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "lines": [
+        16,
+        8,
+        2
+      ],
+      "badge": [
+        "0px",
+        "none"
+      ]
+    },
+    {
+      "viewport": [
+        588,
+        939
+      ],
+      "flick": [
+        "2026-11-16",
+        "2026-11-15"
+      ],
+      "held": "2026-11-15",
+      "long": [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "lines": [
+        16,
+        8,
+        2
+      ],
+      "badge": [
+        "0px",
+        "none"
+      ]
+    },
+    {
+      "viewport": [
+        1441,
+        958
+      ],
+      "flick": [
+        "2026-11-16",
+        "2026-11-15"
+      ],
+      "held": "2026-11-15",
+      "long": [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "lines": [
+        16,
+        8,
+        2
+      ],
+      "badge": [
+        "0px",
+        "none"
+      ]
+    },
+    {
+      "wheelRow": 24,
+      "from": "2026-11-16",
+      "to": "2026-11-15",
+      "reversed": "2026-11-16"
+    },
+    {
+      "wheelRow": 170,
+      "from": "2026-11-16",
+      "to": "2026-11-15",
+      "reversed": "2026-11-16"
+    },
+    {
+      "verticalScroll": [
+        0,
+        100
+      ]
+    },
+    {
+      "syntheticTouch": {
+        "after": 1,
+        "before": 0
+      }
+    },
+    {
+      "interrupted": {
+        "after": 1,
+        "before": 1,
+        "enabled": true,
+        "recreated": true
+      }
+    }
+  ],
+  "sources": [
+    {
+      "index": 2,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "finalError": 0,
+      "controls": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "finalError": 0,
+      "controls": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "finalError": 0,
+      "controls": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "index": 0,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "finalError": 0,
+      "controls": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "finalError": 0,
+      "controls": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "rgba(0, 0, 0, 0)",
+          "ready": true,
+          "shadow": "none"
+        }
+      ]
+    }
+  ],
+  "manualChecks": {
+    "font24pxAnchorDifferenceCssPx": 0.15625,
+    "fontReset": true,
+    "escapeFocus": "reader-font-trigger",
+    "reducedMotionAndTransparency": true,
+    "normalDiagnostics": "undefined",
+    "consoleErrors": []
+  },
+  "iphoneAcceptance": "pending"
+}

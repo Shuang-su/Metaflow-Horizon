@@ -10,12 +10,14 @@ export interface ReaderIdentity {
 
 export const READER_FONT_KEY = "gsd:reader-font:v1";
 export const READER_FONT_MIN = 14;
-export const READER_FONT_MAX = 24;
+export const READER_FONT_MAX = 20;
 
 export function readerFontSize(value: string | null) {
   if (!value) return null;
   const size = Number(value);
-  return Number.isInteger(size) && size >= READER_FONT_MIN && size <= READER_FONT_MAX ? size : null;
+  // v1 previously allowed 21–24. Keep that explicit large-text preference at
+  // the new maximum rather than silently reverting it to the default size.
+  return Number.isInteger(size) && size >= READER_FONT_MIN && size <= 24 ? Math.min(size, READER_FONT_MAX) : null;
 }
 
 export function readerShareUrl(article: ReaderIdentity, current: URL) {

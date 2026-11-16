@@ -81,10 +81,6 @@
     .reader-header[data-reader-scroll-chrome]:not(:has(:focus-visible)) {
     pointer-events: none;
   }
-  html[data-reader-controls-hidden]:not(:has(main[data-card-pulling], .card-transition-backdrop[data-pull-visible]))
-    .article-interaction-wrap[data-reader-scroll-chrome]:not(:has(:focus-visible)) {
-    translate: 0 calc(100% + 24px + env(safe-area-inset-bottom)); pointer-events: none;
-  }
   html:has(main[data-card-pulling], .card-transition-backdrop[data-pull-visible]) [data-reader-scroll-chrome] {
     transition: none;
   }

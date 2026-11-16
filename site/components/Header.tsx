@@ -15,6 +15,8 @@ import { ReadLaterTrigger } from "./ReadLater";
 import { rememberSearch, searchTerm } from "../lib/search-history";
 import { lockDocumentScroll } from "../lib/scroll-lock";
 import { setCarouselAutoplay, useCarouselAutoplay } from "../lib/carousel-autoplay";
+import { glassColdStart } from "../lib/glass-diagnostics";
+import { canFinishGlassMenuWithoutMotion, installGlassMenuPrewarm } from "../lib/glass-menu-prewarm";
 import { transitionContent } from "../lib/content-transition";
 
 type Panel = "mobile" | "topics" | "theme" | "search" | null;
@@ -29,9 +31,11 @@ const routes: { href: string; label: string; icon: IconName }[] = [
 ];
 
 export default function Header() {
+  const [saveNotice, setSaveNotice] = useState("");
   const [panel, setPanel] = useState<Panel>(null);
   const [readerMenuMounted, setReaderMenuMounted] = useState(false);
   const [readerMenuReady, setReaderMenuReady] = useState(false);
+  const [readerMenuPrediction, setReaderMenuPrediction] = useState(false);
   const [theme, setTheme] = useState<Theme>("system");
   const [mobileLayout, setMobileLayout] = useState(false);
   const [phoneLayout, setPhoneLayout] = useState(false);
@@ -47,6 +51,7 @@ export default function Header() {
   fixedChrome.current = immersive || collection;
   const header = useRef<HTMLElement>(null);
   const navigation = useRef<HTMLElement>(null);
+  const menuTrigger = useRef<HTMLButtonElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const currentPanel = useRef(panel);
   const readingDestination = useRef<number | null>(null);
@@ -58,6 +63,7 @@ export default function Header() {
 
   useEffect(() => {
     setPanel(null);
+    setSaveNotice("");
     setReaderMenuMounted(false);
     setReaderMenuReady(false);
     readingDestination.current = null;
@@ -80,11 +86,19 @@ export default function Header() {
     } catch {}
     let last = window.scrollY, frame = 0;
     const scroll = () => {
+      // Reader/home chrome has its own coordinated distance-driven frame.
+      // Avoid a second RAF and an unchanged class mutation invalidating all
+      // optical text replicas after that shared frame has already sampled.
+      if (fixedChrome.current) {
+        last = window.scrollY;
+        if (header.current?.classList.contains("header-hidden")) header.current.classList.remove("header-hidden");
+        return;
+      }
       if (frame) return;
       frame = requestAnimationFrame(() => {
         const y = window.scrollY, delta = y - last;
         if (fixedChrome.current) {
-          header.current?.classList.remove("header-hidden");
+          if (header.current?.classList.contains("header-hidden")) header.current.classList.remove("header-hidden");
         } else if (readingDestination.current !== null) {
           header.current?.classList.remove("header-hidden");
           if (Math.abs(y - readingDestination.current) <= 1) readingDestination.current = null;
@@ -124,6 +138,22 @@ export default function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    setReaderMenuPrediction(false);
+    if (!article || glassColdStart()) return;
+    let idle: number | undefined;
+    const timer = window.setTimeout(() => {
+      if ("requestIdleCallback" in window) idle = window.requestIdleCallback(() => setReaderMenuPrediction(true), { timeout: 500 });
+      else setReaderMenuPrediction(true);
+    }, 200);
+    return () => { window.clearTimeout(timer); if (idle !== undefined) window.cancelIdleCallback(idle); };
+  }, [article, pathname]);
+
+  useLayoutEffect(() => {
+    if (!article || readerMenuMounted || !readerMenuPrediction || !menuTrigger.current || !navigation.current) return;
+    return installGlassMenuPrewarm(menuTrigger.current, navigation.current, { morph: "become" });
+  }, [article, readerMenuMounted, readerMenuPrediction]);
+
   useLayoutEffect(() => {
     const element = navigation.current;
     if (!article || !readerMenuMounted || !element) return;
@@ -134,7 +164,9 @@ export default function Header() {
     };
     if (!mobileOpen && matchMedia("(prefers-reduced-motion: reduce)").matches) { finish(); return; }
     element.addEventListener(eventName, finish, { once: true });
-    const timeout = window.setTimeout(finish, 750);
+    const timeout = window.setTimeout(() => {
+      if (canFinishGlassMenuWithoutMotion(element)) finish();
+    }, 750);
     return () => {
       element.removeEventListener(eventName, finish);
       window.clearTimeout(timeout);
@@ -234,7 +266,16 @@ export default function Header() {
     <div className="mobile-nav-extra">
       <Link href="/topics/" onClick={() => setPanel(null)}><Icon name="layers" />主题<Icon name="chevron" /></Link>
       <Link href="/subscribe/" onClick={() => setPanel(null)}><Icon name="external" />订阅 horizon<Icon name="chevron" /></Link>
+      <button type="button" className="reader-menu-read-later" aria-haspopup="dialog" onClick={event => {
+        reader?.openFavorites(event.currentTarget); setPanel(null);
+      }}><Icon name="bookmark"/>收藏{Boolean(reader?.favoriteIds.length) && <span className="read-later-count">{reader?.favoriteIds.length}</span>}</button>
       <ReadLaterTrigger className="reader-menu-read-later" onOpen={() => setPanel(null)} />
+      {reader?.article && <button type="button" className="reader-menu-read-later" onClick={() => {
+        if (!reader.article) return;
+        setSaveNotice(reader.addReadLater(reader.article.id) ? "已加入稍后阅读" : "浏览器暂时无法保存稍后阅读");
+      }}><Icon name="paper"/>{reader.readLaterIds.includes(reader.article.id) ? "已加入稍后阅读" : "加入稍后阅读"}</button>}
+      {reader?.savedStorageNotice && <p className="reader-save-notice" role="status">{reader.savedStorageNotice}</p>}
+      {saveNotice && <p className="reader-save-notice" role="status">{saveNotice}</p>}
       <div className="mobile-theme-control">
         <span id="mobile-theme-label">外观</span>
         <div className="mobile-theme-options" role="group" aria-labelledby="mobile-theme-label">
@@ -254,11 +295,13 @@ export default function Header() {
           {!article && <Link href="/" className="brand" aria-label="metaflow horizon 首页" onClick={() => setPanel(null)}><BrandMark /><span>metaflow horizon</span></Link>}
           {home && <div id="home-feed-control" aria-hidden={mobileOpen || undefined} />}
         </div>
-        {article ? (readerMenuMounted && <nav ref={navigation} className="reader-more-menu" aria-label="主导航" id="main-nav"
-          aria-hidden={!interactiveMenu || undefined}
-          data-glass-surface="menu" data-glass-morph-from="header-menu-trigger" data-glass-morph-mode="become"
-          data-ending-style={!mobileOpen ? "" : undefined}
-          data-menu-opening={mobileOpen && !readerMenuReady ? "" : undefined}>
+        {article ? ((readerMenuMounted || readerMenuPrediction) && <nav key={readerMenuMounted ? "reader-more-active" : "reader-more-prediction"} ref={navigation} className="reader-more-menu" aria-label="主导航" id={readerMenuMounted ? "main-nav" : undefined}
+          aria-hidden={!interactiveMenu || undefined} inert={!readerMenuMounted || undefined}
+          style={!readerMenuMounted ? { visibility: "hidden", pointerEvents: "none" } : undefined}
+          data-glass-menu-prewarm={!readerMenuMounted ? "" : undefined}
+          data-glass-surface={readerMenuMounted ? "menu" : undefined} data-glass-morph-from={readerMenuMounted ? "header-menu-trigger" : undefined} data-glass-morph-mode="become"
+          data-ending-style={readerMenuMounted && !mobileOpen ? "" : undefined}
+          data-menu-opening={readerMenuMounted && mobileOpen && !readerMenuReady ? "" : undefined}>
           <div className="reader-more-content" data-glass-menu-content inert={!interactiveMenu}>{menuLinks}</div>
         </nav>) : <nav ref={navigation} className={mobileOpen ? "is-open" : ""} aria-label="主导航" id="main-nav"
           inert={mobileLayout && !mobileOpen} aria-hidden={mobileLayout && !mobileOpen || undefined}>{menuLinks}</nav>}
@@ -281,7 +324,7 @@ export default function Header() {
             </div>
             <Link className="subscribe-link desktop-action" href="/subscribe/" onClick={() => setPanel(null)} inert={mobileLayout && mobileOpen}>订阅</Link>
           </>}
-          <button id="header-menu-trigger" className={`menu-toggle${article ? " lg-surface" : ""}`} data-reader-more-trigger
+          <button ref={menuTrigger} id="header-menu-trigger" className={`menu-toggle${article ? " lg-surface" : ""}`} data-reader-more-trigger
             data-lg-container-radius="circle" data-glass-surface={immersive ? "" : undefined} data-glass-interactive={immersive ? "" : undefined}
             aria-label={mobileOpen ? "关闭导航" : "打开导航"} aria-expanded={mobileOpen} aria-controls={!article || readerMenuMounted ? "main-nav" : undefined} onClick={(e) => toggle("mobile", e.currentTarget)}>
             <span className="header-menu-glyph" key={mobileOpen ? "close" : immersive ? "more" : "grid"}><Icon name={mobileOpen ? "close" : immersive ? "more" : "grid"} /></span>

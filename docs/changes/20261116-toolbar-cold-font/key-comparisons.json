@@ -1,0 +1,364 @@
+[
+  {
+    "trial": 0,
+    "first": 125.80000001788142,
+    "again": 59.50000000596037,
+    "keys": [
+      {
+        "absoluteTime": 1794839675036.7998,
+        "at": 269.39999997615814,
+        "detail": {
+          "endpoints": {
+            "along": "y",
+            "from": {
+              "height": 44,
+              "left": 0,
+              "top": 0,
+              "width": 44
+            },
+            "fromRadius": "circle",
+            "to": {
+              "height": 196.695,
+              "left": -260,
+              "top": 52.00015625,
+              "width": 304
+            },
+            "toRadius": 24
+          },
+          "glass": {
+            "height": 44,
+            "layoutHeight": 44,
+            "layoutWidth": 44,
+            "left": 0,
+            "radius": "circle",
+            "top": 0,
+            "width": 44
+          },
+          "id": 1,
+          "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52.00015625,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+          "options": {
+            "dpr": 1,
+            "neck": 36,
+            "restDpr": 2,
+            "stops": 14
+          }
+        },
+        "name": "plan-request",
+        "sequence": 129
+      },
+      {
+        "absoluteTime": 1794839675820.5,
+        "at": 1053.0999999940395,
+        "detail": {
+          "endpoints": {
+            "along": "y",
+            "from": {
+              "height": 44,
+              "left": 0,
+              "top": 0,
+              "width": 44
+            },
+            "fromRadius": "circle",
+            "to": {
+              "height": 196.695,
+              "left": -260,
+              "top": 52.00015816,
+              "width": 304
+            },
+            "toRadius": 24
+          },
+          "glass": {
+            "height": 44,
+            "layoutHeight": 44,
+            "layoutWidth": 44,
+            "left": 0,
+            "radius": "circle",
+            "top": 0,
+            "width": 44
+          },
+          "id": 2,
+          "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52.00015816,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+          "options": {
+            "dpr": 1,
+            "neck": 36,
+            "restDpr": 2,
+            "stops": 14
+          }
+        },
+        "name": "plan-request",
+        "sequence": 992
+      }
+    ]
+  },
+  {
+    "trial": 1,
+    "first": 109.5,
+    "again": 69.29999999999995,
+    "keys": [
+      {
+        "absoluteTime": 1794839676328.9,
+        "at": 200.0999999940395,
+        "detail": {
+          "endpoints": {
+            "along": "y",
+            "from": {
+              "height": 44,
+              "left": 0,
+              "top": 0,
+              "width": 44
+            },
+            "fromRadius": "circle",
+            "to": {
+              "height": 196.695,
+              "left": -260,
+              "top": 51.99234184,
+              "width": 304
+            },
+            "toRadius": 24
+          },
+          "glass": {
+            "height": 44,
+            "layoutHeight": 44,
+            "layoutWidth": 44,
+            "left": 0,
+            "radius": "circle",
+            "top": 0,
+            "width": 44
+          },
+          "id": 1,
+          "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":51.99234184,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+          "options": {
+            "dpr": 1,
+            "neck": 36,
+            "restDpr": 2,
+            "stops": 14
+          }
+        },
+        "name": "plan-request",
+        "sequence": 129
+      },
+      {
+        "absoluteTime": 1794839677111.2,
+        "at": 982.399999976158,
+        "detail": {
+          "endpoints": {
+            "along": "y",
+            "from": {
+              "height": 44,
+              "left": 0,
+              "top": 0,
+              "width": 44
+            },
+            "fromRadius": "circle",
+            "to": {
+              "height": 196.695,
+              "left": -260,
+              "top": 52.00015625,
+              "width": 304
+            },
+            "toRadius": 24
+          },
+          "glass": {
+            "height": 44,
+            "layoutHeight": 44,
+            "layoutWidth": 44,
+            "left": 0,
+            "radius": "circle",
+            "top": 0,
+            "width": 44
+          },
+          "id": 2,
+          "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52.00015625,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+          "options": {
+            "dpr": 1,
+            "neck": 36,
+            "restDpr": 2,
+            "stops": 14
+          }
+        },
+        "name": "plan-request",
+        "sequence": 998
+      }
+    ]
+  },
+  {
+    "trial": 2,
+    "first": 120.09999999403954,
+    "again": 26.70000000596042,
+    "keys": [
+      {
+        "absoluteTime": 1794839677636.9,
+        "at": 209.5,
+        "detail": {
+          "endpoints": {
+            "along": "y",
+            "from": {
+              "height": 44,
+              "left": 0,
+              "top": 0,
+              "width": 44
+            },
+            "fromRadius": "circle",
+            "to": {
+              "height": 196.695,
+              "left": -260,
+              "top": 52.00015625,
+              "width": 304
+            },
+            "toRadius": 24
+          },
+          "glass": {
+            "height": 44,
+            "layoutHeight": 44,
+            "layoutWidth": 44,
+            "left": 0,
+            "radius": "circle",
+            "top": 0,
+            "width": 44
+          },
+          "id": 1,
+          "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52.00015625,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+          "options": {
+            "dpr": 1,
+            "neck": 36,
+            "restDpr": 2,
+            "stops": 14
+          }
+        },
+        "name": "plan-request",
+        "sequence": 131
+      },
+      {
+        "absoluteTime": 1794839678420,
+        "at": 992.5999999940396,
+        "detail": {
+          "endpoints": {
+            "along": "y",
+            "from": {
+              "height": 44,
+              "left": 0,
+              "top": 0,
+              "width": 44
+            },
+            "fromRadius": "circle",
+            "to": {
+              "height": 196.695,
+              "left": -260,
+              "top": 52.00015625,
+              "width": 304
+            },
+            "toRadius": 24
+          },
+          "glass": {
+            "height": 44,
+            "layoutHeight": 44,
+            "layoutWidth": 44,
+            "left": 0,
+            "radius": "circle",
+            "top": 0,
+            "width": 44
+          },
+          "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52.00015625,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+          "options": {
+            "dpr": 1,
+            "neck": 36,
+            "restDpr": 2,
+            "stops": 14
+          }
+        },
+        "name": "plan-cache-hit",
+        "sequence": 1024
+      }
+    ]
+  },
+  {
+    "trial": 3,
+    "first": 128.90000001788138,
+    "again": 28.300000017881302,
+    "keys": [
+      {
+        "absoluteTime": 1794839678903.3,
+        "at": 233.0999999940395,
+        "detail": {
+          "endpoints": {
+            "along": "y",
+            "from": {
+              "height": 44,
+              "left": 0,
+              "top": 0,
+              "width": 44
+            },
+            "fromRadius": "circle",
+            "to": {
+              "height": 196.695,
+              "left": -260,
+              "top": 52.00015625,
+              "width": 304
+            },
+            "toRadius": 24
+          },
+          "glass": {
+            "height": 44,
+            "layoutHeight": 44,
+            "layoutWidth": 44,
+            "left": 0,
+            "radius": "circle",
+            "top": 0,
+            "width": 44
+          },
+          "id": 1,
+          "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52.00015625,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+          "options": {
+            "dpr": 1,
+            "neck": 36,
+            "restDpr": 2,
+            "stops": 14
+          }
+        },
+        "name": "plan-request",
+        "sequence": 137
+      },
+      {
+        "absoluteTime": 1794839679690.6,
+        "at": 1020.399999976158,
+        "detail": {
+          "endpoints": {
+            "along": "y",
+            "from": {
+              "height": 44,
+              "left": 0,
+              "top": 0,
+              "width": 44
+            },
+            "fromRadius": "circle",
+            "to": {
+              "height": 196.695,
+              "left": -260,
+              "top": 52.00015625,
+              "width": 304
+            },
+            "toRadius": 24
+          },
+          "glass": {
+            "height": 44,
+            "layoutHeight": 44,
+            "layoutWidth": 44,
+            "left": 0,
+            "radius": "circle",
+            "top": 0,
+            "width": 44
+          },
+          "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52.00015625,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+          "options": {
+            "dpr": 1,
+            "neck": 36,
+            "restDpr": 2,
+            "stops": 14
+          }
+        },
+        "name": "plan-cache-hit",
+        "sequence": 1018
+      }
+    ]
+  }
+]

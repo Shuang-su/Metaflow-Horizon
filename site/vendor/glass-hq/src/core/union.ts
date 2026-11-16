@@ -35,7 +35,7 @@ export function windingArea(points: readonly ShapePoint[]): number {
   return sum;
 }
 
-function simplify(points: ShapePoint[], epsilon: number): ShapePoint[] {
+function* simplify(points: ShapePoint[], epsilon: number): Generator<void, ShapePoint[], void> {
   if (points.length < 4) return points;
   const keep = new Uint8Array(points.length);
   keep[0] = keep[points.length - 1] = 1;
@@ -46,6 +46,7 @@ function simplify(points: ShapePoint[], epsilon: number): ShapePoint[] {
     const length = Math.hypot(bx - ax, by - ay) || 1;
     let worst = -1, index = -1;
     for (let i = start + 1; i < end; i++) {
+      if (i % 512 === 0) yield;
       const [px, py] = points[i]!;
       const distance = Math.abs((bx - ax) * (ay - py) - (ax - px) * (by - ay)) / length;
       if (distance > worst) { worst = distance; index = i; }
@@ -57,18 +58,27 @@ function simplify(points: ShapePoint[], epsilon: number): ShapePoint[] {
 
 /** Simplify a closed loop: split at the point farthest from its start so
  * neither half has coincident endpoints. */
-function simplifyLoop(loop: ShapePoint[], epsilon: number): ShapePoint[] {
+function* simplifyLoop(loop: ShapePoint[], epsilon: number): Generator<void, ShapePoint[], void> {
   const [sx, sy] = loop[0]!;
   let far = 0, best = -1;
   loop.forEach(([x, y], i) => { const d = Math.hypot(x - sx, y - sy); if (d > best) { best = d; far = i; } });
-  const first = simplify(loop.slice(0, far + 1), epsilon);
-  const second = simplify([...loop.slice(far), loop[0]!], epsilon);
+  const first = yield* simplify(loop.slice(0, far + 1), epsilon);
+  const second = yield* simplify([...loop.slice(far), loop[0]!], epsilon);
   return [...first, ...second.slice(1, -1)];
 }
 /** Outlines of the smooth union of rounded rectangles, traced with marching
  * squares at `step` pixels. Returns one loop per connected body, wound the way
  * the renderer expects and simplified to at most `limit` edges each. */
 export function smoothUnion(shapes: readonly RoundRect[], k: number, step = 1, limit = 1000): ShapePoint[][] {
+  const work = smoothUnionSteps(shapes, k, step, limit);
+  let item = work.next();
+  while (!item.done) item = work.next();
+  return item.value;
+}
+
+/** The same arithmetic and traversal as smoothUnion, with bounded work units
+ * so the worker and main-thread fallback can observe cancellation and yield. */
+export function* smoothUnionSteps(shapes: readonly RoundRect[], k: number, step = 1, limit = 1000): Generator<void, ShapePoint[][], void> {
   if (!shapes.length) return [];
   const margin = k / 2 + 2 * step;
   const left = Math.min(...shapes.map((s) => s.x)) - margin, top = Math.min(...shapes.map((s) => s.y)) - margin;
@@ -76,6 +86,7 @@ export function smoothUnion(shapes: readonly RoundRect[], k: number, step = 1, l
   const columns = Math.ceil((right - left) / step) + 1, rows = Math.ceil((bottom - top) / step) + 1;
   const field = new Float64Array(columns * rows);
   for (let j = 0; j < rows; j++) for (let i = 0; i < columns; i++) {
+    if ((j * columns + i) % 512 === 0) yield;
     const x = left + i * step, y = top + j * step;
     let d = Infinity;
     for (const shape of shapes) d = d === Infinity ? roundRectDistance(x, y, shape) : smoothMin(d, roundRectDistance(x, y, shape), k);
@@ -94,6 +105,7 @@ export function smoothUnion(shapes: readonly RoundRect[], k: number, step = 1, l
   };
   const next = new Map<number, number>();
   for (let j = 0; j < rows - 1; j++) for (let i = 0; i < columns - 1; i++) {
+    if ((j * columns + i) % 512 === 0) yield;
     const tl = field[j * columns + i]! < 0, tr = field[j * columns + i + 1]! < 0;
     const br = field[(j + 1) * columns + i + 1]! < 0, bl = field[(j + 1) * columns + i]! < 0;
     const top = () => crossing(i, j, i + 1, j), rightEdge = () => crossing(i + 1, j, i + 1, j + 1);
@@ -124,13 +136,14 @@ export function smoothUnion(shapes: readonly RoundRect[], k: number, step = 1, l
     if (visited.has(start)) continue;
     const loop: ShapePoint[] = [];
     for (let key: number | undefined = start; key !== undefined && !visited.has(key); key = next.get(key)) {
+      if (loop.length % 512 === 0) yield;
       visited.add(key);
       loop.push(point.get(key)!);
     }
     if (loop.length < 3) continue;
-    let simplified = simplifyLoop(loop, step * 0.12);
+    let simplified = yield* simplifyLoop(loop, step * 0.12);
     for (let epsilon = step * 0.25; simplified.length > limit; epsilon *= 1.6)
-      simplified = simplifyLoop(loop, epsilon);
+      simplified = yield* simplifyLoop(loop, epsilon);
     if (windingArea(simplified) < 0) simplified.reverse();
     loops.push(simplified);
   }

@@ -1,0 +1,27 @@
+/* The toolbar material and controls share one fixed anchor and motion ancestor.
+   This host never samples itself and never participates in hit testing. */
+.article-interaction-wrap { isolation: isolate; }
+.article-interaction-optics {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.article-interaction-optics * { pointer-events: none; }
+.article-interaction-motion > .article-interaction-bar { position: relative; z-index: 1; }
+.article-interaction-wrap > .article-action-notice { z-index: 2; }
+
+/* Keep horizontal centering, safe-area anchoring and drawer motion on the
+   fixed outer wrap. The shared q moves and fades this whole inner group once. */
+.article-interaction-motion {
+  position: relative;
+  opacity: var(--reader-chrome-q, 1);
+  translate: 0 calc(var(--reader-toolbar-exit, 0) * (100% + max(24px, env(safe-area-inset-bottom)) + 16px));
+  scale: var(--reader-toolbar-scale, 1);
+  transform-origin: center bottom;
+  transition: none;
+}
+.article-interaction-motion[inert], .article-interaction-motion[inert] * { pointer-events: none; }

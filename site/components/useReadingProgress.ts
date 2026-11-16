@@ -1,5 +1,7 @@
 "use client";
 
+import { focusReadingTarget } from "../lib/reading-focus";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { navigationStore, UI_CAPTURE } from "../lib/card-navigation";
 import { captureReadingPosition, consumeReadingResume, readReadingPosition, readingLine, READER_ROUTE_READY, resolveReadingPosition, writeReadingPosition } from "../lib/reading-progress";
@@ -26,8 +28,7 @@ export function useReadingProgress(article: ReaderIdentity | null) {
       restarting.current = false;
       cancelRestart.current = null;
       if (completed && heading?.isConnected) {
-        heading.tabIndex = -1;
-        heading.focus({ preventScroll: true });
+        focusReadingTarget(heading);
       }
     });
   }, [article]);
@@ -94,8 +95,7 @@ export function useReadingProgress(article: ReaderIdentity | null) {
       if (explicit) {
         const target = resolved?.element || root!.querySelector<HTMLElement>("h1");
         if (target) {
-          if (!target.matches("a[href], button, [tabindex]")) target.tabIndex = -1;
-          target.focus({ preventScroll: true });
+          focusReadingTarget(target);
         }
       }
       const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
@@ -117,7 +117,12 @@ export function useReadingProgress(article: ReaderIdentity | null) {
         if (!placing || !root!.isConnected) return;
         const bounds = resolved.element.getBoundingClientRect();
         const top = scrollY + bounds.top + bounds.height * resolved.fraction - readingLine();
-        if (Math.abs(top - scrollY) > 1) window.scrollTo({ top, behavior: "instant" });
+        if (Math.abs(top - scrollY) > 1) {
+          // This is an alignment, not a user's scroll and not a chapter jump.
+          // A separate signal avoids cancelling our own restoration listener.
+          window.dispatchEvent(new Event("reading-position-align"));
+          window.scrollTo({ top, behavior: "instant" });
+        }
         expectedScroll = scrollY;
       };
       const schedule = () => {

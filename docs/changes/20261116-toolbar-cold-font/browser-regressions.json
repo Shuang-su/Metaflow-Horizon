@@ -1,0 +1,218 @@
+{
+  "reader": {
+    "alignment": 1,
+    "controls": [
+      {
+        "background": "rgba(0, 0, 0, 0)",
+        "height": 43.55999755859375,
+        "shadow": "none",
+        "width": 43.55999755859375
+      },
+      {
+        "background": "rgba(0, 0, 0, 0)",
+        "height": 43.55999755859375,
+        "shadow": "none",
+        "width": 43.560028076171875
+      },
+      {
+        "background": "rgba(0, 0, 0, 0)",
+        "height": 43.55999755859375,
+        "shadow": "none",
+        "width": 43.56005859375
+      },
+      {
+        "background": "rgba(0, 0, 0, 0)",
+        "height": 43.55999755859375,
+        "shadow": "none",
+        "width": 43.56005859375
+      }
+    ],
+    "fast": 0.75,
+    "optical": {
+      "clipped": true,
+      "coverMask": "linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 42%, rgba(0, 0, 0, 0.88) 61%, rgba(0, 0, 0, 0.28) 83%, rgba(0, 0, 0, 0) 100%)",
+      "foreignObjects": 0,
+      "state": "webgl2-html"
+    },
+    "paused": 0.75,
+    "reversed": 0.875,
+    "slow": 0.75
+  },
+  "carousel": [
+    {
+      "viewport": [
+        477,
+        939
+      ],
+      "flick": [
+        "2026-11-16",
+        "2026-11-15"
+      ],
+      "held": "2026-11-15",
+      "long": [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "lines": [
+        16,
+        8,
+        2
+      ],
+      "badge": [
+        "0px",
+        "none"
+      ]
+    },
+    {
+      "viewport": [
+        495,
+        879
+      ],
+      "flick": [
+        "2026-11-16",
+        "2026-11-15"
+      ],
+      "held": "2026-11-15",
+      "long": [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "lines": [
+        16,
+        8,
+        2
+      ],
+      "badge": [
+        "0px",
+        "none"
+      ]
+    },
+    {
+      "viewport": [
+        588,
+        939
+      ],
+      "flick": [
+        "2026-11-16",
+        "2026-11-15"
+      ],
+      "held": "2026-11-15",
+      "long": [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "lines": [
+        16,
+        8,
+        2
+      ],
+      "badge": [
+        "0px",
+        "none"
+      ]
+    },
+    {
+      "viewport": [
+        1441,
+        958
+      ],
+      "flick": [
+        "2026-11-16",
+        "2026-11-15"
+      ],
+      "held": "2026-11-15",
+      "long": [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "lines": [
+        16,
+        8,
+        2
+      ],
+      "badge": [
+        "0px",
+        "none"
+      ]
+    },
+    {
+      "wheelRow": 24,
+      "from": "2026-11-16",
+      "to": "2026-11-15",
+      "reversed": "2026-11-16"
+    },
+    {
+      "wheelRow": 170,
+      "from": "2026-11-16",
+      "to": "2026-11-15",
+      "reversed": "2026-11-16"
+    },
+    {
+      "verticalScroll": [
+        0,
+        100
+      ]
+    },
+    {
+      "syntheticTouch": {
+        "after": 1,
+        "before": 0
+      }
+    },
+    {
+      "interrupted": {
+        "after": 1,
+        "before": 1,
+        "enabled": true,
+        "recreated": true
+      }
+    }
+  ],
+  "sources": [
+    {
+      "index": 2,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "maxStableError": 0
+    },
+    {
+      "index": 3,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "maxStableError": 0
+    },
+    {
+      "index": 4,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "maxStableError": 0
+    },
+    {
+      "index": 0,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "maxStableError": 0
+    },
+    {
+      "index": 1,
+      "sources": [
+        true,
+        true,
+        true
+      ],
+      "maxStableError": 0
+    }
+  ]
+}

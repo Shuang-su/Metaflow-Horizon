@@ -4,7 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useLayoutEffect, use
 import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { readerFontSize, readerShareUrl, readerThreadTerm, restoreReaderScroll, READER_FONT_KEY } from "../lib/reader";
-import { readSavedArticles, READ_LATER_KEY, writeSavedArticles } from "../lib/read-later";
+import { loadSavedCollections, readSavedCollections, READ_LATER_KEY, SAVED_ARTICLES_KEY, LEGACY_BOOKMARK_PREFIX, writeSavedCollections, addReadLaterId } from "../lib/read-later";
 import type { ReadLaterArticle } from "../lib/read-later";
 import { useReadingProgress } from "./useReadingProgress";
 import ReadLater from "./ReadLater";
@@ -40,8 +40,12 @@ interface ReaderState {
   openDirectory: (origin: HTMLElement | null) => void;
   registerDirectory: (directory: ReaderDirectory) => () => void;
   counts: Record<string, number>;
+  savedStorageNotice: string;
   readLaterIds: string[];
-  toggleReadLater: (id: string) => boolean;
+  addReadLater: (id: string) => boolean;
+  favoriteIds: string[];
+  toggleFavorite: (id: string) => boolean;
+  openFavorites: (origin: HTMLElement) => void;
   openReadLater: (origin: HTMLElement) => void;
   canRestart: boolean;
   resetReading: () => void;
@@ -59,40 +63,55 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
   const [panel, setPanel] = useState<ReaderPanel | null>(null);
   const article = registered && registered.url.replace(/\/$/, "") === pathname.replace(/\/$/, "") ? registered : null;
 
+  const [savedStorageNotice, setSavedStorageNotice] = useState("");
   const [readLaterIds, setReadLaterIds] = useState<string[]>([]);
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+  const [favoritesOrigin, setFavoritesOrigin] = useState<HTMLElement | null>(null);
   const [readLaterOrigin, setReadLaterOrigin] = useState<HTMLElement | null>(null);
   const { canRestart, resetReading } = useReadingProgress(article);
   const known = useMemo(() => new Map(catalogue.map(item => [item.id, item])), [catalogue]);
 
   useEffect(() => {
     const load = () => {
-      try { setReadLaterIds(readSavedArticles(localStorage, catalogue)); } catch {}
+      try {
+        const { collections: saved, persisted } = loadSavedCollections(localStorage, catalogue);
+        setReadLaterIds(saved.readLaterIds.filter(id => known.has(id)));
+        setFavoriteIds(saved.favoriteIds.filter(id => known.has(id)));
+        setSavedStorageNotice(persisted ? "" : "浏览器暂时无法保存更新；目前显示旧记录，收藏与稍后阅读的迁移尚未保存。");
+      } catch { setSavedStorageNotice("浏览器暂时无法读取收藏与稍后阅读记录。"); }
     };
     load();
     const sync = (event: StorageEvent) => {
-      if (event.key === READ_LATER_KEY || event.key === null) load();
+      if (event.key === SAVED_ARTICLES_KEY || event.key === READ_LATER_KEY || event.key?.startsWith(LEGACY_BOOKMARK_PREFIX) || event.key === null) load();
     };
     window.addEventListener("storage", sync);
     return () => window.removeEventListener("storage", sync);
-  }, [catalogue]);
-
-  const updateReadLater = useCallback((id: string, update: (current: string[]) => string[]) => {
-    if (!known.has(id)) return false;
-    try {
-      const current = readSavedArticles(localStorage, catalogue);
-      const next = update(current);
-      if (next !== current) writeSavedArticles(localStorage, next);
-      setReadLaterIds(next);
-      return true;
-    } catch { return false; }
   }, [catalogue, known]);
 
-  const toggleReadLater = useCallback((id: string) => updateReadLater(id, current =>
-    current.includes(id) ? current.filter(item => item !== id) : [id, ...current]), [updateReadLater]);
-
+  const updateCollection = useCallback((kind: "readLaterIds" | "favoriteIds", id: string, update: (current: string[]) => string[]) => {
+    if (!known.has(id)) return false;
+    try {
+      const current = readSavedCollections(localStorage, catalogue);
+      const next = { ...current, [kind]: update(current[kind]) };
+      writeSavedCollections(localStorage, next);
+      setSavedStorageNotice("");
+      setReadLaterIds(next.readLaterIds.filter(item => known.has(item)));
+      setFavoriteIds(next.favoriteIds.filter(item => known.has(item)));
+      return true;
+    } catch { setSavedStorageNotice("浏览器暂时无法保存更新；当前修改未保存，原记录保持不变。"); return false; }
+  }, [catalogue, known]);
+  const updateReadLater = useCallback((id: string, update: (current: string[]) => string[]) =>
+    updateCollection("readLaterIds", id, update), [updateCollection]);
+  const updateFavorite = useCallback((id: string, update: (current: string[]) => string[]) =>
+    updateCollection("favoriteIds", id, update), [updateCollection]);
+  const addReadLater = useCallback((id: string) => updateReadLater(id, current => addReadLaterId(current, id)), [updateReadLater]);
+  const toggleFavorite = useCallback((id: string) => updateFavorite(id, current =>
+    current.includes(id) ? current.filter(item => item !== id) : [id, ...current]), [updateFavorite]);
   const openReadLater = useCallback((origin: HTMLElement) => {
-    setPanel(null);
-    setReadLaterOrigin(origin);
+    setPanel(null); setFavoritesOrigin(null); setReadLaterOrigin(origin);
+  }, []);
+  const openFavorites = useCallback((origin: HTMLElement) => {
+    setPanel(null); setReadLaterOrigin(null); setFavoritesOrigin(origin);
   }, []);
 
   const register = useCallback((identity: ReaderIdentity) => {
@@ -102,7 +121,11 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
 
   useEffect(() => {
     let size = null;
-    try { size = readerFontSize(localStorage.getItem(READER_FONT_KEY)); } catch {}
+    try {
+      const stored = localStorage.getItem(READER_FONT_KEY);
+      size = readerFontSize(stored);
+      if (size !== null && String(size) !== stored) localStorage.setItem(READER_FONT_KEY, String(size));
+    } catch {}
     setFont(size);
     if (size !== null) document.documentElement.style.setProperty("--reader-font-size", `${size}px`);
   }, []);
@@ -133,7 +156,7 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
   const openDiscussion = useCallback((origin: HTMLElement | null, target?: Omit<ReaderThread, "term">) => {
     const current = target || (article && { article });
     if (!current) return;
-    setReadLaterOrigin(null);
+    setReadLaterOrigin(null); setFavoritesOrigin(null);
     setPanel({ kind: "discussion", thread: { ...current, term: readerThreadTerm(current.article, current.eventId) }, origin });
   }, [article]);
 
@@ -144,7 +167,7 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
 
   const openDirectory = useCallback((origin: HTMLElement | null) => {
     if (!article) return;
-    setReadLaterOrigin(null);
+    setReadLaterOrigin(null); setFavoritesOrigin(null);
     setPanel({ kind: "directory", thread: { article, term: readerThreadTerm(article) }, origin });
   }, [article]);
 
@@ -167,7 +190,7 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
     setCounts(current => current[term] === count ? current : { ...current, [term]: count });
   }, []);
 
-  useEffect(() => { setPanel(null); setReadLaterOrigin(null); }, [pathname]);
+  useEffect(() => { setPanel(null); setReadLaterOrigin(null); setFavoritesOrigin(null); }, [pathname]);
 
   useEffect(() => {
     if (!article || !DISCUSSIONS) return;
@@ -202,11 +225,11 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
     } catch {}
   }, [article, openDiscussion]);
 
-  const value = useMemo(() => ({ article, fontSize, setFontSize, share, openDiscussion, openDirectory, registerDirectory, counts, readLaterIds, toggleReadLater, openReadLater, canRestart, resetReading }),
-    [article, fontSize, setFontSize, share, openDiscussion, openDirectory, registerDirectory, counts, readLaterIds, toggleReadLater, openReadLater, canRestart, resetReading]);
+  const value = useMemo(() => ({ article, fontSize, setFontSize, share, openDiscussion, openDirectory, registerDirectory, counts, savedStorageNotice, readLaterIds, addReadLater, openReadLater, favoriteIds, toggleFavorite, openFavorites, canRestart, resetReading }),
+    [article, fontSize, setFontSize, share, openDiscussion, openDirectory, registerDirectory, counts, savedStorageNotice, readLaterIds, addReadLater, openReadLater, favoriteIds, toggleFavorite, openFavorites, canRestart, resetReading]);
   return <Register.Provider value={register}><Reader.Provider value={value}>
     {children}
-    {readLaterOrigin && <ReadLater origin={readLaterOrigin} items={readLaterIds.flatMap(id => {
+    {readLaterOrigin && <ReadLater storageNotice={savedStorageNotice} origin={readLaterOrigin} items={readLaterIds.flatMap(id => {
       const item = known.get(id);
       return item ? [item] : [];
     })} close={() => setReadLaterOrigin(null)}
@@ -218,6 +241,11 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
         const index = previousIndex !== -1 ? previousIndex + 1 : nextIndex !== -1 ? nextIndex : current.length;
         return [...current.slice(0, index), id, ...current.slice(index)];
       })}/>}
+    {favoritesOrigin && <ReadLater storageNotice={savedStorageNotice} kind="favorites" origin={favoritesOrigin}
+      items={favoriteIds.flatMap(id => { const item = known.get(id); return item ? [item] : []; })}
+      close={() => setFavoritesOrigin(null)}
+      removeItem={id => updateFavorite(id, current => current.filter(item => item !== id))}
+      restoreItem={id => updateFavorite(id, current => current.includes(id) ? current : [id, ...current])}/>}
     {panel && <ReaderPanels key={panel.kind === "share" ? "share" : "reading"} panel={panel} directory={directory} close={() => setPanel(null)} reportCount={reportCount}/>}
   </Reader.Provider></Register.Provider>;
 }
