@@ -1,0 +1,39 @@
+{
+  "alignment": 1,
+  "controls": [
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "height": 43.55999755859375,
+      "shadow": "none",
+      "width": 43.55999755859375
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "height": 43.55999755859375,
+      "shadow": "none",
+      "width": 43.55999755859375
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "height": 43.55999755859375,
+      "shadow": "none",
+      "width": 43.55999755859375
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "height": 43.55999755859375,
+      "shadow": "none",
+      "width": 43.560028076171875
+    }
+  ],
+  "fast": 0.75,
+  "optical": {
+    "clipped": true,
+    "coverMask": "linear-gradient(rgb(0, 0, 0) 0px, rgb(0, 0, 0) 42%, rgba(0, 0, 0, 0.88) 61%, rgba(0, 0, 0, 0.28) 83%, rgba(0, 0, 0, 0) 100%)",
+    "foreignObjects": 0,
+    "state": "webgl2-html"
+  },
+  "paused": 0.75,
+  "reversed": 0.875,
+  "slow": 0.75
+}
