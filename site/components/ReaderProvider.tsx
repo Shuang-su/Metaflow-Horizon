@@ -121,7 +121,11 @@ export default function ReaderProvider({ children, catalogue }: { children: Reac
 
   useEffect(() => {
     let size = null;
-    try { size = readerFontSize(localStorage.getItem(READER_FONT_KEY)); } catch {}
+    try {
+      const stored = localStorage.getItem(READER_FONT_KEY);
+      size = readerFontSize(stored);
+      if (size !== null && String(size) !== stored) localStorage.setItem(READER_FONT_KEY, String(size));
+    } catch {}
     setFont(size);
     if (size !== null) document.documentElement.style.setProperty("--reader-font-size", `${size}px`);
   }, []);

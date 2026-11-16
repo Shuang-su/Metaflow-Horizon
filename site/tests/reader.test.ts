@@ -13,7 +13,8 @@ const article: ReaderIdentity = { id: "gsd-2026-10-31", title: "日报", url: "/
 
 test("reader preferences and sharing retain safe defaults and local preview destinations", () => {
   for (const input of [null, "", "13", "14.5", "25", "NaN"]) assert.equal(readerFontSize(input), null);
-  for (const size of [14, 17, 24]) assert.equal(readerFontSize(String(size)), size);
+  for (const size of [14, 17, 20]) assert.equal(readerFontSize(String(size)), size);
+  for (const size of [21, 22, 23, 24]) assert.equal(readerFontSize(String(size)), 20);
   assert.equal(readerShareUrl(article, new URL("https://metaflow.shuang-su.com/horizon/daily/2026/10/31?giscus=abc#section")), "https://metaflow.shuang-su.com/horizon/daily/2026/10/31/");
   assert.equal(readerShareUrl(article, new URL("http://127.0.0.1:4388/horizon/daily/2026/10/31/?commentFixture=mixed#section")), "http://127.0.0.1:4388/horizon/daily/2026/10/31/");
   assert.equal(readerThreadTerm(article), "gsd-2026-10-31::daily");
