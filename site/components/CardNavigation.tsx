@@ -54,6 +54,17 @@ export default function CardNavigation({ children }: { children: ReactNode }) {
   const [busy, setBusy] = useState(false);
   const [contextPath, setContextPath] = useState<string>();
   const [source, setSource] = useState<PageSnapshot | null>(null);
+  const pointerFocus = useRef(false);
+  useEffect(() => {
+    const pointer = () => { pointerFocus.current = true; };
+    const keyboard = () => { pointerFocus.current = false; };
+    document.addEventListener("pointerdown", pointer, true);
+    document.addEventListener("keydown", keyboard, true);
+    return () => {
+      document.removeEventListener("pointerdown", pointer, true);
+      document.removeEventListener("keydown", keyboard, true);
+    };
+  }, []);
 
   const syncSource = useCallback((marker: NavigationMarker) => {
     setContextPath(marker.contextPath);
@@ -387,7 +398,7 @@ export default function CardNavigation({ children }: { children: ReactNode }) {
           if (pending.current?.token !== transaction.token) return;
           finish();
           // Focusing before hiding the real title for the proxy makes browsers blur it.
-          if (focus?.isConnected) focusReadingTarget(focus);
+          if (focus?.isConnected) focusReadingTarget(focus, pointerFocus.current);
           routeReady(transaction.kind);
         };
         const starting = animator.current?.current() || transaction.visual;
