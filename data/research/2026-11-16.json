@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "mode": "scheduled",
+  "window": {"start": "2026-11-15T08:28:00+08:00", "end": "2026-11-16T08:19:00+08:00"},
+  "reviewedAt": "2026-11-16T08:19:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields", "status": "checked-no-new", "checkedAt": "2026-11-16T08:04:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"], "candidateIds": [],
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "checked-no-new", "checkedAt": "2026-11-16T08:03:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "checked-no-new", "checkedAt": "2026-11-16T08:04:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official", "status": "candidates", "checkedAt": "2026-11-16T08:06:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": ["github.com/playcanvas/engine/pull/10025"],
+      "gap": "Blender News 返回 HTTP 403；PlayCanvas 运行时变化改由官方 GitHub PR 与提交核验。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-16T08:05:00+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-16T08:06:00+08:00", "gap": "HTTP 403，未取得可验证正文。"}
+      ]
+    },
+    {
+      "sourceId": "x", "status": "unavailable", "checkedAt": "2026-11-16T08:13:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "candidateIds": [],
+      "gap": "4 个登记账号均返回 403 或禁用错误；改由作者官网、项目页与 GitHub 一手记录核验。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-16T08:12:00+08:00", "gap": "DisabledError，无可验证原帖。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-16T08:12:20+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-16T08:12:40+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-16T08:13:00+08:00", "gap": "DisabledError，无可验证原帖。"}
+      ]
+    },
+    {
+      "sourceId": "research", "status": "unavailable", "checkedAt": "2026-11-16T08:09:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"], "candidateIds": [],
+      "gap": "arXiv export API 未能直接读取；Hugging Face Papers 可读但停在 11 月 13 日，补充网页检索未找到晚于已归档窗口且可由原始页面核验的新论文。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-16T08:08:00+08:00", "gap": "API 端点未能直接读取。"},
+        {"url": "https://huggingface.co/papers", "status": "checked-no-new", "checkedAt": "2026-11-16T08:09:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github", "status": "candidates", "checkedAt": "2026-11-16T08:11:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": ["github.com/playcanvas/engine/pull/10025", "github.com/BudgetAny/Budget3D", "github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8", "github.com/willeastcott/splat-fashion", "github.com/iamvillain/SyntaxSplat", "github.com/cobanov/pixelart-gaussiansplat"],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "checked-no-new", "checkedAt": "2026-11-16T08:10:00+08:00"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "checked-no-new", "checkedAt": "2026-11-16T08:11:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "community", "status": "candidates", "checkedAt": "2026-11-16T08:16:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": ["reddit-storysplat-2.5-repeat-2026-11-16", "reddit-colmap-wasm-repeat-2026-11-16"],
+      "gap": "B 站只返回浏览器兼容提示；中文可读来源未取得可独立核验的新事件。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "candidates", "checkedAt": "2026-11-16T08:14:00+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "unavailable", "checkedAt": "2026-11-16T08:15:00+08:00", "gap": "仅返回浏览器版本过旧提示。"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-16T08:16:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "github.com/playcanvas/engine/pull/10025", "title": "PlayCanvas 修复 packed splat 修改器旋转的四元数符号错误", "eventDate": "2026-11-16", "reportDate": "2026-11-16", "importance": "important", "disposition": "included", "reason": "WebGPU 与 WebGL 2 主干同时修复会造成可见几何方向错误的运行时缺陷。", "sources": ["https://github.com/playcanvas/engine/pull/10025", "https://github.com/playcanvas/engine/commit/ebc152e01d4dd2227e5075f7898623a6a8d29e7d"], "eventId": "github.com/playcanvas/engine/pull/10025"
+    },
+    {
+      "id": "github.com/BudgetAny/Budget3D", "title": "Budget3D 开放可变 token 预算的图生高斯代码与权重", "eventDate": "2026-11-15", "reportDate": "2026-11-16", "importance": "important", "disposition": "included", "reason": "代码、两个权重与在线演示已经可用，技术报告和对照实验边界仍需等待。", "sources": ["https://github.com/BudgetAny/Budget3D", "https://github.com/BudgetAny/Budget3D/commit/95bbeab46063375d560f9b20fa7b9d9fedb078f7", "https://huggingface.co/spaces/BudgetAny/Budget3D"], "eventId": "github.com/BudgetAny/Budget3D"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8", "title": "Spirula 主干改进限边、训练种子与 GPU 超时退出", "eventDate": "2026-11-15", "reportDate": "2026-11-16", "importance": "important", "disposition": "included", "reason": "连续主干提交改善大图输入控制、编辑点云到训练的路径和无人值守任务卡死恢复。", "sources": ["https://github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8", "https://github.com/harry7557558/spirula-studio/commit/5336f4ba6ad5a3e604447a344c1b8f3c3103dc1f", "https://github.com/harry7557558/spirula-studio/commit/8949092edb41bd60fede5a8cb71a7817e2d924e0"], "eventId": "github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8"
+    },
+    {
+      "id": "github.com/willeastcott/splat-fashion", "title": "Splat Fashion 用三套真实服装扫描制作浏览器换装作品", "eventDate": "2026-11-12", "reportDate": "2026-11-16", "importance": "important", "disposition": "included", "reason": "7 日重查补收；作品和代码展示了独立捕获之间的 rig、形态过渡与共享 SH 调色板。", "sources": ["https://github.com/willeastcott/splat-fashion", "https://willeastcott.github.io/splat-fashion/"], "eventId": "github.com/willeastcott/splat-fashion"
+    },
+    {
+      "id": "github.com/iamvillain/SyntaxSplat", "title": "SyntaxSplat 从 SDF 程序场景生成像素化 splat", "eventDate": "2026-11-16", "reportDate": "2026-11-16", "importance": "standard", "disposition": "included", "reason": "本窗口创建的可运行浏览器原型，代表直接创作而非重建的 splat 路线。", "sources": ["https://github.com/iamvillain/SyntaxSplat"], "eventId": "github.com/iamvillain/SyntaxSplat"
+    },
+    {
+      "id": "github.com/cobanov/pixelart-gaussiansplat", "title": "Pixelart Gaussian Splat 把 glTF 动画转换为像素化 splat", "eventDate": "2026-11-16", "reportDate": "2026-11-16", "importance": "standard", "disposition": "merged", "reason": "与 SyntaxSplat 合并为程序化 splat 创作趋势，保留独立来源与许可边界。", "sources": ["https://github.com/cobanov/pixelart-gaussiansplat"], "eventId": "github.com/iamvillain/SyntaxSplat"
+    },
+    {
+      "id": "reddit-storysplat-2.5-repeat-2026-11-16", "title": "StorySplat 2.5 作者社区帖重新浮现", "eventDate": "2026-10-20", "reportDate": "2026-11-16", "importance": "standard", "disposition": "excluded", "reason": "同一 2.5 功能和版本已经归档，帖子没有提供新 release 或新增能力。", "sources": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.storysplat.com/pricing"], "exclusionEvidence": "docs/reading/2026-10-20.md 已记录 StorySplat 2.5；当前帖子仍描述同一版本。"
+    },
+    {
+      "id": "reddit-colmap-wasm-repeat-2026-11-16", "title": "COLMAP WASM 作者社区帖重新浮现", "eventDate": "2026-10-20", "reportDate": "2026-11-16", "importance": "standard", "disposition": "excluded", "reason": "仓库与 0.1.0 版本均已在历史日报归档，本轮没有新提交或 release。", "sources": ["https://www.reddit.com/r/GaussianSplatting/", "https://github.com/colmap/colmap-wasm"], "exclusionEvidence": "docs/reading/2026-10-20.md 已记录 colmap-wasm；仓库最近更新仍停在 2026-10-20。"
+    }
+  ]
+}

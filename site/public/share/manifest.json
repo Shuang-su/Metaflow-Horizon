@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-15",
-    "sha256": "68b08c6c847634027b380f35cb7b7713561df12410a4b76efb866de2ede40860"
+    "date": "2026-11-16",
+    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
   },
   "reports": {
     "2026-09-18": {
@@ -892,6 +892,15 @@
       "inputHash": "18117e5e66dbe482b1ef439522385d7caa6328dc96cc8df1f1f83d070787423e",
       "sha256": "68b08c6c847634027b380f35cb7b7713561df12410a4b76efb866de2ede40860",
       "bytes": 36513
+    },
+    "2026-11-16": {
+      "date": "2026-11-16",
+      "url": "/share/2026-11-16.png",
+      "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
+      "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
+      "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
+      "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
+      "bytes": 34842
     }
   }
 }
