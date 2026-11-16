@@ -6,7 +6,12 @@ import { createPortal } from "react-dom";
 import { READER_FONT_MAX, READER_FONT_MIN } from "../lib/reader";
 import { useReader } from "./ReaderProvider";
 import Icon from "./Icon";
-import { installGlassMenuPrewarm, READER_GLASS_MOTION_REST } from "../lib/glass-menu-prewarm";
+import { canFinishGlassMenuWithoutMotion, installGlassMenuPrewarm, READER_GLASS_MOTION_REST } from "../lib/glass-menu-prewarm";
+
+import { glassColdStart } from "../lib/glass-diagnostics";
+import { morphLayoutBox } from "../vendor/glass-hq/src/dom/morph-plan";
+import { morphLocalCoordinate } from "../vendor/glass-hq/src/core/morph-path";
+import { getLayoutSize } from "../vendor/lisse-core/index.js";
 
 const FONT_PANEL_GAP = 8;
 const FONT_PANEL_VIEWPORT_MARGIN = 12;
@@ -54,6 +59,7 @@ export function ReaderFontControl({ onOpen }: { onOpen?: () => void }) {
 
   useEffect(() => {
     setPrewarmMounted(false);
+    if (glassColdStart()) return;
     let idle: number | undefined;
     const timer = window.setTimeout(() => {
       if ("requestIdleCallback" in window) idle = window.requestIdleCallback(() => setPrewarmMounted(true), { timeout: 500 });
@@ -72,11 +78,11 @@ export function ReaderFontControl({ onOpen }: { onOpen?: () => void }) {
     if (!origin || !element) return;
 
     const place = () => {
-      const bounds = origin.getBoundingClientRect();
+      const bounds = morphLayoutBox(origin.getBoundingClientRect(), getLayoutSize(origin));
       const viewport = document.documentElement;
-      const top = bounds.bottom + FONT_PANEL_GAP;
+      const top = morphLocalCoordinate(bounds.top + bounds.height + FONT_PANEL_GAP);
       const margin = FONT_PANEL_VIEWPORT_MARGIN;
-      const left = Math.max(margin, Math.min(viewport.clientWidth - element.offsetWidth - margin, bounds.right - element.offsetWidth));
+      const left = morphLocalCoordinate(Math.max(margin, Math.min(viewport.clientWidth - element.offsetWidth - margin, bounds.left + bounds.width - element.offsetWidth)));
       const maxHeight = Math.max(0, viewport.clientHeight - top - margin);
       setAnchor(previous => previous?.top === top && previous.left === left && previous.maxHeight === maxHeight
         ? previous : { top, left, maxHeight });
@@ -106,7 +112,9 @@ export function ReaderFontControl({ onOpen }: { onOpen?: () => void }) {
       setPhase(entering ? "open" : "closed");
     };
     element.addEventListener(eventName, finish, { once: true });
-    const timeout = window.setTimeout(finish, FONT_PANEL_MOTION_TIMEOUT);
+    const timeout = window.setTimeout(() => {
+      if (canFinishGlassMenuWithoutMotion(element)) finish();
+    }, FONT_PANEL_MOTION_TIMEOUT);
     return () => {
       element.removeEventListener(eventName, finish);
       window.clearTimeout(timeout);

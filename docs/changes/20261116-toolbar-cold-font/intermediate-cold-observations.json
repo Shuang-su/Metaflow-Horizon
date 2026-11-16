@@ -1,0 +1,438 @@
+{
+  "label": "Pre-cache-key-fix full 20-sample batch, includes all outliers; test tab was later found at a different article, no claim that this proves prior samples were interfered with",
+  "rows": [
+    {
+      "trial": 0,
+      "materialMs": 136.60000000000002,
+      "interactiveMs": 336.79999999999995,
+      "longRafIntervals": [],
+      "planCompletedMs": 110.7000000178814,
+      "plan": {
+        "computeMs": 61.20000001788139,
+        "durationMs": 64.90000000596046,
+        "id": 1,
+        "maxSliceMs": 4.699999988079071,
+        "scheduler": "message-channel",
+        "slices": 15,
+        "workerCompletedAt": 1794838765854.3,
+        "workerReceivedAt": 1794838765789.4,
+        "workerStartedAt": 1794838765791.7,
+        "workerTimeOrigin": 1794838765776.2
+      },
+      "loaf": []
+    },
+    {
+      "trial": 1,
+      "materialMs": 118.4999999821186,
+      "interactiveMs": 310.2999999821186,
+      "longRafIntervals": [],
+      "planCompletedMs": 89.2999999821186,
+      "plan": {
+        "computeMs": 50.49999997019768,
+        "durationMs": 52,
+        "id": 1,
+        "maxSliceMs": 4.0999999940395355,
+        "scheduler": "message-channel",
+        "slices": 13,
+        "workerCompletedAt": 1794838767211.3,
+        "workerReceivedAt": 1794838767159.3,
+        "workerStartedAt": 1794838767159.6,
+        "workerTimeOrigin": 1794838767149.5
+      },
+      "loaf": []
+    },
+    {
+      "trial": 2,
+      "materialMs": 112.2999999880791,
+      "interactiveMs": 312.39999998807906,
+      "longRafIntervals": [],
+      "planCompletedMs": 83.7999999821186,
+      "plan": {
+        "computeMs": 45.099999994039536,
+        "durationMs": 46.29999998211861,
+        "id": 1,
+        "maxSliceMs": 4.100000023841858,
+        "scheduler": "message-channel",
+        "slices": 12,
+        "workerCompletedAt": 1794838768455.1,
+        "workerReceivedAt": 1794838768408.8,
+        "workerStartedAt": 1794838768409.2,
+        "workerTimeOrigin": 1794838768400
+      },
+      "loaf": []
+    },
+    {
+      "trial": 3,
+      "materialMs": 134.60000001192094,
+      "interactiveMs": 343.7000000119209,
+      "longRafIntervals": [],
+      "planCompletedMs": 107.5,
+      "plan": {
+        "computeMs": 62.19999998807907,
+        "durationMs": 63.599999994039536,
+        "id": 1,
+        "maxSliceMs": 6.0999999940395355,
+        "scheduler": "message-channel",
+        "slices": 15,
+        "workerCompletedAt": 1794838769804.2998,
+        "workerReceivedAt": 1794838769740.7,
+        "workerStartedAt": 1794838769741.1,
+        "workerTimeOrigin": 1794838769727.9
+      },
+      "loaf": []
+    },
+    {
+      "trial": 4,
+      "materialMs": 111.49999998807908,
+      "interactiveMs": 303.499999988079,
+      "longRafIntervals": [],
+      "planCompletedMs": 91.40000000596046,
+      "plan": {
+        "computeMs": 50.69999998807907,
+        "durationMs": 51.69999998807907,
+        "id": 1,
+        "maxSliceMs": 4.100000023841858,
+        "scheduler": "message-channel",
+        "slices": 13,
+        "workerCompletedAt": 1794838771153.1,
+        "workerReceivedAt": 1794838771101.4,
+        "workerStartedAt": 1794838771101.7,
+        "workerTimeOrigin": 1794838771092.9
+      },
+      "loaf": []
+    },
+    {
+      "trial": 5,
+      "materialMs": 119.39999998807906,
+      "interactiveMs": 310.3999999880791,
+      "longRafIntervals": [],
+      "planCompletedMs": 90.7999999821186,
+      "plan": {
+        "computeMs": 44.099999994039536,
+        "durationMs": 44.80000001192093,
+        "id": 1,
+        "maxSliceMs": 4.0999999940395355,
+        "scheduler": "message-channel",
+        "slices": 11,
+        "workerCompletedAt": 1794838792807.1,
+        "workerReceivedAt": 1794838792762.3,
+        "workerStartedAt": 1794838792762.7,
+        "workerTimeOrigin": 1794838792748.3
+      },
+      "loaf": []
+    },
+    {
+      "trial": 6,
+      "materialMs": 115.30000000596044,
+      "interactiveMs": 322.80000000596044,
+      "longRafIntervals": [],
+      "planCompletedMs": 96.4000000059605,
+      "plan": {
+        "computeMs": 57.79999998211861,
+        "durationMs": 58.80000001192093,
+        "id": 1,
+        "maxSliceMs": 4.0999999940395355,
+        "scheduler": "message-channel",
+        "slices": 15,
+        "workerCompletedAt": 1794838794153.5,
+        "workerReceivedAt": 1794838794094.7,
+        "workerStartedAt": 1794838794095.1,
+        "workerTimeOrigin": 1794838794084.3
+      },
+      "loaf": []
+    },
+    {
+      "trial": 7,
+      "materialMs": 110.7999999880791,
+      "interactiveMs": 327.09999998807905,
+      "longRafIntervals": [],
+      "planCompletedMs": 90.5,
+      "plan": {
+        "computeMs": 50.29999998211861,
+        "durationMs": 51.29999998211861,
+        "id": 1,
+        "maxSliceMs": 4.0999999940395355,
+        "scheduler": "message-channel",
+        "slices": 13,
+        "workerCompletedAt": 1794838795449.3,
+        "workerReceivedAt": 1794838795398,
+        "workerStartedAt": 1794838795398.5,
+        "workerTimeOrigin": 1794838795389.6
+      },
+      "loaf": []
+    },
+    {
+      "trial": 8,
+      "materialMs": 116.2000000119209,
+      "interactiveMs": 325.2000000119209,
+      "longRafIntervals": [],
+      "planCompletedMs": 87.90000000596046,
+      "plan": {
+        "computeMs": 45.30000001192093,
+        "durationMs": 47.400000005960464,
+        "id": 1,
+        "maxSliceMs": 4.100000023841858,
+        "scheduler": "message-channel",
+        "slices": 12,
+        "workerCompletedAt": 1794838796750.1,
+        "workerReceivedAt": 1794838796702.7,
+        "workerStartedAt": 1794838796703.1,
+        "workerTimeOrigin": 1794838796691
+      },
+      "loaf": []
+    },
+    {
+      "trial": 9,
+      "materialMs": 111.2,
+      "interactiveMs": 494.5,
+      "longRafIntervals": [
+        {
+          "at": 665.7,
+          "dt": 257.70000000000005
+        }
+      ],
+      "planCompletedMs": 91.09999999403954,
+      "plan": {
+        "computeMs": 44.599999994039536,
+        "durationMs": 45.70000001788139,
+        "id": 1,
+        "maxSliceMs": 4.399999976158142,
+        "scheduler": "message-channel",
+        "slices": 11,
+        "workerCompletedAt": 1794838798040.1,
+        "workerReceivedAt": 1794838797994.4,
+        "workerStartedAt": 1794838797994.8,
+        "workerTimeOrigin": 1794838797981.1
+      },
+      "loaf": []
+    },
+    {
+      "trial": 10,
+      "materialMs": 119.60000001192094,
+      "interactiveMs": 319.6000000119209,
+      "longRafIntervals": [],
+      "planCompletedMs": 101.30000001192093,
+      "plan": {
+        "computeMs": 58.69999998807907,
+        "durationMs": 60,
+        "id": 1,
+        "maxSliceMs": 5.9000000059604645,
+        "scheduler": "message-channel",
+        "slices": 15,
+        "workerCompletedAt": 1794838954259.9,
+        "workerReceivedAt": 1794838954199.9,
+        "workerStartedAt": 1794838954200.3,
+        "workerTimeOrigin": 1794838954185.7
+      },
+      "loaf": []
+    },
+    {
+      "trial": 11,
+      "materialMs": 613.8999999880791,
+      "interactiveMs": 1047.199999988079,
+      "longRafIntervals": [],
+      "planCompletedMs": 592.5,
+      "plan": {
+        "computeMs": 416.6999998688698,
+        "durationMs": 430.699999988079,
+        "id": 1,
+        "maxSliceMs": 78.09999999403954,
+        "scheduler": "message-channel",
+        "slices": 47,
+        "workerCompletedAt": 1794838956115.1,
+        "workerReceivedAt": 1794838955684.4,
+        "workerStartedAt": 1794838955684.9,
+        "workerTimeOrigin": 1794838955587.1
+      },
+      "loaf": []
+    },
+    {
+      "trial": 12,
+      "materialMs": 111.99999998807908,
+      "interactiveMs": 319.8999999880791,
+      "longRafIntervals": [],
+      "planCompletedMs": 92.5,
+      "plan": {
+        "computeMs": 43.5,
+        "durationMs": 44.900000005960464,
+        "id": 1,
+        "maxSliceMs": 4,
+        "scheduler": "message-channel",
+        "slices": 11,
+        "workerCompletedAt": 1794838957757.8,
+        "workerReceivedAt": 1794838957712.9,
+        "workerStartedAt": 1794838957713.3,
+        "workerTimeOrigin": 1794838957699.1
+      },
+      "loaf": []
+    },
+    {
+      "trial": 13,
+      "materialMs": 344.0000000059605,
+      "interactiveMs": 569.4000000059605,
+      "longRafIntervals": [],
+      "planCompletedMs": 301.40000000596046,
+      "plan": {
+        "computeMs": 133.09999999403954,
+        "durationMs": 145,
+        "id": 1,
+        "maxSliceMs": 11.5,
+        "scheduler": "message-channel",
+        "slices": 28,
+        "workerCompletedAt": 1794838959727.1,
+        "workerReceivedAt": 1794838959582.1,
+        "workerStartedAt": 1794838959585,
+        "workerTimeOrigin": 1794838959473.9
+      },
+      "loaf": []
+    },
+    {
+      "trial": 14,
+      "materialMs": 282.8000000178814,
+      "interactiveMs": 482.8000000178814,
+      "longRafIntervals": [],
+      "planCompletedMs": 218.59999999403954,
+      "plan": {
+        "computeMs": 136.9000000655651,
+        "durationMs": 143.5,
+        "id": 1,
+        "maxSliceMs": 16.400000005960464,
+        "scheduler": "message-channel",
+        "slices": 29,
+        "workerCompletedAt": 1794838961468.4,
+        "workerReceivedAt": 1794838961324.9,
+        "workerStartedAt": 1794838961325.5,
+        "workerTimeOrigin": 1794838961298.2
+      },
+      "loaf": []
+    },
+    {
+      "trial": 15,
+      "materialMs": 167.60000000596045,
+      "interactiveMs": 426.2000000059604,
+      "longRafIntervals": [],
+      "planCompletedMs": 139.40000000596046,
+      "plan": {
+        "computeMs": 85.2999999821186,
+        "durationMs": 89,
+        "id": 1,
+        "maxSliceMs": 5,
+        "scheduler": "message-channel",
+        "slices": 21,
+        "workerCompletedAt": 1794838963014.4,
+        "workerReceivedAt": 1794838962925.4,
+        "workerStartedAt": 1794838962926.2,
+        "workerTimeOrigin": 1794838962909.4
+      },
+      "loaf": []
+    },
+    {
+      "trial": 16,
+      "materialMs": 397.10000001788137,
+      "interactiveMs": 643.0000000178813,
+      "longRafIntervals": [
+        {
+          "at": 585.5,
+          "dt": 91
+        }
+      ],
+      "planCompletedMs": 273.09999999403954,
+      "plan": {
+        "computeMs": 121.60000002384186,
+        "durationMs": 127.90000000596046,
+        "id": 1,
+        "maxSliceMs": 7.0999999940395355,
+        "scheduler": "message-channel",
+        "slices": 27,
+        "workerCompletedAt": 1794838964847.6,
+        "workerReceivedAt": 1794838964719.7,
+        "workerStartedAt": 1794838964720.1,
+        "workerTimeOrigin": 1794838964701.3
+      },
+      "loaf": [
+        {
+          "absoluteTime": 1794838964875.5,
+          "at": 508.199999988079,
+          "detail": {
+            "blockingDuration": 0,
+            "duration": 84.80000001192093,
+            "entryType": "long-animation-frame",
+            "firstUIEventTimestamp": 0,
+            "name": "long-animation-frame",
+            "navigationId": 1543,
+            "paintTime": 593,
+            "presentationTime": 632,
+            "renderStart": 585.5999999940395,
+            "scripts": [
+              {}
+            ],
+            "startTime": 508.199999988079,
+            "styleAndLayoutStart": 592.7999999821186
+          },
+          "name": "long-animation-frame",
+          "sequence": 532
+        }
+      ]
+    },
+    {
+      "trial": 17,
+      "materialMs": 309.999999988079,
+      "interactiveMs": 542.799999988079,
+      "longRafIntervals": [],
+      "planCompletedMs": 277.0,
+      "plan": {
+        "computeMs": 126.49999994039536,
+        "durationMs": 134.5,
+        "id": 1,
+        "maxSliceMs": 6.699999988079071,
+        "scheduler": "message-channel",
+        "slices": 29,
+        "workerCompletedAt": 1794838967458.7,
+        "workerReceivedAt": 1794838967324.2,
+        "workerStartedAt": 1794838967324.8,
+        "workerTimeOrigin": 1794838967304.7
+      },
+      "loaf": []
+    },
+    {
+      "trial": 18,
+      "materialMs": 161.09999998211862,
+      "interactiveMs": 377.7999999821186,
+      "longRafIntervals": [],
+      "planCompletedMs": 135.5999999940396,
+      "plan": {
+        "computeMs": 81.19999998807907,
+        "durationMs": 84.7999999821186,
+        "id": 1,
+        "maxSliceMs": 7.699999988079071,
+        "scheduler": "message-channel",
+        "slices": 20,
+        "workerCompletedAt": 1794838969036.4,
+        "workerReceivedAt": 1794838968951.6,
+        "workerStartedAt": 1794838968952,
+        "workerTimeOrigin": 1794838968937.1
+      },
+      "loaf": []
+    },
+    {
+      "trial": 19,
+      "materialMs": 159.40000000596046,
+      "interactiveMs": 367.8000000059605,
+      "longRafIntervals": [],
+      "planCompletedMs": 131.4000000059605,
+      "plan": {
+        "computeMs": 60.19999998807907,
+        "durationMs": 61.400000005960464,
+        "id": 1,
+        "maxSliceMs": 4.0999999940395355,
+        "scheduler": "message-channel",
+        "slices": 15,
+        "workerCompletedAt": 1794838970642.6,
+        "workerReceivedAt": 1794838970581.2002,
+        "workerStartedAt": 1794838970581.6,
+        "workerTimeOrigin": 1794838970559.1
+      },
+      "loaf": []
+    }
+  ]
+}

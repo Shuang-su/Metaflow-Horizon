@@ -5,8 +5,10 @@ import { mapScale, maxAtlasRows, type MapGeometry } from '../gpu/geometry';
 type MapPixels = { width: number; height: number; pixels: Uint8Array; duration: number };
 import fragment from './maps-fragment';
 
-export type MaterialBackend = {readonly warmed:Promise<void>;render(g:MapGeometry):Promise<MapPixels>;dispose():void};
-type Request = {g:MapGeometry;columns:number;rows:number;dpr:number;segments:number[][];started:number;resolve:(p:MapPixels)=>void;reject:(e:Error)=>void};
+export type MaterialTrace = (name:string,detail?:Record<string,unknown>,at?:number)=>void;
+export type MaterialRequestOptions = { requestId?:string; priority?:number; trace?:MaterialTrace };
+export type MaterialBackend = {readonly warmed:Promise<void>;render(g:MapGeometry,options?:MaterialRequestOptions):Promise<MapPixels>;dispose():void};
+type Request = {options:MaterialRequestOptions;g:MapGeometry;columns:number;rows:number;dpr:number;segments:number[][];started:number;resolve:(p:MapPixels)=>void;reject:(e:Error)=>void};
 type Slot = {texture:WebGLTexture;fbo:WebGLFramebuffer;pbo:WebGLBuffer;busy:boolean;width:number;height:number;sync:WebGLSync|null};
 const vertex=`#version 300 es
 void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);gl_Position=vec4(p*2.0-1.0,0,1);}`;
@@ -22,6 +24,9 @@ export class WebGL2MaterialRenderer implements MaterialBackend {
   private queue:Request[]=[];
   private pending=new Set<Request>();
   private dead=false;
+  private batches=0;
+  private readonly maxBatches=2;
+  private readonly maxPending=64;
   private limit:number;
   private lost=(event:Event)=>{event.preventDefault();this.dispose();this.onLost?.();};
   constructor(private onLost?:()=>void){
@@ -43,28 +48,34 @@ export class WebGL2MaterialRenderer implements MaterialBackend {
     this.warmed=this.render({width:4,height:4,radius:2,dpr:1}).then(()=>undefined);
     void this.warmed.catch(() => {});
   }
-  render(g:MapGeometry):Promise<MapPixels>{
+  render(g:MapGeometry,options:MaterialRequestOptions={}):Promise<MapPixels>{
     return new Promise((resolve,reject)=>{
       if(this.dead){reject(new Error('Glass renderer disposed'));return;}
+      if(this.pending.size>=this.maxPending){reject(new Error('Glass GPU bounded queue is full'));return;}
       try {
         if(![g.width,g.height,g.dpr??1].every(Number.isFinite)||g.width<=0||g.height<=0)throw new RangeError('Glass geometry must have positive, finite dimensions.');
         const dpr=mapScale(g),columns=Math.ceil((g.width+4)*dpr),rows=Math.ceil((g.height+4)*dpr);
         const {segments}=g.outline?outlineSegments(g.outline):shapeSegments(g.width,g.height,g.radius);
         if(columns>Math.min(4096,this.limit)||rows*2>this.limit||segments.length>4096)throw new RangeError('Glass map exceeds WebGL2 atlas limits');
-        const request={g,columns,rows,dpr,segments,started:performance.now(),resolve,reject};
-        this.pending.add(request);this.queue.push(request);
+        const request={options,g,columns,rows,dpr,segments,started:performance.now(),resolve,reject};
+        this.pending.add(request);this.queue.push(request);this.trace(request,"gpu-enqueue");
         if(this.queue.length===1)queueMicrotask(()=>this.flush());
       }catch(e){reject(e);}
     });
   }
+  private trace(request:Request,name:string){const at=performance.now();request.options.trace?.(name,{requestId:request.options.requestId,absoluteTime:performance.timeOrigin+at},at);}
   private flush(){
-    const requests=this.queue;this.queue=[];
-    let batch:Request[]=[],segments=0,rows=0;
-    for(const request of requests){
-      if(batch.length&&(batch.length===32||segments+request.segments.length>4096||rows+request.rows*2>this.limit)){void this.draw(batch);batch=[];segments=rows=0;}
-      batch.push(request);segments+=request.segments.length;rows+=request.rows*2;
+    if(this.dead)return;
+    this.queue.sort((a,b)=>(a.options.priority??0)-(b.options.priority??0)||a.started-b.started);
+    while(this.queue.length&&this.batches<this.maxBatches){
+      const batch:Request[]=[];let segments=0,rows=0,width=0;
+      while(this.queue.length){
+        const request=this.queue[0];
+        if(batch.length&&((batch[0].options.priority??0)!==(request.options.priority??0)||batch.length===32||segments+request.segments.length>4096||rows+request.rows*2>this.limit||Math.max(width,request.columns)*(rows+request.rows*2)*4>16*1024*1024))break;
+        this.queue.shift();batch.push(request);segments+=request.segments.length;rows+=request.rows*2;width=Math.max(width,request.columns);
+      }
+      this.batches++;void this.draw(batch);
     }
-    if(batch.length)void this.draw(batch);
   }
   private slot(width:number,height:number){
     const gl=this.gl;let slot=this.slots.find(s=>!s.busy);
@@ -91,10 +102,12 @@ export class WebGL2MaterialRenderer implements MaterialBackend {
       gl.useProgram(this.program);gl.viewport(0,0,width,height);
       gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,this.outline);gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,64,64,gl.RGBA,gl.FLOAT,segments);
       gl.uniform4fv(gl.getUniformLocation(this.program,'shapes[0]'),entries);gl.uniform1i(gl.getUniformLocation(this.program,'shapeCount'),requests.length);gl.uniform1f(gl.getUniformLocation(this.program,'atlasHeight'),height);
+      requests.forEach(s=>this.trace(s,"gpu-draw-start"));
       gl.drawArrays(gl.TRIANGLES,0,3);
+      requests.forEach(s=>this.trace(s,"gpu-draw-end"));
       gl.bindBuffer(gl.PIXEL_PACK_BUFFER,slot.pbo);gl.bufferData(gl.PIXEL_PACK_BUFFER,width*height*4,gl.STREAM_READ);
       gl.readPixels(0,0,width,height,gl.RGBA,gl.UNSIGNED_BYTE,0);gl.bindBuffer(gl.PIXEL_PACK_BUFFER,null);
-      slot.sync=gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE,0);if(!slot.sync)throw new Error('Glass readback fence unavailable');gl.flush();
+      slot.sync=gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE,0);if(!slot.sync)throw new Error('Glass readback fence unavailable');gl.flush();requests.forEach(s=>this.trace(s,"gpu-fence-enqueue"));
       const deadline=performance.now()+15000;
       while(true){
         if(this.dead||gl.isContextLost())throw new Error('Glass context lost');
@@ -104,10 +117,12 @@ export class WebGL2MaterialRenderer implements MaterialBackend {
         if(performance.now()>deadline)throw new Error('Glass readback timed out');
         await new Promise(r=>setTimeout(r,4));
       }
+      requests.forEach(s=>this.trace(s,"gpu-fence-ready"));
+      requests.forEach(s=>this.trace(s,"gpu-readback-start"));
       const atlas=new Uint8Array(width*height*4);gl.bindBuffer(gl.PIXEL_PACK_BUFFER,slot.pbo);gl.getBufferSubData(gl.PIXEL_PACK_BUFFER,0,atlas);gl.bindBuffer(gl.PIXEL_PACK_BUFFER,null);
-      requests.forEach((s,i)=>{const pixels=new Uint8Array(s.columns*s.rows*2*4);for(let y=0;y<s.rows*2;y++){const from=(height-1-bands[i]-y)*width*4;pixels.set(atlas.subarray(from,from+s.columns*4),y*s.columns*4);}s.resolve({width:s.columns,height:s.rows,pixels,duration:performance.now()-s.started});});
-    }catch(e){requests.forEach(s=>s.reject(e instanceof Error?e:new Error(String(e))));}
-    finally{requests.forEach(s=>this.pending.delete(s));if(slot){if(slot.sync)this.gl.deleteSync(slot.sync);slot.sync=null;slot.busy=false;this.gl.deleteTexture(slot.texture);this.gl.deleteFramebuffer(slot.fbo);this.gl.deleteBuffer(slot.pbo);this.slots=this.slots.filter(s=>s!==slot);if(!this.dead){const scratch=this.slots.reduce((n,s)=>n+s.width*s.height*8,0);reserveGlassMemory('map-renderer',64*64*16+scratch,0,scratch);}}}
+      requests.forEach((s,i)=>{const pixels=new Uint8Array(s.columns*s.rows*2*4);for(let y=0;y<s.rows*2;y++){const from=(height-1-bands[i]-y)*width*4;pixels.set(atlas.subarray(from,from+s.columns*4),y*s.columns*4);}this.trace(s,"gpu-readback-end");s.resolve({width:s.columns,height:s.rows,pixels,duration:performance.now()-s.started});});
+    }catch(e){requests.forEach(s=>{this.trace(s,"gpu-failed");s.reject(e instanceof Error?e:new Error(String(e)));});}
+    finally{this.batches--;requests.forEach(s=>this.pending.delete(s));if(slot){if(slot.sync)this.gl.deleteSync(slot.sync);slot.sync=null;slot.busy=false;this.gl.deleteTexture(slot.texture);this.gl.deleteFramebuffer(slot.fbo);this.gl.deleteBuffer(slot.pbo);this.slots=this.slots.filter(s=>s!==slot);if(!this.dead){const scratch=this.slots.reduce((n,s)=>n+s.width*s.height*8,0);reserveGlassMemory('map-renderer',64*64*16+scratch,0,scratch);}}if(!this.dead)queueMicrotask(()=>this.flush());}
   }
   dispose(){
     if(this.dead)return;this.dead=true;this.queue=[];

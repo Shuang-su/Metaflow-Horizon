@@ -1,0 +1,307 @@
+{
+  "before": [
+    {
+      "size": "16px",
+      "text": "文章目录"
+    },
+    {
+      "size": "28px",
+      "text": "高斯日报：PlayCanvas 修正动画高斯旋转，Budge"
+    },
+    {
+      "size": "17px",
+      "text": "日报速览"
+    },
+    {
+      "size": "21px",
+      "text": "PlayCanvas 修正动画与修改器路径中的高斯旋转"
+    },
+    {
+      "size": "21px",
+      "text": "Budget3D 让一个权重覆盖不同图生三维计算预算"
+    },
+    {
+      "size": "21px",
+      "text": "Spirula 改进大图输入、训练种子和 GPU 卡死退出"
+    },
+    {
+      "size": "21px",
+      "text": "简讯"
+    },
+    {
+      "size": "21px",
+      "text": "Splat Fashion 用三次独立捕获搭起浏览器换装作品"
+    },
+    {
+      "size": "21px",
+      "text": "程序化 splat 开始形成像素风创作小支线"
+    },
+    {
+      "size": "16px",
+      "text": "来源与纠错"
+    },
+    {
+      "size": "21px",
+      "text": "Horizon 行业日报 — 2026-11-16"
+    },
+    {
+      "size": "21px",
+      "text": "速览"
+    },
+    {
+      "size": "21px",
+      "text": "重点正文"
+    },
+    {
+      "size": "17.7px",
+      "text": "PlayCanvas 修复修改器旋转下的高斯方向翻转"
+    },
+    {
+      "size": "17.7px",
+      "text": "Budget3D 开放一套按内容分配计算预算的图生高斯管线"
+    },
+    {
+      "size": "17.7px",
+      "text": "Spirula 主干把大图输入、点云编辑和 GPU 卡死恢复"
+    },
+    {
+      "size": "21px",
+      "text": "简讯"
+    },
+    {
+      "size": "17.7px",
+      "text": "Splat Fashion 把三套真实服装扫描做成浏览器换装"
+    },
+    {
+      "size": "17.7px",
+      "text": "两个新仓库尝试把 splat 变成像素化程序媒介"
+    },
+    {
+      "size": "21px",
+      "text": "相关深读与行动建议"
+    },
+    {
+      "size": "21px",
+      "text": "覆盖与限制"
+    },
+    {
+      "size": "20px",
+      "text": "本期讨论"
+    },
+    {
+      "size": "20px",
+      "text": "往期日报"
+    },
+    {
+      "size": "15px",
+      "text": "高斯日报：NVIDIA 扩展高斯重照明、Ropedia 发布"
+    },
+    {
+      "size": "15px",
+      "text": "高斯日报：SuperSplat 编排动态高斯、LichtFe"
+    },
+    {
+      "size": "15px",
+      "text": "高斯日报：SOG v3 更新资产布局、SuperSplat "
+    },
+    {
+      "size": "15px",
+      "text": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具"
+    },
+    {
+      "size": "15px",
+      "text": "高斯日报：SuperSplat Viewer 扩展格式、GI"
+    },
+    {
+      "size": "18px",
+      "text": "订阅 horizon"
+    }
+  ],
+  "sizes": [
+    {
+      "body": "14px",
+      "headings": [
+        "16px",
+        "28px",
+        "17px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "16px",
+        "21px",
+        "21px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "21px",
+        "20px",
+        "20px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "18px"
+      ],
+      "max": "20",
+      "min": "14",
+      "value": "14"
+    },
+    {
+      "body": "15px",
+      "headings": [
+        "16px",
+        "28px",
+        "17px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "16px",
+        "21px",
+        "21px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "21px",
+        "20px",
+        "20px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "18px"
+      ],
+      "max": "20",
+      "min": "14",
+      "value": "15"
+    },
+    {
+      "body": "16px",
+      "headings": [
+        "16px",
+        "28px",
+        "17px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "16px",
+        "21px",
+        "21px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "21px",
+        "20px",
+        "20px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "18px"
+      ],
+      "max": "20",
+      "min": "14",
+      "value": "16"
+    },
+    {
+      "body": "17px",
+      "headings": [
+        "16px",
+        "28px",
+        "17px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "16px",
+        "21px",
+        "21px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "21px",
+        "20px",
+        "20px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "18px"
+      ],
+      "max": "20",
+      "min": "14",
+      "value": "17"
+    },
+    {
+      "body": "20px",
+      "headings": [
+        "16px",
+        "28px",
+        "17px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "21px",
+        "16px",
+        "21px",
+        "21px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "17.7px",
+        "17.7px",
+        "21px",
+        "21px",
+        "20px",
+        "20px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "15px",
+        "18px"
+      ],
+      "max": "20",
+      "min": "14",
+      "value": "20"
+    }
+  ]
+}

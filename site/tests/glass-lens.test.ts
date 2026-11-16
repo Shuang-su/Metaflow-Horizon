@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createGlassLens, lensClipOutline, lensClipPath, lensOpticalRegion } from "../lib/glass-lens";
+import { createGlassLens, lensClipOutline, lensClipPath, lensOpticalRegion, lensHostPlacement, measureLensHostTransform } from "../lib/glass-lens";
 import type { LensPlacement } from "../vendor/glass-hq/src/dom/morph";
 
 function inside(points: number[][], x: number, y: number) {
@@ -162,3 +162,67 @@ test("a pure translation reuses the local polygon without revisiting its prepare
   assert.notEqual(lensClipPath(scaled, scaled, 0, lensOpticalRegion(scaled, scaled)), first);
   assert.ok(pointReads > 0);
 });
+
+test("viewport regions map to a nonzero, nonuniformly scaled host without scaling the source snapshot twice", () => {
+  const host = { left: 34.25, top: 610.5, scaleX: .8, scaleY: 1.25 };
+  const viewport = { left: 50.25, top: 635.5, width: 320, height: 90 };
+  const local = lensHostPlacement(viewport, host);
+  assert.deepEqual(local, { left: 20, top: 20, width: 320, height: 90, scaleX: 1.25, scaleY: .8 });
+  for (const [x, y] of [[0, 0], [26, 26], [320, 90]]) {
+    assert.equal(host.left + host.scaleX * (local.left + x * local.scaleX), viewport.left + x);
+    assert.equal(host.top + host.scaleY * (local.top + y * local.scaleY), viewport.top + y);
+  }
+  assert.throws(() => lensHostPlacement(viewport, { ...host, scaleX: 0 }), /Invalid glass host/);
+});
+
+test("host measurement preserves fractional border-box size, border origin and scroll offset", () => {
+  const original = Object.getOwnPropertyDescriptor(globalThis, "getComputedStyle");
+  Object.defineProperty(globalThis, "getComputedStyle", { configurable: true, value: () => ({
+    width: "300.5px", height: "60.25px", boxSizing: "border-box", borderLeftWidth: "2px", borderTopWidth: "3px",
+  }) });
+  try {
+    const host = { getBoundingClientRect: () => ({ left: 20.5, top: 630.25, width: 240.4, height: 75.3125 }),
+      scrollLeft: 4, scrollTop: 5 } as unknown as HTMLElement;
+    const result = measureLensHostTransform(host);
+    assert.ok(Math.abs(result.scaleX - .8) < 1e-12);
+    assert.equal(result.scaleY, 1.25);
+    assert.ok(Math.abs(result.left - 18.9) < 1e-12);
+    assert.equal(result.top, 627.75);
+  } finally {
+    if (original) Object.defineProperty(globalThis, "getComputedStyle", original);
+    else Reflect.deleteProperty(globalThis, "getComputedStyle");
+  }
+});
+
+test("toolbar and slider paint consume captured host coordinates without reading any live layout", () => withLensDOM(host => {
+  Object.assign(host, { getBoundingClientRect() { throw new Error("paint read live host layout"); } });
+  for (const kind of ["toolbar", "slider"] as const) {
+    const lens = createGlassLens(host as unknown as HTMLElement, kind);
+    const transform = { left: 30, top: 10, scaleX: .5, scaleY: 2 };
+    lens.paint(layer, layer, 0, [], 1, false, 0, { roots: [], plans: [{ region, nodes: [] }] }, transform);
+    const strip = walk(host).find(node => node.className === "glass-optical-strip")!;
+    assert.equal(strip.style.left, "88px");
+    assert.equal(strip.style.top, "-13px");
+    assert.equal(strip.style.width, "96px");
+    assert.equal(strip.style.height, "96px");
+    assert.equal(strip.style.transform, "scale(2, 0.5)");
+    assert.equal(strip.style.transformOrigin, "0 0");
+    assert.match(strip.style.clipPath, /^polygon\(nonzero,/);
+    assert.equal(strip.style.visibility, "visible");
+    assert.throws(() => lens.paint(layer, layer, 0, [host as unknown as HTMLElement], 1, false, 0), /measured source snapshot/);
+    lens.dispose();
+  }
+}));
+
+test("a scaled local lens retains its outer clip and hides on filter resource failure", () => withLensDOM(host => {
+  let failed = 0;
+  const lens = createGlassLens(host as unknown as HTMLElement, "toolbar", () => failed++);
+  lens.paint(layer, layer, 0, [], 1, false, 0, undefined, { left: 18, top: 600, scaleX: .9, scaleY: .9 });
+  const strip = walk(host).find(node => node.className === "glass-optical-strip")!;
+  const clip = strip.style.clipPath;
+  walk(host).find(node => node.name === "feImage")!.emit("error");
+  assert.equal(strip.style.visibility, "hidden");
+  assert.equal(strip.style.clipPath, clip);
+  assert.equal(failed, 1);
+  lens.dispose();
+}));

@@ -1,0 +1,15 @@
+/* The toolbar material and controls share one fixed/translated ancestor.
+   This host never samples itself and never participates in hit testing. */
+.article-interaction-wrap { isolation: isolate; }
+.article-interaction-optics {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.article-interaction-optics * { pointer-events: none; }
+.article-interaction-wrap > .article-interaction-bar { position: relative; z-index: 1; }
+.article-interaction-wrap > .article-action-notice { z-index: 2; }

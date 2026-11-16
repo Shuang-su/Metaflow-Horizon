@@ -2,10 +2,11 @@ import { Spring, settleTime, springs } from "../core/spring";
 import { getLayoutSize } from "../../../lisse-core/index.js";
 import type { SpringOptions } from "../core/spring";
 import type { GlassRadius } from "../core/shape";
-import { contentReveal, morphDraw, morphShape, openingAxis, planMorph, radiusPixels, sourceConceal } from "../core/morph-path";
+import { contentReveal, morphDraw, morphShape, openingAxis, radiusPixels, sourceConceal } from "../core/morph-path";
 import type { Box, MorphEndpoints, MorphGeometry, MorphStop } from "../core/morph-path";
 import type { GlassMotion, SurfaceAnimator } from "./interaction";
 import { webkit } from "./filter-budget";
+import { morphLayoutBox, requestMorphPlan } from "./morph-plan";
 import { finishRetainedExit, retainLatestExit } from "./exit-handoff";
 /** WebKit decodes every map a filter switches to during a frame it already
  * paints slowly; a path of fewer prepared shapes switches maps less often. */
@@ -55,7 +56,7 @@ export interface GeometryMotionOptions {
   layout?: boolean;
   radius: GlassRadius;
   motion: () => GlassMotion;
-  /** Whether a shape's maps are ready to draw. An entrance waits briefly for its path. */
+  /** Whether a shape's maps are ready. Only the current adjacent pair gates motion. */
   prepared?: (shape: LensWaypoint) => boolean;
   /** How far a detaching drop stays joined to its glass by a liquid neck, in
    * pixels. `0` lets it grow as a plain shape, with no union to trace. */
@@ -66,8 +67,6 @@ export interface GeometryMotionOptions {
   /** Submenus fade in place and share the previous sibling's outline. */
   submenu?: boolean;
 }
-/** Longest an entrance waits for the maps of its path. */
-const maxWait = 140;
 const frame = 1 / 60;
 const sourceCount = new WeakMap<Element, number>();
 interface SubmenuSlot {
@@ -149,6 +148,12 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
   let holding: Animation | undefined;
   let previous = 0, now = 0;
   let plan: Plan | undefined;
+  let planning: AbortController | undefined;
+  let activePlanRequest: (() => void) | undefined;
+  let resumePlan: (() => void) | undefined;
+  let disposed = false;
+  const cancelPlan = () => { planning?.abort(); planning = undefined; activePlanRequest = undefined; resumePlan = undefined; };
+  const wake = () => document.dispatchEvent(new CustomEvent("glass-plan-ready"));
   let lastFrame: LensFrame | undefined;
   let morphing = false, exiting = false, materialize = false;
   /** Waiting for the path's maps before the glass starts to move. */
@@ -180,6 +185,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
     },
     snapshot: () => lastFrame ?? (waiting && sibling ? sibling.snapshot() : rectOf(element)),
     finish: () => {
+      cancelPlan();
       releaseExit?.(); releaseExit = undefined;
       morphing = false; closed = true; waiting = 0;
       progress.jump(0); fade.jump(0); lastFrame = undefined;
@@ -221,38 +227,55 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
     // A drop leaves the glass its source is, or the glass its source sits in.
     glass = morph === "become" ? own : own ?? (enclosing && !enclosing.contains(element) ? enclosing : null);
     if (morph === "become" && glass) source = glass;
-    if (source?.isConnected) sourceRect = rectOf(source);
+    if (source?.isConnected) sourceRect = morphLayoutBox(rectOf(source), layoutSize(source));
     materialize = !source?.isConnected || !sourceRect.width || !sourceRect.height;
   };
   /** Plan the path from the source to the surface's current placement. */
   const planEntry = () => {
-    const target = rectOf(element);
+    cancelPlan();
     const to = layoutSize(element);
+    const target = morphLayoutBox(rectOf(element), to);
     if (!to.width || !to.height || materialize || !source) { plan = undefined; return; }
     const endpoints: MorphEndpoints = {
       from: { ...sourceRect }, fromRadius: declaredRadius(source),
       to: target, toRadius: options.radius, along: openingAxis(sourceRect, target),
     };
     const drop = morph === "detach" && glass?.isConnected ? (() => {
-      const rect = rectOf(glass!), size = layoutSize(glass!);
+      const size = layoutSize(glass!), rect = morphLayoutBox(rectOf(glass!), size);
       return { ...rect, radius: declaredRadius(glass!), layoutWidth: size.width || rect.width, layoutHeight: size.height || rect.height };
     })() : undefined;
     const neck = options.neck ?? 18;
-    const stops = planMorph(endpoints, neck > 0 ? drop : undefined, { dpr: 1, restDpr: dpr(), neck, stops: stopCount(neck > 0 ? 14 : 10) });
-    // The resting endpoints use layout sizes, which the maps are keyed by.
-    if (morph === "become" && glass) { const size = layoutSize(glass); if (size.width && size.height) Object.assign(stops[0]!.shape, { width: size.width, height: size.height }); }
-    Object.assign(stops.at(-1)!.shape, { width: to.width, height: to.height });
-    const joined = neck > 0 && drop ? glass ?? undefined : undefined;
-    plan = { endpoints, stops, shapes: stops.map((stop) => stop.shape), glass: morph === "become" ? glass ?? undefined : joined, glassRect: joined && drop ? { left: drop.left, top: drop.top, width: drop.width, height: drop.height } : undefined };
+    activePlanRequest = planEntry;
+    const controller = planning = new AbortController();
+    void requestMorphPlan(endpoints, neck > 0 ? drop : undefined, { dpr: 1, restDpr: dpr(), neck, stops: stopCount(neck > 0 ? 14 : 10) }, { signal: controller.signal }).then(stops => {
+      if (disposed || planning !== controller) return;
+      planning = undefined; activePlanRequest = undefined;
+      if (morph === "become" && glass) { const size = layoutSize(glass); if (size.width && size.height) Object.assign(stops[0]!.shape, { width: size.width, height: size.height }); }
+      Object.assign(stops.at(-1)!.shape, { width: to.width, height: to.height });
+      const joined = neck > 0 && drop ? glass ?? undefined : undefined;
+      plan = { endpoints, stops, shapes: stops.map(stop => stop.shape), glass: morph === "become" ? glass ?? undefined : joined, glassRect: joined && drop ? { left: drop.left, top: drop.top, width: drop.width, height: drop.height } : undefined };
+      wake();
+    }, error => {
+      if (disposed || planning !== controller) return;
+      planning = undefined; activePlanRequest = undefined;
+      if (error?.name !== "AbortError") {
+        document.dispatchEvent(new CustomEvent("glass-plan-trace", { detail: { name: "plan-failure", detail: { error: String(error) } } }));
+        waiting = 0; materialize = true; plan = undefined;
+        progress.jump(1); fade.jump(0).target = 1; wake();
+      }
+    });
   };
-  /** The path can start once its maps are ready, or, for a path of plain
-   * shapes, once its destination's map is: stretched, it stands in for the
-   * shapes on the way while theirs arrive, so a menu seen before opens at once. */
-  const ready = () => {
-    if (!plan || !options.prepared) return true;
-    if (plan.stops.every((stop) => options.prepared!(stop.shape))) return true;
-    return !plan.stops.some((stop) => stop.shape.outline) && options.prepared(plan.stops.at(-1)!.shape);
+  /** Only the adjacent pair about to be drawn gates progress. */
+  const readyAt = (p: number) => {
+    if (planning || !plan) return false;
+    if (!options.prepared) return true;
+    const draw = morphDraw(plan.stops, Math.max(plan.stops[0]!.p, p));
+    if (!draw) return false;
+    const a = options.prepared(draw.a.shape);
+    const b = !draw.b || options.prepared(draw.b.shape);
+    return a && b;
   };
+  const ready = () => readyAt(progress.value);
   function enter() {
     if (options.motion() === "none") return;
     releaseExit?.(); releaseExit = undefined;
@@ -265,7 +288,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
     closed = false;
     const still = materialize || options.motion() === "reduced";
     progress.configure(entrance).jump(still ? 1 : 0);
-    if (still) { plan = undefined; waiting = 0; }
+    if (still) { cancelPlan(); plan = undefined; waiting = 0; }
     else { planEntry(); waiting = now || performance.now(); }
     fade.jump(still ? 0 : 1).target = 1;
     element.dataset.glassMorph = "enter";
@@ -274,6 +297,8 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
   function exit() {
     if (options.motion() === "none") return;
     handoffPending = false;
+    if (planning) { cancelPlan(); if (!plan) { materialize = true; fade.jump(0); } }
+    if (waiting && !lastFrame) { plan = undefined; materialize = true; fade.jump(0); }
     // A submenu disappears at its current location, including when its
     // sibling handoff is interrupted. It never travels back to a menu row.
     if (options.submenu) { plan = undefined; materialize = true; releaseSibling?.(); releaseSibling = undefined; sibling = undefined; }
@@ -292,7 +317,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
     }
     morphing = true;
     exiting = true;
-    waiting = 0;
+    waiting = planning ? performance.now() : 0;
     const still = !plan || materialize || options.motion() === "reduced";
     progress.configure(settle).target = still ? 1 : 0;
     fade.target = still ? 0 : 1;
@@ -313,6 +338,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
     const parentMenu = options.submenu ? submenuParent : source?.parentElement?.closest(".lg-menu");
     if (parentMenu) releaseExit = retainLatestExit(parentMenu, () => {
       if (!exiting || closed) return;
+      cancelPlan();
       releaseExit?.(); releaseExit = undefined;
       morphing = false; closed = true; waiting = 0;
       progress.jump(0); fade.jump(0); lastFrame = undefined;
@@ -361,9 +387,10 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
       progress.configure(entrance).target = 1;
       fade.target = 1;
       // Closing may interrupt the original map preparation. Reopening keeps
-      // this outline in place until that path is ready, with a fresh bounded
-      // wait rather than spending its entrance while the maps still arrive.
-      waiting = options.motion() === "full" && plan && !ready() ? performance.now() : 0;
+      // this outline in place until its adjacent pair is ready, without
+      // spending its entrance while maps still arrive.
+      if (!plan && options.motion() === "full") { resolve(); if (!materialize) planEntry(); }
+      waiting = options.motion() === "full" && (planning || (plan && !ready())) ? performance.now() : 0;
       element.dataset.glassMorph = "enter";
     }
   });
@@ -386,8 +413,14 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
   const place = (stop: MorphStop, live: Box): LensPlacement => {
     if (!stop.box) return { shape: stop.shape, ...live };
     const planned = plan?.glassRect, current = planned && plan?.glass?.isConnected ? rectOf(plan.glass) : undefined;
-    const dx = current && planned ? current.left - planned.left : 0, dy = current && planned ? current.top - planned.top : 0;
-    return { shape: stop.shape, left: stop.box.left + dx, top: stop.box.top + dy, width: stop.box.width, height: stop.box.height };
+    // Transient press affects placement only, fading as the drop departs.
+    const weight = 1 - Math.min(1, Math.max(0, progress.value));
+    const sx = current && planned ? 1 + (current.width / planned.width - 1) * weight : 1;
+    const sy = current && planned ? 1 + (current.height / planned.height - 1) * weight : 1;
+    const dx = current && planned ? current.left + current.width / 2 - planned.left - planned.width / 2 : 0;
+    const dy = current && planned ? current.top + current.height / 2 - planned.top - planned.height / 2 : 0;
+    const cx = planned ? planned.left + planned.width / 2 : 0, cy = planned ? planned.top + planned.height / 2 : 0;
+    return { shape: stop.shape, left: cx + (stop.box.left - cx) * sx + dx, top: cy + (stop.box.top - cy) * sy + dy, width: stop.box.width * sx, height: stop.box.height * sy };
   };
   const frameOf = (p: number, live: Box & { radius: number }): LensFrame => {
     const draw = plan ? morphDraw(plan.stops, p) : undefined;
@@ -399,6 +432,28 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
       absorbs: absorbed > 0 && plan?.glass ? { element: plan.glass, weight: absorbed } : undefined,
     };
   };
+
+  // BFCache freezes the existing React/menu state. Save the interrupted
+  // request before the shared service is disposed, then replan on restore.
+  // Ordinary visibility changes do not cancel work or destroy resources.
+  const onPageHide = (event: PageTransitionEvent) => {
+    const restart = event.persisted && planning ? activePlanRequest : undefined;
+    cancelPlan();
+    resumePlan = restart;
+    previous = 0; now = 0;
+  };
+  const onPageShow = (event: PageTransitionEvent) => {
+    if (!event.persisted || disposed) return;
+    const restart = resumePlan; resumePlan = undefined;
+    previous = 0; now = 0;
+    if (restart && !closed) { waiting = performance.now(); restart(); }
+    wake();
+  };
+  const ownerWindow = typeof window !== "undefined" ? window : undefined;
+  // Capture precedes the shared service's non-capture disposer, including
+  // native listener checkpoints that run rejection microtasks between handlers.
+  ownerWindow?.addEventListener?.("pagehide", onPageHide, true);
+  ownerWindow?.addEventListener?.("pageshow", onPageShow);
 
   return {
     frame(at) {
@@ -418,9 +473,12 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
         const stable = placed && placement && Math.hypot(rect.left - placement.left, rect.top - placement.top) < 0.5
           && Math.abs(rect.width - placement.width) < 0.5 && Math.abs(rect.height - placement.height) < 0.5;
         placement = rect;
-        // Two settled frames: the first paint can land before placement.
-        settledFrames = stable ? settledFrames + 1 : 0;
-        if (settledFrames >= 2 || ++waited > 8) {
+        // Count the first placed sample, then require one matching sample.
+        // A layout change begins a new pair; unplaced samples never qualify,
+        // including for the bounded fallback during continuously moving layout.
+        settledFrames = placed ? (stable ? settledFrames + 1 : 1) : 0;
+        waited = placed ? waited + 1 : 0;
+        if (placed && (settledFrames >= 2 || waited > 8)) {
           entering = false;
           dt = 0;
           if (!element.hasAttribute("data-ending-style")) enter();
@@ -438,15 +496,26 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
             ? { left: lastFrame.left - plan.layout.x, top: lastFrame.top - plan.layout.y, width: lastFrame.width, height: lastFrame.height }
             : { left: box.x, top: box.y, width: box.width, height: box.height };
           const endpoints: MorphEndpoints = { from: current, fromRadius: ownRadius(current.width, current.height), to: { left: next.x, top: next.y, width: next.width, height: next.height }, toRadius: options.radius };
-          const stops = planMorph(endpoints, undefined, { stops: stopCount(12), dpr: 1, restDpr: dpr() });
-          plan = { endpoints, stops, shapes: stops.map((stop) => stop.shape), layout: next };
-          progress.configure(springs.layout).jump(0).target = 1;
+          const requestLayout = () => {
+            cancelPlan();
+            activePlanRequest = requestLayout;
+            const controller = planning = new AbortController();
+            waiting = performance.now();
+            void requestMorphPlan(endpoints, undefined, { stops: stopCount(12), dpr: 1, restDpr: dpr() }, { signal: controller.signal }).then(stops => {
+              if (disposed || planning !== controller) return;
+              planning = undefined; activePlanRequest = undefined;
+              plan = { endpoints, stops, shapes: stops.map(stop => stop.shape), layout: next };
+              progress.configure(springs.layout).jump(0).target = 1;
+              wake();
+            }, () => { if (planning === controller) { planning = undefined; activePlanRequest = undefined; waiting = 0; wake(); } });
+          };
+          requestLayout();
           dt = 0;
         }
         if (next.width && next.height) box = next;
       }
-      if (waiting && (ready() || at - waiting > maxWait)) {
-        waiting = 0; progress.target = 1;
+      if (waiting && ready()) {
+        waiting = 0; progress.target = exiting ? 0 : 1;
         // Preparing a path does not spend any of its animation time.
         dt = 0;
       }
@@ -461,7 +530,15 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
         const parentMenu = options.submenu ? submenuParent : source?.parentElement?.closest(".lg-menu");
         if (parentMenu) finishRetainedExit(parentMenu);
       }
+      const oldValue = progress.value, oldVelocity = progress.velocity;
       progress.step(dt);
+      // Missing maps retain the previous complete frame and spring state.
+      if (plan && options.motion() === "full" && !readyAt(progress.value)) {
+        progress.value = oldValue; progress.velocity = oldVelocity;
+        if (exiting) holding?.pause();
+        return true;
+      }
+      if (exiting && !retainers) holding?.play();
       fade.step(dt);
       const active = () => {
         const running = entering || morphing || waiting > 0 || !progress.settled || !fade.settled;
@@ -503,7 +580,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
           // A popup that moves with its wobbling trigger keeps its planned
           // shapes and simply follows; only a resize plans again.
           const target = rectOf(element);
-          if (resized(plan.endpoints.to, target)) { if (!waiting) { sourceRect = rectOf(source); planEntry(); if (!ready()) waiting = at; } }
+          if (resized(plan.endpoints.to, target)) { if (!waiting) { sourceRect = morphLayoutBox(rectOf(source), layoutSize(source)); planEntry(); if (!ready()) waiting = at; } }
           else if (moved(plan.endpoints.to, target)) plan.endpoints.to = target;
         }
         const p = progress.value;
@@ -514,6 +591,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
         lastFrame = frameOf(p, shape);
         return active();
       }
+      if (planning || waiting) return true;
       if (morphing) {
         // Materializing in place: the resting outline fades.
         element.style.setProperty("--lg-morph", fade.value.toFixed(3));
@@ -530,7 +608,7 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
     positioning: () => entering,
     opacity() {
       // Waiting for placement, or parked at the source after an exit.
-      if (closed || entering) return 0;
+      if (closed || entering || ((planning || waiting) && !lastFrame)) return 0;
       if (!morphing) return 1;
       // Fading the glass itself redraws the scene every frame; on WebKit the
       // material arrives whole and leaves with the popup.
@@ -540,6 +618,9 @@ export function attachGeometryMotion(element: HTMLElement, options: GeometryMoti
       return plan.glass ? 1 : Math.min(1, Math.max(0, progress.value / 0.2));
     },
     dispose() {
+      disposed = true; cancelPlan();
+      ownerWindow?.removeEventListener?.("pagehide", onPageHide, true);
+      ownerWindow?.removeEventListener?.("pageshow", onPageShow);
       releaseSibling?.(); releaseSibling = undefined;
       if (submenuParent && submenuSlots.get(submenuParent) === slot) submenuSlots.delete(submenuParent);
       observer.disconnect();

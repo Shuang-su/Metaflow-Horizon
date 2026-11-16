@@ -1,6 +1,6 @@
 import type { ShapePoint } from "./concentric";
 import type { GlassRadius } from "./shape";
-import { smoothUnion } from "./union";
+import { smoothUnionSteps } from "./union";
 import type { RoundRect } from "./union";
 
 /** A box in any shared coordinate space. */
@@ -133,6 +133,9 @@ export interface MorphPlanOptions {
  * and `radius` its declared corners, so its stop matches its own resting map. */
 export interface MorphGlass extends Box { radius: GlassRadius; layoutWidth: number; layoutHeight: number }
 const round = (v: number, unit: number) => Math.round(v / unit) * unit;
+/** Stable browser layout coordinates. Only relative placement is snapped;
+ * dimensions, union sampling and contour points retain their precision. */
+export const morphLocalCoordinate = (value: number) => Math.round(value * 64) / 64;
 // A detached popup is removed from the DOM after closing, but its path is
 // reusable. Keep a small number of local plans, independent of page position.
 const detachedPlans = new Map<string, MorphStop[]>();
@@ -148,8 +151,8 @@ export function planMorph(e: MorphEndpoints, glass: MorphGlass | undefined, opti
   // precision when a scene is far from the viewport origin.
   const local = (box: Box): Box => ({
     ...box,
-    left: Number((box.left - glass.left).toFixed(8)),
-    top: Number((box.top - glass.top).toFixed(8)),
+    left: morphLocalCoordinate(box.left - glass.left),
+    top: morphLocalCoordinate(box.top - glass.top),
   });
   const endpoints = { ...e, from: local(e.from), to: local(e.to) };
   const source = { ...glass, left: 0, top: 0 };
@@ -169,6 +172,14 @@ export function planMorph(e: MorphEndpoints, glass: MorphGlass | undefined, opti
 }
 
 function traceMorph(e: MorphEndpoints, glass: MorphGlass | undefined, options: MorphPlanOptions): MorphStop[] {
+  const work = traceMorphSteps(e, glass, options);
+  let item = work.next();
+  while (!item.done) item = work.next();
+  return item.value;
+}
+
+/** Original planner, cooperatively iterable without changing its contours. */
+export function* traceMorphSteps(e: MorphEndpoints, glass: MorphGlass | undefined, options: MorphPlanOptions): Generator<void, MorphStop[], void> {
   const { stops: count = 14, unions = 16, neck = 18, dpr = 1, restDpr = dpr } = options;
   const fine = 240;
   const shapes = Array.from({ length: fine + 1 }, (_, i) => morphShape(e, i / fine));
@@ -209,7 +220,7 @@ function traceMorph(e: MorphEndpoints, glass: MorphGlass | undefined, options: M
   for (let j = 0; j < samples; j++) {
     const i = Math.round(mix(start, end, j / (samples - 1)));
     const s = shapes[i]!, p = i / fine;
-    const loops = smoothUnion([own, { x: s.left, y: s.top, width: s.width, height: s.height, radius: s.radius }], neckWidth(p, neck), 1.5, 700);
+    const loops = yield* smoothUnionSteps([own, { x: s.left, y: s.top, width: s.width, height: s.height, radius: s.radius }], neckWidth(p, neck), 1.5, 700);
     if (loops.length !== 1) continue;
     const outline = loops[0]!;
     const left = Math.floor(Math.min(...outline.map(([x]) => x))), top = Math.floor(Math.min(...outline.map(([, y]) => y)));

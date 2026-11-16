@@ -141,11 +141,17 @@ function encodeMapPixels(pixels, width, height, cap) {
 
 // src/dom/map-encoder.worker.ts
 var scope = globalThis;
+var absolute = () => performance.timeOrigin + performance.now();
+scope.postMessage({ type: "ready", absoluteAt: absolute() });
 var queue = Promise.resolve();
-scope.onmessage = ({ data: { id, pixels, width, height } }) => {
+scope.onmessage = ({ data: { id, pixels, width, height, trace } }) => {
+  if (trace) scope.postMessage({ id, type: "trace", name: "encode-worker-received", absoluteAt: absolute() });
   queue = queue.then(async () => {
     try {
-      scope.postMessage({ id, planes: await encodeMapPixels(pixels, width, height) });
+      if (trace) scope.postMessage({ id, type: "trace", name: "encode-worker-start", absoluteAt: absolute() });
+      const planes = await encodeMapPixels(pixels, width, height);
+      if (trace) scope.postMessage({ id, type: "trace", name: "encode-worker-end", absoluteAt: absolute() });
+      scope.postMessage({ id, planes });
     } catch (error) {
       scope.postMessage({ id, error: String(error) });
     }

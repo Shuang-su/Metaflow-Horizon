@@ -35,6 +35,7 @@ export default function ArticleInteractionBar() {
   const title = article?.kind === "daily" ? "本期讨论" : "文章讨论";
   if (!article) return null;
   return createPortal(<div className="article-interaction-wrap" data-reader-scroll-chrome inert={navigation?.busy}>
+    <div className="article-interaction-optics" data-glass-toolbar-host data-glass-optics-host aria-hidden="true" inert />
     <div className="article-interaction-bar" data-glass-surface="toolbar" role="group" aria-label="文章操作">
       <button type="button" className="article-comment-entry" data-glass-interactive aria-haspopup="dialog" onClick={event => reader?.openDiscussion(event.currentTarget)}>
         <Icon name="edit"/><span>{thread || DISCUSSIONS ? "说点什么…" : title}</span>

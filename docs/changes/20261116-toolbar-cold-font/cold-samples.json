@@ -1,0 +1,2445 @@
+{
+  "environment": "Mac Chromium CUA/CDP,613x939,DPR2;50ms real mouse hold;new document and app caches for each cold sample;prediction disabled;network and GPU process caches retained",
+  "rows": [
+    {
+      "trial": 0,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 265.40000000596046
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=0",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=0",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840791276.6,
+        "identityChanged": false,
+        "pointerDownAt": 293.2999999821186,
+        "clickedAt": 359.90000000596046,
+        "firstMaterialMs": 124.79999999403952,
+        "firstContentMs": 224.7999999940396,
+        "interactiveMs": 349.7999999940396,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840791655.4,
+            "at": 378.7999999821186,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 117
+          },
+          {
+            "absoluteTime": 1794840791655.5,
+            "at": 378.90000000596046,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 118
+          },
+          {
+            "absoluteTime": 1794840791741.8,
+            "at": 465.199999988079,
+            "detail": {
+              "computeMs": 52.5,
+              "durationMs": 53.900000005960464,
+              "id": 1,
+              "maxSliceMs": 4.0999999940395355,
+              "scheduler": "message-channel",
+              "slices": 14,
+              "workerCompletedAt": 1794840791737.9,
+              "workerReceivedAt": 1794840791684,
+              "workerStartedAt": 1794840791684.9,
+              "workerTimeOrigin": 1794840791667.9
+            },
+            "name": "plan-worker-complete",
+            "sequence": 203
+          },
+          {
+            "absoluteTime": 1794840791766.4,
+            "at": 489.7999999821186,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 300
+          },
+          {
+            "absoluteTime": 1794840791957.6,
+            "at": 681,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 676
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=0",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=0",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840791276.6,
+        "identityChanged": false,
+        "pointerDownAt": 1122.699999988079,
+        "clickedAt": 1181.5999999940395,
+        "firstMaterialMs": 19.800000005960555,
+        "firstContentMs": 111.20000000596042,
+        "interactiveMs": 228.1000000059605,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840792472.3,
+            "at": 1195.699999988079,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 980
+          },
+          {
+            "absoluteTime": 1794840792481.7002,
+            "at": 1205.0999999940395,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 990
+          },
+          {
+            "absoluteTime": 1794840792665.2002,
+            "at": 1388.5999999940395,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1108
+          }
+        ]
+      }
+    },
+    {
+      "trial": 1,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 115.5
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=1",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=1",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840792737.2,
+        "identityChanged": false,
+        "pointerDownAt": 160.80000001192093,
+        "clickedAt": 221.2000000178814,
+        "firstMaterialMs": 110.9999999821186,
+        "firstContentMs": 202.7999999821186,
+        "interactiveMs": 319.49999998211865,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840792974.1,
+            "at": 236.9000000059605,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6.000001907348633,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6.000001907348633,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 147
+          },
+          {
+            "absoluteTime": 1794840792974.2,
+            "at": 237,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 148
+          },
+          {
+            "absoluteTime": 1794840793049,
+            "at": 311.80000001192093,
+            "detail": {
+              "computeMs": 45.19999998807907,
+              "durationMs": 46.19999998807907,
+              "id": 1,
+              "maxSliceMs": 4,
+              "scheduler": "message-channel",
+              "slices": 12,
+              "workerCompletedAt": 1794840793046.9,
+              "workerReceivedAt": 1794840793000.7002,
+              "workerStartedAt": 1794840793001.1,
+              "workerTimeOrigin": 1794840792986.1
+            },
+            "name": "plan-worker-complete",
+            "sequence": 227
+          },
+          {
+            "absoluteTime": 1794840793073.9,
+            "at": 336.7000000178814,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 332
+          },
+          {
+            "absoluteTime": 1794840793262.2,
+            "at": 525,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 723
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=1",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=1",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840792737.2,
+        "identityChanged": false,
+        "pointerDownAt": 945.5999999940396,
+        "clickedAt": 1004.3000000119208,
+        "firstMaterialMs": 19.69999998807907,
+        "firstContentMs": 115.59999998807916,
+        "interactiveMs": 215.19999998807907,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840793759.5,
+            "at": 1022.3000000119208,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1027
+          },
+          {
+            "absoluteTime": 1794840793769.5,
+            "at": 1032.300000011921,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1037
+          },
+          {
+            "absoluteTime": 1794840793949.8,
+            "at": 1212.5999999940395,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1155
+          }
+        ]
+      }
+    },
+    {
+      "trial": 2,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 104
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=2",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=2",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840794016.1,
+        "identityChanged": false,
+        "pointerDownAt": 131.59999999403954,
+        "clickedAt": 188.5999999940395,
+        "firstMaterialMs": 119.00000000596047,
+        "firstContentMs": 209.80000000596044,
+        "interactiveMs": 326.7000000059604,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840794220,
+            "at": 203.9000000059605,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6.000001907348633,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6.000001907348633,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 117
+          },
+          {
+            "absoluteTime": 1794840794220.1,
+            "at": 204,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 118
+          },
+          {
+            "absoluteTime": 1794840794296.4,
+            "at": 280.30000001192093,
+            "detail": {
+              "computeMs": 48.900000005960464,
+              "durationMs": 49.69999998807907,
+              "id": 1,
+              "maxSliceMs": 4.200000017881393,
+              "scheduler": "message-channel",
+              "slices": 13,
+              "workerCompletedAt": 1794840794296.2002,
+              "workerReceivedAt": 1794840794246.5,
+              "workerStartedAt": 1794840794246.9,
+              "workerTimeOrigin": 1794840794233.1
+            },
+            "name": "plan-worker-complete",
+            "sequence": 197
+          },
+          {
+            "absoluteTime": 1794840794328,
+            "at": 311.90000000596046,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 355
+          },
+          {
+            "absoluteTime": 1794840794516.3,
+            "at": 500.2000000178814,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 707
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=2",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=2",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840794016.1,
+        "identityChanged": false,
+        "pointerDownAt": 923.2000000178814,
+        "clickedAt": 980.9000000059604,
+        "firstMaterialMs": 26.69999999403956,
+        "firstContentMs": 118.39999999403948,
+        "interactiveMs": 241.3999999940395,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840795010.5,
+            "at": 994.4000000059604,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1005
+          },
+          {
+            "absoluteTime": 1794840795028.4,
+            "at": 1012.3000000119208,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1015
+          },
+          {
+            "absoluteTime": 1794840795216.5,
+            "at": 1200.4000000059605,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1133
+          }
+        ]
+      }
+    },
+    {
+      "trial": 3,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 111.80000001192091
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=3",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=3",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840795292.3,
+        "identityChanged": false,
+        "pointerDownAt": 142.30000001192093,
+        "clickedAt": 201.9000000059605,
+        "firstMaterialMs": 124.69999999403956,
+        "firstContentMs": 217.0999999940395,
+        "interactiveMs": 316.9999999940395,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840795508.9,
+            "at": 216.60000002384183,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 124
+          },
+          {
+            "absoluteTime": 1794840795509.2,
+            "at": 216.9000000059605,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 125
+          },
+          {
+            "absoluteTime": 1794840795591.2,
+            "at": 298.90000000596046,
+            "detail": {
+              "computeMs": 52.900000005960464,
+              "durationMs": 54.5,
+              "id": 1,
+              "maxSliceMs": 4.100000023841858,
+              "scheduler": "message-channel",
+              "slices": 14,
+              "workerCompletedAt": 1794840795589.2,
+              "workerReceivedAt": 1794840795534.7,
+              "workerStartedAt": 1794840795535.4,
+              "workerTimeOrigin": 1794840795521.5
+            },
+            "name": "plan-worker-complete",
+            "sequence": 209
+          },
+          {
+            "absoluteTime": 1794840795626.6,
+            "at": 334.30000001192093,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 358
+          },
+          {
+            "absoluteTime": 1794840795803.8,
+            "at": 511.5,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 707
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=3",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=3",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840795292.3,
+        "identityChanged": false,
+        "pointerDownAt": 923.4000000059604,
+        "clickedAt": 982.2000000178814,
+        "firstMaterialMs": 19.699999982118584,
+        "firstContentMs": 111.6999999821187,
+        "interactiveMs": 228.2999999821186,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840796288.1,
+            "at": 995.8000000119208,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1017
+          },
+          {
+            "absoluteTime": 1794840796298,
+            "at": 1005.7000000178814,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1027
+          },
+          {
+            "absoluteTime": 1794840796486.4,
+            "at": 1194.100000023842,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1145
+          }
+        ]
+      }
+    },
+    {
+      "trial": 4,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 102.19999998807909
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=4",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=4",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840796562.4,
+        "identityChanged": false,
+        "pointerDownAt": 130.09999999403954,
+        "clickedAt": 187.5999999940395,
+        "firstMaterialMs": 107.40000000596046,
+        "firstContentMs": 197.80000000596044,
+        "interactiveMs": 331.90000000596046,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840796764.4,
+            "at": 202,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 5.999998092651367,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 5.999998092651367,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 118
+          },
+          {
+            "absoluteTime": 1794840796764.5,
+            "at": 202.0999999940395,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 119
+          },
+          {
+            "absoluteTime": 1794840796833.7998,
+            "at": 271.40000000596046,
+            "detail": {
+              "computeMs": 46.20000001788139,
+              "durationMs": 47.599999994039536,
+              "id": 1,
+              "maxSliceMs": 4.700000017881393,
+              "scheduler": "message-channel",
+              "slices": 12,
+              "workerCompletedAt": 1794840796833.5,
+              "workerReceivedAt": 1794840796785.9,
+              "workerStartedAt": 1794840796786.2998,
+              "workerTimeOrigin": 1794840796775.9
+            },
+            "name": "plan-worker-complete",
+            "sequence": 191
+          },
+          {
+            "absoluteTime": 1794840796862.1,
+            "at": 299.69999998807907,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 345
+          },
+          {
+            "absoluteTime": 1794840797066.2998,
+            "at": 503.90000000596046,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 701
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=4",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=4",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840796562.4,
+        "identityChanged": false,
+        "pointerDownAt": 915.9000000059604,
+        "clickedAt": 975.5999999940396,
+        "firstMaterialMs": 18.000000005960487,
+        "firstContentMs": 110.60000000596052,
+        "interactiveMs": 227.30000000596056,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840797552.2998,
+            "at": 989.9000000059604,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6.000001907348633,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6.000001907348633,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1005
+          },
+          {
+            "absoluteTime": 1794840797561.6,
+            "at": 999.1999999880792,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1015
+          },
+          {
+            "absoluteTime": 1794840797742.9,
+            "at": 1180.5,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1139
+          }
+        ]
+      }
+    },
+    {
+      "trial": 5,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 106.40000000596046
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=5",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=5",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840797824.4,
+        "identityChanged": false,
+        "pointerDownAt": 139.59999999403954,
+        "clickedAt": 212.5,
+        "firstMaterialMs": 111.7,
+        "firstContentMs": 203.3,
+        "interactiveMs": 311.70000000000005,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840798051.9,
+            "at": 227.5,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 145
+          },
+          {
+            "absoluteTime": 1794840798052,
+            "at": 227.5999999940395,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 146
+          },
+          {
+            "absoluteTime": 1794840798130.2998,
+            "at": 305.90000000596046,
+            "detail": {
+              "computeMs": 50.30000001192093,
+              "durationMs": 51.099999994039536,
+              "id": 1,
+              "maxSliceMs": 4.199999988079071,
+              "scheduler": "message-channel",
+              "slices": 13,
+              "workerCompletedAt": 1794840798129.9,
+              "workerReceivedAt": 1794840798078.8,
+              "workerStartedAt": 1794840798079.1,
+              "workerTimeOrigin": 1794840798064
+            },
+            "name": "plan-worker-complete",
+            "sequence": 226
+          },
+          {
+            "absoluteTime": 1794840798152.7,
+            "at": 328.2999999821186,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 326
+          },
+          {
+            "absoluteTime": 1794840798334.4,
+            "at": 510,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 724
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=5",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=5",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840797824.4,
+        "identityChanged": false,
+        "pointerDownAt": 928.6999999880792,
+        "clickedAt": 986.9000000059604,
+        "firstMaterialMs": 20.599999994039536,
+        "firstContentMs": 112.29999999403958,
+        "interactiveMs": 228.5999999940395,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840798826.5,
+            "at": 1002.0999999940396,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1046
+          },
+          {
+            "absoluteTime": 1794840798836.2,
+            "at": 1011.7999999821186,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1056
+          },
+          {
+            "absoluteTime": 1794840799018.7998,
+            "at": 1194.4000000059605,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1174
+          }
+        ]
+      }
+    },
+    {
+      "trial": 6,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 104.7000000178814
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=6",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=6",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840799094.1,
+        "identityChanged": false,
+        "pointerDownAt": 130,
+        "clickedAt": 191.9000000059605,
+        "firstMaterialMs": 120.89999999403956,
+        "firstContentMs": 219.9999999940395,
+        "interactiveMs": 311.69999999403956,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840799302,
+            "at": 207.9000000059605,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 123
+          },
+          {
+            "absoluteTime": 1794840799302.2002,
+            "at": 208.10000002384183,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 124
+          },
+          {
+            "absoluteTime": 1794840799378.4,
+            "at": 284.30000001192093,
+            "detail": {
+              "computeMs": 51.29999998211861,
+              "durationMs": 52.60000002384186,
+              "id": 1,
+              "maxSliceMs": 4.0999999940395355,
+              "scheduler": "message-channel",
+              "slices": 13,
+              "workerCompletedAt": 1794840799375.2,
+              "workerReceivedAt": 1794840799322.6,
+              "workerStartedAt": 1794840799322.9,
+              "workerTimeOrigin": 1794840799313.7
+            },
+            "name": "plan-worker-complete",
+            "sequence": 203
+          },
+          {
+            "absoluteTime": 1794840799411.5,
+            "at": 317.40000000596046,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 361
+          },
+          {
+            "absoluteTime": 1794840799591.4,
+            "at": 497.300000011921,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 707
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=6",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=6",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840799094.1,
+        "identityChanged": false,
+        "pointerDownAt": 934.600000023842,
+        "clickedAt": 995,
+        "firstMaterialMs": 17.399999999999977,
+        "firstContentMs": 109.5,
+        "interactiveMs": 226.0999999999999,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840800104.2002,
+            "at": 1010.100000023842,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6.000001907348633,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6.000001907348633,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1005
+          },
+          {
+            "absoluteTime": 1794840800113.8,
+            "at": 1019.7000000178814,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1015
+          },
+          {
+            "absoluteTime": 1794840800295.7002,
+            "at": 1201.600000023842,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1133
+          }
+        ]
+      }
+    },
+    {
+      "trial": 7,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 107.89999997615814
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=7",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=7",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840800379.7,
+        "identityChanged": false,
+        "pointerDownAt": 129.69999998807907,
+        "clickedAt": 187.2999999821186,
+        "firstMaterialMs": 110.60000001788136,
+        "firstContentMs": 202.2000000178814,
+        "interactiveMs": 318.10000001788137,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840800582.6,
+            "at": 202.89999997615817,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 135
+          },
+          {
+            "absoluteTime": 1794840800582.7,
+            "at": 203,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 136
+          },
+          {
+            "absoluteTime": 1794840800657.2,
+            "at": 277.5,
+            "detail": {
+              "computeMs": 44.09999996423721,
+              "durationMs": 45,
+              "id": 1,
+              "maxSliceMs": 4.199999988079071,
+              "scheduler": "message-channel",
+              "slices": 11,
+              "workerCompletedAt": 1794840800652.6,
+              "workerReceivedAt": 1794840800607.6,
+              "workerStartedAt": 1794840800608,
+              "workerTimeOrigin": 1794840800594.1
+            },
+            "name": "plan-worker-complete",
+            "sequence": 215
+          },
+          {
+            "absoluteTime": 1794840800682.4,
+            "at": 302.69999998807907,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 312
+          },
+          {
+            "absoluteTime": 1794840800869.6,
+            "at": 489.89999997615814,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 712
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=7",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=7",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840800379.7,
+        "identityChanged": false,
+        "pointerDownAt": 911.399999976158,
+        "clickedAt": 969.1999999880792,
+        "firstMaterialMs": 20.500000011920974,
+        "firstContentMs": 111.30000001192091,
+        "interactiveMs": 228.70000001192105,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840801362.6,
+            "at": 982.899999976158,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1022
+          },
+          {
+            "absoluteTime": 1794840801373.5,
+            "at": 993.7999999821186,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1032
+          },
+          {
+            "absoluteTime": 1794840801564.1,
+            "at": 1184.399999976158,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1156
+          }
+        ]
+      }
+    },
+    {
+      "trial": 8,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 100.69999998807909
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=8",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=8",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840801643.3,
+        "identityChanged": false,
+        "pointerDownAt": 124.2999999821186,
+        "clickedAt": 182.19999998807907,
+        "firstMaterialMs": 110.60000001192094,
+        "firstContentMs": 202.10000001192097,
+        "interactiveMs": 301.7000000119209,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840801838.8,
+            "at": 195.5,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6.000001907348633,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6.000001907348633,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 128
+          },
+          {
+            "absoluteTime": 1794840801838.9,
+            "at": 195.5999999940395,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 129
+          },
+          {
+            "absoluteTime": 1794840801907.5,
+            "at": 264.19999998807907,
+            "detail": {
+              "computeMs": 46.80000001192093,
+              "durationMs": 48.10000002384186,
+              "id": 1,
+              "maxSliceMs": 4.100000023841858,
+              "scheduler": "message-channel",
+              "slices": 12,
+              "workerCompletedAt": 1794840801907.2,
+              "workerReceivedAt": 1794840801859.1,
+              "workerStartedAt": 1794840801859.5,
+              "workerTimeOrigin": 1794840801849.9
+            },
+            "name": "plan-worker-complete",
+            "sequence": 201
+          },
+          {
+            "absoluteTime": 1794840801940.3,
+            "at": 297,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 312
+          },
+          {
+            "absoluteTime": 1794840802120.4,
+            "at": 477.09999999403954,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 697
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=8",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=8",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840801643.3,
+        "identityChanged": false,
+        "pointerDownAt": 881,
+        "clickedAt": 939.5999999940396,
+        "firstMaterialMs": 19.70000000596042,
+        "firstContentMs": 111.40000000596046,
+        "interactiveMs": 227.1000000059605,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840802596.9,
+            "at": 953.5999999940396,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1001
+          },
+          {
+            "absoluteTime": 1794840802606.6,
+            "at": 963.2999999821186,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1011
+          },
+          {
+            "absoluteTime": 1794840802794.6,
+            "at": 1151.2999999821186,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1129
+          }
+        ]
+      }
+    },
+    {
+      "trial": 9,
+      "hydration": {
+        "cold": true,
+        "predictor": false,
+        "time": 117
+      },
+      "first": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=9",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=9",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840802861,
+        "identityChanged": false,
+        "pointerDownAt": 141.30000001192093,
+        "clickedAt": 199.30000001192093,
+        "firstMaterialMs": 108.89999998807906,
+        "firstContentMs": 200.59999998807905,
+        "interactiveMs": 316.2999999880791,
+        "timeout": null,
+        "generatedBefore": 0,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840803073.9,
+            "at": 212.9000000059605,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "id": 1,
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6.000001907348633,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6.000001907348633,
+                "width": 44
+              }
+            },
+            "name": "plan-request",
+            "sequence": 118
+          },
+          {
+            "absoluteTime": 1794840803074,
+            "at": 213,
+            "detail": {},
+            "name": "plan-worker-created",
+            "sequence": 119
+          },
+          {
+            "absoluteTime": 1794840803149.5,
+            "at": 288.5,
+            "detail": {
+              "computeMs": 51.69999998807907,
+              "durationMs": 53.099999994039536,
+              "id": 1,
+              "maxSliceMs": 4.199999988079071,
+              "scheduler": "message-channel",
+              "slices": 13,
+              "workerCompletedAt": 1794840803147.8,
+              "workerReceivedAt": 1794840803094.7,
+              "workerStartedAt": 1794840803095.1,
+              "workerTimeOrigin": 1794840803085.2
+            },
+            "name": "plan-worker-complete",
+            "sequence": 198
+          },
+          {
+            "absoluteTime": 1794840803174.1,
+            "at": 313.10000002384186,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 295
+          },
+          {
+            "absoluteTime": 1794840803356.3,
+            "at": 495.300000011921,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 702
+          }
+        ]
+      },
+      "again": {
+        "url": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=9",
+        "endUrl": "http://127.0.0.1:4357/horizon/daily/2026/11/12/?glassDiagnostics=1&glassCold=1&acceptance=9",
+        "title": "高斯日报：SuperSplat 修复文件读取、重建与渲染工具同步更新等 · metaflow horizon",
+        "origin": 1794840802861,
+        "identityChanged": false,
+        "pointerDownAt": 921.2000000178814,
+        "clickedAt": 980.7000000178814,
+        "firstMaterialMs": 19.199999982118584,
+        "firstContentMs": 110.49999998211864,
+        "interactiveMs": 243.2999999821186,
+        "timeout": null,
+        "generatedBefore": 21,
+        "generatedAfter": 21,
+        "longRafIntervals": [],
+        "timeline": [
+          {
+            "absoluteTime": 1794840803856.9,
+            "at": 995.9000000059604,
+            "detail": {
+              "endpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 0,
+                  "top": 0,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": -260,
+                  "top": 52,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "glass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 0,
+                "radius": "circle",
+                "top": 0,
+                "width": 44
+              },
+              "key": "[{\"from\":{\"left\":0,\"top\":0,\"width\":44,\"height\":44},\"fromRadius\":\"circle\",\"to\":{\"left\":-260,\"top\":52,\"width\":304,\"height\":196.695},\"toRadius\":24,\"along\":\"y\"},{\"left\":0,\"top\":0,\"width\":44,\"height\":44,\"radius\":\"circle\",\"layoutWidth\":44,\"layoutHeight\":44},{\"dpr\":1,\"restDpr\":2,\"neck\":36,\"stops\":14}]",
+              "options": {
+                "dpr": 1,
+                "neck": 36,
+                "restDpr": 2,
+                "stops": 14
+              },
+              "positionGrid": 0.015625,
+              "rawEndpoints": {
+                "along": "y",
+                "from": {
+                  "height": 44,
+                  "left": 449,
+                  "top": 6,
+                  "width": 44
+                },
+                "fromRadius": "circle",
+                "to": {
+                  "height": 196.695,
+                  "left": 189,
+                  "top": 58.00015625,
+                  "width": 304
+                },
+                "toRadius": 24
+              },
+              "rawGlass": {
+                "height": 44,
+                "layoutHeight": 44,
+                "layoutWidth": 44,
+                "left": 449,
+                "radius": "circle",
+                "top": 6,
+                "width": 44
+              }
+            },
+            "name": "plan-cache-hit",
+            "sequence": 1018
+          },
+          {
+            "absoluteTime": 1794840803870.3,
+            "at": 1009.3000000119208,
+            "detail": {
+              "id": "reader-font-panel",
+              "kind": "menu"
+            },
+            "name": "surface:first-material",
+            "sequence": 1028
+          },
+          {
+            "absoluteTime": 1794840804070.4,
+            "at": 1209.4000000059605,
+            "detail": {
+              "target": "reader-font-panel"
+            },
+            "name": "glass:entered",
+            "sequence": 1146
+          }
+        ]
+      }
+    }
+  ]
+}

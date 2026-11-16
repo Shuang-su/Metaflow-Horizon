@@ -1,4 +1,5 @@
-import { createOpticalFrame, OpticalSource, type OpticalBox, type OpticalFrameSnapshot } from "./glass-optical-source";
+import { OpticalSource, type OpticalBox, type OpticalFrameSnapshot } from "./glass-optical-source";
+import { getLayoutSize } from "../vendor/lisse-core/index.js";
 import type { LensPlacement } from "../vendor/glass-hq/src/dom/morph";
 import type { MapGeometry } from "../vendor/glass-hq/src/gpu/geometry";
 import { shapePolygon } from "../vendor/glass-hq/src/core/shape";
@@ -9,6 +10,36 @@ export type LensKind = "chrome" | "toolbar" | "slider" | "menu";
 export type GlassAppearance = NonNullable<MapGeometry["appearance"]>;
 export type MaterialPlanes = { field: string; rim: string };
 export type LensLayer = { placement: LensPlacement; maps: MaterialPlanes };
+/** Viewport position of the host's absolute containing-block origin and its
+ * positive axis-aligned CSS scale. Capture once in the measure phase. */
+export type LensHostTransform = Readonly<{ left: number; top: number; scaleX: number; scaleY: number }>;
+export const IDENTITY_LENS_HOST: LensHostTransform = Object.freeze({ left: 0, top: 0, scaleX: 1, scaleY: 1 });
+
+export function measureLensHostTransform(host: HTMLElement): LensHostTransform {
+  const rect = host.getBoundingClientRect();
+  const style = getComputedStyle(host);
+  const size = getLayoutSize(host, style);
+  const scaleX = rect.width / size.width, scaleY = rect.height / size.height;
+  // Absolute descendants are positioned from the padding edge, inside borders.
+  const left = rect.left + (parseFloat(style.borderLeftWidth) || 0) * scaleX - host.scrollLeft * scaleX;
+  const top = rect.top + (parseFloat(style.borderTopWidth) || 0) * scaleY - host.scrollTop * scaleY;
+  const transform = { left, top, scaleX, scaleY };
+  validateHostTransform(transform);
+  return transform;
+}
+
+function validateHostTransform(host: LensHostTransform) {
+  if (![host.left, host.top, host.scaleX, host.scaleY].every(Number.isFinite) || host.scaleX <= 0 || host.scaleY <= 0)
+    throw new RangeError("Invalid glass host transform");
+}
+
+/** Keep the entire optical plane in viewport CSS pixels, then cancel the
+ * host's scale once. The parent's transform moves material and glyphs together. */
+export function lensHostPlacement(region: OpticalBox, host: LensHostTransform) {
+  validateHostTransform(host);
+  return { left: (region.left - host.left) / host.scaleX, top: (region.top - host.top) / host.scaleY,
+    width: region.width, height: region.height, scaleX: 1 / host.scaleX, scaleY: 1 / host.scaleY };
+}
 
 const namespace = "http://www.w3.org/2000/svg";
 const reach = 26;
@@ -184,13 +215,14 @@ export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: ()
   let mapA: MaterialPlanes | undefined;
   let mapB: MaterialPlanes | undefined;
 
-  function position(bounds: OpticalBox) {
-    const parent = kind === "slider" ? host.getBoundingClientRect() : null;
-    const left = bounds.left - (parent?.left || 0), top = bounds.top - (parent?.top || 0);
-    const key = `${left}|${top}|${bounds.width}|${bounds.height}`;
+  function position(bounds: OpticalBox, hostTransform: LensHostTransform) {
+    const placement = lensHostPlacement(bounds, hostTransform);
+    const { left, top, scaleX, scaleY } = placement;
+    const key = `${left}|${top}|${bounds.width}|${bounds.height}|${scaleX}|${scaleY}`;
     if (key !== lastBox) {
       lastBox = key;
-      const values = { left: `${left}px`, top: `${top}px`, width: `${bounds.width}px`, height: `${bounds.height}px` };
+      const values = { left: `${left}px`, top: `${top}px`, width: `${bounds.width}px`, height: `${bounds.height}px`,
+        transformOrigin: "0 0", transform: `scale(${scaleX}, ${scaleY})` };
       for (const [key, value] of Object.entries(values)) {
         const property = key as keyof typeof values;
         if (strip.style[property] !== value) strip.style[property] = value;
@@ -210,15 +242,18 @@ export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: ()
   return {
     source,
     hide() { if (strip.style.visibility !== "hidden") strip.style.visibility = "hidden"; },
-    paint(a: LensLayer, b: LensLayer, mix: number, roots: HTMLElement[], opacity: number, refresh: boolean, glow: number, snapshot?: OpticalFrameSnapshot) {
+    paint(a: LensLayer, b: LensLayer, mix: number, roots: HTMLElement[], opacity: number, refresh: boolean, glow: number, snapshot?: OpticalFrameSnapshot, hostTransform: LensHostTransform = IDENTITY_LENS_HOST) {
       if (broken || disposed) throw new Error("Glass lens is unavailable");
       if (![mix, opacity, glow].every(Number.isFinite) || !a.maps.field || !a.maps.rim || !b.maps.field || !b.maps.rim) {
         throw new Error("Glass lens resources are unavailable");
       }
       const region = lensOpticalRegion(a.placement, b.placement);
       const clip = lensClipPath(a.placement, b.placement, mix, region);
-      const frame = snapshot || createOpticalFrame(roots, [region]);
-      position(region);
+      // A paint may never fall back to measuring live source DOM. Empty roots
+      // still permit a material-only lens (and do not require any layout read).
+      if (!snapshot && roots.length) throw new Error("Glass paint requires a measured source snapshot");
+      const frame = snapshot || { roots: [], plans: [{ region, nodes: [] }] };
+      position(region, hostTransform);
       if (strip.style.clipPath !== clip) strip.style.clipPath = clip;
       for (const [key, pair] of [["field", field], ["rim", rim]] as const) {
         place(pair.a, a.maps[key], a.placement, region);

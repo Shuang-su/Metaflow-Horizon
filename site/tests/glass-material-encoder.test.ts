@@ -91,7 +91,7 @@ test("the shipped self-contained worker asset executes in a separate thread and 
     const result = await new Promise<{ id: number; planes: string[][] }>((resolve, reject) => {
       const timer = setTimeout(() => reject(new Error("worker result timeout")), 5000);
       worker.once("error", error => { clearTimeout(timer); reject(error); });
-      worker.once("message", message => { clearTimeout(timer); resolve(message); });
+      worker.on("message", message => { if (message.id === 7 && message.planes) { clearTimeout(timer); resolve(message); } });
       worker.postMessage({ id: 7, pixels: data, width: 32, height: 48 });
     });
     assert.equal(result.id, 7);
@@ -111,4 +111,58 @@ test("the committed worker exactly matches the current TS dependency bundle with
   await promisify(execFile)(process.execPath, [fileURLToPath(script), "--check"]);
   assert.deepEqual(await readFile(artifact), before);
   assert.equal((await stat(artifact)).mtimeMs, metadata.mtimeMs, "check mode must not rewrite the worker");
+});
+
+test("encoder starts no worker until cold demand and bounds/priority-orders its retained requests", async () => {
+  const descriptor = Object.getOwnPropertyDescriptor(globalThis, "Worker");
+  let constructed = 0;
+  const sent: { id: number; width: number; finish: () => void }[] = [];
+  class FixtureWorker {
+    onmessage?: (event: { data: { id?: number; type?: "ready"; absoluteAt?: number; planes?: string[][] } }) => void;
+    onerror: unknown; onmessageerror: unknown;
+    constructor() { constructed++; queueMicrotask(() => this.onmessage?.({ data: { type: "ready", absoluteAt: performance.timeOrigin + performance.now() } })); }
+    postMessage(data: { id: number; width: number }) { sent.push({ ...data, finish: () => this.onmessage?.({ data: { id: data.id, planes: [["field"], ["rim"]] } }) }); }
+    terminate() {}
+  }
+  Object.defineProperty(globalThis, "Worker", { configurable: true, value: FixtureWorker });
+  try {
+    const trace: { name: string; requestId: unknown; absolute: unknown }[] = [];
+    const encoder = createMaterialEncoder({ maxPending: 3, maxPixelBytes: 3 * 4 * 4 * 8,
+      trace: (name, detail) => trace.push({ name, requestId: detail?.requestId, absolute: detail?.absoluteTime }) });
+    assert.equal(encoder.mode(), "idle"); assert.equal(constructed, 0);
+    const first = encoder.encode(pixels(4, 4), 4, 4, { requestId: "cold", priority: 2 });
+    await new Promise<void>(resolve => queueMicrotask(resolve));
+    assert.equal(constructed, 1);
+    const warm = encoder.encode(pixels(4, 4), 5, 4, { requestId: "warm", priority: 2 });
+    const urgent = encoder.encode(pixels(4, 4), 6, 4, { requestId: "urgent", priority: 0 });
+    await assert.rejects(encoder.encode(pixels(4, 4), 7, 4), /bounded queue/);
+    sent[0].finish(); await first;
+    await new Promise<void>(resolve => queueMicrotask(resolve));
+    assert.equal(sent[1].width, 6);
+    sent[1].finish(); await urgent;
+    await new Promise<void>(resolve => queueMicrotask(resolve));
+    assert.equal(sent[2].width, 5);
+    sent[2].finish(); await warm;
+    assert.ok(trace.some(event => event.name === "encode-worker-spawn" && event.requestId === "cold"));
+    assert.ok(trace.some(event => event.name === "encode-worker-ready" && event.requestId === "cold"));
+    assert.ok(trace.every(event => typeof event.absolute === "number" && event.absolute > 1_000_000_000_000));
+    encoder.dispose();
+  } finally {
+    if (descriptor) Object.defineProperty(globalThis, "Worker", descriptor); else Reflect.deleteProperty(globalThis, "Worker");
+  }
+});
+
+test("dispose rejects both active worker demand and queued encodes", async () => {
+  const descriptor = Object.getOwnPropertyDescriptor(globalThis, "Worker");
+  Object.defineProperty(globalThis, "Worker", { configurable: true, value: class { postMessage() {} terminate() {} } });
+  try {
+    const encoder = createMaterialEncoder();
+    const active = encoder.encode(pixels(4, 4), 4, 4);
+    await new Promise<void>(resolve => queueMicrotask(resolve));
+    const queued = encoder.encode(pixels(4, 4), 4, 4);
+    const rejected = Promise.all([assert.rejects(active, /disposed/), assert.rejects(queued, /disposed/)]);
+    encoder.dispose(); await rejected;
+  } finally {
+    if (descriptor) Object.defineProperty(globalThis, "Worker", descriptor); else Reflect.deleteProperty(globalThis, "Worker");
+  }
 });

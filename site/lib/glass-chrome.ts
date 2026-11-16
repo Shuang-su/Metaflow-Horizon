@@ -1,8 +1,9 @@
 import { updateCoverGlyphContrast } from "./reader-chrome-contrast";
 import { chromeOpticalOpacity } from "./reader-chrome-motion";
-import { createGlassLens, lensOpticalRegion, type GlassAppearance, type LensKind, type MaterialPlanes } from "./glass-lens";
+import { createGlassLens, lensOpticalRegion, measureLensHostTransform, type LensHostTransform, type GlassAppearance, type LensKind, type MaterialPlanes } from "./glass-lens";
 import { createOpticalFrame, type OpticalFrameSnapshot } from "./glass-optical-source";
-import { createGlassMaterialCache } from "./glass-material-cache";
+import { createGlassMaterialCache, type GlassMaterialPriority } from "./glass-material-cache";
+import { glassColdStart, glassDiagnosticsEnabled, readGlassTrace, startGlassDiagnostics, traceGlass } from "./glass-diagnostics";
 import { readerFrame } from "./reader-frame";
 import { isGlassMenuSourceAtRest, READER_GLASS_MOTION_REST } from "./glass-menu-prewarm";
 import { attachGeometryMotion, type GeometryAnimator, type LensFrame, type LensPlacement } from "../vendor/glass-hq/src/dom/morph";
@@ -12,12 +13,14 @@ import { polygonClip } from "../vendor/glass-hq/src/core/concentric";
 import { shapeClip } from "../vendor/glass-hq/src/core/shape";
 import type { MorphGeometry } from "../vendor/glass-hq/src/core/morph-path";
 import { WebGL2MaterialRenderer } from "../vendor/glass-hq/src/webgl2/index";
+import { disposeMorphPlans } from "../vendor/glass-hq/src/dom/morph-plan";
 
 const selector = "[data-glass-surface]";
 const maximumSurfaces = 12;
 const interactionEvents = ["pointerdown", "pointermove", "pointerup", "pointercancel", "pointerover", "pointerout", "keydown", "keyup", "focusout", "input"];
 type Surface = {
   element: HTMLElement;
+  host: HTMLElement;
   kind: LensKind;
   lens: ReturnType<typeof createGlassLens>;
   outline?: GeometryAnimator;
@@ -37,6 +40,7 @@ type Surface = {
 type PaintJob = {
   surface: Surface; a: LensPlacement; b: LensPlacement; aMaps: MaterialPlanes; bMaps: MaterialPlanes;
   mix: number; sources: HTMLElement[]; opacity: number; changed: boolean; glow: number;
+  hostTransform: LensHostTransform;
 };
 
 function lensKind(element: HTMLElement): LensKind {
@@ -100,7 +104,11 @@ export function startGlassChrome(root: HTMLElement) {
   let warmedAppearance: GlassAppearance | undefined;
   let warmedDpr = 0;
   let motionRest = false;
-  const debug = new URLSearchParams(location.search).has("glassDiagnostics");
+  const debug = glassDiagnosticsEnabled();
+  const releaseDiagnostics = startGlassDiagnostics();
+  let viewportTrackingUntil = 0;
+  let viewportPrevious = "";
+  let viewportStable = 0;
 
   function report(state: string) {
     if (root.dataset.glassState !== state) root.dataset.glassState = state;
@@ -120,13 +128,13 @@ export function startGlassChrome(root: HTMLElement) {
     report("fallback");
     schedule();
   }
-  function material(shape: MorphGeometry) {
+  function material(shape: MorphGeometry, priority: GlassMaterialPriority = "urgent") {
     if (failed || !materials) return;
-    return materials.get(shape, appearance, Math.min(devicePixelRatio || 1, 2));
+    return materials.get(shape, appearance, Math.min(devicePixelRatio || 1, 2), priority);
   }
 
   function makeSurface(element: HTMLElement, kind: LensKind, host: HTMLElement) {
-    const surface: Surface = { element, kind, lens: createGlassLens(host, kind, () => fallback("filter-resource")), entered: false };
+    const surface: Surface = { element, host, kind, lens: createGlassLens(host, kind, () => fallback("filter-resource")), entered: false };
     if (kind === "slider") surface.releaseControl = attachNativeControlMotion(element, "full", true);
     if (kind === "menu") {
       surface.trigger = document.getElementById(element.dataset.glassMorphFrom || "");
@@ -214,7 +222,7 @@ export function startGlassChrome(root: HTMLElement) {
     appearance = theme === "light" || theme === "dark" ? theme : preference.matches ? "dark" : "light";
     if (!document.getElementById("reader-font-trigger")) fontPrewarmShapes = [];
     const currentDpr = Math.min(devicePixelRatio || 1, 2);
-    if (fontPrewarmShapes.length && (appearance !== warmedAppearance || currentDpr !== warmedDpr)) {
+    if (!glassColdStart() && fontPrewarmShapes.length && (appearance !== warmedAppearance || currentDpr !== warmedDpr)) {
       materials?.prewarm(fontPrewarmShapes, appearance, currentDpr);
       warmedAppearance = appearance; warmedDpr = currentDpr;
     }
@@ -240,7 +248,9 @@ export function startGlassChrome(root: HTMLElement) {
     }
     for (const element of targets) if (!surfaces.has(element)) {
       const kind = lensKind(element);
-      const host = kind === "slider" ? element.closest("[data-glass-scope]")?.querySelector<HTMLElement>("[data-glass-optics-host]") : root;
+      const host = kind === "toolbar"
+        ? element.closest(".article-interaction-wrap")?.querySelector<HTMLElement>("[data-glass-toolbar-host]")
+        : kind === "slider" ? element.closest("[data-glass-scope]")?.querySelector<HTMLElement>("[data-glass-optics-host]") : root;
       if (host) surfaces.set(element, makeSurface(element, kind, host));
     }
 
@@ -282,9 +292,15 @@ export function startGlassChrome(root: HTMLElement) {
       }
       const waypoints = outline.waypoints();
       const dpr = Math.min(devicePixelRatio || 1, 2);
+      // Demand both neighbours before background work. No .every short circuit:
+      // both resource requests must enter the queue on the first eligible frame.
+      const activeShape = path?.draw?.a.shape;
+      const activeIndex = Math.max(0, waypoints.findIndex(shape => shape === activeShape));
+      materials?.prewarm(waypoints.slice(activeIndex, activeIndex + 2), appearance, dpr, "urgent");
+      materials?.prewarm(waypoints.slice(activeIndex + 2, activeIndex + 4), appearance, dpr, "next");
       if (!failed && !transparency.matches && (surface.preparedPath !== waypoints ||
           surface.preparedAppearance !== appearance || surface.preparedDpr !== dpr)) {
-        materials?.prewarm(waypoints, appearance, dpr);
+        materials?.prewarm(waypoints, appearance, dpr, "warm");
         surface.preparedPath = waypoints; surface.preparedAppearance = appearance; surface.preparedDpr = dpr;
       }
       const reveal = parseFloat(surface.element.style.getPropertyValue("--lg-morph"));
@@ -304,6 +320,7 @@ export function startGlassChrome(root: HTMLElement) {
     // crossfade instead of freezing its first colour until transitionend.
     const changed = refreshSources || document.documentElement.hasAttribute("data-theme-changing");
     refreshSources = false;
+    const hostTransforms = new Map<HTMLElement, LensHostTransform>();
     for (const surface of surfaces.values()) {
       const { element, kind, lens, outline } = surface;
       if (kind === "chrome") {
@@ -339,7 +356,11 @@ export function startGlassChrome(root: HTMLElement) {
         continue;
       }
 
-      const settled = !failed && !transparency.matches ? material(box.shape) : undefined;
+      // An unplanned/hidden menu has no current optical frame. Its eventual
+      // full-size endpoint must not compete with the first union pair.
+      if (outline && opacity < .001) { lens.hide(); continue; }
+
+      const settled = !failed && !transparency.matches ? material(box.shape, outline ? "warm" : "urgent") : undefined;
       if (settled && settled !== surface.maps) {
         // A density/geometry upgrade is ready to display now. Only an actual
         // theme change needs the material crossfade; quality must not lag 200ms.
@@ -368,8 +389,15 @@ export function startGlassChrome(root: HTMLElement) {
         .reduce((value, control) => Math.max(value, Number(control.style.getPropertyValue("--lg-glow"))), 0) : 0;
       if (kind === "chrome") updateCoverGlyphContrast(element, appearance === "dark", true);
       materials?.pin(previous || aMaps); materials?.pin(bMaps);
+      let hostTransform = hostTransforms.get(surface.host);
+      if (!hostTransform) { hostTransform = measureLensHostTransform(surface.host); hostTransforms.set(surface.host, hostTransform); }
+      if (debug && kind === "toolbar") {
+        const viewport = window.visualViewport;
+        traceGlass("toolbar:geometry", { target: {left:box.left,top:box.top,width:box.width,height:box.height}, host:hostTransform,
+          scrollY, innerHeight, viewport:viewport && {offsetTop:viewport.offsetTop,offsetLeft:viewport.offsetLeft,height:viewport.height,scale:viewport.scale} });
+      }
       jobs.push({ surface, a, b, aMaps: previous || aMaps, bMaps,
-        mix: previous ? themeMix * (2 - themeMix) : mix, sources, opacity, changed, glow });
+        mix: previous ? themeMix * (2 - themeMix) : mix, sources, opacity, changed, glow, hostTransform });
     }
     const started = performance.now();
     if (jobs.length) {
@@ -382,6 +410,16 @@ export function startGlassChrome(root: HTMLElement) {
       measuredFrames++;
     }
     sourceCaptureMs = performance.now() - started;
+    if (debug) traceGlass("source:capture", { duration:sourceCaptureMs,groups:snapshots.size,surfaces:jobs.length }, started);
+    if (now < viewportTrackingUntil) {
+      const view = window.visualViewport;
+      const key = [view?.offsetTop,view?.offsetLeft,view?.height,view?.width,view?.scale,
+        ...jobs.filter(job=>job.surface.kind==="toolbar").flatMap(job=>[job.a.left,job.a.top,job.hostTransform.left,job.hostTransform.top])].join("|");
+      viewportStable = key === viewportPrevious ? viewportStable + 1 : 0;
+      viewportPrevious = key;
+      if (viewportStable < 4) moving = true;
+      else viewportTrackingUntil = 0;
+    }
     const keepMoving = moving || now < motionUntil;
     const fontTrigger = document.getElementById("reader-font-trigger");
     const atRest = !keepMoving && fontTrigger !== null && isGlassMenuSourceAtRest(fontTrigger);
@@ -394,13 +432,16 @@ export function startGlassChrome(root: HTMLElement) {
     if (disposed || document.hidden) return;
     let pieces = 0, textPieces = 0;
     for (const job of jobs) {
-      const { surface, a, b, aMaps, bMaps, sources, opacity, changed, glow, mix } = job;
+      const { surface, a, b, aMaps, bMaps, sources, opacity, changed, glow, mix, hostTransform } = job;
       try {
         pieces += surface.lens.paint({ placement: a, maps: aMaps }, { placement: b, maps: bMaps },
-          mix, sources, opacity, changed, glow, snapshots.get(sources));
+          mix, sources, opacity, changed, glow, snapshots.get(sources), hostTransform);
       } catch { fallback("lens-binding-or-paint"); break; }
       textPieces += surface.lens.source.visibleTextCount;
-      if (!surface.element.hasAttribute("data-glass-ready")) surface.element.dataset.glassReady = "";
+      if (!surface.element.hasAttribute("data-glass-ready")) {
+        surface.element.dataset.glassReady = "";
+        traceGlass("surface:first-material", { kind:surface.kind, id:surface.element.id });
+      }
       delete surface.element.dataset.glassPending;
       report("webgl2-html");
     }
@@ -430,11 +471,13 @@ export function startGlassChrome(root: HTMLElement) {
   const releaseMeasure = readerFrame.subscribe("measure", draw);
   const releasePaint = readerFrame.subscribe("paint", paint);
   const prewarmFont = (event: Event) => {
+    if (glassColdStart()) return;
     fontPrewarmShapes = (event as CustomEvent<{ shapes: readonly MorphGeometry[] }>).detail.shapes;
     warmedAppearance = undefined;
     schedule();
   };
   document.addEventListener("reader-glass-prewarm", prewarmFont);
+  document.addEventListener("glass-plan-ready", schedule);
   const repaint = (event: Event) => {
     if (event.target instanceof Element && event.target.closest("[data-glass-optics], [data-glass-optics-host]")) return;
     refreshSources = true;
@@ -452,7 +495,13 @@ export function startGlassChrome(root: HTMLElement) {
   window.addEventListener("scroll", schedule, { passive: true, capture: true });
   window.addEventListener("resize", wakeMotion, { passive: true });
   const viewport = window.visualViewport;
-  viewport?.addEventListener("resize", wakeMotion);
+  const viewportChange = (event: Event) => {
+    viewportTrackingUntil = performance.now() + 500; viewportStable = 0;
+    traceGlass("viewport:" + event.type, {offsetTop:viewport?.offsetTop,offsetLeft:viewport?.offsetLeft,height:viewport?.height,scale:viewport?.scale});
+    schedule();
+  };
+  viewport?.addEventListener("resize", viewportChange);
+  viewport?.addEventListener("scroll", viewportChange);
   document.addEventListener("visibilitychange", schedule);
   document.addEventListener("transitionrun", wakeMotion);
   document.addEventListener("transitionend", repaint);
@@ -462,16 +511,18 @@ export function startGlassChrome(root: HTMLElement) {
   preference.addEventListener("change", repaint);
   transparency.addEventListener("change", repaint);
   try {
+    traceGlass("renderer:create-start");
     renderer = new WebGL2MaterialRenderer(fallback);
+    traceGlass("renderer:create-end");
     materials = createGlassMaterialCache(renderer, { onReady: schedule, onFailure: () => fallback("material-resource") });
   } catch { fallback(); }
   type DebugRoot = HTMLElement & { glassDiagnostics?: () => unknown };
   if (debug) (root as DebugRoot).glassDiagnostics = () => ({
     frame: readerFrame.inspect(), measuredFrames, paintedFrames, sourceCaptureMs,
-    sourceGroups: snapshots.size, surfaces: surfaces.size, materials: materials?.diagnostics(),
+    sourceGroups: snapshots.size, surfaces: surfaces.size, materials: materials?.diagnostics(), timeline:readGlassTrace(),
   });
   const warmStatic = () => {
-    if (disposed || failed || transparency.matches) return;
+    if (disposed || failed || transparency.matches || glassColdStart()) return;
     const dpr = Math.min(devicePixelRatio || 1, 2);
     const shapes = [...surfaces.values()].filter(surface => !surface.outline).map(surface => shapeOf(surface).shape);
     materials?.prewarm(shapes, appearance === "dark" ? "light" : "dark", dpr);
@@ -481,15 +532,17 @@ export function startGlassChrome(root: HTMLElement) {
 
   return () => {
     disposed = true;
-    releaseMeasure(); releasePaint(); clearTimeout(warmTimer);
+    releaseMeasure(); releasePaint(); releaseDiagnostics(); clearTimeout(warmTimer);
     observer.disconnect();
     delete (root as DebugRoot).glassDiagnostics;
     document.removeEventListener("reader-glass-prewarm", prewarmFont);
+    document.removeEventListener("glass-plan-ready", schedule);
     resize.disconnect();
     for (const event of interactionEvents) document.removeEventListener(event, input, true);
     window.removeEventListener("scroll", schedule, true);
     window.removeEventListener("resize", wakeMotion);
-    viewport?.removeEventListener("resize", wakeMotion);
+    viewport?.removeEventListener("resize", viewportChange);
+    viewport?.removeEventListener("scroll", viewportChange);
     document.removeEventListener("visibilitychange", schedule);
     document.removeEventListener("transitionrun", wakeMotion);
     document.removeEventListener("transitionend", repaint);
@@ -501,6 +554,7 @@ export function startGlassChrome(root: HTMLElement) {
     transparency.removeEventListener("change", repaint);
     for (const surface of surfaces.values()) removeSurface(surface);
     for (const animator of interactions.values()) animator.dispose();
+    disposeMorphPlans();
     materials?.dispose();
     renderer?.dispose();
   };
