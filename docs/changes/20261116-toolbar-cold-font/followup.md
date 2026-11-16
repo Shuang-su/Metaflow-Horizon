@@ -51,3 +51,13 @@ Astra High实现/分析与独立复核分别完成：底栏/quiet focus未发现
 207项站点测试、43+25项Python、类型、编辑、60期原稿/内容/来源覆盖与媒体验证通过。静态构建与导出检查通过，99HTML、3RSS、60canonical reports，无内部链接/资源/锚点错误。构建没有改变稿件与分享图；仅本轮生成的三份分享图衍生漂移已恢复。实际最终SHA的CI和测试部署回读在PR交付中记录。
 
 最新测试部署需重新由用户在iPhone检查底栏同步退出、More手感与调整后的材质；上一版“基本好了”仅对应上一版对齐反馈。原始录屏、完整逐请求时间线仅存本机cache；本轮没有发评论、合并或动生产，也不计为定时发布成功。
+
+## 最终交付回读
+
+- `2b36710`：触摸返回卡片quiet focus及移除标题hover下划线。
+- `729a7abea3cf421ddea2ae0c4f16fff38f30e870`：共享底栏退出、More预热/材质去重/首个交互门槛、流式路径与材质对照。
+- [实现SHA的CI已成功](https://github.com/Shuang-su/Metaflow-Horizon/actions/runs/43907194782)。
+- [最新iPhone测试页](https://6afb2e96a1283402df46f47f--creative-kitsune-db27b4.netlify.app/horizon/daily/2026/11/12/)，Netlify draft `6afb2e96a1283402df46f47f`，build commit729a7ab；[线上内容/搜索/RSS/sitemap回读](followup-online-readback.json)通过。
+- [4337预览](http://127.0.0.1:4337/horizon/)切至冻结构建 `toolbar-followup-729a7ab`；[本地回读](followup-local-readback.json)通过。旧2798315及0fe1989测试构建保留。
+- 线上真实页面确认WebGL2折射、底栏motion本地宿主、字号14/20/1、正常页面无诊断接口；More开合与字号菜单可用。
+- 两个生产地址的deployment.json再次回读均仍为11279e2，PR #143保持draft，不合并。已将新预览链接交给用户继续iPhone验收。
