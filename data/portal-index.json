@@ -1,7 +1,127 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-15",
+  "updatedThrough": "2026-11-16",
   "daily": [
+    {
+      "id": "gsd-2026-11-16",
+      "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
+      "date": "2026-11-16",
+      "title": "Horizon 行业日报 — 2026-11-16",
+      "headline": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
+      "summary": "PlayCanvas Engine 主干修复修改器旋转下的四元数符号错误，Budget3D 同时开放代码、权重与演示；Spirula 改进大图输入、训练种子和 GPU 卡死退出。Splat Fashion 与两个程序化工具则展示高斯作为浏览器创作媒介的新方向。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-16.md",
+      "sourceCount": 0,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "github.com/playcanvas/engine/pull/10025",
+          "anchor": "event-playcanvas-packed-rotation-10025",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/engine/pull/10025",
+          "title": "PlayCanvas 修正动画与修改器路径中的高斯旋转",
+          "summary": "PlayCanvas Engine 的 packed 高斯缓冲区只保存四元数 x/y/z，读取时再重建正 w。修改器合成旋转后如果留下负 w，原逻辑会在下一阶段重建成错误方向；新提交在写回前再次统一符号，并同时修改 WGSL 与 GLSL 路径。",
+          "date": "2026-11-16",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/BudgetAny/Budget3D",
+          "anchor": "event-budget3d-adaptive-tokens",
+          "kind": "tool",
+          "source": "https://github.com/BudgetAny/Budget3D",
+          "title": "Budget3D 让一个权重覆盖不同图生三维计算预算",
+          "summary": "Budget3D 按图像内容合并低变化或空白区域的潜变量，把更多 token 留给轮廓与细节，再接入 Idol / Idol-Turbo 输出 PLY 高斯。代码、两个权重和在线演示已经公开，Python 3.11—3.13 与 CUDA GPU 是当前安装边界。",
+          "date": "2026-11-16",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8",
+          "anchor": "event-spirula-input-seed-timeout",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8",
+          "title": "Spirula 改进大图输入、训练种子和 GPU 卡死退出",
+          "summary": "Spirula 新增绝对长边上限，让混合分辨率输入在原有整数缩放之后继续限边，并同步更新相机内参。编辑后的稀疏或稠密点云副本现在也能直接作为训练起点，减少“保存副本后又回到默认 dense seed”的断点。",
+          "date": "2026-11-16",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/willeastcott/splat-fashion",
+          "anchor": "event-splat-fashion",
+          "kind": "news",
+          "source": "https://github.com/willeastcott/splat-fashion",
+          "title": "Splat Fashion 用三次独立捕获搭起浏览器换装作品",
+          "summary": "Splat Fashion 把三套真实服装扫描绑定到 9 个刚性骨骼，并在没有逐点对应关系的捕获之间做形态过渡。共享 SH 调色板、WebGPU 优先与 WebGL 2 回退展示了一套可复用的网页作品架构；代码和捕获资产分别采用 MIT 与 CC BY 4.0。",
+          "date": "2026-11-16",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/iamvillain/SyntaxSplat",
+          "anchor": "event-pixel-splat-authoring",
+          "kind": "tool",
+          "source": "https://github.com/iamvillain/SyntaxSplat",
+          "title": "程序化 splat 开始形成像素风创作小支线",
+          "summary": "SyntaxSplat 从 SDF 场景采样表面、烘焙光照并导出标准 PLY；Pixelart Gaussian Splat 则把 glTF/GLB 与骨骼动画转换为硬边 surfel、限色和抖动风格。两者都把 splat 当作可直接创作的媒介，而不是摄影测量或训练的终点。",
+          "date": "2026-11-16",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 2,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、项目说明、提交与发布记录编辑阅读版。未独立运行软件、复现生成质量、验证作者性能数字或进行设备验收；主干提交不等同于正式发行。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-16.md",
+        "contentHash": "322e7c4313c8cba45880acd52f68bc65936e44d3494989a278c8c2929ba172f3"
+      }
+    },
     {
       "id": "gsd-2026-11-15",
       "contentHash": "47bd961e599732ff7f0dfcae589a81f9b80655d42a3aac1caf18b1ade9f3a4c6",
@@ -17402,6 +17522,96 @@
   ],
   "entries": [
     {
+      "id": "github.com/BudgetAny/Budget3D",
+      "anchor": "event-budget3d-adaptive-tokens",
+      "kind": "tool",
+      "source": "https://github.com/BudgetAny/Budget3D",
+      "title": "Budget3D 让一个权重覆盖不同图生三维计算预算",
+      "summary": "Budget3D 按图像内容合并低变化或空白区域的潜变量，把更多 token 留给轮廓与细节，再接入 Idol / Idol-Turbo 输出 PLY 高斯。代码、两个权重和在线演示已经公开，Python 3.11—3.13 与 CUDA GPU 是当前安装边界。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8",
+      "anchor": "event-spirula-input-seed-timeout",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8",
+      "title": "Spirula 改进大图输入、训练种子和 GPU 卡死退出",
+      "summary": "Spirula 新增绝对长边上限，让混合分辨率输入在原有整数缩放之后继续限边，并同步更新相机内参。编辑后的稀疏或稠密点云副本现在也能直接作为训练起点，减少“保存副本后又回到默认 dense seed”的断点。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/iamvillain/SyntaxSplat",
+      "anchor": "event-pixel-splat-authoring",
+      "kind": "tool",
+      "source": "https://github.com/iamvillain/SyntaxSplat",
+      "title": "程序化 splat 开始形成像素风创作小支线",
+      "summary": "SyntaxSplat 从 SDF 场景采样表面、烘焙光照并导出标准 PLY；Pixelart Gaussian Splat 则把 glTF/GLB 与骨骼动画转换为硬边 surfel、限色和抖动风格。两者都把 splat 当作可直接创作的媒介，而不是摄影测量或训练的终点。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/engine/pull/10025",
+      "anchor": "event-playcanvas-packed-rotation-10025",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/engine/pull/10025",
+      "title": "PlayCanvas 修正动画与修改器路径中的高斯旋转",
+      "summary": "PlayCanvas Engine 的 packed 高斯缓冲区只保存四元数 x/y/z，读取时再重建正 w。修改器合成旋转后如果留下负 w，原逻辑会在下一阶段重建成错误方向；新提交在写回前再次统一符号，并同时修改 WGSL 与 GLSL 路径。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/willeastcott/splat-fashion",
+      "anchor": "event-splat-fashion",
+      "kind": "news",
+      "source": "https://github.com/willeastcott/splat-fashion",
+      "title": "Splat Fashion 用三次独立捕获搭起浏览器换装作品",
+      "summary": "Splat Fashion 把三套真实服装扫描绑定到 9 个刚性骨骼，并在没有逐点对应关系的捕获之间做形态过渡。共享 SH 调色板、WebGPU 优先与 WebGL 2 回退展示了一套可复用的网页作品架构；代码和捕获资产分别采用 MIT 与 CC BY 4.0。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
       "id": "arxiv:2611.17060",
       "kind": "paper",
       "date": "2026-11-15",
@@ -30595,6 +30805,24 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-16",
+      "kind": "daily",
+      "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
+      "summary": "PlayCanvas Engine 主干修复修改器旋转下的四元数符号错误，Budget3D 同时开放代码、权重与演示；Spirula 改进大图输入、训练种子和 GPU 卡死退出。Splat Fashion 与两个程序化工具则展示高斯作为浏览器创作媒介的新方向。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/16/",
+      "text": "PlayCanvas 修正动画与修改器路径中的高斯旋转\nPlayCanvas Engine 的 packed 高斯缓冲区只保存四元数 x/y/z，读取时再重建正 w。修改器合成旋转后如果留下负 w，原逻辑会在下一阶段重建成错误方向；新提交在写回前再次统一符号，并同时修改 WGSL 与 GLSL 路径。\n静态、未修改的 splat 不是主要影响对象。使用骨骼、动画或节点旋转的项目应在 WebGPU 与 WebGL 2 下测试大角度连续旋转；修复已经合并到主干，却还没有对应正式发行，因此生产项目要么等待 tag，要么锁提交隔离验证。\n合并记录 · 修复提交\nBudget3D 让一个权重覆盖不同图生三维计算预算\nBudget3D 按图像内容合并低变化或空白区域的潜变量，把更多 token 留给轮廓与细节，再接入 Idol / Idol-Turbo 输出 PLY 高斯。代码、两个权重和在线演示已经公开，Python 3.11—3.13 与 CUDA GPU 是当前安装边界。\n项目值得测试的不是某一张演示图，而是同一输入在不同预算下的时间、显存、splat 数与几何完整度曲线。技术报告仍未发布，公开材料不足以核对质量和效率对照；DINOv3、FLUX.2 VAE 与 Idol 也有独立许可条件。\n代码与安装说明 · 在线演示\nSpirula 改进大图输入、训练种子和 GPU 卡死退出\nSpirula 新增绝对长边上限，让混合分辨率输入在原有整数缩放之后继续限边，并同步更新相机内参。编辑后的稀疏或稠密点云副本现在也能直接作为训练起点，减少“保存副本后又回到默认 dense seed”的断点。\n另一项提交在 Vulkan GPU timeout 后无进展时直接终止进程，避免驱动销毁无限等待。这更适合无人值守批处理恢复，却不是无损恢复；未保存状态仍可能丢失。上述变化都在主干，正式 release 仍停在 v2026.11.12。\n输入限边提交 · 训练种子提交 · 超时退出提交\nSplat Fashion 用三次独立捕获搭起浏览器换装作品\nSplat Fashion 把三套真实服装扫描绑定到 9 个刚性骨骼，并在没有逐点对应关系的捕获之间做形态过渡。共享 SH 调色板、WebGPU 优先与 WebGL 2 回退展示了一套可复用的网页作品架构；代码和捕获资产分别采用 MIT 与 CC BY 4.0。\n作者的 iPhone 14 Pro 帧率与 47 MB 标准资产数字尚未独立复测。它目前更适合作为作品和参考实现，而不是已经解决多体型、布料物理或商品化资产流程的换装产品。\n项目与实现说明 · 在线作品\n程序化 splat 开始形成像素风创作小支线\nSyntaxSplat 从 SDF 场景采样表面、烘焙光照并导出标准 PLY；Pixelart Gaussian Splat 则把 glTF/GLB 与骨骼动画转换为硬边 surfel、限色和抖动风格。两者都把 splat 当作可直接创作的媒介，而不是摄影测量或训练的终点。\n这两个仓库都刚创建，属于早期演示。WebGL 2、浮点纹理、Worker 或 Node.js 版本是实际门槛，示例模型的第三方许可也不能随 MIT 代码一起推定。\nSyntaxSplat · Pixelart Gaussian Splat"
+    },
+    {
       "id": "gsd-2026-11-15",
       "kind": "daily",
       "title": "高斯日报：NVIDIA 扩展高斯重照明、Ropedia 发布任务数据与浏览器剪辑等",
@@ -31877,6 +32105,96 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "github.com/BudgetAny/Budget3D",
+      "kind": "tool",
+      "title": "Budget3D 让一个权重覆盖不同图生三维计算预算",
+      "summary": "Budget3D 按图像内容合并低变化或空白区域的潜变量，把更多 token 留给轮廓与细节，再接入 Idol / Idol-Turbo 输出 PLY 高斯。代码、两个权重和在线演示已经公开，Python 3.11—3.13 与 CUDA GPU 是当前安装边界。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/16/#event-budget3d-adaptive-tokens",
+      "text": "Budget3D 让一个权重覆盖不同图生三维计算预算 Budget3D 按图像内容合并低变化或空白区域的潜变量，把更多 token 留给轮廓与细节，再接入 Idol / Idol-Turbo 输出 PLY 高斯。代码、两个权重和在线演示已经公开，Python 3.11—3.13 与 CUDA GPU 是当前安装边界。 https://github.com/BudgetAny/Budget3D Budget3D 让一个权重覆盖不同图生三维计算预算 ## Budget3D 让一个权重覆盖不同图生三维计算预算\n\nBudget3D 按图像内容合并低变化或空白区域的潜变量，把更多 token 留给轮廓与细节，再接入 Idol / Idol-Turbo 输出 PLY 高斯。代码、两个权重和在线演示已经公开，Python 3.11—3.13 与 CUDA GPU 是当前安装边界。\n\n项目值得测试的不是某一张演示图，而是同一输入在不同预算下的时间、显存、splat 数与几何完整度曲线。技术报告仍未发布，公开材料不足以核对质量和效率对照；DINOv3、FLUX.2 VAE 与 Idol 也有独立许可条件。\n\n[代码与安装说明](https://github.com/BudgetAny/Budget3D) · [在线演示](https://huggingface.co/spaces/BudgetAny/Budget3D)"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8",
+      "kind": "tool",
+      "title": "Spirula 改进大图输入、训练种子和 GPU 卡死退出",
+      "summary": "Spirula 新增绝对长边上限，让混合分辨率输入在原有整数缩放之后继续限边，并同步更新相机内参。编辑后的稀疏或稠密点云副本现在也能直接作为训练起点，减少“保存副本后又回到默认 dense seed”的断点。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/16/#event-spirula-input-seed-timeout",
+      "text": "Spirula 改进大图输入、训练种子和 GPU 卡死退出 Spirula 新增绝对长边上限，让混合分辨率输入在原有整数缩放之后继续限边，并同步更新相机内参。编辑后的稀疏或稠密点云副本现在也能直接作为训练起点，减少“保存副本后又回到默认 dense seed”的断点。 https://github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8 Spirula 改进大图输入、训练种子和 GPU 卡死退出 ## Spirula 改进大图输入、训练种子和 GPU 卡死退出\n\nSpirula 新增绝对长边上限，让混合分辨率输入在原有整数缩放之后继续限边，并同步更新相机内参。编辑后的稀疏或稠密点云副本现在也能直接作为训练起点，减少“保存副本后又回到默认 dense seed”的断点。\n\n另一项提交在 Vulkan GPU timeout 后无进展时直接终止进程，避免驱动销毁无限等待。这更适合无人值守批处理恢复，却不是无损恢复；未保存状态仍可能丢失。上述变化都在主干，正式 release 仍停在 v2026.11.12。\n\n[输入限边提交](https://github.com/harry7557558/spirula-studio/commit/84e296f3933b9e43e05039c38399143768b469b8) · [训练种子提交](https://github.com/harry7557558/spirula-studio/commit/5336f4ba6ad5a3e604447a344c1b8f3c3103dc1f) · [超时退出提交](https://github.com/harry7557558/spirula-studio/commit/8949092edb41bd60fede5a8cb71a7817e2d924e0)"
+    },
+    {
+      "id": "github.com/iamvillain/SyntaxSplat",
+      "kind": "tool",
+      "title": "程序化 splat 开始形成像素风创作小支线",
+      "summary": "SyntaxSplat 从 SDF 场景采样表面、烘焙光照并导出标准 PLY；Pixelart Gaussian Splat 则把 glTF/GLB 与骨骼动画转换为硬边 surfel、限色和抖动风格。两者都把 splat 当作可直接创作的媒介，而不是摄影测量或训练的终点。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/16/#event-pixel-splat-authoring",
+      "text": "程序化 splat 开始形成像素风创作小支线 SyntaxSplat 从 SDF 场景采样表面、烘焙光照并导出标准 PLY；Pixelart Gaussian Splat 则把 glTF/GLB 与骨骼动画转换为硬边 surfel、限色和抖动风格。两者都把 splat 当作可直接创作的媒介，而不是摄影测量或训练的终点。 https://github.com/iamvillain/SyntaxSplat 程序化 splat 开始形成像素风创作小支线 ## 程序化 splat 开始形成像素风创作小支线\n\nSyntaxSplat 从 SDF 场景采样表面、烘焙光照并导出标准 PLY；Pixelart Gaussian Splat 则把 glTF/GLB 与骨骼动画转换为硬边 surfel、限色和抖动风格。两者都把 splat 当作可直接创作的媒介，而不是摄影测量或训练的终点。\n\n这两个仓库都刚创建，属于早期演示。WebGL 2、浮点纹理、Worker 或 Node.js 版本是实际门槛，示例模型的第三方许可也不能随 MIT 代码一起推定。\n\n[SyntaxSplat](https://github.com/iamvillain/SyntaxSplat) · [Pixelart Gaussian Splat](https://github.com/cobanov/pixelart-gaussiansplat)"
+    },
+    {
+      "id": "github.com/playcanvas/engine/pull/10025",
+      "kind": "tool",
+      "title": "PlayCanvas 修正动画与修改器路径中的高斯旋转",
+      "summary": "PlayCanvas Engine 的 packed 高斯缓冲区只保存四元数 x/y/z，读取时再重建正 w。修改器合成旋转后如果留下负 w，原逻辑会在下一阶段重建成错误方向；新提交在写回前再次统一符号，并同时修改 WGSL 与 GLSL 路径。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/16/#event-playcanvas-packed-rotation-10025",
+      "text": "PlayCanvas 修正动画与修改器路径中的高斯旋转 PlayCanvas Engine 的 packed 高斯缓冲区只保存四元数 x/y/z，读取时再重建正 w。修改器合成旋转后如果留下负 w，原逻辑会在下一阶段重建成错误方向；新提交在写回前再次统一符号，并同时修改 WGSL 与 GLSL 路径。 https://github.com/playcanvas/engine/pull/10025 PlayCanvas 修正动画与修改器路径中的高斯旋转 ## PlayCanvas 修正动画与修改器路径中的高斯旋转\n\nPlayCanvas Engine 的 packed 高斯缓冲区只保存四元数 `x/y/z`，读取时再重建正 `w`。修改器合成旋转后如果留下负 `w`，原逻辑会在下一阶段重建成错误方向；新提交在写回前再次统一符号，并同时修改 WGSL 与 GLSL 路径。\n\n静态、未修改的 splat 不是主要影响对象。使用骨骼、动画或节点旋转的项目应在 WebGPU 与 WebGL 2 下测试大角度连续旋转；修复已经合并到主干，却还没有对应正式发行，因此生产项目要么等待 tag，要么锁提交隔离验证。\n\n[合并记录](https://github.com/playcanvas/engine/pull/10025) · [修复提交](https://github.com/playcanvas/engine/commit/ebc152e01d4dd2227e5075f7898623a6a8d29e7d)"
+    },
+    {
+      "id": "github.com/willeastcott/splat-fashion",
+      "kind": "news",
+      "title": "Splat Fashion 用三次独立捕获搭起浏览器换装作品",
+      "summary": "Splat Fashion 把三套真实服装扫描绑定到 9 个刚性骨骼，并在没有逐点对应关系的捕获之间做形态过渡。共享 SH 调色板、WebGPU 优先与 WebGL 2 回退展示了一套可复用的网页作品架构；代码和捕获资产分别采用 MIT 与 CC BY 4.0。",
+      "date": "2026-11-16",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/16/#event-splat-fashion",
+      "text": "Splat Fashion 用三次独立捕获搭起浏览器换装作品 Splat Fashion 把三套真实服装扫描绑定到 9 个刚性骨骼，并在没有逐点对应关系的捕获之间做形态过渡。共享 SH 调色板、WebGPU 优先与 WebGL 2 回退展示了一套可复用的网页作品架构；代码和捕获资产分别采用 MIT 与 CC BY 4.0。 https://github.com/willeastcott/splat-fashion Splat Fashion 用三次独立捕获搭起浏览器换装作品 ## Splat Fashion 用三次独立捕获搭起浏览器换装作品\n\nSplat Fashion 把三套真实服装扫描绑定到 9 个刚性骨骼，并在没有逐点对应关系的捕获之间做形态过渡。共享 SH 调色板、WebGPU 优先与 WebGL 2 回退展示了一套可复用的网页作品架构；代码和捕获资产分别采用 MIT 与 CC BY 4.0。\n\n作者的 iPhone 14 Pro 帧率与 47 MB 标准资产数字尚未独立复测。它目前更适合作为作品和参考实现，而不是已经解决多体型、布料物理或商品化资产流程的换装产品。\n\n[项目与实现说明](https://github.com/willeastcott/splat-fashion) · [在线作品](https://willeastcott.github.io/splat-fashion/)"
     },
     {
       "id": "arxiv:2611.17060",
