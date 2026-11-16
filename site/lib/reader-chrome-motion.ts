@@ -1,9 +1,10 @@
+import { readerFrame } from "./reader-frame";
+
 /** One reversible clock for DOM chrome and its separately hosted optical lens. */
 export const CHROME_FADE_MS = 180;
 export const CHROME_ROUTE_MS = 320;
 // Web tuning distance: gesture displacement drives q, rather than a hide timer.
 export const CHROME_SCROLL_RANGE = 64;
-export const CHROME_FRAME_EVENT = "reader-chrome-frame";
 const selector = ".reader-header :is(.reader-chrome-control,.menu-toggle), .home-header .header-actions :is(.search-link,.appearance-toggle,.menu-toggle)";
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const ease = (value: number) => value * value * (3 - 2 * value);
@@ -55,7 +56,6 @@ export function createReaderChromeMotion() {
   const root = document.documentElement;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const visibility = new ChromeVisibility();
-  let frame = 0;
   let routeStart: number | undefined;
   let pathname: string | undefined;
   let snapshots = new Map<string, Node>();
@@ -81,7 +81,6 @@ export function createReaderChromeMotion() {
     }));
   }
   function paint(now: number) {
-    frame = 0;
     const q = visibility.sample(now);
     const route = routeStart === undefined ? { scale: 1, glyph: 1 } : chromeRouteFrame(now - routeStart);
     const header = document.querySelector<HTMLElement>(".reader-header");
@@ -91,10 +90,11 @@ export function createReaderChromeMotion() {
       const side = element.matches(".article-back") ? "left" : "right";
       const anchor = side === "left" ? left : right;
       const x = anchor ? chromeExitOffset(q, side, anchor.left, anchor.width, window.innerWidth) : 0;
-      element.style.setProperty("--reader-chrome-x", `${x}px`);
-      element.style.setProperty("--reader-chrome-q", String(q));
-      element.style.setProperty("--reader-chrome-scale", String(chromeVisibilityScale(q) * route.scale));
-      element.dataset.chromeMotion = "";
+      for (const [property, value] of [["--reader-chrome-x", `${x}px`], ["--reader-chrome-q", String(q)],
+        ["--reader-chrome-scale", String(chromeVisibilityScale(q) * route.scale)]]) {
+        if (element.style.getPropertyValue(property) !== value) element.style.setProperty(property, value);
+      }
+      if (!element.hasAttribute("data-chrome-motion")) element.dataset.chromeMotion = "";
     }
     for (const { live, ghost } of glyphs) {
       live.style.opacity = `calc(${route.glyph} * var(--lg-morph-source, 1))`;
@@ -107,11 +107,10 @@ export function createReaderChromeMotion() {
       clearGlyphs();
       capture();
     }
-    // Synchronous dispatch: glass measures only after this frame's DOM writes.
-    document.dispatchEvent(new CustomEvent(CHROME_FRAME_EVENT, { detail: now }));
-    if (visibility.moving || routeStart !== undefined) frame = requestAnimationFrame(paint);
+    return visibility.moving || routeStart !== undefined;
   }
-  function repaint() { cancelAnimationFrame(frame); paint(performance.now()); }
+  const releaseFrame = readerFrame.subscribe("advance", paint, 10);
+  function repaint() { readerFrame.request(); }
   function setVisible(visible: boolean, immediate = reduced.matches) {
     if (visibility.target === (visible ? 1 : 0) && !visibility.moving) return;
     visibility.set(visible, performance.now(), immediate);
@@ -170,7 +169,7 @@ export function createReaderChromeMotion() {
   return {
     route, setVisible, followScroll,
     dispose() {
-      cancelAnimationFrame(frame); observer.disconnect(); clearGlyphs(); reduced.removeEventListener("change", preferences);
+      releaseFrame(); observer.disconnect(); clearGlyphs(); reduced.removeEventListener("change", preferences);
       root.removeAttribute("data-reader-controls-hidden");
       for (const element of controls()) {
         element.style.removeProperty("--reader-chrome-q"); element.style.removeProperty("--reader-chrome-scale");

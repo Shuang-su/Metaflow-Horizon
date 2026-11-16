@@ -49,9 +49,9 @@ function imageSample(image: HTMLImageElement) {
   return pixels;
 }
 
-export function updateCoverGlyphContrast(element: HTMLElement, darkTheme: boolean) {
+export function updateCoverGlyphContrast(element: HTMLElement, darkTheme: boolean, materialReady = element.hasAttribute("data-glass-ready")) {
   const reset = () => { delete element.dataset.coverGlyph; };
-  if (!element.closest(".reader-header") || !element.hasAttribute("data-glass-ready")) { reset(); return; }
+  if (!element.closest(".reader-header") || !materialReady) { reset(); return; }
   const cover = document.querySelector<HTMLElement>("#main .article-cover, #main .article-intro-cover");
   const image = cover?.querySelector<HTMLImageElement>(".source-image > img");
   if (!cover || !image) { reset(); return; }

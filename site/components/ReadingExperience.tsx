@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { installReaderSheetDrag } from "../lib/reader-sheet";
 import { createReaderChromeMotion } from "../lib/reader-chrome-motion";
+import { readerFrame } from "../lib/reader-frame";
 
 export default function ReadingExperience() {
   const pathname = usePathname();
@@ -19,7 +20,7 @@ export default function ReadingExperience() {
     const phone = matchMedia("(max-width: 767px)");
     const folded = matchMedia("(vertical-viewport-segments: 2)");
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
+    let dirty = true;
     let last = Math.max(0, window.scrollY);
     let width = window.innerWidth;
     let orientation = screen.orientation?.angle;
@@ -30,7 +31,8 @@ export default function ReadingExperience() {
         || document.activeElement?.matches("[data-reader-scroll-chrome] :focus-visible"));
     }
     function update() {
-      frame = 0;
+      if (!dirty) return;
+      dirty = false;
       const y = Math.max(0, window.scrollY);
       const delta = y - last;
       last = y;
@@ -43,7 +45,8 @@ export default function ReadingExperience() {
       // any progress remains paused until content actually moves again.
       chrome.current?.followScroll(delta);
     }
-    function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+    function schedule() { dirty = true; readerFrame.request(); }
+    const releaseFrame = readerFrame.subscribe("advance", update, -10);
     function userInput(event: Event) {
       if (event.defaultPrevented) return;
       if (programmatic) { programmatic = false; last = Math.max(0, scrollY); }
@@ -99,7 +102,7 @@ export default function ReadingExperience() {
     folded.addEventListener("change", layoutChange);
     reduced.addEventListener("change", layoutChange);
     return () => {
-      cancelAnimationFrame(frame); panels.disconnect();
+      releaseFrame(); panels.disconnect();
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("scrollend", scrollEnd);
       window.removeEventListener("touchstart", userInput);
@@ -120,7 +123,7 @@ export default function ReadingExperience() {
     const image = cover?.querySelector<HTMLImageElement>(".source-image > img");
     if (!cover || !image) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
+    let dirty = true;
     let previous = -1;
     let sampledSource = "";
     const properties = ["--cover-hue", "--cover-blur", "--cover-image-y", "--cover-ambient-y"];
@@ -164,7 +167,8 @@ export default function ReadingExperience() {
       schedule();
     }
     function update() {
-      frame = 0;
+      if (!dirty) return;
+      dirty = false;
       const bounds = cover!.getBoundingClientRect();
       const height = Math.max(image!.offsetHeight, 1);
       const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 56;
@@ -178,7 +182,8 @@ export default function ReadingExperience() {
       cover!.style.setProperty("--cover-image-y", `${Math.round(Math.min(overlap, height) * (reduced.matches ? 0 : .16))}px`);
       cover!.style.setProperty("--cover-ambient-y", `${Math.round(Math.min(overlap, height) * (reduced.matches ? 0 : .28))}px`);
     }
-    function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+    function schedule() { dirty = true; readerFrame.request(); }
+    const releaseFrame = readerFrame.subscribe("advance", update, 0);
     const failed = () => { properties.forEach(property => cover!.style.removeProperty(property)); };
     sample();
     schedule();
@@ -188,7 +193,7 @@ export default function ReadingExperience() {
     addEventListener("resize", schedule);
     reduced.addEventListener("change", schedule);
     return () => {
-      cancelAnimationFrame(frame);
+      releaseFrame();
       ambient.remove();
       delete cover.dataset.readerCover;
       properties.forEach(property => cover.style.removeProperty(property));

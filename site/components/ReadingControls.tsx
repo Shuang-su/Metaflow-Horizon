@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { READER_FONT_MAX, READER_FONT_MIN } from "../lib/reader";
 import { useReader } from "./ReaderProvider";
 import Icon from "./Icon";
+import { installGlassMenuPrewarm, READER_GLASS_MOTION_REST } from "../lib/glass-menu-prewarm";
 
 const FONT_PANEL_GAP = 8;
 const FONT_PANEL_VIEWPORT_MARGIN = 12;
@@ -20,11 +21,14 @@ export function ReaderFontControl({ onOpen }: { onOpen?: () => void }) {
   const [mobile, setMobile] = useState(false);
   const [active, setActive] = useState(false);
   const [anchor, setAnchor] = useState<FontPanelAnchor | null>(null);
+  const [prewarmMounted, setPrewarmMounted] = useState(false);
   const trigger = useRef<HTMLButtonElement>(null);
   const slider = useRef<HTMLInputElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const mounted = phase !== "closed";
   const expanded = phase === "opening" || phase === "open";
+  const rendered = mounted || prewarmMounted;
+  const predicting = rendered && !mounted;
   const size = reader?.fontSize ?? (mobile ? 15 : 17);
   const progress = (size - READER_FONT_MIN) / (READER_FONT_MAX - READER_FONT_MIN);
 
@@ -48,8 +52,21 @@ export function ReaderFontControl({ onOpen }: { onOpen?: () => void }) {
     setAnchor(null);
   }, [reader?.article?.id]);
 
+  useEffect(() => {
+    setPrewarmMounted(false);
+    let idle: number | undefined;
+    const timer = window.setTimeout(() => {
+      if ("requestIdleCallback" in window) idle = window.requestIdleCallback(() => setPrewarmMounted(true), { timeout: 500 });
+      else setPrewarmMounted(true);
+    }, 200);
+    return () => {
+      window.clearTimeout(timer);
+      if (idle !== undefined) window.cancelIdleCallback(idle);
+    };
+  }, [reader?.article?.id]);
+
   useLayoutEffect(() => {
-    if (!mounted) return;
+    if (!rendered) return;
     const origin = trigger.current;
     const element = panel.current;
     if (!origin || !element) return;
@@ -67,8 +84,17 @@ export function ReaderFontControl({ onOpen }: { onOpen?: () => void }) {
 
     place();
     window.addEventListener("resize", place);
-    return () => window.removeEventListener("resize", place);
-  }, [mounted]);
+    if (!mounted) document.addEventListener(READER_GLASS_MOTION_REST, place);
+    return () => {
+      window.removeEventListener("resize", place);
+      document.removeEventListener(READER_GLASS_MOTION_REST, place);
+    };
+  }, [rendered, mounted]);
+
+  useLayoutEffect(() => {
+    if (!predicting || !anchor || !trigger.current || !panel.current) return;
+    return installGlassMenuPrewarm(trigger.current, panel.current);
+  }, [predicting, anchor]);
 
   useLayoutEffect(() => {
     const element = panel.current;
@@ -125,26 +151,27 @@ export function ReaderFontControl({ onOpen }: { onOpen?: () => void }) {
           setPhase("opening");
         }
       }}><span>字</span></button>
-    {mounted && createPortal(
-      <div ref={panel} id="reader-font-panel" className="reader-font-panel" role="dialog" aria-labelledby="reader-font-heading"
-        aria-hidden={phase !== "open" || undefined} style={anchor ?? undefined}
-        data-glass-surface="menu" data-glass-morph-from="reader-font-trigger" data-lg-container-radius="24"
-        data-starting-style={anchor ? undefined : ""} data-font-opening={phase === "opening" ? "" : undefined}
+    {rendered && createPortal(
+      <div ref={panel} id={mounted ? "reader-font-panel" : undefined} className="reader-font-panel" role={mounted ? "dialog" : undefined}
+        aria-labelledby={mounted ? "reader-font-heading" : undefined} inert={predicting || undefined}
+        aria-hidden={phase !== "open" || undefined} style={anchor ?? undefined} data-glass-menu-prewarm={predicting ? "" : undefined}
+        data-glass-surface={mounted ? "menu" : undefined} data-glass-morph-from={mounted ? "reader-font-trigger" : undefined} data-lg-container-radius="24"
+        data-starting-style={mounted && !anchor ? "" : undefined} data-font-opening={phase === "opening" ? "" : undefined}
         data-ending-style={phase === "closing" ? "" : undefined}>
         <div className="reader-font-content" inert={phase !== "open"}>
           <header>
-            <div><h2 id="reader-font-heading">字体大小</h2><output htmlFor="reader-font-size">{size} px</output></div>
+            <div><h2 id={mounted ? "reader-font-heading" : undefined}>字体大小</h2><output htmlFor={mounted ? "reader-font-size" : undefined}>{size} px</output></div>
             <button type="button" className="reader-dialog-close" aria-label="关闭字号面板" onClick={() => close(true)}><Icon name="close"/></button>
           </header>
           <div className="reader-font-scale">
             <span className="reader-font-a-small" aria-hidden="true">A</span>
-            <div className="reader-font-range" data-glass-scope>
+            <div className="reader-font-range" data-glass-scope={mounted ? "" : undefined}>
               <div className="reader-font-graphics" aria-hidden="true" style={{ "--reader-slider-progress": progress } as CSSProperties}>
-                <span className="reader-font-rail" data-glass-source><span/></span>
-                <span className="reader-font-thumb" data-glass-surface="slider" data-press-phase={active ? "pressed" : "released"}/>
+                <span className="reader-font-rail" data-glass-source={mounted ? "" : undefined}><span/></span>
+                <span className="reader-font-thumb" data-glass-surface={mounted ? "slider" : undefined} data-press-phase={active ? "pressed" : "released"}/>
               </div>
-              <div className="reader-font-optics" data-glass-optics-host aria-hidden="true"/>
-              <input ref={slider} id="reader-font-size" aria-label="正文字号" aria-valuetext={`${size} 像素`} type="range" min={READER_FONT_MIN} max={READER_FONT_MAX} step={1} value={size}
+              <div className="reader-font-optics" data-glass-optics-host={mounted ? "" : undefined} aria-hidden="true"/>
+              <input ref={slider} id={mounted ? "reader-font-size" : undefined} aria-label="正文字号" aria-valuetext={`${size} 像素`} type="range" min={READER_FONT_MIN} max={READER_FONT_MAX} step={1} value={size}
                 onChange={event => reader?.setFontSize(Number(event.currentTarget.value))}
                 onPointerDown={event => {
                   if (!event.isPrimary || event.button !== 0) return;
@@ -157,7 +184,7 @@ export function ReaderFontControl({ onOpen }: { onOpen?: () => void }) {
           </div>
           <footer><button type="button" onClick={() => reader?.setFontSize(null)}>默认字号</button></footer>
         </div>
-      </div>, document.body)}
+      </div>, document.body, mounted ? "reader-font-active" : "reader-font-prediction")}
   </div>;
 }
 

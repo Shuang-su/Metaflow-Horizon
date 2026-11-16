@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createGlassLens, lensClipOutline, lensClipPath } from "../lib/glass-lens";
+import { createGlassLens, lensClipOutline, lensClipPath, lensOpticalRegion } from "../lib/glass-lens";
 import type { LensPlacement } from "../vendor/glass-hq/src/dom/morph";
 
 function inside(points: number[][], x: number, y: number) {
@@ -136,3 +136,29 @@ test("invalid geometry cannot be declared prepared or reveal a padded rectangle"
   assert.equal(strip.dataset.glassPrepared, undefined);
   lens.dispose();
 }));
+
+
+test("shared collection region is exactly the padded placement union", () => {
+  assert.deepEqual(lensOpticalRegion(circle, circle), region);
+  assert.deepEqual(lensOpticalRegion(circle, { ...circle, left: 180, top: 30 }), { left: 74, top: -16, width: 176, height: 116 });
+});
+
+test("a pure translation reuses the local polygon without revisiting its prepared outline", () => {
+  let pointReads = 0;
+  const outline = new Proxy<[number, number][]>([[0, 0], [40, 0], [40, 40], [0, 40]], {
+    get(target, key, receiver) {
+      if (typeof key === "string" && /^\d+$/.test(key)) pointReads++;
+      return Reflect.get(target, key, receiver);
+    },
+  });
+  const a: LensPlacement = { left: 10.1, top: 20.2, width: 40, height: 40, shape: { width: 40, height: 40, radius: 0, outline } };
+  const first = lensClipPath(a, a, 0, lensOpticalRegion(a, a));
+  assert.ok(pointReads > 0);
+  pointReads = 0;
+  const translated = { ...a, left: a.left + .3, top: a.top + 72.1 };
+  assert.equal(lensClipPath(translated, translated, 0, lensOpticalRegion(translated, translated)), first);
+  assert.equal(pointReads, 0);
+  const scaled = { ...translated, width: 41 };
+  assert.notEqual(lensClipPath(scaled, scaled, 0, lensOpticalRegion(scaled, scaled)), first);
+  assert.ok(pointReads > 0);
+});

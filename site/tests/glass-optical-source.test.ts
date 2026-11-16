@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { intersectsOpticalBox, opticalChildClip, OpticalSource } from "../lib/glass-optical-source";
+import { createOpticalFrame, intersectsOpticalBox, opticalChildClip, OpticalSource } from "../lib/glass-optical-source";
 
 test("a lens samples only boxes intersecting its padded optical region", () => {
   const strip = { left: 70, top: 0, width: 100, height: 104 };
@@ -54,7 +54,7 @@ test("an offscreen article branch is pruned before inspecting its descendants or
 
 // A small DOM fixture exercises the actual replica tree without a browser or
 // image decoder. Rendering and live frame continuity are checked separately.
-function fixtureStyle(values: Record<string, string> = {}) {
+function fixtureStyle(values: Record<string, string> = {}, onWrite: () => void = () => {}) {
   const data: Record<string, string> = {
     boxSizing: "border-box", width: "100px", height: "100px", display: "block", visibility: "visible",
     opacity: "1", filter: "none", clipPath: "none", backgroundColor: "rgba(0, 0, 0, 0)",
@@ -63,15 +63,18 @@ function fixtureStyle(values: Record<string, string> = {}) {
   const key = (property: string) => property.replace(/-([a-z])/g, (_, letter: string) => letter.toUpperCase());
   return Object.assign(data, {
     getPropertyValue(property: string) { return data[key(property)] || ""; },
-    setProperty(property: string, value: string) { data[key(property)] = value; },
+    setProperty(property: string, value: string) { onWrite(); data[key(property)] = value; },
   }) as unknown as CSSStyleDeclaration;
 }
 
 class FixtureElement {
   readonly nodeType = 1;
   readonly tagName = "DIV";
-  readonly textContent = "";
-  style = fixtureStyle();
+  get textContent(): string { return this.children.map(child => child.textContent).join(""); }
+  measurements = 0;
+  styleReads = 0;
+  styleWrites = 0;
+  style = fixtureStyle({}, () => this.styleWrites++);
   computed: CSSStyleDeclaration;
   children: FixtureElement[] = [];
   parent: FixtureElement | null = null;
@@ -82,10 +85,11 @@ class FixtureElement {
   get offsetWidth() { return parseFloat(this.computed.width); }
   get offsetHeight() { return parseFloat(this.computed.height); }
   getBoundingClientRect() {
+    this.measurements++;
     return { ...this.box, right: this.box.left + this.box.width, bottom: this.box.top + this.box.height };
   }
   matches() { return false; }
-  querySelector() { return this.children[0] || null; }
+  querySelector(): FixtureElement | null { return this.children[0] || null; }
   append(...nodes: FixtureElement[]) {
     for (const node of nodes) {
       if (node.parent) node.parent.children = node.parent.children.filter(child => child !== node);
@@ -104,8 +108,8 @@ function withOpticalDOM(run: () => void) {
   class FixtureImage extends FixtureElement {}
   const replacements = {
     HTMLElement: FixtureElement, HTMLImageElement: FixtureImage, Node: { TEXT_NODE: 3 },
-    document: { createElement: () => new FixtureElement() },
-    getComputedStyle: (node: FixtureElement) => node.computed,
+    document: { createElement: () => new FixtureElement(), createTextNode: (text: string) => ({ nodeType: 3, textContent: text, parent: null }) },
+    getComputedStyle: (node: FixtureElement) => { node.styleReads++; return node.computed; },
   };
   const original = new Map(Object.keys(replacements).map(key => [key, Object.getOwnPropertyDescriptor(globalThis, key)]));
   try {
@@ -208,4 +212,87 @@ test("a stable cover wrapper masks its moving blurred child once in wrapper coor
   wrapper.computed.setProperty("-webkit-mask-image", "none");
   optics.update([asElement(wrapper)], region);
   assert.equal(layer.children[0], blurGroup, "a removed ancestor mask does not leave a stale masked replica");
+}));
+
+
+test("one frame shares source measurements and frozen styles across overlapping lenses", () => withOpticalDOM(() => {
+  const wrapper = new FixtureElement(region, { opacity: ".6", maskImage: "linear-gradient(black, transparent)" });
+  const piece = new FixtureElement(region, { backgroundColor: "red" });
+  wrapper.append(piece);
+  const roots = [asElement(wrapper)];
+  const second = { left: 40, top: 0, width: 60, height: 100 };
+  const snapshot = createOpticalFrame(roots, [region, second]);
+  assert.equal(wrapper.measurements, 1); assert.equal(piece.measurements, 1);
+  assert.equal(wrapper.styleReads, 1); assert.equal(piece.styleReads, 1);
+  piece.computed.backgroundColor = "blue";
+  wrapper.computed.opacity = ".9";
+  wrapper.getBoundingClientRect = piece.getBoundingClientRect = () => { throw new Error("paint must not measure a source"); };
+  Object.defineProperty(globalThis, "getComputedStyle", { configurable: true, value: () => { throw new Error("paint must not read live styles"); } });
+  const a = new FixtureElement(), b = new FixtureElement();
+  assert.equal(new OpticalSource(asElement(a)).update(roots, region, false, snapshot), 1);
+  assert.equal(new OpticalSource(asElement(b)).update(roots, second, true, snapshot), 1);
+  for (const layer of [a, b]) {
+    assert.equal(layer.children[0].style.opacity, ".6");
+    assert.equal(layer.children[0].children[0].style.backgroundColor, "red");
+  }
+}));
+
+test("inline descendants are captured once and no source style reads follow replica writes", () => withOpticalDOM(() => {
+  const text = { nodeType: 3, textContent: "Captured text", parent: null } as unknown as FixtureElement;
+  const span = new FixtureElement(region, { color: "red" });
+  span.append(text);
+  const paragraph = new FixtureElement();
+  paragraph.matches = (selector?: string) => selector === "p, h1, h2, h3, h4, h5, h6, pre, figcaption, dt, dd, blockquote, td, th, li";
+  paragraph.querySelector = () => null;
+  paragraph.append(span);
+  const roots = [asElement(paragraph)];
+  const second = { left: 20, top: 0, width: 80, height: 100 };
+  const snapshot = createOpticalFrame(roots, [region, second]);
+  assert.equal(paragraph.styleReads, 1); assert.equal(span.styleReads, 1);
+  span.computed.color = "blue";
+  Object.defineProperty(globalThis, "getComputedStyle", { configurable: true, value: () => { throw new Error("no post-collection reads"); } });
+  for (const box of [region, second]) {
+    const layer = new FixtureElement();
+    const optics = new OpticalSource(asElement(layer));
+    assert.equal(optics.update(roots, box, true, snapshot), 1);
+    assert.equal(optics.visibleTextCount, 1);
+    assert.equal(layer.children[0].children[0].style.color, "red");
+    assert.equal(layer.children[0].textContent, "Captured text");
+  }
+}));
+
+test("separated lens regions retain independent 96-piece limits without sampling their gap", () => withOpticalDOM(() => {
+  const a = new FixtureElement(region), bBox = { left: 200, top: 0, width: 100, height: 100 };
+  const b = new FixtureElement(bBox);
+  a.append(...Array.from({ length: 120 }, () => new FixtureElement(region, { backgroundColor: "red" })));
+  b.append(...Array.from({ length: 120 }, () => new FixtureElement(bBox, { backgroundColor: "blue" })));
+  const gap = new FixtureElement({ left: 110, top: 0, width: 80, height: 100 });
+  gap.append(new FixtureElement());
+  gap.children[0].getBoundingClientRect = () => { throw new Error("the gap is outside both regions"); };
+  const roots = [a, gap, b].map(asElement);
+  const snapshot = createOpticalFrame(roots, [region, bBox]);
+  assert.equal(gap.measurements, 1); assert.equal(gap.styleReads, 0);
+  for (const box of [region, bBox]) {
+    const layer = new FixtureElement();
+    assert.equal(new OpticalSource(asElement(layer)).update(roots, box, false, snapshot), 96);
+    assert.equal(layer.children.length, 96);
+  }
+}));
+
+test("unchanged masks and piece styles are not written again for a reused snapshot", () => withOpticalDOM(() => {
+  const wrapper = new FixtureElement(region, { maskImage: "linear-gradient(black, transparent)", maskRepeat: "no-repeat" });
+  wrapper.append(new FixtureElement(region, { backgroundColor: "red" }));
+  const roots = [asElement(wrapper)], snapshot = createOpticalFrame(roots, [region]);
+  const layer = new FixtureElement(), source = new OpticalSource(asElement(layer));
+  source.update(roots, region, false, snapshot);
+  const group = layer.children[0], piece = group.children[0];
+  const writes = [group.styleWrites, piece.styleWrites];
+  source.update(roots, region, false, snapshot);
+  assert.deepEqual([group.styleWrites, piece.styleWrites], writes);
+}));
+
+test("a snapshot cannot silently remeasure an uncollected region", () => withOpticalDOM(() => {
+  const source = new OpticalSource(asElement(new FixtureElement()));
+  const snapshot = createOpticalFrame([], [region]);
+  assert.throws(() => source.update([], { ...region, left: 10 }, false, snapshot), /does not cover/);
 }));

@@ -1,10 +1,13 @@
 import { updateCoverGlyphContrast } from "./reader-chrome-contrast";
-import { CHROME_FRAME_EVENT, chromeOpticalOpacity } from "./reader-chrome-motion";
-import { createGlassLens, type GlassAppearance, type LensKind, type MaterialPlanes } from "./glass-lens";
+import { chromeOpticalOpacity } from "./reader-chrome-motion";
+import { createGlassLens, lensOpticalRegion, type GlassAppearance, type LensKind, type MaterialPlanes } from "./glass-lens";
+import { createOpticalFrame, type OpticalFrameSnapshot } from "./glass-optical-source";
+import { createGlassMaterialCache } from "./glass-material-cache";
+import { readerFrame } from "./reader-frame";
+import { isGlassMenuSourceAtRest, READER_GLASS_MOTION_REST } from "./glass-menu-prewarm";
 import { attachGeometryMotion, type GeometryAnimator, type LensFrame, type LensPlacement } from "../vendor/glass-hq/src/dom/morph";
 import { attachInteraction, resolveMotion, type SurfaceAnimator } from "../vendor/glass-hq/src/dom/interaction";
 import { attachNativeControlMotion, updateControlMotion } from "../vendor/glass-hq/src/dom/control-motion";
-import { encodeMapPixels } from "../vendor/glass-hq/src/dom/map-encoding";
 import { polygonClip } from "../vendor/glass-hq/src/core/concentric";
 import { shapeClip } from "../vendor/glass-hq/src/core/shape";
 import type { MorphGeometry } from "../vendor/glass-hq/src/core/morph-path";
@@ -12,11 +15,7 @@ import { WebGL2MaterialRenderer } from "../vendor/glass-hq/src/webgl2/index";
 
 const selector = "[data-glass-surface]";
 const maximumSurfaces = 12;
-const maximumMaps = 80;
 const interactionEvents = ["pointerdown", "pointermove", "pointerup", "pointercancel", "pointerover", "pointerout", "keydown", "keyup", "focusout", "input"];
-const rasterScale = 1;
-
-type Material = { maps?: MaterialPlanes };
 type Surface = {
   element: HTMLElement;
   kind: LensKind;
@@ -28,8 +27,16 @@ type Surface = {
   releaseControl?: () => void;
   entered: boolean;
   maps?: MaterialPlanes;
+  mapsAppearance?: GlassAppearance;
   previousMaps?: MaterialPlanes;
   themeStart?: number;
+  preparedPath?: readonly MorphGeometry[];
+  preparedAppearance?: GlassAppearance;
+  preparedDpr?: number;
+};
+type PaintJob = {
+  surface: Surface; a: LensPlacement; b: LensPlacement; aMaps: MaterialPlanes; bMaps: MaterialPlanes;
+  mix: number; sources: HTMLElement[]; opacity: number; changed: boolean; glow: number;
 };
 
 function lensKind(element: HTMLElement): LensKind {
@@ -73,19 +80,27 @@ export function startGlassChrome(root: HTMLElement) {
   delete root.dataset.glassFailure;
   const surfaces = new Map<HTMLElement, Surface>();
   const interactions = new Map<HTMLElement, SurfaceAnimator>();
-  const cache = new Map<string, Material>();
   const preference = matchMedia("(prefers-color-scheme: dark)");
+  let density = matchMedia(`(resolution: ${devicePixelRatio || 1}dppx)`);
   const transparency = matchMedia("(prefers-reduced-transparency: reduce), (forced-colors: active)");
   const motion = () => resolveMotion("full");
   let appearance: GlassAppearance = "light";
   let renderer: WebGL2MaterialRenderer | undefined;
+  let materials: ReturnType<typeof createGlassMaterialCache> | undefined;
   let failed = false;
   let disposed = false;
-  let frame = 0;
-  let frameTime = -1;
   let motionUntil = 0;
   let refreshSources = false;
-  let sliderQueued = false;
+  let jobs: PaintJob[] = [];
+  const snapshots = new Map<HTMLElement[], OpticalFrameSnapshot>();
+  let measuredFrames = 0;
+  let paintedFrames = 0;
+  let sourceCaptureMs = 0;
+  let fontPrewarmShapes: readonly MorphGeometry[] = [];
+  let warmedAppearance: GlassAppearance | undefined;
+  let warmedDpr = 0;
+  let motionRest = false;
+  const debug = new URLSearchParams(location.search).has("glassDiagnostics");
 
   function report(state: string) {
     if (root.dataset.glassState !== state) root.dataset.glassState = state;
@@ -94,7 +109,7 @@ export function startGlassChrome(root: HTMLElement) {
     if (disposed || failed) return;
     failed = true;
     root.dataset.glassFailure = reason;
-    cache.clear();
+    materials?.dispose();
     renderer?.dispose();
     for (const surface of surfaces.values()) {
       delete surface.element.dataset.glassReady;
@@ -106,29 +121,8 @@ export function startGlassChrome(root: HTMLElement) {
     schedule();
   }
   function material(shape: MorphGeometry) {
-    if (failed || !renderer) return;
-    const key = JSON.stringify([appearance, shape.width, shape.height, shape.radius, rasterScale, shape.outline]);
-    const known = cache.get(key);
-    if (known) {
-      cache.delete(key);
-      cache.set(key, known);
-      return known.maps;
-    }
-    if (cache.size >= maximumMaps) cache.delete(cache.keys().next().value!);
-    const entry: Material = {};
-    cache.set(key, entry);
-    void renderer.render({ ...shape, appearance, dpr: rasterScale })
-      .then(pixels => encodeMapPixels(pixels.pixels, pixels.width, pixels.height))
-      .then(async ([[field], [rim]]) => {
-        await Promise.all([field, rim].map(url => {
-          const image = new Image();
-          image.src = url;
-          return image.decode();
-        }));
-        if (disposed || failed) return;
-        entry.maps = { field, rim };
-        schedule();
-      }).catch(() => fallback("material-resource"));
+    if (failed || !materials) return;
+    return materials.get(shape, appearance, Math.min(devicePixelRatio || 1, 2));
   }
 
   function makeSurface(element: HTMLElement, kind: LensKind, host: HTMLElement) {
@@ -195,27 +189,35 @@ export function startGlassChrome(root: HTMLElement) {
   }
 
   function schedule() {
-    if (!disposed && !frame) frame = requestAnimationFrame(draw);
+    if (!disposed) readerFrame.request();
   }
   function syncSlider() {
-    if (sliderQueued) return;
-    sliderQueued = true;
-    queueMicrotask(() => {
-      sliderQueued = false;
-      if (disposed) return;
-      cancelAnimationFrame(frame);
-      draw(frameTime < 0 ? performance.now() : frameTime);
-    });
+    // React commits the range value before the shared RAF. Do not start a
+    // second optical scan from an input microtask in the same display frame.
+    schedule();
   }
   const wakeMotion = () => { motionUntil = performance.now() + 250; schedule(); };
+  const densityChanged = () => {
+    density.removeEventListener("change", densityChanged);
+    density = matchMedia(`(resolution: ${devicePixelRatio || 1}dppx)`);
+    density.addEventListener("change", densityChanged);
+    wakeMotion();
+  };
+  density.addEventListener("change", densityChanged);
   const resize = new ResizeObserver(() => { refreshSources = true; schedule(); });
   function draw(now: number) {
-    frame = 0;
+    jobs = [];
+    snapshots.clear();
     if (disposed || document.hidden) return;
-    const sameFrame = frameTime === now;
-    frameTime = now;
+    materials?.beginFrame();
     const theme = document.documentElement.dataset.theme;
     appearance = theme === "light" || theme === "dark" ? theme : preference.matches ? "dark" : "light";
+    if (!document.getElementById("reader-font-trigger")) fontPrewarmShapes = [];
+    const currentDpr = Math.min(devicePixelRatio || 1, 2);
+    if (fontPrewarmShapes.length && (appearance !== warmedAppearance || currentDpr !== warmedDpr)) {
+      materials?.prewarm(fontPrewarmShapes, appearance, currentDpr);
+      warmedAppearance = appearance; warmedDpr = currentDpr;
+    }
     const controls = new Set(Array.from(document.querySelectorAll<HTMLElement>("[data-glass-interactive]"))
       .filter(element => !element.closest("[inert]") && visible(element)));
     for (const [element, animator] of interactions) if (!controls.has(element)) {
@@ -224,10 +226,8 @@ export function startGlassChrome(root: HTMLElement) {
     }
     for (const element of controls) if (!interactions.has(element)) interactions.set(element, attachInteraction(element, motion));
     let moving = false;
-    if (!sameFrame) {
-      moving = updateControlMotion(document.body, now);
-      for (const animator of interactions.values()) if (animator.frame(now)) moving = true;
-    }
+    moving = updateControlMotion(document.body, now);
+    for (const animator of interactions.values()) if (animator.frame(now)) moving = true;
 
     const targets = Array.from(document.querySelectorAll<HTMLElement>(selector))
       .filter(element => {
@@ -254,7 +254,7 @@ export function startGlassChrome(root: HTMLElement) {
     });
 
     // Continue sampling independent interaction and ancestor animations.
-    // Scroll chrome itself uses a synchronous shared frame (chromeFrame).
+    // Cover and scroll chrome advance earlier in this same coordinated frame.
     const motionHosts = new Set<HTMLElement>();
     for (const element of targets) {
       for (let host: HTMLElement | null = element; host && host !== document.body; host = host.parentElement)
@@ -274,13 +274,19 @@ export function startGlassChrome(root: HTMLElement) {
       const outline = surface.outline;
       if (!outline) continue;
       if (surface.element.hasAttribute("data-ending-style")) surface.entered = false;
-      if (!sameFrame && outline.frame(now)) moving = true;
+      if (outline.frame(now)) moving = true;
       const path = outline.geometry();
       if (path) {
         paths.set(surface, path);
         if (path.absorbs) absorbed.set(path.absorbs.element, path.absorbs.weight);
       }
-      if (!failed && !transparency.matches) for (const shape of outline.waypoints()) material(shape);
+      const waypoints = outline.waypoints();
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      if (!failed && !transparency.matches && (surface.preparedPath !== waypoints ||
+          surface.preparedAppearance !== appearance || surface.preparedDpr !== dpr)) {
+        materials?.prewarm(waypoints, appearance, dpr);
+        surface.preparedPath = waypoints; surface.preparedAppearance = appearance; surface.preparedDpr = dpr;
+      }
       const reveal = parseFloat(surface.element.style.getPropertyValue("--lg-morph"));
       const contentReady = !surface.element.hasAttribute("data-glass-morph") || reveal >= .97;
       const menuBox = path && surface.element.dataset.glassMorphMode === "become"
@@ -294,7 +300,6 @@ export function startGlassChrome(root: HTMLElement) {
       }
     }
 
-    let pieces = 0, textPieces = 0;
     // Source replicas store computed colours. Sample every frame of the theme
     // crossfade instead of freezing its first colour until transitionend.
     const changed = refreshSources || document.documentElement.hasAttribute("data-theme-changing");
@@ -336,8 +341,11 @@ export function startGlassChrome(root: HTMLElement) {
 
       const settled = !failed && !transparency.matches ? material(box.shape) : undefined;
       if (settled && settled !== surface.maps) {
-        surface.previousMaps = motion() === "full" ? surface.maps : undefined;
+        // A density/geometry upgrade is ready to display now. Only an actual
+        // theme change needs the material crossfade; quality must not lag 200ms.
+        surface.previousMaps = motion() === "full" && surface.mapsAppearance !== appearance ? surface.maps : undefined;
         surface.maps = settled;
+        surface.mapsAppearance = appearance;
         surface.themeStart = now;
       }
       const themeMix = surface.previousMaps ? Math.min(1, (now - (surface.themeStart ?? now)) / 200) : 1;
@@ -358,29 +366,56 @@ export function startGlassChrome(root: HTMLElement) {
       const previous = !path && surface.previousMaps;
       const glow = kind === "toolbar" ? Array.from(element.querySelectorAll<HTMLElement>("[data-glass-interactive]"))
         .reduce((value, control) => Math.max(value, Number(control.style.getPropertyValue("--lg-glow"))), 0) : 0;
-      try {
-        pieces += lens.paint({ placement: a, maps: previous || aMaps }, { placement: b, maps: bMaps },
-          previous ? themeMix * (2 - themeMix) : mix, sources, opacity, changed, glow);
-      } catch {
-        fallback("lens-binding-or-paint");
-        continue;
+      if (kind === "chrome") updateCoverGlyphContrast(element, appearance === "dark", true);
+      materials?.pin(previous || aMaps); materials?.pin(bMaps);
+      jobs.push({ surface, a, b, aMaps: previous || aMaps, bMaps,
+        mix: previous ? themeMix * (2 - themeMix) : mix, sources, opacity, changed, glow });
+    }
+    const started = performance.now();
+    if (jobs.length) {
+      // All page lenses share the exact backdrop array; a slider's tiny local
+      // rail is a separate source, never another full article traversal.
+      for (const roots of new Set(jobs.map(job => job.sources))) {
+        snapshots.set(roots, createOpticalFrame(roots, jobs.filter(job => job.sources === roots)
+          .map(job => lensOpticalRegion(job.a, job.b))));
       }
-      textPieces += lens.source.visibleTextCount;
-      if (!element.hasAttribute("data-glass-ready")) element.dataset.glassReady = "";
-      delete element.dataset.glassPending;
-      if (kind === "chrome") updateCoverGlyphContrast(element, appearance === "dark");
+      measuredFrames++;
+    }
+    sourceCaptureMs = performance.now() - started;
+    const keepMoving = moving || now < motionUntil;
+    const fontTrigger = document.getElementById("reader-font-trigger");
+    const atRest = !keepMoving && fontTrigger !== null && isGlassMenuSourceAtRest(fontTrigger);
+    if (atRest && !motionRest) document.dispatchEvent(new Event(READER_GLASS_MOTION_REST));
+    motionRest = atRest;
+    return keepMoving;
+  }
+
+  function paint() {
+    if (disposed || document.hidden) return;
+    let pieces = 0, textPieces = 0;
+    for (const job of jobs) {
+      const { surface, a, b, aMaps, bMaps, sources, opacity, changed, glow, mix } = job;
+      try {
+        pieces += surface.lens.paint({ placement: a, maps: aMaps }, { placement: b, maps: bMaps },
+          mix, sources, opacity, changed, glow, snapshots.get(sources));
+      } catch { fallback("lens-binding-or-paint"); break; }
+      textPieces += surface.lens.source.visibleTextCount;
+      if (!surface.element.hasAttribute("data-glass-ready")) surface.element.dataset.glassReady = "";
+      delete surface.element.dataset.glassPending;
       report("webgl2-html");
     }
+    if (jobs.length) paintedFrames++;
+    materials?.endFrame();
     if (!surfaces.size && !failed) report("idle");
     if (root.dataset.glassPieces !== String(pieces)) root.dataset.glassPieces = String(pieces);
     if (root.dataset.glassTextPieces !== String(textPieces)) root.dataset.glassTextPieces = String(textPieces);
-    if (moving || now < motionUntil) schedule();
   }
 
   const observer = new MutationObserver(records => {
     for (const record of records) {
       const target = record.target instanceof Element ? record.target : record.target.parentElement;
       if (!target || target.closest("[data-glass-optics], [data-glass-optics-host]")) continue;
+      if (record.type === "attributes" && record.attributeName && record.oldValue === target.getAttribute(record.attributeName)) continue;
       if (record.type !== "attributes" || record.attributeName === "data-theme" ||
           record.attributeName === "class" || record.attributeName === "src" ||
           (target === document.documentElement && record.attributeName === "style")) refreshSources = true;
@@ -388,15 +423,18 @@ export function startGlassChrome(root: HTMLElement) {
       schedule();
     }
   });
-  observer.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true,
+  observer.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeOldValue: true,
     attributeFilter: ["class", "style", "hidden", "inert", "aria-hidden", "data-card-pulling", "data-pull-visible", "data-retained",
       "src", "data-glass-surface", "data-ending-style", "data-starting-style", "data-press-phase"] });
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "style"] });
-  const chromeFrame = (event: Event) => {
-    cancelAnimationFrame(frame);
-    draw((event as CustomEvent<number>).detail);
+  observer.observe(document.documentElement, { attributes: true, attributeOldValue: true, attributeFilter: ["data-theme", "style"] });
+  const releaseMeasure = readerFrame.subscribe("measure", draw);
+  const releasePaint = readerFrame.subscribe("paint", paint);
+  const prewarmFont = (event: Event) => {
+    fontPrewarmShapes = (event as CustomEvent<{ shapes: readonly MorphGeometry[] }>).detail.shapes;
+    warmedAppearance = undefined;
+    schedule();
   };
-  document.addEventListener(CHROME_FRAME_EVENT, chromeFrame);
+  document.addEventListener("reader-glass-prewarm", prewarmFont);
   const repaint = (event: Event) => {
     if (event.target instanceof Element && event.target.closest("[data-glass-optics], [data-glass-optics-host]")) return;
     refreshSources = true;
@@ -423,14 +461,30 @@ export function startGlassChrome(root: HTMLElement) {
   document.fonts?.addEventListener("loadingdone", repaint);
   preference.addEventListener("change", repaint);
   transparency.addEventListener("change", repaint);
-  try { renderer = new WebGL2MaterialRenderer(fallback); } catch { fallback(); }
+  try {
+    renderer = new WebGL2MaterialRenderer(fallback);
+    materials = createGlassMaterialCache(renderer, { onReady: schedule, onFailure: () => fallback("material-resource") });
+  } catch { fallback(); }
+  type DebugRoot = HTMLElement & { glassDiagnostics?: () => unknown };
+  if (debug) (root as DebugRoot).glassDiagnostics = () => ({
+    frame: readerFrame.inspect(), measuredFrames, paintedFrames, sourceCaptureMs,
+    sourceGroups: snapshots.size, surfaces: surfaces.size, materials: materials?.diagnostics(),
+  });
+  const warmStatic = () => {
+    if (disposed || failed || transparency.matches) return;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const shapes = [...surfaces.values()].filter(surface => !surface.outline).map(surface => shapeOf(surface).shape);
+    materials?.prewarm(shapes, appearance === "dark" ? "light" : "dark", dpr);
+  };
+  const warmTimer = setTimeout(warmStatic, 600);
   schedule();
 
   return () => {
     disposed = true;
-    cancelAnimationFrame(frame);
+    releaseMeasure(); releasePaint(); clearTimeout(warmTimer);
     observer.disconnect();
-    document.removeEventListener(CHROME_FRAME_EVENT, chromeFrame);
+    delete (root as DebugRoot).glassDiagnostics;
+    document.removeEventListener("reader-glass-prewarm", prewarmFont);
     resize.disconnect();
     for (const event of interactionEvents) document.removeEventListener(event, input, true);
     window.removeEventListener("scroll", schedule, true);
@@ -443,10 +497,11 @@ export function startGlassChrome(root: HTMLElement) {
     document.removeEventListener("load", repaint, true);
     document.fonts?.removeEventListener("loadingdone", repaint);
     preference.removeEventListener("change", repaint);
+    density.removeEventListener("change", densityChanged);
     transparency.removeEventListener("change", repaint);
     for (const surface of surfaces.values()) removeSurface(surface);
     for (const animator of interactions.values()) animator.dispose();
+    materials?.dispose();
     renderer?.dispose();
-    cache.clear();
   };
 }

@@ -82,11 +82,19 @@ export default function Header() {
     } catch {}
     let last = window.scrollY, frame = 0;
     const scroll = () => {
+      // Reader/home chrome has its own coordinated distance-driven frame.
+      // Avoid a second RAF and an unchanged class mutation invalidating all
+      // optical text replicas after that shared frame has already sampled.
+      if (fixedChrome.current) {
+        last = window.scrollY;
+        if (header.current?.classList.contains("header-hidden")) header.current.classList.remove("header-hidden");
+        return;
+      }
       if (frame) return;
       frame = requestAnimationFrame(() => {
         const y = window.scrollY, delta = y - last;
         if (fixedChrome.current) {
-          header.current?.classList.remove("header-hidden");
+          if (header.current?.classList.contains("header-hidden")) header.current.classList.remove("header-hidden");
         } else if (readingDestination.current !== null) {
           header.current?.classList.remove("header-hidden");
           if (Math.abs(y - readingDestination.current) <= 1) readingDestination.current = null;

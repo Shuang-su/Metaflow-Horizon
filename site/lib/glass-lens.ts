@@ -1,4 +1,4 @@
-import { OpticalSource, type OpticalBox } from "./glass-optical-source";
+import { createOpticalFrame, OpticalSource, type OpticalBox, type OpticalFrameSnapshot } from "./glass-optical-source";
 import type { LensPlacement } from "../vendor/glass-hq/src/dom/morph";
 import type { MapGeometry } from "../vendor/glass-hq/src/gpu/geometry";
 import { shapePolygon } from "../vendor/glass-hq/src/core/shape";
@@ -16,6 +16,25 @@ const reach = 26;
 const rimReach = 1.5;
 let serial = 0;
 const outlines = new Map<string, ShapePoint[]>();
+const clipPaths = new Map<string, string>();
+const outlineIds = new WeakMap<ShapePoint[], number>();
+let outlineSerial = 0;
+
+/** Exactly the padded region consumed by paint, shared with the read phase. */
+export function lensOpticalRegion(a: LensPlacement, b: LensPlacement): OpticalBox {
+  const left = Math.min(a.left, b.left), top = Math.min(a.top, b.top);
+  const right = Math.max(a.left + a.width, b.left + b.width), bottom = Math.max(a.top + a.height, b.top + b.height);
+  return { left: left - reach, top: top - reach, width: right - left + reach * 2, height: bottom - top + reach * 2 };
+}
+
+function localClipKey(item: LensPlacement, region: OpticalBox) {
+  const outline = item.shape.outline;
+  if (outline && !outlineIds.has(outline)) outlineIds.set(outline, ++outlineSerial);
+  // Prepared outlines are immutable. Absolute screen translation is excluded;
+  // subpixel rounding only absorbs floating-point subtraction noise.
+  return [item.left - region.left, item.top - region.top, item.width, item.height].map(value => value.toFixed(6)).join("|") +
+    `|${item.shape.width}|${item.shape.height}|${item.shape.radius}|${outline ? outlineIds.get(outline) : "rounded"}`;
+}
 
 function placementOutline(item: LensPlacement, region: OpticalBox): ShapePoint[] {
   if (![item.left, item.top, item.width, item.height, item.shape.width, item.shape.height].every(Number.isFinite)
@@ -73,8 +92,18 @@ export function lensClipOutline(a: LensPlacement, b: LensPlacement, mix: number,
   return loops.flatMap(loop => [...loop, loop[0], first]);
 }
 export function lensClipPath(a: LensPlacement, b: LensPlacement, mix: number, region: OpticalBox) {
+  if (![region.left, region.top, region.width, region.height, mix].every(Number.isFinite) || region.width <= 0 || region.height <= 0) {
+    throw new RangeError("Invalid glass clip region");
+  }
+  const placements = mix <= 0 || a === b ? [a] : mix >= 1 ? [b] : [a, b];
+  const key = placements.map(item => localClipKey(item, region)).join(";");
+  const cached = clipPaths.get(key);
+  if (cached !== undefined) return cached;
   const points = lensClipOutline(a, b, mix, region);
-  return `polygon(nonzero, ${points.map(([x, y]) => `${x.toFixed(3)}px ${y.toFixed(3)}px`).join(",")})`;
+  const path = `polygon(nonzero, ${points.map(([x, y]) => `${x.toFixed(3)}px ${y.toFixed(3)}px`).join(",")})`;
+  if (clipPaths.size >= 160) clipPaths.delete(clipPaths.keys().next().value!);
+  clipPaths.set(key, path);
+  return path;
 }
 
 function svg<K extends keyof SVGElementTagNameMap>(name: K, attributes: Record<string, string | number>) {
@@ -155,14 +184,17 @@ export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: ()
   let mapA: MaterialPlanes | undefined;
   let mapB: MaterialPlanes | undefined;
 
-  function position(box: OpticalBox) {
-    const bounds = { left: box.left - reach, top: box.top - reach, width: box.width + reach * 2, height: box.height + reach * 2 };
+  function position(bounds: OpticalBox) {
     const parent = kind === "slider" ? host.getBoundingClientRect() : null;
     const left = bounds.left - (parent?.left || 0), top = bounds.top - (parent?.top || 0);
     const key = `${left}|${top}|${bounds.width}|${bounds.height}`;
     if (key !== lastBox) {
       lastBox = key;
-      Object.assign(strip.style, { left: `${left}px`, top: `${top}px`, width: `${bounds.width}px`, height: `${bounds.height}px` });
+      const values = { left: `${left}px`, top: `${top}px`, width: `${bounds.width}px`, height: `${bounds.height}px` };
+      for (const [key, value] of Object.entries(values)) {
+        const property = key as keyof typeof values;
+        if (strip.style[property] !== value) strip.style[property] = value;
+      }
     }
     return bounds;
   }
@@ -177,18 +209,16 @@ export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: ()
 
   return {
     source,
-    hide() { strip.style.visibility = "hidden"; },
-    paint(a: LensLayer, b: LensLayer, mix: number, roots: HTMLElement[], opacity: number, refresh: boolean, glow: number) {
-      const left = Math.min(a.placement.left, b.placement.left);
-      const top = Math.min(a.placement.top, b.placement.top);
-      const right = Math.max(a.placement.left + a.placement.width, b.placement.left + b.placement.width);
-      const bottom = Math.max(a.placement.top + a.placement.height, b.placement.top + b.placement.height);
+    hide() { if (strip.style.visibility !== "hidden") strip.style.visibility = "hidden"; },
+    paint(a: LensLayer, b: LensLayer, mix: number, roots: HTMLElement[], opacity: number, refresh: boolean, glow: number, snapshot?: OpticalFrameSnapshot) {
       if (broken || disposed) throw new Error("Glass lens is unavailable");
       if (![mix, opacity, glow].every(Number.isFinite) || !a.maps.field || !a.maps.rim || !b.maps.field || !b.maps.rim) {
         throw new Error("Glass lens resources are unavailable");
       }
-      const region = position({ left, top, width: right - left, height: bottom - top });
+      const region = lensOpticalRegion(a.placement, b.placement);
       const clip = lensClipPath(a.placement, b.placement, mix, region);
+      const frame = snapshot || createOpticalFrame(roots, [region]);
+      position(region);
       if (strip.style.clipPath !== clip) strip.style.clipPath = clip;
       for (const [key, pair] of [["field", field], ["rim", rim]] as const) {
         place(pair.a, a.maps[key], a.placement, region);
@@ -208,8 +238,8 @@ export function createGlassLens(host: HTMLElement, kind: LensKind, onFailure: ()
       // The independent outer contour remains in force even if SVG paint fails.
       if (!filter.isConnected || !plane.isConnected || !strip.style.clipPath ||
           !plane.style.filter.includes(filter.id)) throw new Error("Glass lens binding is unavailable");
-      const pieces = source.update(roots, region, refresh);
-      strip.dataset.glassPrepared = "resources-and-binding";
+      const pieces = source.update(roots, region, refresh, frame);
+      if (strip.dataset.glassPrepared !== "resources-and-binding") strip.dataset.glassPrepared = "resources-and-binding";
       const alpha = opacity.toFixed(3);
       if (strip.style.opacity !== alpha) strip.style.opacity = alpha;
       if (strip.style.visibility !== "visible") strip.style.visibility = "visible";
