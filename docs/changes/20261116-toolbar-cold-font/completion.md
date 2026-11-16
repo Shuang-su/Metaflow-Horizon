@@ -53,4 +53,13 @@
 
 ## 交付
 
-本轮只更新4337与独立Netlify draft，在PR143/Issue137回填实现提交、证据记录、CI和服务器回读。生产保持11279e2，不合并、不提升、不计入08:00定时成功。具体checkpoint与预览URL在交付后回填；旧0fe1989构建保留为测试回退点。
+实现分为两个可审查提交：`59d274b`（正文14–20及标题固定）和 `2798315e9247f243f7f462a408fa78c56ed33a7c`（底栏同宿主、异步冷首开、回归证据）。后续交付记录为文档提交，不改变本次测试构建。
+
+- [4337本地预览](http://127.0.0.1:4337/horizon/)已切到冻结构建 `toolbar-cold-2798315`，[本地回读](local-readback.json)核对内容哈希、搜索、3份RSS及sitemap通过。
+- [独立在线测试页：11月12日](https://6afb1d9a6971115ddf573d2e--creative-kitsune-db27b4.netlify.app/horizon/daily/2026/11/12/)；部署ID `6afb1d9a6971115ddf573d2e`，`deployment.json`为2798315，[在线回读](online-readback.json)通过。
+- [实际实现SHA的CI](https://github.com/Shuang-su/Metaflow-Horizon/actions/runs/43893968097)已完成并成功。草稿[PR #143](https://github.com/Shuang-su/Metaflow-Horizon/pull/143)仍未合并。
+- 线上浏览器回读确认字号min/max为14/20、底栏与光学宿主同父容器、WebGL2折射启用、普通页面无诊断接口；菜单收回后重新检查稳定画面。
+
+![独立在线测试预览，菜单收回后](online-preview.png)
+
+已向用户提供这一个新部署的iPhone验收链接。等待Safari地址栏展开/收起、慢滚/停住/反向和冷首开的实际设备反馈。生产继续保持 `11279e223d8ad4e50d5ff80222a63af739a3f9cf`，不合并、不提升、不计入08:00定时成功；旧0fe1989构建保留为测试回退点。

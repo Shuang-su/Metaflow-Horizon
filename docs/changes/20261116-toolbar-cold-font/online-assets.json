@@ -1,0 +1,58 @@
+[
+  {
+    "path": "",
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 292438
+  },
+  {
+    "path": "daily/",
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 253609
+  },
+  {
+    "path": "daily/2026/11/10/",
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 237800
+  },
+  {
+    "path": "daily/2026/11/12/",
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 242545
+  },
+  {
+    "path": "daily/2026/11/13/",
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 206561
+  },
+  {
+    "path": "search/",
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 78045
+  },
+  {
+    "path": "deployment.json",
+    "status": 200,
+    "contentType": "application/json",
+    "bytes": 19932
+  },
+  {
+    "path": "_next/static/media/map-encoder.worker.345p_pjdoawa-.js",
+    "status": 200,
+    "contentType": "application/javascript; charset=UTF-8",
+    "bytes": 5642,
+    "matchesBuild": true
+  },
+  {
+    "path": "_next/static/media/morph-plan.worker.2dj-hs36vb575.js",
+    "status": 200,
+    "contentType": "application/javascript; charset=UTF-8",
+    "bytes": 14548,
+    "matchesBuild": true
+  }
+]

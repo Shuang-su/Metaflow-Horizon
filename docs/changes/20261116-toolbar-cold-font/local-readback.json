@@ -1,0 +1,20 @@
+{
+  "searchVerified": true,
+  "feedsVerified": [
+    "daily",
+    "weekly",
+    "articles"
+  ],
+  "sitemapVerified": true,
+  "state": "deployed-and-read-back",
+  "commit": "2798315e9247f243f7f462a408fa78c56ed33a7c",
+  "checkedAt": "2026-11-16T15:12:52.316949+00:00",
+  "site": "http://127.0.0.1:4337/horizon",
+  "evidence": {
+    "report_id": "gsd-2026-11-16",
+    "content_sha256": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
+    "latest_report_date": "2026-11-16",
+    "homepage_url": "https://metaflow.shuang-su.com/horizon/",
+    "detail_url": "https://metaflow.shuang-su.com/horizon/daily/2026/11/16/"
+  }
+}
