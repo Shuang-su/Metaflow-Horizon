@@ -1,6 +1,6 @@
 # 高光精度与刷新时序修复
 
-本轮基于 `33af672d2f2fa4d1839ee11469406058ef6e8059`，追加到草稿 PR #143，关联 Issue #137。iPhone 上一轮结果未通过；本轮只交付本地及独立测试部署，生产继续保持 `11279e223d8ad4e50d5ff80222a63af739a3f9cf`。任务提交 SHA、测试部署地址和回读回执在后续交付记录与 PR 回填。
+本轮基于 `33af672d2f2fa4d1839ee11469406058ef6e8059`，追加到草稿 PR #143，关联 Issue #137。实现 checkpoint 为 `0fe1989f68df5ffce49ef2152a2fd7f7c9928f54`。iPhone 上一轮结果未通过；本轮只交付本地及独立测试部署，生产继续保持 `11279e223d8ad4e50d5ff80222a63af739a3f9cf`。
 
 ## 实际修改
 
@@ -48,3 +48,20 @@ Astra High 独立复核发现的资源预算等待、预热真实 `0px` 解析�
 **iPhone Safari 新版本验收仍为待验。** 新预览需检查高光清晰度、持续慢滚停住、立即反向、地址栏收放、冷开与再次打开字号菜单。若仍有多帧追赶，保留测试版本并继续评估合成路径，不合并提升生产。本轮不改变定时发布流程，不计入每日 08:00 定时成功次数。
 
 回退测试预览可重新指向已保存的 33af672 构建；生产不需要回退，因为本轮没有发布生产。系统盘构建，未清理用户文件；仅恢复本轮构建产生的三份无关分享图字节漂移。
+
+## 已交付测试构建
+
+- [11/12 iPhone 测试页](https://6afa8903ab58c239cf6ecda0--creative-kitsune-db27b4.netlify.app/horizon/daily/2026/11/12/)；[测试首页](https://6afa8903ab58c239cf6ecda0--creative-kitsune-db27b4.netlify.app/horizon/)。Netlify deploy `6afa8903ab58c239cf6ecda0`，不是 production deploy。
+- 4337 `/horizon/` 与上述独立预览均为 `0fe1989`。两处回读首页/最新日报/搜索/三路RSS/sitemap/原稿与阅读版SHA一致，见 [local-readback.json](local-readback.json) 与 [online-readback.json](online-readback.json)。旧本地路径继续兼容跳转。
+- [实现提交 CI](https://github.com/Shuang-su/Metaflow-Horizon/actions/runs/43805306043) 成功；在线页面确认真实光学模式、DPR2为96×96，普通页面不提供诊断函数。
+- 正式域名与 Netlify 主地址回读均仍为 `11279e2`；没有合并或提升生产。后续证据记录提交只补交付文件，测试构建继续精确对应已验证的实现提交。
+
+相同 613 CSS px、DPR2、亮色封面，以下为浏览器直接截图，保留原像素比例。静态截图用于比较高光边缘，不能证明运动延迟或替代iPhone验收。
+
+旧版 33af672（48×48 材质）：
+
+![旧版高光](header-before.png)
+
+本轮 0fe1989（96×96 材质）：
+
+![新版高光](header-after.png)
