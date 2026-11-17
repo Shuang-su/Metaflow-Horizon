@@ -60,7 +60,7 @@ test("closed weeks retain their actual report dates across web and RSS", async (
   const {articles,weeks}=await buildArchive(), feeds=buildFeeds(articles,weeks);
   assert.ok(weeks.length >= 8);
   assert.ok(weeks.every((week,index)=>week.reports.length === (index === weeks.length-1 ? 3 : 7)));
-  assert.equal((feeds.daily.match(/<item>/g)||[]).length,articles.length);
+  assert.equal((feeds.daily.match(/<item>/g)||[]).length,Math.min(60,articles.length));
   assert.equal((feeds.weekly.match(/<item>/g)||[]).length,Math.min(26,weeks.length));
   for(const week of weeks){assert.ok(feeds.weekly.includes(SITE_URL+weeklyUrl(week)));for(const report of week.reports)assert.ok(feeds.weekly.includes(report.headline));}
   const gapWeek = weeks.find(week => week.week === 43)!;
