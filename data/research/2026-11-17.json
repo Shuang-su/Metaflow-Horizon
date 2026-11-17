@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "mode": "scheduled",
+  "window": {
+    "start": "2026-11-16T08:19:00+08:00",
+    "end": "2026-11-17T08:55:00+08:00"
+  },
+  "reviewedAt": "2026-11-17T08:55:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields",
+      "status": "candidates",
+      "checkedAt": "2026-11-17T08:31:00+08:00",
+      "urls": [
+        "https://radiancefields.com/",
+        "https://radiancefields.com/platforms"
+      ],
+      "candidateIds": [
+        "github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+        "github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+        "districtcinema.com/terra-public-launch-2026-11-16",
+        "nico-hartl.itch.io/splat-prep-v1.0.1",
+        "arxiv:2611.17752",
+        "arxiv:2611.17957"
+      ],
+      "urlResults": [
+        {
+          "url": "https://radiancefields.com/",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:30:00+08:00"
+        },
+        {
+          "url": "https://radiancefields.com/platforms",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-17T08:31:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "official",
+      "status": "candidates",
+      "checkedAt": "2026-11-17T08:40:00+08:00",
+      "urls": [
+        "https://blog.playcanvas.com/",
+        "https://www.blender.org/news/"
+      ],
+      "candidateIds": [
+        "districtcinema.com/terra-public-launch-2026-11-16",
+        "nico-hartl.itch.io/splat-prep-v1.0.1"
+      ],
+      "gap": "Blender News 返回 HTTP 403；Terra 与 Splat Prep 改由产品官网和商店原始页面核验。",
+      "urlResults": [
+        {
+          "url": "https://blog.playcanvas.com/",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-17T08:39:00+08:00"
+        },
+        {
+          "url": "https://www.blender.org/news/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-17T08:40:00+08:00",
+          "gap": "HTTP 403，未取得可验证正文。"
+        }
+      ]
+    },
+    {
+      "sourceId": "x",
+      "status": "unavailable",
+      "checkedAt": "2026-11-17T08:49:00+08:00",
+      "urls": [
+        "https://x.com/radiancefields",
+        "https://x.com/playcanvas",
+        "https://x.com/willeastcott",
+        "https://x.com/valigurskym"
+      ],
+      "candidateIds": [],
+      "gap": "4 个登记账号均返回 HTTP 403 或 DisabledError；没有把登录外壳或摘要当作已核实原帖，候选改由官网、GitHub 和论文原页核验。",
+      "urlResults": [
+        {
+          "url": "https://x.com/radiancefields",
+          "status": "unavailable",
+          "checkedAt": "2026-11-17T08:48:20+08:00",
+          "gap": "DisabledError，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/playcanvas",
+          "status": "unavailable",
+          "checkedAt": "2026-11-17T08:48:30+08:00",
+          "gap": "HTTP 403，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/willeastcott",
+          "status": "unavailable",
+          "checkedAt": "2026-11-17T08:48:40+08:00",
+          "gap": "HTTP 403，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/valigurskym",
+          "status": "unavailable",
+          "checkedAt": "2026-11-17T08:48:50+08:00",
+          "gap": "DisabledError，无可验证原帖。"
+        }
+      ]
+    },
+    {
+      "sourceId": "research",
+      "status": "candidates",
+      "checkedAt": "2026-11-17T08:51:00+08:00",
+      "urls": [
+        "https://export.arxiv.org/api/query",
+        "https://huggingface.co/papers"
+      ],
+      "candidateIds": [
+        "arxiv:2611.17752",
+        "arxiv:2611.17957"
+      ],
+      "gap": "arXiv export API 不能由当前读取器直接访问；两篇候选改由 arXiv 摘要页、HTML 正文与精确标题检索核验。",
+      "urlResults": [
+        {
+          "url": "https://export.arxiv.org/api/query",
+          "status": "unavailable",
+          "checkedAt": "2026-11-17T08:50:00+08:00",
+          "gap": "API URL 被当前读取器拒绝，未取得响应正文。"
+        },
+        {
+          "url": "https://huggingface.co/papers",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:51:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "github",
+      "status": "candidates",
+      "checkedAt": "2026-11-17T08:47:00+08:00",
+      "urls": [
+        "https://github.com/playcanvas/supersplat",
+        "https://github.com/MrNeRF/LichtFeld-Studio"
+      ],
+      "candidateIds": [
+        "github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+        "github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+        "github.com/nianticlabs/spz/pull/117",
+        "github.com/playcanvas/supersplat/pull/1109",
+        "github.com/playcanvas/supersplat-viewer/pull/368"
+      ],
+      "urlResults": [
+        {
+          "url": "https://github.com/playcanvas/supersplat",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:44:00+08:00"
+        },
+        {
+          "url": "https://github.com/MrNeRF/LichtFeld-Studio",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-17T08:45:00+08:00"
+        }
+      ],
+      "additionalChecks": [
+        {
+          "url": "https://github.com/playcanvas/supersplat-viewer",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:44:20+08:00"
+        },
+        {
+          "url": "https://github.com/playcanvas/splat-transform",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-17T08:44:40+08:00"
+        },
+        {
+          "url": "https://github.com/playcanvas/engine",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:45:20+08:00"
+        },
+        {
+          "url": "https://github.com/nianticlabs/spz",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:46:00+08:00"
+        },
+        {
+          "url": "https://github.com/harry7557558/spirula-studio",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-17T08:46:20+08:00"
+        },
+        {
+          "url": "https://github.com/voyager-so/vauss",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:46:40+08:00"
+        },
+        {
+          "url": "https://github.com/NicolasDrum/splat-repair",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:47:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "community",
+      "status": "candidates",
+      "checkedAt": "2026-11-17T08:52:00+08:00",
+      "urls": [
+        "https://www.reddit.com/r/GaussianSplatting/",
+        "https://www.bilibili.com/",
+        "https://sspai.com/"
+      ],
+      "candidateIds": [
+        "reddit-storysplat-2.5-repeat-2026-11-17",
+        "reddit-colmap-wasm-repeat-2026-11-17",
+        "reddit-spark-qt-2026-11-17",
+        "reddit-portalcam-spirula-2026-11-17"
+      ],
+      "gap": "B 站只返回浏览器兼容提示；中文可读来源没有取得同时具备明确日期、原始链接和新增事实的候选。",
+      "urlResults": [
+        {
+          "url": "https://www.reddit.com/r/GaussianSplatting/",
+          "status": "candidates",
+          "checkedAt": "2026-11-17T08:50:30+08:00"
+        },
+        {
+          "url": "https://www.bilibili.com/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-17T08:51:30+08:00",
+          "gap": "重定向到浏览器版本过低提示，未取得可验证内容列表。"
+        },
+        {
+          "url": "https://sspai.com/",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-17T08:52:00+08:00"
+        }
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+      "title": "Splat Repair 0.1.0 发布可编辑高斯表面的 repair brush",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-17",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "Apache-2.0 首个公开发行版可直接安装，首次把几何、颜色与视角相关外观的洞口修补做成完整编辑器。",
+      "sources": [
+        "https://github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+        "https://github.com/NicolasDrum/splat-repair",
+        "https://radiancefields.com/splat-repair-brings-a-repair-brush-to-gaussian-splats"
+      ],
+      "eventId": "github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0"
+    },
+    {
+      "id": "github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+      "title": "Vauss 研究预览把视频到多种高斯交付物合成一条 CLI",
+      "eventDate": "2026-11-15",
+      "reportDate": "2026-11-17",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "7 日重查补收；候选发行版已可下载和编译，端到端管线与非 CUDA 训练后端具有直接工作流价值。",
+      "sources": [
+        "https://github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+        "https://github.com/voyager-so/vauss",
+        "https://github.com/voyager-so/vauss/blob/main/LICENSE",
+        "https://radiancefields.com/voyager-releases-vauss-splat-trainer-as-a-research-preview"
+      ],
+      "eventId": "github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc"
+    },
+    {
+      "id": "districtcinema.com/terra-public-launch-2026-11-16",
+      "title": "District Cinema 向公众开放 Terra 三维制作协作平台",
+      "eventDate": "2026-11-16",
+      "reportDate": "2026-11-17",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "商业平台把 splat、模型、3D Tiles、XR、协作、影视机位和 API 放入公开可注册的产品与计费体系。",
+      "sources": [
+        "https://districtcinema.com/terra",
+        "https://radiancefields.com/district-cinema-opens-terra-to-the-public"
+      ],
+      "eventId": "districtcinema.com/terra-public-launch-2026-11-16"
+    },
+    {
+      "id": "github.com/nianticlabs/spz/pull/117",
+      "title": "Niantic 为 SPZ 提交动态高斯 temporal 扩展草案",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-17",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "首次给出可兼容旧 reader 的动态属性、driver 蒙皮和多语言 binding 参考实现，同时明确当前内存、流式与 GPU 边界。",
+      "sources": [
+        "https://github.com/nianticlabs/spz/pull/117",
+        "https://github.com/nianticlabs/spz/commit/c6e9110a9bef859a38226b6de092cc27724ac57d"
+      ],
+      "eventId": "github.com/nianticlabs/spz/pull/117"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat/pull/1109",
+      "title": "SuperSplat 修正组合操作的撤销顺序",
+      "eventDate": "2026-11-16",
+      "reportDate": "2026-11-17",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "主干正确性修复防止依赖同一状态的组合操作按错误顺序撤销。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat/pull/1109",
+        "https://github.com/playcanvas/supersplat/commit/f29e2b4a34ecee6e4e4886630d653324c5b07add"
+      ],
+      "eventId": "github.com/playcanvas/supersplat/pull/1109"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/pull/368",
+      "title": "SuperSplat Viewer 与 PlayCanvas Engine 修正带手骨架控制器的 XR 识别",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-17",
+      "importance": "important",
+      "disposition": "merged",
+      "reason": "与 SuperSplat 撤销修复合并为 PlayCanvas 主干工程更新；SteamVR/Steam Frame 兼容直接影响 XR 输入，但尚无真实 Steam Frame 测试。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat-viewer/pull/368",
+        "https://github.com/playcanvas/engine/pull/10053",
+        "https://github.com/playcanvas/engine/commit/a0de85c7f2ffe350877cbb94c1b6391860db76c4"
+      ],
+      "eventId": "github.com/playcanvas/supersplat/pull/1109"
+    },
+    {
+      "id": "nico-hartl.itch.io/splat-prep-v1.0.1",
+      "title": "Splat Prep 1.0.1 为 Blender 5.3 补齐高斯变换、清理与导出",
+      "eventDate": "2026-11-16",
+      "reportDate": "2026-11-17",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "付费扩展解决 Blender 5.3 现有高斯变换和导出缺口，并给出多种格式与清理工具。",
+      "sources": [
+        "https://nico-hartl.itch.io/splat-prep-import-fix-clean-up-and-export-gaussian-splats",
+        "https://radiancefields.com/splat-prep-brings-splat-export-to-blender-5-3"
+      ],
+      "eventId": "nico-hartl.itch.io/splat-prep-v1.0.1"
+    },
+    {
+      "id": "arxiv:2611.17752",
+      "title": "Stage-wise Lineage-aware Dropout for Sparse-View 3D Gaussian Splatting",
+      "eventDate": "2026-11-13",
+      "reportDate": "2026-11-17",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "迟到索引补收；论文把 densification 的后代关系转化为结构化 dropout 和预算重分配，但未找到代码。",
+      "sources": [
+        "https://arxiv.org/abs/2611.17752",
+        "https://arxiv.org/html/2611.17752v1"
+      ],
+      "eventId": "arxiv:2611.17752"
+    },
+    {
+      "id": "arxiv:2611.17957",
+      "title": "MacroGS: Macro-Pixel Shared Gaussian Primitives for Arbitrary-Scale Light Field Super-Resolution",
+      "eventDate": "2026-11-13",
+      "reportDate": "2026-11-17",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "迟到索引补收；跨视角共享 primitives 的光场解码设计值得跟踪，但未找到可核查代码或权重。",
+      "sources": [
+        "https://arxiv.org/abs/2611.17957"
+      ],
+      "eventId": "arxiv:2611.17957"
+    },
+    {
+      "id": "reddit-storysplat-2.5-repeat-2026-11-17",
+      "title": "StorySplat 2.5 作者社区帖再次出现",
+      "eventDate": "2026-10-20",
+      "reportDate": "2026-11-17",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "作者帖仍描述同一 2.5 功能和计费，没有新 release 或独立新增事实。",
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/comments/1xagbqb/storysplat_25_is_out_real_shadows_clouds_weather/",
+        "https://storysplat.com/"
+      ],
+      "exclusionEvidence": "docs/reading/2026-10-20.md 已归档 StorySplat 2.5；当前官方页与作者帖没有给出晚于该事件的新版本标识。"
+    },
+    {
+      "id": "reddit-colmap-wasm-repeat-2026-11-17",
+      "title": "colmap-wasm 作者社区帖再次出现",
+      "eventDate": "2026-10-20",
+      "reportDate": "2026-11-17",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "仓库与 0.1.0 能力已按事件日期归档，本轮帖子没有提供新版本或独立新增能力。",
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/comments/1xa8ywt/i_ported_colmap_to_webassembly_so_it_can_run_in/",
+        "https://github.com/obraia/colmap-wasm",
+        "https://colmap.wasm.obraia.dev/"
+      ],
+      "exclusionEvidence": "docs/reading/2026-10-20.md 已归档 colmap-wasm 0.1.0；本轮仓库说明仍是同一 COLMAP 4.2.1 / WebGPU SIFT / global mapper 能力。"
+    },
+    {
+      "id": "reddit-spark-qt-2026-11-17",
+      "title": "社区展示 Spark 到 Qt 6 原生 C++ 的移植",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-17",
+      "importance": "standard",
+      "disposition": "deferred",
+      "reason": "本轮只取得单一社区展示标题，尚未核到稳定仓库、release、许可和上游兼容边界；留待下一窗口核验。",
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/"
+      ]
+    },
+    {
+      "id": "reddit-portalcam-spirula-2026-11-17",
+      "title": "PortalCam、DJI Osmo 360 与 Spirula Studio 的 WIP 展示",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-17",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "目前是单一社区 WIP 展示，没有可复用发布、参数或独立技术结论。",
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/"
+      ],
+      "exclusionEvidence": "Reddit 列表只提供 WIP 展示标题和预览，未给出版本、代码或一手技术文档。"
+    }
+  ]
+}

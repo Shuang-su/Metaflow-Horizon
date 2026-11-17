@@ -49,8 +49,24 @@
         "homepage_url": "https://metaflow.shuang-su.com/horizon/",
         "detail_url": "https://metaflow.shuang-su.com/horizon/daily/2026/11/15/"
       }
+    },
+    {
+      "key": "scheduled:2026-11-16:11279e223d8ad4e50d5ff80222a63af739a3f9cf",
+      "date": "2026-11-16",
+      "mode": "scheduled",
+      "commit": "11279e223d8ad4e50d5ff80222a63af739a3f9cf",
+      "verified_at": "2026-11-17T00:45:03.389008+00:00",
+      "state": "deployed-and-read-back",
+      "url": "https://metaflow.shuang-su.com/horizon/",
+      "readback": {
+        "report_id": "gsd-2026-11-16",
+        "content_sha256": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
+        "latest_report_date": "2026-11-16",
+        "homepage_url": "https://metaflow.shuang-su.com/horizon/",
+        "detail_url": "https://metaflow.shuang-su.com/horizon/daily/2026/11/16/"
+      }
     }
   ],
-  "scheduled_success_streak": 0,
+  "scheduled_success_streak": 1,
   "status": "observing"
 }
