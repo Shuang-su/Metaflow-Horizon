@@ -1,7 +1,199 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-17",
   "daily": [
+    {
+      "id": "gsd-2026-11-17",
+      "contentHash": "832c131ce875f03ac934904aba190c69014b76a145d4ee33a7d612149e398050",
+      "date": "2026-11-17",
+      "title": "Horizon 行业日报 — 2026-11-17",
+      "headline": "Splat Repair 开放表面修补，动态 SPZ 出现首个互操作草案",
+      "summary": "Splat Repair 0.1.0 把删物后的几何与外观补全做成开源工具；Vauss、Terra 分别推进端到端重建和影视协作。Niantic 的动态 SPZ 仍是高内存、无流式的 WIP，PlayCanvas 两项修复也尚未进入正式版本。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-17.md",
+      "sourceCount": 2,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+          "anchor": "event-splat-repair-v0-1-0",
+          "kind": "tool",
+          "source": "https://github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+          "title": "Splat Repair 0.1.0 把删物后的表面补回高斯资产",
+          "summary": "Splat Repair 同时重建几何、颜色与视角相关外观，Fast Fill 适合墙面、标牌和缓曲面，Deep Fill 再用 LaMa 处理更难的图像内容。它以 Apache-2.0 发布，能读写 PLY、.splat 与 SPZ；PLY 是当前 bit-exact 工作格式。",
+          "date": "2026-11-17",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+          "anchor": "event-vauss-v0-1-25-rc",
+          "kind": "tool",
+          "source": "https://github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+          "title": "Vauss 把视频、训练、评估和多种交付物合成一条 CLI",
+          "summary": "Vauss 从视频检查、选帧和相机求解一路输出 viewer、SPZ、Blender pack、体素游戏与碰撞目录。固定流程不需要 AI 账号，Codex、Claude Code 和 MCP 客户端也能调用同一工具；trainer 经 Vulkan、Metal 或 DX12 运行，不强制 CUDA。",
+          "date": "2026-11-17",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "districtcinema.com/terra-public-launch-2026-11-16",
+          "anchor": "event-terra-public-launch",
+          "kind": "news",
+          "source": "https://districtcinema.com/terra",
+          "title": "Terra 向影视团队开放浏览器三维协作工作区",
+          "summary": "Terra 把高斯、常见模型、Cesium 3D Tiles、HDR 环境、实时协作、测量、批注、机位和 XR 放进同一浏览器产品。免费层可直接开始，Starter 为 29 美元/月，Production 为每成员 79 美元/月；官网同时列出 REST API + OAuth 2.1 与 Enterprise on-prem 选项。",
+          "date": "2026-11-17",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/nianticlabs/spz/pull/117",
+          "anchor": "event-spz-temporal-117",
+          "kind": "tool",
+          "source": "https://github.com/nianticlabs/spz/pull/117",
+          "title": "动态 SPZ 草案保留静态退化路径，也暴露当前成本",
+          "summary": "SPZ_NIANTIC_temporal 把 poster frame 留在核心 SPZ，旧 reader 仍能显示静态画面；新 reader 可读取位置/旋转多项式、不透明度时间窗和最多 8 个刚性 driver。C++、Python、WASM、按时间导出 PLY 与 PlayCanvas viewer 已进入同一 WIP PR。",
+          "date": "2026-11-17",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/playcanvas/supersplat/pull/1109",
+          "anchor": "event-playcanvas-undo-xr-2026-11-17",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/supersplat/pull/1109",
+          "title": "SuperSplat 修正撤销顺序，XR 输入判断下沉 Engine",
+          "summary": "SuperSplat 的组合操作现在按严格后进先出撤销，避免未来依赖同一状态的操作按错误顺序回滚。Viewer 与 Engine 的另一组修复把裸手和“同时暴露 hand skeleton 的控制器”分开，针对模型在原点、传送角度异常、抓取组合键和掌心菜单等 SteamVR 症状。",
+          "date": "2026-11-17",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "nico-hartl.itch.io/splat-prep-v1.0.1",
+          "anchor": "event-splat-prep-v1-0-1",
+          "kind": "tool",
+          "source": "https://nico-hartl.itch.io/splat-prep-import-fix-clean-up-and-export-gaussian-splats",
+          "title": "Splat Prep 为 Blender 5.3 补齐高斯专用变换和导出",
+          "summary": "Splat Prep 1.0.1 修正普通 Apply Transform/Join 不会同步方向、尺度和球谐的问题，并加入 compressed PLY、SPZ、.splat 导出、floater 清理、裁切、调色、proxy mesh 与 mesh-to-splats。售价为 19 美元，要求 Blender 5.3+，作者只在 Windows 5.3.0 测试。",
+          "date": "2026-11-17",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.17752",
+          "anchor": "event-arxiv-2611-17752",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.17752",
+          "title": "Lineage-aware Dropout 用高斯家族约束稀疏视图过拟合",
+          "summary": "SLD 把同一 founder 经 clone/split 产生的后代视作家族，在结构阶段整体 dropout，后期再切回单点 dropout；LBD 用家族梯度和后代数量重新分配固定 densification 预算。LLFF 3-view 的作者结果为 20.70 dB，比 DropGaussian 高 0.37 dB，但 SSIM 不高于全部对照。",
+          "date": "2026-11-17",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.17957",
+          "anchor": "event-arxiv-2611-17957",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.17957",
+          "title": "MacroGS 让光场多视角共享一组宏像素 Gaussian",
+          "summary": "MacroGS 为一个 macro pixel 的多视角观测共同预测 primitives，再用视差和视角条件调整位置与外观，避免 primitive 数随输出视角数线性增长。作者在 5 个 benchmark 上报告固定倍率质量提升，并给出相对隐式 decoder 2—10×、相对逐视角 Gaussian baseline 10—18× 的速度区间。",
+          "date": "2026-11-17",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 4,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、产品官网、论文原页、GitHub 提交、PR、release 与许可文件编辑阅读版。未实际运行或购买软件、上传资产、复现论文与性能数据，也未在 Steam Frame 等目标设备上验收；作者 benchmark、主干提交和开放草案均按其边界表述。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-17.md",
+        "contentHash": "cf27187b5bf2f63c815f1260235f6712389e47a6be95b1a22d821f31226155f4"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17714,148 @@
   ],
   "entries": [
     {
+      "id": "arxiv:2611.17752",
+      "kind": "paper",
+      "date": "2026-11-17",
+      "title": "论文与研究",
+      "summary": "SLD 把同一 founder 经 clone/split 产生的后代视作家族，在结构阶段整体 dropout，后期再切回单点 dropout；LBD 用家族梯度和后代数量重新分配固定 densification 预算。LLFF 3-view 的作者结果为 20.70 dB，比 DropGaussian 高 0.37 dB，但 SSIM 不高于全部对照。",
+      "source": "https://arxiv.org/abs/2611.17752",
+      "anchor": "event-arxiv-2611-17752",
+      "topics": []
+    },
+    {
+      "id": "arxiv:2611.17957",
+      "kind": "paper",
+      "date": "2026-11-17",
+      "title": "Stage-wise Lineage-aware Dropout 把 densification 后代关系用于稀疏视图正则化",
+      "summary": "MacroGS 为一个 macro pixel 的多视角观测共同预测 primitives，再用视差和视角条件调整位置与外观，避免 primitive 数随输出视角数线性增长。作者在 5 个 benchmark 上报告固定倍率质量提升，并给出相对隐式 decoder 2—10×、相对逐视角 Gaussian baseline 10—18× 的速度区间。",
+      "source": "https://arxiv.org/abs/2611.17957",
+      "anchor": "event-arxiv-2611-17957",
+      "topics": [
+        "xr"
+      ]
+    },
+    {
+      "id": "districtcinema.com/terra-public-launch-2026-11-16",
+      "anchor": "event-terra-public-launch",
+      "kind": "news",
+      "source": "https://districtcinema.com/terra",
+      "title": "Terra 向影视团队开放浏览器三维协作工作区",
+      "summary": "Terra 把高斯、常见模型、Cesium 3D Tiles、HDR 环境、实时协作、测量、批注、机位和 XR 放进同一浏览器产品。免费层可直接开始，Starter 为 29 美元/月，Production 为每成员 79 美元/月；官网同时列出 REST API + OAuth 2.1 与 Enterprise on-prem 选项。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/nianticlabs/spz/pull/117",
+      "anchor": "event-spz-temporal-117",
+      "kind": "tool",
+      "source": "https://github.com/nianticlabs/spz/pull/117",
+      "title": "动态 SPZ 草案保留静态退化路径，也暴露当前成本",
+      "summary": "SPZ_NIANTIC_temporal 把 poster frame 留在核心 SPZ，旧 reader 仍能显示静态画面；新 reader 可读取位置/旋转多项式、不透明度时间窗和最多 8 个刚性 driver。C++、Python、WASM、按时间导出 PLY 与 PlayCanvas viewer 已进入同一 WIP PR。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+      "anchor": "event-splat-repair-v0-1-0",
+      "kind": "tool",
+      "source": "https://github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+      "title": "Splat Repair 0.1.0 把删物后的表面补回高斯资产",
+      "summary": "Splat Repair 同时重建几何、颜色与视角相关外观，Fast Fill 适合墙面、标牌和缓曲面，Deep Fill 再用 LaMa 处理更难的图像内容。它以 Apache-2.0 发布，能读写 PLY、.splat 与 SPZ；PLY 是当前 bit-exact 工作格式。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/supersplat/pull/1109",
+      "anchor": "event-playcanvas-undo-xr-2026-11-17",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/supersplat/pull/1109",
+      "title": "SuperSplat 修正撤销顺序，XR 输入判断下沉 Engine",
+      "summary": "SuperSplat 的组合操作现在按严格后进先出撤销，避免未来依赖同一状态的操作按错误顺序回滚。Viewer 与 Engine 的另一组修复把裸手和“同时暴露 hand skeleton 的控制器”分开，针对模型在原点、传送角度异常、抓取组合键和掌心菜单等 SteamVR 症状。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+      "anchor": "event-vauss-v0-1-25-rc",
+      "kind": "tool",
+      "source": "https://github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+      "title": "Vauss 把视频、训练、评估和多种交付物合成一条 CLI",
+      "summary": "Vauss 从视频检查、选帧和相机求解一路输出 viewer、SPZ、Blender pack、体素游戏与碰撞目录。固定流程不需要 AI 账号，Codex、Claude Code 和 MCP 客户端也能调用同一工具；trainer 经 Vulkan、Metal 或 DX12 运行，不强制 CUDA。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "nico-hartl.itch.io/splat-prep-v1.0.1",
+      "anchor": "event-splat-prep-v1-0-1",
+      "kind": "tool",
+      "source": "https://nico-hartl.itch.io/splat-prep-import-fix-clean-up-and-export-gaussian-splats",
+      "title": "Splat Prep 为 Blender 5.3 补齐高斯专用变换和导出",
+      "summary": "Splat Prep 1.0.1 修正普通 Apply Transform/Join 不会同步方向、尺度和球谐的问题，并加入 compressed PLY、SPZ、.splat 导出、floater 清理、裁切、调色、proxy mesh 与 mesh-to-splats。售价为 19 美元，要求 Blender 5.3+，作者只在 Windows 5.3.0 测试。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31139,26 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-17",
+      "kind": "daily",
+      "title": "Splat Repair 开放表面修补，动态 SPZ 出现首个互操作草案",
+      "summary": "Splat Repair 0.1.0 把删物后的几何与外观补全做成开源工具；Vauss、Terra 分别推进端到端重建和影视协作。Niantic 的动态 SPZ 仍是高内存、无流式的 WIP，PlayCanvas 两项修复也尚未进入正式版本。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/17/",
+      "text": "Splat Repair 0.1.0 把删物后的表面补回高斯资产\nSplat Repair 同时重建几何、颜色与视角相关外观，Fast Fill 适合墙面、标牌和缓曲面，Deep Fill 再用 LaMa 处理更难的图像内容。它以 Apache-2.0 发布，能读写 PLY、.splat 与 SPZ；PLY 是当前 bit-exact 工作格式。\n这是单作者八天开发的第一个公开版，只在 Windows 与 RTX 4090 路径测试。普通路径仍需 Node.js 22+ 与 Python 3.10—3.13，Deep Fill 还要 NVIDIA、CUDA、MSVC 和约 3 GB 下载；先对副本做规则洞口、撤销和往返检查。\n发行说明 · 代码与安装边界\nVauss 把视频、训练、评估和多种交付物合成一条 CLI\nVauss 从视频检查、选帧和相机求解一路输出 viewer、SPZ、Blender pack、体素游戏与碰撞目录。固定流程不需要 AI 账号，Codex、Claude Code 和 MCP 客户端也能调用同一工具；trainer 经 Vulkan、Metal 或 DX12 运行，不强制 CUDA。\n作者的 5.4× 来自 L40S、7 个 Mip-NeRF 360 场景、1M splat 上限和 30k steps，不能脱离条件外推。原生代码使用允许免费商用但限制修改版分发和托管服务的 Preview License，不属于开源；采用前应同时做配对 benchmark 与许可审核。\n候选发行版 · 许可原文\nTerra 向影视团队开放浏览器三维协作工作区\nTerra 把高斯、常见模型、Cesium 3D Tiles、HDR 环境、实时协作、测量、批注、机位和 XR 放进同一浏览器产品。免费层可直接开始，Starter 为 29 美元/月，Production 为每成员 79 美元/月；官网同时列出 REST API + OAuth 2.1 与 Enterprise on-prem 选项。\n本期只核对公开资料，没有上传资产或评测延迟。团队应先用非敏感样片确认 PLY/SPZ/SOG/LOD 的显示与回读、原件和优化件下载权限、API 实际范围及数据管理，再决定是否把它作为勘景或 set planning 的共享层。\n产品、格式与价格\n动态 SPZ 草案保留静态退化路径，也暴露当前成本\nSPZ_NIANTIC_temporal 把 poster frame 留在核心 SPZ，旧 reader 仍能显示静态画面；新 reader 可读取位置/旋转多项式、不透明度时间窗和最多 8 个刚性 driver。C++、Python、WASM、按时间导出 PLY 与 PlayCanvas viewer 已进入同一 WIP PR。\n当前实现没有测试、frame reuse、分段、流式或 GPU 求值，示例转换峰值约 10 GB 内存。它足够让格式和播放器作者验证互操作，却不足以支撑网页大场景、随机访问和生产交付承诺。\n草案与实现讨论\nSuperSplat 修正撤销顺序，XR 输入判断下沉 Engine\nSuperSplat 的组合操作现在按严格后进先出撤销，避免未来依赖同一状态的操作按错误顺序回滚。Viewer 与 Engine 的另一组修复把裸手和“同时暴露 hand skeleton 的控制器”分开，针对模型在原点、传送角度异常、抓取组合键和掌心菜单等 SteamVR 症状。\n这些都是主干变化：SuperSplat、Viewer 和 Engine 都没有新 tag。维护者验证了模拟 SteamVR 控制器与 Quest 3，没有在真实 Steam Frame 上测试；普通项目可等待 release，XR 项目应按裸手/控制器、session restart 和目标设备建立测试矩阵。\nSuperSplat 撤销修复 · Viewer XR 修复 · Engine 上游修复\nSplat Prep 为 Blender 5.3 补齐高斯专用变换和导出\nSplat Prep 1.0.1 修正普通 Apply Transform/Join 不会同步方向、尺度和球谐的问题，并加入 compressed PLY、SPZ、.splat 导出、floater 清理、裁切、调色、proxy mesh 与 mesh-to-splats。售价为 19 美元，要求 Blender 5.3+，作者只在 Windows 5.3.0 测试。\nSPZ、compressed PLY 和 .splat 都有损，.splat 不保存视角相关颜色；公开商店页也没有给出源码许可。它适合现有 Blender 高斯资产做转换验证，但不是 Blender 官方 exporter。\n商店、功能与兼容范围\nLineage-aware Dropout 用高斯家族约束稀疏视图过拟合\nSLD 把同一 founder 经 clone/split 产生的后代视作家族，在结构阶段整体 dropout，后期再切回单点 dropout；LBD 用家族梯度和后代数量重新分配固定 densification 预算。LLFF 3-view 的作者结果为 20.70 dB，比 DropGaussian 高 0.37 dB，但 SSIM 不高于全部对照。\n实验基于 DropGaussian 协议并对复现实验平均 3 次，本轮没有找到作者代码或权重。它目前是可借鉴的训练结构设计，不是可以直接安装的稀疏视图方案。\n论文原文\nMacroGS 让光场多视角共享一组宏像素 Gaussian\nMacroGS 为一个 macro pixel 的多视角观测共同预测 primitives，再用视差和视角条件调整位置与外观，避免 primitive 数随输出视角数线性增长。作者在 5 个 benchmark 上报告固定倍率质量提升，并给出相对隐式 decoder 2—10×、相对逐视角 Gaussian baseline 10—18× 的速度区间。\n摘要不足以统一分辨率、视角网格、encoder、GPU 与质量约束，本轮也没有找到可核查代码或权重。它针对光场超分 decoder，不应直接宣传成场景 3DGS trainer 的通用加速。\n论文原文"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32459,148 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "arxiv:2611.17752",
+      "kind": "paper",
+      "title": "论文与研究",
+      "summary": "SLD 把同一 founder 经 clone/split 产生的后代视作家族，在结构阶段整体 dropout，后期再切回单点 dropout；LBD 用家族梯度和后代数量重新分配固定 densification 预算。LLFF 3-view 的作者结果为 20.70 dB，比 DropGaussian 高 0.37 dB，但 SSIM 不高于全部对照。",
+      "date": "2026-11-17",
+      "topics": [],
+      "url": "/daily/2026/11/17/#event-arxiv-2611-17752",
+      "text": "论文与研究 SLD 把同一 founder 经 clone/split 产生的后代视作家族，在结构阶段整体 dropout，后期再切回单点 dropout；LBD 用家族梯度和后代数量重新分配固定 densification 预算。LLFF 3-view 的作者结果为 20.70 dB，比 DropGaussian 高 0.37 dB，但 SSIM 不高于全部对照。 https://arxiv.org/abs/2611.17752 Lineage-aware Dropout 用高斯家族约束稀疏视图过拟合 ## Lineage-aware Dropout 用高斯家族约束稀疏视图过拟合\n\nSLD 把同一 founder 经 clone/split 产生的后代视作家族，在结构阶段整体 dropout，后期再切回单点 dropout；LBD 用家族梯度和后代数量重新分配固定 densification 预算。LLFF 3-view 的作者结果为 20.70 dB，比 DropGaussian 高 0.37 dB，但 SSIM 不高于全部对照。\n\n实验基于 DropGaussian 协议并对复现实验平均 3 次，本轮没有找到作者代码或权重。它目前是可借鉴的训练结构设计，不是可以直接安装的稀疏视图方案。\n\n[论文原文](https://arxiv.org/abs/2611.17752)"
+    },
+    {
+      "id": "arxiv:2611.17957",
+      "kind": "paper",
+      "title": "Stage-wise Lineage-aware Dropout 把 densification 后代关系用于稀疏视图正则化",
+      "summary": "MacroGS 为一个 macro pixel 的多视角观测共同预测 primitives，再用视差和视角条件调整位置与外观，避免 primitive 数随输出视角数线性增长。作者在 5 个 benchmark 上报告固定倍率质量提升，并给出相对隐式 decoder 2—10×、相对逐视角 Gaussian baseline 10—18× 的速度区间。",
+      "date": "2026-11-17",
+      "topics": [
+        "xr"
+      ],
+      "url": "/daily/2026/11/17/#event-arxiv-2611-17957",
+      "text": "Stage-wise Lineage-aware Dropout 把 densification 后代关系用于稀疏视图正则化 MacroGS 为一个 macro pixel 的多视角观测共同预测 primitives，再用视差和视角条件调整位置与外观，避免 primitive 数随输出视角数线性增长。作者在 5 个 benchmark 上报告固定倍率质量提升，并给出相对隐式 decoder 2—10×、相对逐视角 Gaussian baseline 10—18× 的速度区间。 https://arxiv.org/abs/2611.17957 MacroGS 让光场多视角共享一组宏像素 Gaussian ## MacroGS 让光场多视角共享一组宏像素 Gaussian\n\nMacroGS 为一个 macro pixel 的多视角观测共同预测 primitives，再用视差和视角条件调整位置与外观，避免 primitive 数随输出视角数线性增长。作者在 5 个 benchmark 上报告固定倍率质量提升，并给出相对隐式 decoder 2—10×、相对逐视角 Gaussian baseline 10—18× 的速度区间。\n\n摘要不足以统一分辨率、视角网格、encoder、GPU 与质量约束，本轮也没有找到可核查代码或权重。它针对光场超分 decoder，不应直接宣传成场景 3DGS trainer 的通用加速。\n\n[论文原文](https://arxiv.org/abs/2611.17957)"
+    },
+    {
+      "id": "districtcinema.com/terra-public-launch-2026-11-16",
+      "kind": "news",
+      "title": "Terra 向影视团队开放浏览器三维协作工作区",
+      "summary": "Terra 把高斯、常见模型、Cesium 3D Tiles、HDR 环境、实时协作、测量、批注、机位和 XR 放进同一浏览器产品。免费层可直接开始，Starter 为 29 美元/月，Production 为每成员 79 美元/月；官网同时列出 REST API + OAuth 2.1 与 Enterprise on-prem 选项。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/17/#event-terra-public-launch",
+      "text": "Terra 向影视团队开放浏览器三维协作工作区 Terra 把高斯、常见模型、Cesium 3D Tiles、HDR 环境、实时协作、测量、批注、机位和 XR 放进同一浏览器产品。免费层可直接开始，Starter 为 29 美元/月，Production 为每成员 79 美元/月；官网同时列出 REST API + OAuth 2.1 与 Enterprise on-prem 选项。 https://districtcinema.com/terra Terra 向影视团队开放浏览器三维协作工作区 ## Terra 向影视团队开放浏览器三维协作工作区\n\nTerra 把高斯、常见模型、Cesium 3D Tiles、HDR 环境、实时协作、测量、批注、机位和 XR 放进同一浏览器产品。免费层可直接开始，Starter 为 29 美元/月，Production 为每成员 79 美元/月；官网同时列出 REST API + OAuth 2.1 与 Enterprise on-prem 选项。\n\n本期只核对公开资料，没有上传资产或评测延迟。团队应先用非敏感样片确认 PLY/SPZ/SOG/LOD 的显示与回读、原件和优化件下载权限、API 实际范围及数据管理，再决定是否把它作为勘景或 set planning 的共享层。\n\n[产品、格式与价格](https://districtcinema.com/terra)"
+    },
+    {
+      "id": "github.com/nianticlabs/spz/pull/117",
+      "kind": "tool",
+      "title": "动态 SPZ 草案保留静态退化路径，也暴露当前成本",
+      "summary": "SPZ_NIANTIC_temporal 把 poster frame 留在核心 SPZ，旧 reader 仍能显示静态画面；新 reader 可读取位置/旋转多项式、不透明度时间窗和最多 8 个刚性 driver。C++、Python、WASM、按时间导出 PLY 与 PlayCanvas viewer 已进入同一 WIP PR。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/17/#event-spz-temporal-117",
+      "text": "动态 SPZ 草案保留静态退化路径，也暴露当前成本 SPZ_NIANTIC_temporal 把 poster frame 留在核心 SPZ，旧 reader 仍能显示静态画面；新 reader 可读取位置/旋转多项式、不透明度时间窗和最多 8 个刚性 driver。C++、Python、WASM、按时间导出 PLY 与 PlayCanvas viewer 已进入同一 WIP PR。 https://github.com/nianticlabs/spz/pull/117 动态 SPZ 草案保留静态退化路径，也暴露当前成本 ## 动态 SPZ 草案保留静态退化路径，也暴露当前成本\n\n`SPZ_NIANTIC_temporal` 把 poster frame 留在核心 SPZ，旧 reader 仍能显示静态画面；新 reader 可读取位置/旋转多项式、不透明度时间窗和最多 8 个刚性 driver。C++、Python、WASM、按时间导出 PLY 与 PlayCanvas viewer 已进入同一 WIP PR。\n\n当前实现没有测试、frame reuse、分段、流式或 GPU 求值，示例转换峰值约 10 GB 内存。它足够让格式和播放器作者验证互操作，却不足以支撑网页大场景、随机访问和生产交付承诺。\n\n[草案与实现讨论](https://github.com/nianticlabs/spz/pull/117)"
+    },
+    {
+      "id": "github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0",
+      "kind": "tool",
+      "title": "Splat Repair 0.1.0 把删物后的表面补回高斯资产",
+      "summary": "Splat Repair 同时重建几何、颜色与视角相关外观，Fast Fill 适合墙面、标牌和缓曲面，Deep Fill 再用 LaMa 处理更难的图像内容。它以 Apache-2.0 发布，能读写 PLY、.splat 与 SPZ；PLY 是当前 bit-exact 工作格式。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/17/#event-splat-repair-v0-1-0",
+      "text": "Splat Repair 0.1.0 把删物后的表面补回高斯资产 Splat Repair 同时重建几何、颜色与视角相关外观，Fast Fill 适合墙面、标牌和缓曲面，Deep Fill 再用 LaMa 处理更难的图像内容。它以 Apache-2.0 发布，能读写 PLY、.splat 与 SPZ；PLY 是当前 bit-exact 工作格式。 https://github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0 Splat Repair 0.1.0 把删物后的表面补回高斯资产 ## Splat Repair 0.1.0 把删物后的表面补回高斯资产\n\nSplat Repair 同时重建几何、颜色与视角相关外观，Fast Fill 适合墙面、标牌和缓曲面，Deep Fill 再用 LaMa 处理更难的图像内容。它以 Apache-2.0 发布，能读写 PLY、`.splat` 与 SPZ；PLY 是当前 bit-exact 工作格式。\n\n这是单作者八天开发的第一个公开版，只在 Windows 与 RTX 4090 路径测试。普通路径仍需 Node.js 22+ 与 Python 3.10—3.13，Deep Fill 还要 NVIDIA、CUDA、MSVC 和约 3 GB 下载；先对副本做规则洞口、撤销和往返检查。\n\n[发行说明](https://github.com/NicolasDrum/splat-repair/releases/tag/v0.1.0) · [代码与安装边界](https://github.com/NicolasDrum/splat-repair)"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat/pull/1109",
+      "kind": "tool",
+      "title": "SuperSplat 修正撤销顺序，XR 输入判断下沉 Engine",
+      "summary": "SuperSplat 的组合操作现在按严格后进先出撤销，避免未来依赖同一状态的操作按错误顺序回滚。Viewer 与 Engine 的另一组修复把裸手和“同时暴露 hand skeleton 的控制器”分开，针对模型在原点、传送角度异常、抓取组合键和掌心菜单等 SteamVR 症状。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/17/#event-playcanvas-undo-xr-2026-11-17",
+      "text": "SuperSplat 修正撤销顺序，XR 输入判断下沉 Engine SuperSplat 的组合操作现在按严格后进先出撤销，避免未来依赖同一状态的操作按错误顺序回滚。Viewer 与 Engine 的另一组修复把裸手和“同时暴露 hand skeleton 的控制器”分开，针对模型在原点、传送角度异常、抓取组合键和掌心菜单等 SteamVR 症状。 https://github.com/playcanvas/supersplat/pull/1109 SuperSplat 修正撤销顺序，XR 输入判断下沉 Engine ## SuperSplat 修正撤销顺序，XR 输入判断下沉 Engine\n\nSuperSplat 的组合操作现在按严格后进先出撤销，避免未来依赖同一状态的操作按错误顺序回滚。Viewer 与 Engine 的另一组修复把裸手和“同时暴露 hand skeleton 的控制器”分开，针对模型在原点、传送角度异常、抓取组合键和掌心菜单等 SteamVR 症状。\n\n这些都是主干变化：SuperSplat、Viewer 和 Engine 都没有新 tag。维护者验证了模拟 SteamVR 控制器与 Quest 3，没有在真实 Steam Frame 上测试；普通项目可等待 release，XR 项目应按裸手/控制器、session restart 和目标设备建立测试矩阵。\n\n[SuperSplat 撤销修复](https://github.com/playcanvas/supersplat/pull/1109) · [Viewer XR 修复](https://github.com/playcanvas/supersplat-viewer/pull/368) · [Engine 上游修复](https://github.com/playcanvas/engine/pull/10053)"
+    },
+    {
+      "id": "github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc",
+      "kind": "tool",
+      "title": "Vauss 把视频、训练、评估和多种交付物合成一条 CLI",
+      "summary": "Vauss 从视频检查、选帧和相机求解一路输出 viewer、SPZ、Blender pack、体素游戏与碰撞目录。固定流程不需要 AI 账号，Codex、Claude Code 和 MCP 客户端也能调用同一工具；trainer 经 Vulkan、Metal 或 DX12 运行，不强制 CUDA。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/17/#event-vauss-v0-1-25-rc",
+      "text": "Vauss 把视频、训练、评估和多种交付物合成一条 CLI Vauss 从视频检查、选帧和相机求解一路输出 viewer、SPZ、Blender pack、体素游戏与碰撞目录。固定流程不需要 AI 账号，Codex、Claude Code 和 MCP 客户端也能调用同一工具；trainer 经 Vulkan、Metal 或 DX12 运行，不强制 CUDA。 https://github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc Vauss 把视频、训练、评估和多种交付物合成一条 CLI ## Vauss 把视频、训练、评估和多种交付物合成一条 CLI\n\nVauss 从视频检查、选帧和相机求解一路输出 viewer、SPZ、Blender pack、体素游戏与碰撞目录。固定流程不需要 AI 账号，Codex、Claude Code 和 MCP 客户端也能调用同一工具；trainer 经 Vulkan、Metal 或 DX12 运行，不强制 CUDA。\n\n作者的 5.4× 来自 L40S、7 个 Mip-NeRF 360 场景、1M splat 上限和 30k steps，不能脱离条件外推。原生代码使用允许免费商用但限制修改版分发和托管服务的 Preview License，不属于开源；采用前应同时做配对 benchmark 与许可审核。\n\n[候选发行版](https://github.com/voyager-so/vauss/releases/tag/vauss-v0.1.25-rc) · [许可原文](https://github.com/voyager-so/vauss/blob/main/LICENSE)"
+    },
+    {
+      "id": "nico-hartl.itch.io/splat-prep-v1.0.1",
+      "kind": "tool",
+      "title": "Splat Prep 为 Blender 5.3 补齐高斯专用变换和导出",
+      "summary": "Splat Prep 1.0.1 修正普通 Apply Transform/Join 不会同步方向、尺度和球谐的问题，并加入 compressed PLY、SPZ、.splat 导出、floater 清理、裁切、调色、proxy mesh 与 mesh-to-splats。售价为 19 美元，要求 Blender 5.3+，作者只在 Windows 5.3.0 测试。",
+      "date": "2026-11-17",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/17/#event-splat-prep-v1-0-1",
+      "text": "Splat Prep 为 Blender 5.3 补齐高斯专用变换和导出 Splat Prep 1.0.1 修正普通 Apply Transform/Join 不会同步方向、尺度和球谐的问题，并加入 compressed PLY、SPZ、.splat 导出、floater 清理、裁切、调色、proxy mesh 与 mesh-to-splats。售价为 19 美元，要求 Blender 5.3+，作者只在 Windows 5.3.0 测试。 https://nico-hartl.itch.io/splat-prep-import-fix-clean-up-and-export-gaussian-splats Splat Prep 为 Blender 5.3 补齐高斯专用变换和导出 ## Splat Prep 为 Blender 5.3 补齐高斯专用变换和导出\n\nSplat Prep 1.0.1 修正普通 Apply Transform/Join 不会同步方向、尺度和球谐的问题，并加入 compressed PLY、SPZ、`.splat` 导出、floater 清理、裁切、调色、proxy mesh 与 mesh-to-splats。售价为 19 美元，要求 Blender 5.3+，作者只在 Windows 5.3.0 测试。\n\nSPZ、compressed PLY 和 `.splat` 都有损，`.splat` 不保存视角相关颜色；公开商店页也没有给出源码许可。它适合现有 Blender 高斯资产做转换验证，但不是 Blender 官方 exporter。\n\n[商店、功能与兼容范围](https://nico-hartl.itch.io/splat-prep-import-fix-clean-up-and-export-gaussian-splats)"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",

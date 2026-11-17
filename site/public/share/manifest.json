@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-17",
+    "sha256": "f856b3d7f6401f65862275d6d6ffba608eca34837928c7ec4fb8f632b018c4ef"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-17": {
+      "date": "2026-11-17",
+      "url": "/share/2026-11-17.png",
+      "title": "Splat Repair 开放表面修补，动态 SPZ 出现首个互操作草案",
+      "contentHash": "832c131ce875f03ac934904aba190c69014b76a145d4ee33a7d612149e398050",
+      "inputHash": "025b8ef843c4568a687987d0a66e3555b653ced46ed921a247c0e676688d9aa8",
+      "sha256": "f856b3d7f6401f65862275d6d6ffba608eca34837928c7ec4fb8f632b018c4ef",
+      "bytes": 29745
     }
   }
 }
