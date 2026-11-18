@@ -1,0 +1,418 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-18",
+  "mode": "scheduled",
+  "window": {
+    "start": "2026-11-16T08:19:00+08:00",
+    "end": "2026-11-18T08:35:00+08:00"
+  },
+  "reviewedAt": "2026-11-18T08:35:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields",
+      "status": "candidates",
+      "checkedAt": "2026-11-18T08:20:00+08:00",
+      "urls": [
+        "https://radiancefields.com/",
+        "https://radiancefields.com/platforms"
+      ],
+      "candidateIds": [
+        "carla.org/release-1.0-nurec-2026-11-17",
+        "volinga.ai/arquimea-ai-transition-2026-11-16",
+        "metaverse-standards.org/volumetric-media-town-hall-2026-11-24"
+      ],
+      "urlResults": [
+        {
+          "url": "https://radiancefields.com/",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:19:30+08:00"
+        },
+        {
+          "url": "https://radiancefields.com/platforms",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-18T08:20:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "official",
+      "status": "candidates",
+      "checkedAt": "2026-11-18T08:24:00+08:00",
+      "urls": [
+        "https://blog.playcanvas.com/",
+        "https://www.blender.org/news/"
+      ],
+      "candidateIds": [
+        "epicgames.com/ue-5.9-preview-gaussian-splat-asset",
+        "carla.org/release-1.0-nurec-2026-11-17",
+        "volinga.ai/arquimea-ai-transition-2026-11-16",
+        "cesium.com/3d-tiles-2.0-vote-2026-11-16"
+      ],
+      "gap": "Blender News 返回 HTTP 403；PlayCanvas 博客可读但最新文章仍是 11 月 9 日。UE、CARLA、Volinga 与 Cesium 变化改由各自官方发布页和文档核验。",
+      "urlResults": [
+        {
+          "url": "https://blog.playcanvas.com/",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-18T08:23:30+08:00"
+        },
+        {
+          "url": "https://www.blender.org/news/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-18T08:24:00+08:00",
+          "gap": "HTTP 403，未取得可验证正文。"
+        }
+      ],
+      "additionalChecks": [
+        {
+          "url": "https://dev.epicgames.com/community/learning/tutorials/LeGVo/salpicaduras-gaussianas-en-unreal-engine-5-9-preview",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:22:00+08:00"
+        },
+        {
+          "url": "https://carla.org/2026/11/17/release-1.0/",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:22:30+08:00"
+        },
+        {
+          "url": "https://www.volinga.ai/insights/volinga-begins-a-new-chapter-with-arquimea-ai/",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:23:00+08:00"
+        },
+        {
+          "url": "https://cesium.com/blog/2026/11/16/cesium-at-iitsec-2026/",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:23:20+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "x",
+      "status": "unavailable",
+      "checkedAt": "2026-11-18T08:26:00+08:00",
+      "urls": [
+        "https://x.com/radiancefields",
+        "https://x.com/playcanvas",
+        "https://x.com/willeastcott",
+        "https://x.com/valigurskym"
+      ],
+      "candidateIds": [],
+      "gap": "4 个登记账号分别返回 HTTP 403 或 DisabledError；没有把登录外壳、摘要或失败访问写成无新增，候选改由作者官网、产品文档与 GitHub 原始记录核验。",
+      "urlResults": [
+        {
+          "url": "https://x.com/radiancefields",
+          "status": "unavailable",
+          "checkedAt": "2026-11-18T08:25:00+08:00",
+          "gap": "DisabledError，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/playcanvas",
+          "status": "unavailable",
+          "checkedAt": "2026-11-18T08:25:20+08:00",
+          "gap": "HTTP 403，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/willeastcott",
+          "status": "unavailable",
+          "checkedAt": "2026-11-18T08:25:40+08:00",
+          "gap": "HTTP 403，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/valigurskym",
+          "status": "unavailable",
+          "checkedAt": "2026-11-18T08:26:00+08:00",
+          "gap": "DisabledError，无可验证原帖。"
+        }
+      ]
+    },
+    {
+      "sourceId": "research",
+      "status": "unavailable",
+      "checkedAt": "2026-11-18T08:28:00+08:00",
+      "urls": [
+        "https://export.arxiv.org/api/query",
+        "https://huggingface.co/papers"
+      ],
+      "candidateIds": [],
+      "gap": "arXiv export API 仍无法由当前读取器直接读取；Hugging Face Papers 与精确 arXiv/OpenReview 检索未取得晚于已归档窗口、可由原始页面核验且与本期主题直接相关的新论文，不能据此宣称整个论文互联网无新增。",
+      "urlResults": [
+        {
+          "url": "https://export.arxiv.org/api/query",
+          "status": "unavailable",
+          "checkedAt": "2026-11-18T08:27:00+08:00",
+          "gap": "API 端点未能直接读取。"
+        },
+        {
+          "url": "https://huggingface.co/papers",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-18T08:28:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "github",
+      "status": "candidates",
+      "checkedAt": "2026-11-18T08:32:00+08:00",
+      "urls": [
+        "https://github.com/playcanvas/supersplat",
+        "https://github.com/MrNeRF/LichtFeld-Studio"
+      ],
+      "candidateIds": [
+        "github.com/playcanvas/supersplat/releases/tag/v3.9.0",
+        "github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3",
+        "github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183",
+        "github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00"
+      ],
+      "urlResults": [
+        {
+          "url": "https://github.com/playcanvas/supersplat",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:29:00+08:00"
+        },
+        {
+          "url": "https://github.com/MrNeRF/LichtFeld-Studio",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:30:00+08:00"
+        }
+      ],
+      "additionalChecks": [
+        {
+          "url": "https://github.com/playcanvas/supersplat-viewer",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:29:20+08:00"
+        },
+        {
+          "url": "https://github.com/playcanvas/splat-transform",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-18T08:29:40+08:00"
+        },
+        {
+          "url": "https://github.com/playcanvas/engine",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:30:20+08:00"
+        },
+        {
+          "url": "https://github.com/harry7557558/spirula-studio",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:30:40+08:00"
+        },
+        {
+          "url": "https://github.com/nerfstudio-project/gsplat",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:31:00+08:00"
+        },
+        {
+          "url": "https://github.com/carla-simulator/carla",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:31:20+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "community",
+      "status": "candidates",
+      "checkedAt": "2026-11-18T08:34:00+08:00",
+      "urls": [
+        "https://www.reddit.com/r/GaussianSplatting/",
+        "https://www.bilibili.com/",
+        "https://sspai.com/"
+      ],
+      "candidateIds": [
+        "reddit-dinovi-app-unverified-2026-11-18",
+        "reddit-splat-filmed-people-2026-11-18"
+      ],
+      "gap": "B 站重定向到浏览器版本过旧提示；Reddit 的应用自报和一般讨论没有足够一手事实，少数派可读但没有找到日期与原始来源同时清楚的新候选。",
+      "urlResults": [
+        {
+          "url": "https://www.reddit.com/r/GaussianSplatting/",
+          "status": "candidates",
+          "checkedAt": "2026-11-18T08:33:00+08:00"
+        },
+        {
+          "url": "https://www.bilibili.com/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-18T08:33:30+08:00",
+          "gap": "仅返回浏览器版本过旧提示，未取得可验证内容列表。"
+        },
+        {
+          "url": "https://sspai.com/",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-18T08:34:00+08:00"
+        }
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "epicgames.com/ue-5.9-preview-gaussian-splat-asset",
+      "title": "Unreal Engine 5.9 Preview 内置 Gaussian Splat Asset 实验插件",
+      "eventDate": "2026-11-16",
+      "reportDate": "2026-11-18",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "7 日重查补收；Epic 首次在通用 Unreal Engine 中提供自带高斯资产插件，改变第三方插件是唯一入口的选型前提，但仍是 Preview/Experimental。",
+      "sources": [
+        "https://dev.epicgames.com/community/learning/tutorials/LeGVo/salpicaduras-gaussianas-en-unreal-engine-5-9-preview",
+        "https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-9-release-notes",
+        "https://forums.unrealengine.com/t/gaussian-splatting-support-out-of-the-box/2677693"
+      ],
+      "eventId": "epicgames.com/ue-5.9-preview-gaussian-splat-asset"
+    },
+    {
+      "id": "carla.org/release-1.0-nurec-2026-11-17",
+      "title": "CARLA 1.0 接入 NVIDIA NuRec 26.04 神经重建场景",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-18",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "开放自动驾驶模拟器首次把 NuRec 相机与 neural lidar 渲染接进物理、Traffic Manager 和 actor 重放，形成可实际部署的物理 AI 链路。",
+      "sources": [
+        "https://carla.org/2026/11/17/release-1.0/",
+        "https://carla-ue5.readthedocs.io/en/latest/nvidia_nurec/",
+        "https://github.com/carla-simulator/carla/blob/ue58-dev/CHANGELOG.md",
+        "https://developer.nvidia.com/drive/downloads"
+      ],
+      "eventId": "carla.org/release-1.0-nurec-2026-11-17"
+    },
+    {
+      "id": "volinga.ai/arquimea-ai-transition-2026-11-16",
+      "title": "Volinga 并入 Arquimea AI 并停止 Suite 与 Plugin 新许可",
+      "eventDate": "2026-11-16",
+      "reportDate": "2026-11-18",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "7 日重查补收；12 月 1 日的停售、不可续订和停止发行会直接影响现有 Unreal/Suite 项目的维护与迁移。",
+      "sources": [
+        "https://www.volinga.ai/insights/volinga-begins-a-new-chapter-with-arquimea-ai/",
+        "https://radiancefields.com/volinga-to-join-arquimea-ai"
+      ],
+      "eventId": "volinga.ai/arquimea-ai-transition-2026-11-16"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat/releases/tag/v3.9.0",
+      "title": "SuperSplat 3.9.0 正式发布 GSAF 多序列、导入复核与选择可见性重构",
+      "eventDate": "2026-11-18",
+      "reportDate": "2026-11-18",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "北京时间 11 月 18 日发布的正式 tag 把多项主干能力推进到可锁定版本，编辑器、4D 时间线和选择工具都有直接影响。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat/releases/tag/v3.9.0",
+        "https://github.com/playcanvas/supersplat/commit/8b6af56d0b589095b8ab56a1c52444c1f84582af",
+        "https://github.com/playcanvas/supersplat/pull/1110",
+        "https://github.com/playcanvas/supersplat/pull/1111"
+      ],
+      "eventId": "github.com/playcanvas/supersplat/releases/tag/v3.9.0"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3",
+      "title": "SuperSplat Viewer 1.43.3 正式修复 SteamVR 控制器误判",
+      "eventDate": "2026-11-18",
+      "reportDate": "2026-11-18",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "XR 类型识别修复从主干进入正式 tag，并同时把 annotation 上限提高到 50。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3",
+        "https://github.com/playcanvas/supersplat-viewer/commit/71ee1ae2106b7d1c5aa26397d4605b312a29c021",
+        "https://github.com/playcanvas/supersplat-viewer/commit/d8c74450e3d4a1be7d669cc5ac0578114a4d8bc4"
+      ],
+      "eventId": "github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183",
+      "title": "LichtFeld convert 可导出完整可见工程场景",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-18",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "主干补齐多节点、变换、crop、SH 与 RAD 完整细节的 CLI 交付路径，但尚未正式发行。",
+      "sources": [
+        "https://github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183"
+      ],
+      "eventId": "github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00",
+      "title": "Spirula 改善 SuperSplat 交付坐标、导入遮罩与 Vulkan FLIP 精度",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-18",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "一组主干提交分别改善交付 PLY、相机特定遮罩和 AMD Vulkan 训练一致性，全部有直接工程价值。",
+      "sources": [
+        "https://github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00",
+        "https://github.com/harry7557558/spirula-studio/commit/b8e15cb8d7f8a2f45ca9b4fea3fa331181433caa",
+        "https://github.com/harry7557558/spirula-studio/commit/571044dae76706fc5073174604cb4a72e828bf96"
+      ],
+      "eventId": "github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00"
+    },
+    {
+      "id": "cesium.com/3d-tiles-2.0-vote-2026-11-16",
+      "title": "3D Tiles 2.0 进入 OGC 批准投票并纳入 Gaussian splats",
+      "eventDate": "2026-11-16",
+      "reportDate": "2026-11-18",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "7 日重查补收；标准进程已从公开征求意见推进到批准投票，但尚未完成批准，需避免把草案写成正式标准。",
+      "sources": [
+        "https://cesium.com/blog/2026/11/16/cesium-at-iitsec-2026/",
+        "https://www.ogc.org/requests/ogc-seeks-public-comment-on-proposed-3d-tiles-2-0-community-standard-work-item/",
+        "https://github.com/CesiumGS/3d-tiles/blob/main/next/2.0/README.md"
+      ],
+      "eventId": "cesium.com/3d-tiles-2.0-vote-2026-11-16"
+    },
+    {
+      "id": "metaverse-standards.org/volumetric-media-town-hall-2026-11-24",
+      "title": "Volumetric Media Town Hall 将集中讨论 4DGS 采集、压缩与 WebXR",
+      "eventDate": "2026-11-17",
+      "reportDate": "2026-11-18",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "官方议程集合多个 4DGS 工具与标准参与者，值得预告；它是活动信号，不是已发布能力。",
+      "sources": [
+        "https://metaverse-standards.org/event/volumetric-media-town-hall-2/",
+        "https://radiancefields.com/volumetric-media-town-hall-turns-to-4d-gaussian-splats"
+      ],
+      "eventId": "metaverse-standards.org/volumetric-media-town-hall-2026-11-24"
+    },
+    {
+      "id": "github.com/nerfstudio-project/gsplat/commit/512d366b67073d77ca099ede742683c165dfc23b",
+      "title": "gsplat 8×B200 image cache 性能提交重新浮现",
+      "eventDate": "2026-09-19",
+      "reportDate": "2026-11-18",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "仓库默认分支顶部提交日期为 9 月 19 日，不是本窗口新增；稳定 SHA 去重后不重复归档。",
+      "sources": [
+        "https://github.com/nerfstudio-project/gsplat/commit/512d366b67073d77ca099ede742683c165dfc23b"
+      ],
+      "exclusionEvidence": "GitHub 原始提交 created_at 为 2026-09-19T07:14:27Z；本轮没有新 release 或后续合并。"
+    },
+    {
+      "id": "reddit-dinovi-app-unverified-2026-11-18",
+      "title": "Reddit 用户自报 Dinovi 高斯应用",
+      "eventDate": "2026-11-18",
+      "reportDate": "2026-11-18",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "只有单一社区自报，没有取得产品官网、商店版本记录或可核验技术边界。",
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/"
+      ],
+      "exclusionEvidence": "登记社区页只有作者帖摘要；本轮未找到第二个独立来源或稳定版本页。"
+    },
+    {
+      "id": "reddit-splat-filmed-people-2026-11-18",
+      "title": "Reddit 讨论扫描时拍到人物的清理问题",
+      "eventDate": "2026-11-18",
+      "reportDate": "2026-11-18",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "属于一般工作流讨论，没有新软件、版本、可复现方案或一手工程变更。",
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/"
+      ],
+      "exclusionEvidence": "社区讨论未关联新 release、commit、论文或正式教程。"
+    }
+  ]
+}
