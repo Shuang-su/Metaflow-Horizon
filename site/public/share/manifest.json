@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-18",
+    "sha256": "7a845d9351e9b86221892cb0a5ab4c02ff07c55daa17ef6de2f68828ab39ef09"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-18": {
+      "date": "2026-11-18",
+      "url": "/share/2026-11-18.png",
+      "title": "UE 5.9 Preview 内置高斯插件，CARLA 1.0 接入 NuRec",
+      "contentHash": "6562237c8c1d4cd2df0374afac63f77d472d364e9c3599499ee94cd809114791",
+      "inputHash": "919f5da3d6dbf7e94b91fd102cdf960e6c3eb893f4ed5ad5b189eff1d12f2fb8",
+      "sha256": "7a845d9351e9b86221892cb0a5ab4c02ff07c55daa17ef6de2f68828ab39ef09",
+      "bytes": 26636
     }
   }
 }

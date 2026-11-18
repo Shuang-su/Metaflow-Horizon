@@ -1,7 +1,229 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-18",
   "daily": [
+    {
+      "id": "gsd-2026-11-18",
+      "contentHash": "6562237c8c1d4cd2df0374afac63f77d472d364e9c3599499ee94cd809114791",
+      "date": "2026-11-18",
+      "title": "Horizon 行业日报 — 2026-11-18",
+      "headline": "UE 5.9 Preview 内置高斯插件，CARLA 1.0 接入 NuRec",
+      "summary": "Epic 首次把 Gaussian Splat Asset 放进通用 Unreal Engine；CARLA 1.0 则让 NuRec 场景进入可改车辆与交通参与者的闭环仿真。Volinga 产品线收束要求现有用户立即做迁移盘点，SuperSplat 3.9.0 与 Viewer 1.43.3 已可锁定测试。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-18.md",
+      "sourceCount": 0,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "epicgames.com/ue-5.9-preview-gaussian-splat-asset",
+          "anchor": "event-ue59-gaussian-splat-asset",
+          "kind": "news",
+          "source": "https://dev.epicgames.com/community/learning/tutorials/LeGVo/salpicaduras-gaussianas-en-unreal-engine-5-9-preview",
+          "title": "Unreal Engine 5.9 Preview 首次内置高斯资产插件",
+          "summary": "Epic 自带的 Gaussian Splat Asset 插件可以把 PLY 导入为 Unreal 资产并放进关卡，团队终于有了不依赖第三方插件的官方实验入口。它默认关闭，公开教程只确认了 Preview、PLY 和两个外观参数。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "carla.org/release-1.0-nurec-2026-11-17",
+          "anchor": "event-carla-1-0-nurec",
+          "kind": "news",
+          "source": "https://carla.org/2026/11/17/release-1.0/",
+          "title": "CARLA 1.0 让 NuRec 场景进入物理与交通闭环",
+          "summary": "CARLA 1.0 把 NVIDIA NuRec 26.04 的相机和 neural lidar 渲染接进仿真 tick，CARLA 继续负责物理、Traffic Manager 与 actor 重放。记录的真实道路因此不再只是离线 novel-view 回放，而能换 ego 车辆、重跑交通参与者并保持控制接口。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "volinga.ai/arquimea-ai-transition-2026-11-16",
+          "anchor": "event-volinga-arquimea-transition",
+          "kind": "news",
+          "source": "https://www.volinga.ai/insights/volinga-begins-a-new-chapter-with-arquimea-ai/",
+          "title": "Volinga 产品线收束，把迁移期限推到 12 月 1 日",
+          "summary": "Volinga 将团队和神经渲染能力并入 Arquimea AI，Plugin 与 Suite 新许可只销售到 12 月 1 日。现有订阅支持到期但不能续订，产品也不会再有新发行；这会把未来 UE、驱动和操作系统兼容风险留给现有项目。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/playcanvas/supersplat/releases/tag/v3.9.0",
+          "anchor": "event-supersplat-v3-9-0",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/supersplat/releases/tag/v3.9.0",
+          "title": "SuperSplat 3.9.0 正式接纳多序列与新选择路径",
+          "summary": "3.9.0 能把 GSAF 作为时间序列载入并同时播放多段 sequence，混合文件导入增加复核，组合操作按逆序撤销，非循环时间线会停在末帧。新的 mode strip 还统一了 centers/rings、markers、X-Ray 与 selection 样式。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3",
+          "anchor": "event-supersplat-viewer-v1-43-3",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3",
+          "title": "SuperSplat Viewer 1.43.3 修正带手部骨架的控制器",
+          "summary": "Viewer 现在不会再把仍有按钮和摇杆、但同时报告 hand skeleton 的 SteamVR 控制器当作裸手，teleport、grab、掌心菜单和模型姿态因此回到控制器逻辑。版本还把 annotation 上限从 20 提高到 50。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183",
+          "anchor": "event-lichtfeld-visible-project-export",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183",
+          "title": "LichtFeld 把完整可见工程接到 convert",
+          "summary": ".licht 输入现在可以合并所有可见 splat 节点，应用父级可见性、场景变换、启用 crop 和各资产 SH 阶数，再输出 PLY、SOG、SPZ、GLB、USD、HTML 或 RAD。外部 RAD 会按完整细节载入，脚本可检查稳定能力标识 visible-project-splats-v1。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00",
+          "anchor": "event-spirula-y-up-mask-flip",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00",
+          "title": "Spirula 修正交付坐标、遮罩路径与 Vulkan FLIP 精度",
+          "summary": "Spirula 让每个 checkpoint 同时保留原生 splat.ply 与 run-named 交付 PLY；可选 Y-up 文件会同步旋转 Gaussian 方向、SH 和 spherical-beta lobe，用于 SuperSplat，而训练相机和 meshing 仍使用原坐标。导入遮罩也开始识别非标准文件名并保持多相机手绘区域隔离。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "cesium.com/3d-tiles-2.0-vote-2026-11-16",
+          "anchor": "event-3d-tiles-2-vote",
+          "kind": "news",
+          "source": "https://cesium.com/blog/2026/11/16/cesium-at-iitsec-2026/",
+          "title": "3D Tiles 2.0 进入批准投票，高斯是明确能力域",
+          "summary": "Cesium 表示 3D Tiles 2.0 已提交 OGC，批准投票正在进行；高斯 splat 与时变内容、voxel、vector、AEC 和更深的 glTF 集成同列为六个能力域。OGC 早先的工作项目公开征求意见也明确包含 3DGS。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "metaverse-standards.org/volumetric-media-town-hall-2026-11-24",
+          "anchor": "event-volumetric-town-hall-4dgs",
+          "kind": "news",
+          "source": "https://metaverse-standards.org/event/volumetric-media-town-hall-2/",
+          "title": "4DGS Town Hall 将把采集、压缩和 WebXR 放在同一场讨论",
+          "summary": "11 月 24 日的 Volumetric Media Town Hall 安排 Dymensium、Chronospace、Gracia AI 与 PlayCanvas/Snap 讨论真实 4DGS、Packed Gaussian UV maps、streaming/WebXR 和开源采集。它给格式和播放器团队提供了一次集中观察窗口。",
+          "date": "2026-11-18",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 4,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、厂商发布、产品文档、GitHub release/commit 与标准组织页面编辑阅读版。未实际安装 UE 5.9 Preview、运行 CARLA/NuRec、购买 Volinga 产品、复现作者性能数字或完成 XR/AMD 设备验收；Preview、正式发行和主干提交按各自边界表述。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-18.md",
+        "contentHash": "078bb537c7552057a5dfa83ca255b303ee0dc14ff4b82f88f2be3082140d46f3"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17744,195 @@
   ],
   "entries": [
     {
+      "id": "carla.org/release-1.0-nurec-2026-11-17",
+      "anchor": "event-carla-1-0-nurec",
+      "kind": "news",
+      "source": "https://carla.org/2026/11/17/release-1.0/",
+      "title": "CARLA 1.0 让 NuRec 场景进入物理与交通闭环",
+      "summary": "CARLA 1.0 把 NVIDIA NuRec 26.04 的相机和 neural lidar 渲染接进仿真 tick，CARLA 继续负责物理、Traffic Manager 与 actor 重放。记录的真实道路因此不再只是离线 novel-view 回放，而能换 ego 车辆、重跑交通参与者并保持控制接口。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "cesium.com/3d-tiles-2.0-vote-2026-11-16",
+      "anchor": "event-3d-tiles-2-vote",
+      "kind": "news",
+      "source": "https://cesium.com/blog/2026/11/16/cesium-at-iitsec-2026/",
+      "title": "3D Tiles 2.0 进入批准投票，高斯是明确能力域",
+      "summary": "Cesium 表示 3D Tiles 2.0 已提交 OGC，批准投票正在进行；高斯 splat 与时变内容、voxel、vector、AEC 和更深的 glTF 集成同列为六个能力域。OGC 早先的工作项目公开征求意见也明确包含 3DGS。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "epicgames.com/ue-5.9-preview-gaussian-splat-asset",
+      "anchor": "event-ue59-gaussian-splat-asset",
+      "kind": "news",
+      "source": "https://dev.epicgames.com/community/learning/tutorials/LeGVo/salpicaduras-gaussianas-en-unreal-engine-5-9-preview",
+      "title": "Unreal Engine 5.9 Preview 首次内置高斯资产插件",
+      "summary": "Epic 自带的 Gaussian Splat Asset 插件可以把 PLY 导入为 Unreal 资产并放进关卡，团队终于有了不依赖第三方插件的官方实验入口。它默认关闭，公开教程只确认了 Preview、PLY 和两个外观参数。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00",
+      "anchor": "event-spirula-y-up-mask-flip",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00",
+      "title": "Spirula 修正交付坐标、遮罩路径与 Vulkan FLIP 精度",
+      "summary": "Spirula 让每个 checkpoint 同时保留原生 splat.ply 与 run-named 交付 PLY；可选 Y-up 文件会同步旋转 Gaussian 方向、SH 和 spherical-beta lobe，用于 SuperSplat，而训练相机和 meshing 仍使用原坐标。导入遮罩也开始识别非标准文件名并保持多相机手绘区域隔离。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183",
+      "anchor": "event-lichtfeld-visible-project-export",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183",
+      "title": "LichtFeld 把完整可见工程接到 convert",
+      "summary": ".licht 输入现在可以合并所有可见 splat 节点，应用父级可见性、场景变换、启用 crop 和各资产 SH 阶数，再输出 PLY、SOG、SPZ、GLB、USD、HTML 或 RAD。外部 RAD 会按完整细节载入，脚本可检查稳定能力标识 visible-project-splats-v1。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3",
+      "anchor": "event-supersplat-viewer-v1-43-3",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3",
+      "title": "SuperSplat Viewer 1.43.3 修正带手部骨架的控制器",
+      "summary": "Viewer 现在不会再把仍有按钮和摇杆、但同时报告 hand skeleton 的 SteamVR 控制器当作裸手，teleport、grab、掌心菜单和模型姿态因此回到控制器逻辑。版本还把 annotation 上限从 20 提高到 50。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/supersplat/releases/tag/v3.9.0",
+      "anchor": "event-supersplat-v3-9-0",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/supersplat/releases/tag/v3.9.0",
+      "title": "SuperSplat 3.9.0 正式接纳多序列与新选择路径",
+      "summary": "3.9.0 能把 GSAF 作为时间序列载入并同时播放多段 sequence，混合文件导入增加复核，组合操作按逆序撤销，非循环时间线会停在末帧。新的 mode strip 还统一了 centers/rings、markers、X-Ray 与 selection 样式。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "metaverse-standards.org/volumetric-media-town-hall-2026-11-24",
+      "anchor": "event-volumetric-town-hall-4dgs",
+      "kind": "news",
+      "source": "https://metaverse-standards.org/event/volumetric-media-town-hall-2/",
+      "title": "4DGS Town Hall 将把采集、压缩和 WebXR 放在同一场讨论",
+      "summary": "11 月 24 日的 Volumetric Media Town Hall 安排 Dymensium、Chronospace、Gracia AI 与 PlayCanvas/Snap 讨论真实 4DGS、Packed Gaussian UV maps、streaming/WebXR 和开源采集。它给格式和播放器团队提供了一次集中观察窗口。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "volinga.ai/arquimea-ai-transition-2026-11-16",
+      "anchor": "event-volinga-arquimea-transition",
+      "kind": "news",
+      "source": "https://www.volinga.ai/insights/volinga-begins-a-new-chapter-with-arquimea-ai/",
+      "title": "Volinga 产品线收束，把迁移期限推到 12 月 1 日",
+      "summary": "Volinga 将团队和神经渲染能力并入 Arquimea AI，Plugin 与 Suite 新许可只销售到 12 月 1 日。现有订阅支持到期但不能续订，产品也不会再有新发行；这会把未来 UE、驱动和操作系统兼容风险留给现有项目。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31216,27 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-18",
+      "kind": "daily",
+      "title": "UE 5.9 Preview 内置高斯插件，CARLA 1.0 接入 NuRec",
+      "summary": "Epic 首次把 Gaussian Splat Asset 放进通用 Unreal Engine；CARLA 1.0 则让 NuRec 场景进入可改车辆与交通参与者的闭环仿真。Volinga 产品线收束要求现有用户立即做迁移盘点，SuperSplat 3.9.0 与 Viewer 1.43.3 已可锁定测试。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/",
+      "text": "Unreal Engine 5.9 Preview 首次内置高斯资产插件\nEpic 自带的 Gaussian Splat Asset 插件可以把 PLY 导入为 Unreal 资产并放进关卡，团队终于有了不依赖第三方插件的官方实验入口。它默认关闭，公开教程只确认了 Preview、PLY 和两个外观参数。\n这还不是生产级原生支持的完整答案。SPZ/SOG、球谐、LOD、streaming、移动端、XR、打包和碰撞都没有在 UE 5.9 教程中得到证明；UEFN 的格式与平台能力也不能直接外推。先用最小场景做编辑器、Standalone 和 packaged build 兼容矩阵。\n官方教程 · UE 5.9 Preview 发行说明\nCARLA 1.0 让 NuRec 场景进入物理与交通闭环\nCARLA 1.0 把 NVIDIA NuRec 26.04 的相机和 neural lidar 渲染接进仿真 tick，CARLA 继续负责物理、Traffic Manager 与 actor 重放。记录的真实道路因此不再只是离线 novel-view 回放，而能换 ego 车辆、重跑交通参与者并保持控制接口。\n它需要 Ubuntu、NVIDIA 容器栈、受控数据访问和高显存 GPU；官方最低显存高于 24 GB、推荐高于 48 GB，完整样例约 1.5 TB。第一次验证应只取单场景，测相机数、每 tick 延迟、neural lidar 和磁盘成本。\nCARLA 1.0 发布说明 · NuRec 集成文档\nVolinga 产品线收束，把迁移期限推到 12 月 1 日\nVolinga 将团队和神经渲染能力并入 Arquimea AI，Plugin 与 Suite 新许可只销售到 12 月 1 日。现有订阅支持到期但不能续订，产品也不会再有新发行；这会把未来 UE、驱动和操作系统兼容风险留给现有项目。\n正在交付的团队应现在保存安装包、许可凭证、可工作环境和可迁移资产，并验证至少一条替代 viewer、DCC 或引擎路径。官方公告没有披露交易条款，也没有承诺同一产品会在 Arquimea AI 下继续，不能把转向写成 Suite 升级。\nVolinga 官方公告\nSuperSplat 3.9.0 正式接纳多序列与新选择路径\n3.9.0 能把 GSAF 作为时间序列载入并同时播放多段 sequence，混合文件导入增加复核，组合操作按逆序撤销，非循环时间线会停在末帧。新的 mode strip 还统一了 centers/rings、markers、X-Ray 与 selection 样式。\n选择渲染并非只换了 UI：X-Ray 关闭时新增 ID pass 和 visibility buffer，让 centers、rings 与工具使用同一帧的深度可见集合。升级时要把静态格式、GSAF、多文件导入、stochastic、各种选择、撤销和 camera path 放在同一测试矩阵；没有证据表明 SOG/SPZ 编码或 LOD 本身改变。\n发行说明 · PR #1110 · PR #1111\nSuperSplat Viewer 1.43.3 修正带手部骨架的控制器\nViewer 现在不会再把仍有按钮和摇杆、但同时报告 hand skeleton 的 SteamVR 控制器当作裸手，teleport、grab、掌心菜单和模型姿态因此回到控制器逻辑。版本还把 annotation 上限从 20 提高到 50。\n正式 tag 让项目可以锁版本回归，但维护者没有宣称真实 Steam Frame 实机已验收。WebXR 团队应覆盖裸手、普通控制器、带骨架控制器、session restart 和左右手切换；桌面 viewer 用户不必只为 XR 修复紧急升级。\nViewer v1.43.3 · XR 修复提交\nLichtFeld 把完整可见工程接到 convert\n.licht 输入现在可以合并所有可见 splat 节点，应用父级可见性、场景变换、启用 crop 和各资产 SH 阶数，再输出 PLY、SOG、SPZ、GLB、USD、HTML 或 RAD。外部 RAD 会按完整细节载入，脚本可检查稳定能力标识 visible-project-splats-v1。\n这补齐了多模型工程的 CLI 交付，但 Undo 历史和无关 checkpoint 不会进入导出，非 RAD 输出还可能展开 LOD 叶节点。变更仍在主干，正式项目应锁提交小规模验证或等待 release。\n实现提交\nSpirula 修正交付坐标、遮罩路径与 Vulkan FLIP 精度\nSpirula 让每个 checkpoint 同时保留原生 splat.ply 与 run-named 交付 PLY；可选 Y-up 文件会同步旋转 Gaussian 方向、SH 和 spherical-beta lobe，用于 SuperSplat，而训练相机和 meshing 仍使用原坐标。导入遮罩也开始识别非标准文件名并保持多相机手绘区域隔离。\nVulkan 路径把 FLIP mask coverage 从 float16 改为 float32，作者在 AMD R9700 上报告梯度偏差由 8.3% 降到约 4.9e-6，代价是每像素临时数据从 16 B 增到 28 B；旧 CUDA kernel 不变。三项仍是主干变化。\nY-up 交付 · 遮罩修复 · Vulkan 精度\n3D Tiles 2.0 进入批准投票，高斯是明确能力域\nCesium 表示 3D Tiles 2.0 已提交 OGC，批准投票正在进行；高斯 splat 与时变内容、voxel、vector、AEC 和更深的 glTF 集成同列为六个能力域。OGC 早先的工作项目公开征求意见也明确包含 3DGS。\n这仍是投票中的提案，不是已批准标准。已有 Cesium 运行时和 ion 工具可以测试 3DGS + LOD，但长期协议应等待最终文本；当前更适合验证 KHR Gaussian、SPZ、tile 层级与坐标精度。\nCesium 进度公告 · OGC 工作项目\n4DGS Town Hall 将把采集、压缩和 WebXR 放在同一场讨论\n11 月 24 日的 Volumetric Media Town Hall 安排 Dymensium、Chronospace、Gracia AI 与 PlayCanvas/Snap 讨论真实 4DGS、Packed Gaussian UV maps、streaming/WebXR 和开源采集。它给格式和播放器团队提供了一次集中观察窗口。\n这只是即将举行的线上活动，不是标准或产品发布；活动页的分项时间还有顺序错误。本期只采用总时段与议题，不把尚未进行的演讲内容写成已发布能力。\n官方活动页"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32537,195 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "carla.org/release-1.0-nurec-2026-11-17",
+      "kind": "news",
+      "title": "CARLA 1.0 让 NuRec 场景进入物理与交通闭环",
+      "summary": "CARLA 1.0 把 NVIDIA NuRec 26.04 的相机和 neural lidar 渲染接进仿真 tick，CARLA 继续负责物理、Traffic Manager 与 actor 重放。记录的真实道路因此不再只是离线 novel-view 回放，而能换 ego 车辆、重跑交通参与者并保持控制接口。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-carla-1-0-nurec",
+      "text": "CARLA 1.0 让 NuRec 场景进入物理与交通闭环 CARLA 1.0 把 NVIDIA NuRec 26.04 的相机和 neural lidar 渲染接进仿真 tick，CARLA 继续负责物理、Traffic Manager 与 actor 重放。记录的真实道路因此不再只是离线 novel-view 回放，而能换 ego 车辆、重跑交通参与者并保持控制接口。 https://carla.org/2026/11/17/release-1.0/ CARLA 1.0 让 NuRec 场景进入物理与交通闭环 ## CARLA 1.0 让 NuRec 场景进入物理与交通闭环\n\nCARLA 1.0 把 NVIDIA NuRec 26.04 的相机和 neural lidar 渲染接进仿真 tick，CARLA 继续负责物理、Traffic Manager 与 actor 重放。记录的真实道路因此不再只是离线 novel-view 回放，而能换 ego 车辆、重跑交通参与者并保持控制接口。\n\n它需要 Ubuntu、NVIDIA 容器栈、受控数据访问和高显存 GPU；官方最低显存高于 24 GB、推荐高于 48 GB，完整样例约 1.5 TB。第一次验证应只取单场景，测相机数、每 tick 延迟、neural lidar 和磁盘成本。\n\n[CARLA 1.0 发布说明](https://carla.org/2026/11/17/release-1.0/) · [NuRec 集成文档](https://carla-ue5.readthedocs.io/en/latest/nvidia_nurec/)"
+    },
+    {
+      "id": "cesium.com/3d-tiles-2.0-vote-2026-11-16",
+      "kind": "news",
+      "title": "3D Tiles 2.0 进入批准投票，高斯是明确能力域",
+      "summary": "Cesium 表示 3D Tiles 2.0 已提交 OGC，批准投票正在进行；高斯 splat 与时变内容、voxel、vector、AEC 和更深的 glTF 集成同列为六个能力域。OGC 早先的工作项目公开征求意见也明确包含 3DGS。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-3d-tiles-2-vote",
+      "text": "3D Tiles 2.0 进入批准投票，高斯是明确能力域 Cesium 表示 3D Tiles 2.0 已提交 OGC，批准投票正在进行；高斯 splat 与时变内容、voxel、vector、AEC 和更深的 glTF 集成同列为六个能力域。OGC 早先的工作项目公开征求意见也明确包含 3DGS。 https://cesium.com/blog/2026/11/16/cesium-at-iitsec-2026/ 3D Tiles 2.0 进入批准投票，高斯是明确能力域 ## 3D Tiles 2.0 进入批准投票，高斯是明确能力域\n\nCesium 表示 3D Tiles 2.0 已提交 OGC，批准投票正在进行；高斯 splat 与时变内容、voxel、vector、AEC 和更深的 glTF 集成同列为六个能力域。OGC 早先的工作项目公开征求意见也明确包含 3DGS。\n\n这仍是投票中的提案，不是已批准标准。已有 Cesium 运行时和 ion 工具可以测试 3DGS + LOD，但长期协议应等待最终文本；当前更适合验证 KHR Gaussian、SPZ、tile 层级与坐标精度。\n\n[Cesium 进度公告](https://cesium.com/blog/2026/11/16/cesium-at-iitsec-2026/) · [OGC 工作项目](https://www.ogc.org/requests/ogc-seeks-public-comment-on-proposed-3d-tiles-2-0-community-standard-work-item/)"
+    },
+    {
+      "id": "epicgames.com/ue-5.9-preview-gaussian-splat-asset",
+      "kind": "news",
+      "title": "Unreal Engine 5.9 Preview 首次内置高斯资产插件",
+      "summary": "Epic 自带的 Gaussian Splat Asset 插件可以把 PLY 导入为 Unreal 资产并放进关卡，团队终于有了不依赖第三方插件的官方实验入口。它默认关闭，公开教程只确认了 Preview、PLY 和两个外观参数。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-ue59-gaussian-splat-asset",
+      "text": "Unreal Engine 5.9 Preview 首次内置高斯资产插件 Epic 自带的 Gaussian Splat Asset 插件可以把 PLY 导入为 Unreal 资产并放进关卡，团队终于有了不依赖第三方插件的官方实验入口。它默认关闭，公开教程只确认了 Preview、PLY 和两个外观参数。 https://dev.epicgames.com/community/learning/tutorials/LeGVo/salpicaduras-gaussianas-en-unreal-engine-5-9-preview Unreal Engine 5.9 Preview 首次内置高斯资产插件 ## Unreal Engine 5.9 Preview 首次内置高斯资产插件\n\nEpic 自带的 Gaussian Splat Asset 插件可以把 PLY 导入为 Unreal 资产并放进关卡，团队终于有了不依赖第三方插件的官方实验入口。它默认关闭，公开教程只确认了 Preview、PLY 和两个外观参数。\n\n这还不是生产级原生支持的完整答案。SPZ/SOG、球谐、LOD、streaming、移动端、XR、打包和碰撞都没有在 UE 5.9 教程中得到证明；UEFN 的格式与平台能力也不能直接外推。先用最小场景做编辑器、Standalone 和 packaged build 兼容矩阵。\n\n[官方教程](https://dev.epicgames.com/community/learning/tutorials/LeGVo/salpicaduras-gaussianas-en-unreal-engine-5-9-preview) · [UE 5.9 Preview 发行说明](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-5-9-release-notes)"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00",
+      "kind": "tool",
+      "title": "Spirula 修正交付坐标、遮罩路径与 Vulkan FLIP 精度",
+      "summary": "Spirula 让每个 checkpoint 同时保留原生 splat.ply 与 run-named 交付 PLY；可选 Y-up 文件会同步旋转 Gaussian 方向、SH 和 spherical-beta lobe，用于 SuperSplat，而训练相机和 meshing 仍使用原坐标。导入遮罩也开始识别非标准文件名并保持多相机手绘区域隔离。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-spirula-y-up-mask-flip",
+      "text": "Spirula 修正交付坐标、遮罩路径与 Vulkan FLIP 精度 Spirula 让每个 checkpoint 同时保留原生 splat.ply 与 run-named 交付 PLY；可选 Y-up 文件会同步旋转 Gaussian 方向、SH 和 spherical-beta lobe，用于 SuperSplat，而训练相机和 meshing 仍使用原坐标。导入遮罩也开始识别非标准文件名并保持多相机手绘区域隔离。 https://github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00 Spirula 修正交付坐标、遮罩路径与 Vulkan FLIP 精度 ## Spirula 修正交付坐标、遮罩路径与 Vulkan FLIP 精度\n\nSpirula 让每个 checkpoint 同时保留原生 `splat.ply` 与 run-named 交付 PLY；可选 Y-up 文件会同步旋转 Gaussian 方向、SH 和 spherical-beta lobe，用于 SuperSplat，而训练相机和 meshing 仍使用原坐标。导入遮罩也开始识别非标准文件名并保持多相机手绘区域隔离。\n\nVulkan 路径把 FLIP mask coverage 从 float16 改为 float32，作者在 AMD R9700 上报告梯度偏差由 8.3% 降到约 `4.9e-6`，代价是每像素临时数据从 16 B 增到 28 B；旧 CUDA kernel 不变。三项仍是主干变化。\n\n[Y-up 交付](https://github.com/harry7557558/spirula-studio/commit/69002756ce30a0a73374f31a79210f0928d80c00) · [遮罩修复](https://github.com/harry7557558/spirula-studio/commit/b8e15cb8d7f8a2f45ca9b4fea3fa331181433caa) · [Vulkan 精度](https://github.com/harry7557558/spirula-studio/commit/571044dae76706fc5073174604cb4a72e828bf96)"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183",
+      "kind": "tool",
+      "title": "LichtFeld 把完整可见工程接到 convert",
+      "summary": ".licht 输入现在可以合并所有可见 splat 节点，应用父级可见性、场景变换、启用 crop 和各资产 SH 阶数，再输出 PLY、SOG、SPZ、GLB、USD、HTML 或 RAD。外部 RAD 会按完整细节载入，脚本可检查稳定能力标识 visible-project-splats-v1。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-lichtfeld-visible-project-export",
+      "text": "LichtFeld 把完整可见工程接到 convert .licht 输入现在可以合并所有可见 splat 节点，应用父级可见性、场景变换、启用 crop 和各资产 SH 阶数，再输出 PLY、SOG、SPZ、GLB、USD、HTML 或 RAD。外部 RAD 会按完整细节载入，脚本可检查稳定能力标识 visible-project-splats-v1。 https://github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183 LichtFeld 把完整可见工程接到 convert ## LichtFeld 把完整可见工程接到 `convert`\n\n`.licht` 输入现在可以合并所有可见 splat 节点，应用父级可见性、场景变换、启用 crop 和各资产 SH 阶数，再输出 PLY、SOG、SPZ、GLB、USD、HTML 或 RAD。外部 RAD 会按完整细节载入，脚本可检查稳定能力标识 `visible-project-splats-v1`。\n\n这补齐了多模型工程的 CLI 交付，但 Undo 历史和无关 checkpoint 不会进入导出，非 RAD 输出还可能展开 LOD 叶节点。变更仍在主干，正式项目应锁提交小规模验证或等待 release。\n\n[实现提交](https://github.com/MrNeRF/LichtFeld-Studio/commit/e9aefe9816c5603e7d634559e77950f5e2a94183)"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3",
+      "kind": "tool",
+      "title": "SuperSplat Viewer 1.43.3 修正带手部骨架的控制器",
+      "summary": "Viewer 现在不会再把仍有按钮和摇杆、但同时报告 hand skeleton 的 SteamVR 控制器当作裸手，teleport、grab、掌心菜单和模型姿态因此回到控制器逻辑。版本还把 annotation 上限从 20 提高到 50。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-supersplat-viewer-v1-43-3",
+      "text": "SuperSplat Viewer 1.43.3 修正带手部骨架的控制器 Viewer 现在不会再把仍有按钮和摇杆、但同时报告 hand skeleton 的 SteamVR 控制器当作裸手，teleport、grab、掌心菜单和模型姿态因此回到控制器逻辑。版本还把 annotation 上限从 20 提高到 50。 https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3 SuperSplat Viewer 1.43.3 修正带手部骨架的控制器 ## SuperSplat Viewer 1.43.3 修正带手部骨架的控制器\n\nViewer 现在不会再把仍有按钮和摇杆、但同时报告 hand skeleton 的 SteamVR 控制器当作裸手，teleport、grab、掌心菜单和模型姿态因此回到控制器逻辑。版本还把 annotation 上限从 20 提高到 50。\n\n正式 tag 让项目可以锁版本回归，但维护者没有宣称真实 Steam Frame 实机已验收。WebXR 团队应覆盖裸手、普通控制器、带骨架控制器、session restart 和左右手切换；桌面 viewer 用户不必只为 XR 修复紧急升级。\n\n[Viewer v1.43.3](https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.43.3) · [XR 修复提交](https://github.com/playcanvas/supersplat-viewer/commit/71ee1ae2106b7d1c5aa26397d4605b312a29c021)"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat/releases/tag/v3.9.0",
+      "kind": "tool",
+      "title": "SuperSplat 3.9.0 正式接纳多序列与新选择路径",
+      "summary": "3.9.0 能把 GSAF 作为时间序列载入并同时播放多段 sequence，混合文件导入增加复核，组合操作按逆序撤销，非循环时间线会停在末帧。新的 mode strip 还统一了 centers/rings、markers、X-Ray 与 selection 样式。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-supersplat-v3-9-0",
+      "text": "SuperSplat 3.9.0 正式接纳多序列与新选择路径 3.9.0 能把 GSAF 作为时间序列载入并同时播放多段 sequence，混合文件导入增加复核，组合操作按逆序撤销，非循环时间线会停在末帧。新的 mode strip 还统一了 centers/rings、markers、X-Ray 与 selection 样式。 https://github.com/playcanvas/supersplat/releases/tag/v3.9.0 SuperSplat 3.9.0 正式接纳多序列与新选择路径 ## SuperSplat 3.9.0 正式接纳多序列与新选择路径\n\n3.9.0 能把 GSAF 作为时间序列载入并同时播放多段 sequence，混合文件导入增加复核，组合操作按逆序撤销，非循环时间线会停在末帧。新的 mode strip 还统一了 centers/rings、markers、X-Ray 与 selection 样式。\n\n选择渲染并非只换了 UI：X-Ray 关闭时新增 ID pass 和 visibility buffer，让 centers、rings 与工具使用同一帧的深度可见集合。升级时要把静态格式、GSAF、多文件导入、stochastic、各种选择、撤销和 camera path 放在同一测试矩阵；没有证据表明 SOG/SPZ 编码或 LOD 本身改变。\n\n[发行说明](https://github.com/playcanvas/supersplat/releases/tag/v3.9.0) · [PR #1110](https://github.com/playcanvas/supersplat/pull/1110) · [PR #1111](https://github.com/playcanvas/supersplat/pull/1111)"
+    },
+    {
+      "id": "metaverse-standards.org/volumetric-media-town-hall-2026-11-24",
+      "kind": "news",
+      "title": "4DGS Town Hall 将把采集、压缩和 WebXR 放在同一场讨论",
+      "summary": "11 月 24 日的 Volumetric Media Town Hall 安排 Dymensium、Chronospace、Gracia AI 与 PlayCanvas/Snap 讨论真实 4DGS、Packed Gaussian UV maps、streaming/WebXR 和开源采集。它给格式和播放器团队提供了一次集中观察窗口。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-volumetric-town-hall-4dgs",
+      "text": "4DGS Town Hall 将把采集、压缩和 WebXR 放在同一场讨论 11 月 24 日的 Volumetric Media Town Hall 安排 Dymensium、Chronospace、Gracia AI 与 PlayCanvas/Snap 讨论真实 4DGS、Packed Gaussian UV maps、streaming/WebXR 和开源采集。它给格式和播放器团队提供了一次集中观察窗口。 https://metaverse-standards.org/event/volumetric-media-town-hall-2/ 4DGS Town Hall 将把采集、压缩和 WebXR 放在同一场讨论 ## 4DGS Town Hall 将把采集、压缩和 WebXR 放在同一场讨论\n\n11 月 24 日的 Volumetric Media Town Hall 安排 Dymensium、Chronospace、Gracia AI 与 PlayCanvas/Snap 讨论真实 4DGS、Packed Gaussian UV maps、streaming/WebXR 和开源采集。它给格式和播放器团队提供了一次集中观察窗口。\n\n这只是即将举行的线上活动，不是标准或产品发布；活动页的分项时间还有顺序错误。本期只采用总时段与议题，不把尚未进行的演讲内容写成已发布能力。\n\n[官方活动页](https://metaverse-standards.org/event/volumetric-media-town-hall-2/)"
+    },
+    {
+      "id": "volinga.ai/arquimea-ai-transition-2026-11-16",
+      "kind": "news",
+      "title": "Volinga 产品线收束，把迁移期限推到 12 月 1 日",
+      "summary": "Volinga 将团队和神经渲染能力并入 Arquimea AI，Plugin 与 Suite 新许可只销售到 12 月 1 日。现有订阅支持到期但不能续订，产品也不会再有新发行；这会把未来 UE、驱动和操作系统兼容风险留给现有项目。",
+      "date": "2026-11-18",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/18/#event-volinga-arquimea-transition",
+      "text": "Volinga 产品线收束，把迁移期限推到 12 月 1 日 Volinga 将团队和神经渲染能力并入 Arquimea AI，Plugin 与 Suite 新许可只销售到 12 月 1 日。现有订阅支持到期但不能续订，产品也不会再有新发行；这会把未来 UE、驱动和操作系统兼容风险留给现有项目。 https://www.volinga.ai/insights/volinga-begins-a-new-chapter-with-arquimea-ai/ Volinga 产品线收束，把迁移期限推到 12 月 1 日 ## Volinga 产品线收束，把迁移期限推到 12 月 1 日\n\nVolinga 将团队和神经渲染能力并入 Arquimea AI，Plugin 与 Suite 新许可只销售到 12 月 1 日。现有订阅支持到期但不能续订，产品也不会再有新发行；这会把未来 UE、驱动和操作系统兼容风险留给现有项目。\n\n正在交付的团队应现在保存安装包、许可凭证、可工作环境和可迁移资产，并验证至少一条替代 viewer、DCC 或引擎路径。官方公告没有披露交易条款，也没有承诺同一产品会在 Arquimea AI 下继续，不能把转向写成 Suite 升级。\n\n[Volinga 官方公告](https://www.volinga.ai/insights/volinga-begins-a-new-chapter-with-arquimea-ai/)"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",
