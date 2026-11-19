@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-19",
+    "sha256": "88a2a26b94e7524876e815165c6c8ced30357b5dbe68f34bbf46a9f4c035c7de"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-19": {
+      "date": "2026-11-19",
+      "url": "/share/2026-11-19.png",
+      "title": "Open4DGS 降低多机位门槛，ArcGIS 把高斯生成带进企业服务器",
+      "contentHash": "cf1c8c6d29380c5b1b8320beaef170cf861231c03ae3d645fbdde263e4c967ff",
+      "inputHash": "9aa01fc46fe67fd1585035350ad2d99558521a5c1c3c47a10cbe9ff2b00587a9",
+      "sha256": "88a2a26b94e7524876e815165c6c8ced30357b5dbe68f34bbf46a9f4c035c7de",
+      "bytes": 34076
     }
   }
 }
