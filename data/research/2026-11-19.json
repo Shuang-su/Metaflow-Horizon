@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-19",
+  "mode": "scheduled",
+  "window": {"start": "2026-11-18T08:35:00+08:00", "end": "2026-11-19T08:50:00+08:00"},
+  "reviewedAt": "2026-11-19T08:50:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields", "status": "candidates", "checkedAt": "2026-11-19T08:19:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"],
+      "candidateIds": ["open4dgs-2026-11-18", "arcgis-reality-server-ga-12.2", "annx-studio-1.6.1", "arxiv:2606.19609", "dji-heritage-awards-2026"],
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "candidates", "checkedAt": "2026-11-19T08:18:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "candidates", "checkedAt": "2026-11-19T08:19:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official", "status": "candidates", "checkedAt": "2026-11-19T08:30:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": ["open4dgs-2026-11-18", "arcgis-reality-server-ga-12.2", "annx-studio-1.6.1", "dji-heritage-awards-2026"],
+      "gap": "Blender News 返回 HTTP 403；新增候选由 ASU、Esri、ANNX 与 DJI 的官方页核验。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-19T08:13:00+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-19T08:14:00+08:00", "gap": "HTTP 403，未取得可验证正文。"},
+        {"url": "https://open4dgs.asunemlabs.com/", "status": "candidates", "checkedAt": "2026-11-19T08:22:00+08:00"},
+        {"url": "https://www.esri.com/arcgis-blog/products/arcgis-reality-server/imagery/arcgis-reality-server-is-now-available", "status": "candidates", "checkedAt": "2026-11-19T08:25:00+08:00"},
+        {"url": "https://annx.studio/", "status": "candidates", "checkedAt": "2026-11-19T08:27:00+08:00", "gap": "官方产品页确认平台、功能与许可分层，但没有公开 1.6.1 独立 changelog。"},
+        {"url": "https://enterprise.dji.com/3dheritage-2026/awards", "status": "candidates", "checkedAt": "2026-11-19T08:30:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "x", "status": "unavailable", "checkedAt": "2026-11-19T08:17:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "candidateIds": [],
+      "gap": "4 个登记账号均返回 403 或 DisabledError；改由作者项目页、厂商官网和 GitHub 一手记录核验。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-19T08:15:00+08:00", "gap": "DisabledError，无可验证原帖。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-19T08:15:40+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-19T08:16:20+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-19T08:17:00+08:00", "gap": "DisabledError，无可验证原帖。"}
+      ]
+    },
+    {
+      "sourceId": "research", "status": "candidates", "checkedAt": "2026-11-19T08:34:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"],
+      "candidateIds": ["arxiv:2606.19609"],
+      "gap": "arXiv export API 未能直接读取；Hugging Face Papers 可读但未取得新的相关论文。Pentimento 由 arXiv 原文与 Cornell 获奖公告核验，属于历史论文的本期行业补收。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-19T08:31:00+08:00", "gap": "API 端点未能直接读取。"},
+        {"url": "https://huggingface.co/papers", "status": "checked-no-new", "checkedAt": "2026-11-19T08:32:00+08:00"},
+        {"url": "https://arxiv.org/abs/2606.19609", "status": "candidates", "checkedAt": "2026-11-19T08:33:00+08:00"},
+        {"url": "https://news.cornell.edu/stories/2026/11/tracking-flaws-used-building-materials-facilitates-reuse", "status": "candidates", "checkedAt": "2026-11-19T08:34:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github", "status": "candidates", "checkedAt": "2026-11-19T08:42:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": ["open4dgs-2026-11-18", "spirula-2dgs-tsdf-2026-11-18", "lichtfeld-panorama-fisheye-2026-11-18"],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "checked-no-new", "checkedAt": "2026-11-19T08:35:00+08:00", "gap": "最新 3.9.0 提交在增量窗口之前，并已进入 11 月 17 日未合并稿件的去重库。"},
+        {"url": "https://github.com/playcanvas/supersplat-viewer", "status": "checked-no-new", "checkedAt": "2026-11-19T08:36:00+08:00"},
+        {"url": "https://github.com/playcanvas/splat-transform", "status": "checked-no-new", "checkedAt": "2026-11-19T08:37:00+08:00"},
+        {"url": "https://github.com/playcanvas/engine", "status": "checked-no-new", "checkedAt": "2026-11-19T08:38:00+08:00", "gap": "窗口内提交为通用灯光、feature 拆分与 beta 版本，没有核实到新的 splat 专项变化。"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "candidates", "checkedAt": "2026-11-19T08:39:00+08:00"},
+        {"url": "https://github.com/harry7557558/spirula-studio", "status": "candidates", "checkedAt": "2026-11-19T08:40:00+08:00"},
+        {"url": "https://github.com/ASU-NEM-Labs/open4dgs-core", "status": "candidates", "checkedAt": "2026-11-19T08:41:00+08:00"},
+        {"url": "https://github.com/ASU-NEM-Labs/open4dgs-trigs", "status": "candidates", "checkedAt": "2026-11-19T08:42:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "community", "status": "checked-no-new", "checkedAt": "2026-11-19T08:47:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": [],
+      "gap": "Reddit 可读但候选缺少足够一手事实；B 站只返回浏览器兼容提示；少数派未取得带明确日期与原始链接的新事件。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "checked-no-new", "checkedAt": "2026-11-19T08:45:00+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "unavailable", "checkedAt": "2026-11-19T08:46:00+08:00", "gap": "仅返回浏览器版本过旧提示。"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-19T08:47:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "open4dgs-2026-11-18", "title": "ASU 公开不依赖硬件 genlock 的 Open4DGS 管线", "eventDate": "2026-11-18", "reportDate": "2026-11-19", "importance": "important", "disposition": "included", "reason": "公开项目页、两个代码仓库、受限测试数据和端到端流程，直接降低消费级多机位 4DGS 的试验门槛，同时明确披露初始研究发布限制。", "sources": ["https://open4dgs.asunemlabs.com/", "https://github.com/ASU-NEM-Labs/open4dgs-core", "https://github.com/ASU-NEM-Labs/open4dgs-trigs", "https://radiancefields.com/asu-open-sources-open4dgs-for-genlock-free-4d-gaussian-splatting"], "eventId": "open4dgs-2026-11-18"
+    },
+    {
+      "id": "arcgis-reality-server-ga-12.2", "title": "ArcGIS Reality Server 随 Enterprise 12.2 正式 GA", "eventDate": "2026-11-17", "reportDate": "2026-11-19", "importance": "important", "disposition": "included", "reason": "迟到索引补收；Gaussian splat 成为自托管、分布式、可由 Python/REST 自动化的企业 reality mapping 产物。", "sources": ["https://www.esri.com/arcgis-blog/products/arcgis-reality-server/imagery/arcgis-reality-server-is-now-available", "https://radiancefields.com/esri-makes-arcgis-reality-server-generally-available"], "eventId": "arcgis-reality-server-ga-12.2"
+    },
+    {
+      "id": "spirula-2dgs-tsdf-2026-11-18", "title": "Spirula 主干合入 2DGS、TSDF 与低显存显示路径", "eventDate": "2026-11-18", "reportDate": "2026-11-19", "importance": "important", "disposition": "included", "reason": "一组可锁提交测试的训练、网格、分区和显示更新，作者同时披露对照条件与 TSDF 在 3DGS 模型上的退化。", "sources": ["https://github.com/harry7557558/spirula-studio/commit/5806955241ec653a1ba279cf2e73dc17e6d03cba", "https://github.com/harry7557558/spirula-studio/commit/303d1c6fdfaeaab1d604b18a78c7063a38dd7135", "https://github.com/harry7557558/spirula-studio/commit/b631f114964dd9e0bc207972ca7af4ac49b5ce66", "https://github.com/harry7557558/spirula-studio/commit/97145860684c1604ef0ad978c3da657f0aecaf05"], "eventId": "spirula-2dgs-tsdf-2026-11-18"
+    },
+    {
+      "id": "lichtfeld-panorama-fisheye-2026-11-18", "title": "LichtFeld 主干增加全景/鱼眼切片训练与显存不足快照延后", "eventDate": "2026-11-18", "reportDate": "2026-11-19", "importance": "important", "disposition": "included", "reason": "把 360° 全景和超广角鱼眼接入现有快速训练路径，并处理后台自动保存造成的显存竞争。", "sources": ["https://github.com/MrNeRF/LichtFeld-Studio/commit/979ed5dee72e692150f2fa9072c60ef37d967cc7", "https://github.com/MrNeRF/LichtFeld-Studio/commit/db400bc3ff81110c897857cb307e20568e695cd5", "https://github.com/MrNeRF/LichtFeld-Studio/commit/fa05c8022a2f2e2c73df3fd6887d169ebe334e8e", "https://github.com/MrNeRF/LichtFeld-Studio/commit/73579832efa8c08c92f175708bd105d1a1ada987"], "eventId": "lichtfeld-panorama-fisheye-2026-11-18"
+    },
+    {
+      "id": "annx-studio-1.6.1", "title": "ANNX Studio 1.6.1 为 Apple Silicon 增加 MCMC、Xsplat 与 live preview", "eventDate": "2026-11-18", "reportDate": "2026-11-19", "importance": "important", "disposition": "included", "reason": "Mac 商业重建工具的可下载更新；官方产品页确认平台与许可分层，但版本细节缺少独立官方 changelog，因此保留证据限制。", "sources": ["https://radiancefields.com/annx-studio-1-6-1-brings-mcmc-and-xsplat-training-to-mac", "https://annx.studio/"], "eventId": "annx-studio-1.6.1"
+    },
+    {
+      "id": "arxiv:2606.19609", "title": "Pentimento 获 ACADIA'26 Best Paper", "eventDate": "2026-11-17", "reportDate": "2026-11-19", "importance": "important", "disposition": "included", "reason": "历史论文的本期获奖与行业应用补收；把视频、语音、Gaussian splat 与 CAD 注册用于回收材料施工记录。", "sources": ["https://arxiv.org/abs/2606.19609", "https://news.cornell.edu/stories/2026/11/tracking-flaws-used-building-materials-facilitates-reuse", "https://radiancefields.com/cornell-techs-pentimento-takes-acadia26-best-paper"], "eventId": "arxiv:2606.19609"
+    },
+    {
+      "id": "dji-heritage-awards-2026", "title": "DJI 公布 World Heritage 3D Conservation Initiative 获奖作品", "eventDate": "2026-11-18", "reportDate": "2026-11-19", "importance": "standard", "disposition": "included", "reason": "厂商把 mesh、point cloud 与 3DGS 并列作为遗产漫游的输入；官方未披露每个获奖项目的表示，正文保留限制。", "sources": ["https://enterprise.dji.com/3dheritage-2026/awards", "https://radiancefields.com/dji-names-winners-of-its-3d-heritage-contest"], "eventId": "dji-heritage-awards-2026"
+    },
+    {
+      "id": "playcanvas-supersplat-3.9.0-repeat-2026-11-19", "title": "SuperSplat 3.9.0 与 Viewer 1.43.3 仍为最新提交", "eventDate": "2026-11-17", "reportDate": "2026-11-19", "importance": "standard", "disposition": "excluded", "reason": "提交早于本增量窗口，且同一版本已经进入 11 月 17 日未合并稿件；本轮没有新增 commit、PR 或 release。", "sources": ["https://github.com/playcanvas/supersplat/commit/8b6af56d0b5885be931ac360a9b093379bf145ae", "https://github.com/playcanvas/supersplat-viewer/commit/d8c74450e3d40823655b529b1d2040b3e7230f3a"], "exclusionEvidence": "origin/automation/daily/2026-11-17 已包含相同版本与提交；今日仓库检索未发现更新。"
+    }
+  ]
+}

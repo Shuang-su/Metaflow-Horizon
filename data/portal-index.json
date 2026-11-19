@@ -1,7 +1,179 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-19",
   "daily": [
+    {
+      "id": "gsd-2026-11-19",
+      "contentHash": "cf1c8c6d29380c5b1b8320beaef170cf861231c03ae3d645fbdde263e4c967ff",
+      "date": "2026-11-19",
+      "title": "Horizon 行业日报 — 2026-11-19",
+      "headline": "Open4DGS 降低多机位门槛，ArcGIS 把高斯生成带进企业服务器",
+      "summary": "ASU 公开了带亚帧同步与滚动快门补偿的 Open4DGS 初始研究管线；ArcGIS Reality Server 随 Enterprise 12.2 正式 GA。Spirula 与 LichtFeld 的主干更新则分别推进 2DGS 网格、低显存显示和全景/鱼眼训练。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-19.md",
+      "sourceCount": 1,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "open4dgs-2026-11-18",
+          "anchor": "event-open4dgs-genlock-free",
+          "kind": "tool",
+          "source": "https://open4dgs.asunemlabs.com/",
+          "title": "Open4DGS 用画面运动补上多机位硬件同步",
+          "summary": "Open4DGS 把消费级多机位视频变成动态高斯：先从极线运动估计相机间的亚帧偏移与滚动快门读出，再用 RoMa v2、MEMFOF 和 TRiGS 路线初始化、训练与导出。Core 与训练器分别采用 MIT 和 AGPL-3.0，公开数据另有非商用限制。",
+          "date": "2026-11-19",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "arcgis-reality-server-ga-12.2",
+          "anchor": "event-arcgis-reality-server-ga",
+          "kind": "news",
+          "source": "https://www.esri.com/arcgis-blog/products/arcgis-reality-server/imagery/arcgis-reality-server-is-now-available",
+          "title": "ArcGIS Reality Server 把高斯生成放进企业任务队列",
+          "summary": "ArcGIS Reality Server 随 Enterprise 12.2 正式 GA，能在自管服务器或私有云上分布式处理无人机、航空和卫星影像，并把 Gaussian splat 与 true ortho、DSM、点云和网格一起作为产品。ArcGIS Pro、Python API、REST API 和 beta Web App 提供了桌面、自动化与浏览器入口。",
+          "date": "2026-11-19",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "spirula-2dgs-tsdf-2026-11-18",
+          "anchor": "event-spirula-2dgs-tsdf",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/5806955241ec653a1ba279cf2e73dc17e6d03cba",
+          "title": "Spirula 把 2DGS 训练和 TSDF 网格出口接到一起",
+          "summary": "Spirula 的新主干可以直接训练 2DGS surfel，并用 spirula mesh --method tsdf 从各相机的中值深度融合表面。CUDA 与 Vulkan 都接入了相同的 ray-disc 求交；同一轮还加入 OpenGL 硬件栅格器回退、Voronoi 分区和更准确的渐进分辨率显存预测。",
+          "date": "2026-11-19",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "lichtfeld-panorama-fisheye-2026-11-18",
+          "anchor": "event-lichtfeld-panorama-fisheye",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/979ed5dee72e692150f2fa9072c60ef37d967cc7",
+          "title": "LichtFeld 用共享 pose 的针孔切片训练全景与鱼眼",
+          "summary": "LichtFeld 把一张等距柱状全景切为六个针孔视图，把覆盖半球以上的鱼眼切为五个视图，同时仍让这些派生视图共享原始照片的一套相机姿态。这样能复用快速栅格器，也避免相机优化把同一镜头的切片当成多台独立相机漂移。",
+          "date": "2026-11-19",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "annx-studio-1.6.1",
+          "anchor": "event-annx-studio-1-6-1",
+          "kind": "news",
+          "source": "https://annx.studio/",
+          "title": "ANNX Studio 在 Mac 上扩充训练模型并开放训练中预览",
+          "summary": "Radiance Fields 记录的 ANNX Studio 1.6.1 为 Apple Silicon 加入 MCMC、Xsplat 和默认 gsplat 训练，并允许训练时旋转查看中间结果。官方产品页确认 Mac/Windows、本地处理和许可分层，但没有提供公开的 1.6.1 独立 changelog，因此本期没有把它写成实测。",
+          "date": "2026-11-19",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "dji-heritage-awards-2026",
+          "anchor": "event-dji-heritage-awards",
+          "kind": "news",
+          "source": "https://enterprise.dji.com/3dheritage-2026/awards",
+          "title": "DJI 用同一漫游出口承接网格、点云与高斯",
+          "summary": "DJI 的 World Heritage 3D Conservation Initiative 公布了龙门石窟、拉斯班塔斯斗牛场、武陵源和卡帕多奇亚等获奖项目。参赛者用 DJI Reality 把三维模型生成 MP4 漫游，输入可以是 mesh、point cloud 或 3DGS。",
+          "date": "2026-11-19",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2606.19609",
+          "anchor": "paper-2606-19609-pentimento",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2606.19609",
+          "title": "Pentimento 用 splat 记录施工现场为什么偏离 CAD",
+          "summary": "Pentimento 把现场视频、口述说明、Gaussian splat 和 CAD 模型注册到同一个浏览器时间线，用来记录回收木材施工中不断发生的临场调整。论文在 ACADIA’26 获 Best Paper，Cornell 的公告让这项 6 月首发、10 月更新的研究在本期成为行业应用新闻。",
+          "date": "2026-11-19",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 3,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、项目页、厂商公告、论文与 GitHub 提交编辑阅读版。未独立运行软件、复现实验、验证作者性能数字或进行设备验收；初始研究发布与主干提交均不等同于生产可用正式版。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-19.md",
+        "contentHash": "9fd4868033e855702e0b4a0fa034a1985819cd1cce4e28046125da0859561eaa"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17694,138 @@
   ],
   "entries": [
     {
+      "id": "annx-studio-1.6.1",
+      "anchor": "event-annx-studio-1-6-1",
+      "kind": "news",
+      "source": "https://annx.studio/",
+      "title": "ANNX Studio 在 Mac 上扩充训练模型并开放训练中预览",
+      "summary": "Radiance Fields 记录的 ANNX Studio 1.6.1 为 Apple Silicon 加入 MCMC、Xsplat 和默认 gsplat 训练，并允许训练时旋转查看中间结果。官方产品页确认 Mac/Windows、本地处理和许可分层，但没有提供公开的 1.6.1 独立 changelog，因此本期没有把它写成实测。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "arcgis-reality-server-ga-12.2",
+      "anchor": "event-arcgis-reality-server-ga",
+      "kind": "news",
+      "source": "https://www.esri.com/arcgis-blog/products/arcgis-reality-server/imagery/arcgis-reality-server-is-now-available",
+      "title": "ArcGIS Reality Server 把高斯生成放进企业任务队列",
+      "summary": "ArcGIS Reality Server 随 Enterprise 12.2 正式 GA，能在自管服务器或私有云上分布式处理无人机、航空和卫星影像，并把 Gaussian splat 与 true ortho、DSM、点云和网格一起作为产品。ArcGIS Pro、Python API、REST API 和 beta Web App 提供了桌面、自动化与浏览器入口。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "arxiv:2606.19609",
+      "kind": "paper",
+      "date": "2026-11-19",
+      "title": "Pentimento 获奖说明 splat 正在承载“为什么现场会偏离 CAD”",
+      "summary": "Pentimento 把现场视频、口述说明、Gaussian splat 和 CAD 模型注册到同一个浏览器时间线，用来记录回收木材施工中不断发生的临场调整。论文在 ACADIA’26 获 Best Paper，Cornell 的公告让这项 6 月首发、10 月更新的研究在本期成为行业应用新闻。",
+      "source": "https://arxiv.org/abs/2606.19609",
+      "anchor": "paper-2606-19609-pentimento",
+      "topics": [
+        "industry"
+      ]
+    },
+    {
+      "id": "dji-heritage-awards-2026",
+      "anchor": "event-dji-heritage-awards",
+      "kind": "news",
+      "source": "https://enterprise.dji.com/3dheritage-2026/awards",
+      "title": "DJI 用同一漫游出口承接网格、点云与高斯",
+      "summary": "DJI 的 World Heritage 3D Conservation Initiative 公布了龙门石窟、拉斯班塔斯斗牛场、武陵源和卡帕多奇亚等获奖项目。参赛者用 DJI Reality 把三维模型生成 MP4 漫游，输入可以是 mesh、point cloud 或 3DGS。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "lichtfeld-panorama-fisheye-2026-11-18",
+      "anchor": "event-lichtfeld-panorama-fisheye",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/979ed5dee72e692150f2fa9072c60ef37d967cc7",
+      "title": "LichtFeld 用共享 pose 的针孔切片训练全景与鱼眼",
+      "summary": "LichtFeld 把一张等距柱状全景切为六个针孔视图，把覆盖半球以上的鱼眼切为五个视图，同时仍让这些派生视图共享原始照片的一套相机姿态。这样能复用快速栅格器，也避免相机优化把同一镜头的切片当成多台独立相机漂移。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "open4dgs-2026-11-18",
+      "anchor": "event-open4dgs-genlock-free",
+      "kind": "tool",
+      "source": "https://open4dgs.asunemlabs.com/",
+      "title": "Open4DGS 用画面运动补上多机位硬件同步",
+      "summary": "Open4DGS 把消费级多机位视频变成动态高斯：先从极线运动估计相机间的亚帧偏移与滚动快门读出，再用 RoMa v2、MEMFOF 和 TRiGS 路线初始化、训练与导出。Core 与训练器分别采用 MIT 和 AGPL-3.0，公开数据另有非商用限制。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "spirula-2dgs-tsdf-2026-11-18",
+      "anchor": "event-spirula-2dgs-tsdf",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/5806955241ec653a1ba279cf2e73dc17e6d03cba",
+      "title": "Spirula 把 2DGS 训练和 TSDF 网格出口接到一起",
+      "summary": "Spirula 的新主干可以直接训练 2DGS surfel，并用 spirula mesh --method tsdf 从各相机的中值深度融合表面。CUDA 与 Vulkan 都接入了相同的 ray-disc 求交；同一轮还加入 OpenGL 硬件栅格器回退、Voronoi 分区和更准确的渐进分辨率显存预测。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31109,26 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-19",
+      "kind": "daily",
+      "title": "Open4DGS 降低多机位门槛，ArcGIS 把高斯生成带进企业服务器",
+      "summary": "ASU 公开了带亚帧同步与滚动快门补偿的 Open4DGS 初始研究管线；ArcGIS Reality Server 随 Enterprise 12.2 正式 GA。Spirula 与 LichtFeld 的主干更新则分别推进 2DGS 网格、低显存显示和全景/鱼眼训练。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/19/",
+      "text": "Open4DGS 用画面运动补上多机位硬件同步\nOpen4DGS 把消费级多机位视频变成动态高斯：先从极线运动估计相机间的亚帧偏移与滚动快门读出，再用 RoMa v2、MEMFOF 和 TRiGS 路线初始化、训练与导出。Core 与训练器分别采用 MIT 和 AGPL-3.0，公开数据另有非商用限制。\n现在最需要看到的是边界而不是宣传语。仓库把自己称为初始研究发布，分拆版本尚未完成一次全新端到端 GPU 跑通；测试环境集中在 Ubuntu 24.04、Python 3.11、CUDA 12.8 与 RTX 3090。.trigsbin 仍是大体量中间格式，不支持当前所说的 streaming，Unity、Web SDK 与压缩也只是 roadmap。\n项目页 · 准备与导出代码 · 训练器\nArcGIS Reality Server 把高斯生成放进企业任务队列\nArcGIS Reality Server 随 Enterprise 12.2 正式 GA，能在自管服务器或私有云上分布式处理无人机、航空和卫星影像，并把 Gaussian splat 与 true ortho、DSM、点云和网格一起作为产品。ArcGIS Pro、Python API、REST API 和 beta Web App 提供了桌面、自动化与浏览器入口。\n这条路线面向已经有 ArcGIS Enterprise、数据治理和多人协作需求的组织。每台参与高斯处理的服务器至少需要 64 GB 内存、8 GB NVIDIA 显存、计算能力 7.5 与 CUDA 13；价格仍需联系客户经理。个人扫描用户不会因为它 GA 就得到更轻的工作流。\nEsri 正式公告\nSpirula 把 2DGS 训练和 TSDF 网格出口接到一起\nSpirula 的新主干可以直接训练 2DGS surfel，并用 spirula mesh --method tsdf 从各相机的中值深度融合表面。CUDA 与 Vulkan 都接入了相同的 ray-disc 求交；同一轮还加入 OpenGL 硬件栅格器回退、Voronoi 分区和更准确的渐进分辨率显存预测。\n作者的对照给出了适用边界：在 action-camera 样例里，2DGS 用 TSDF 与 opacity field 的网格 F-score 接近；3DGS 用 TSDF 反而留下更多 floaters，F-score 更低。TSDF 因此是 2DGS 的候选出口，而不是所有高斯模型的新默认。这些变化还没有正式 tag。\n2DGS 与 TSDF 合并提交 · 低显存显示路径\nLichtFeld 用共享 pose 的针孔切片训练全景与鱼眼\nLichtFeld 把一张等距柱状全景切为六个针孔视图，把覆盖半球以上的鱼眼切为五个视图，同时仍让这些派生视图共享原始照片的一套相机姿态。这样能复用快速栅格器，也避免相机优化把同一镜头的切片当成多台独立相机漂移。\n后台 autosave 遇到显存不足时会延后快照，并保留部分捕获结果。这比让保存任务挤垮训练更稳健，但不保证快照完成；批处理仍需监控 deferred 状态。全景、鱼眼与快照变化都只在 GPL-3.0 主干。\n全景训练提交 · 超广角鱼眼提交 · 快照显存处理\nANNX Studio 在 Mac 上扩充训练模型并开放训练中预览\nRadiance Fields 记录的 ANNX Studio 1.6.1 为 Apple Silicon 加入 MCMC、Xsplat 和默认 gsplat 训练，并允许训练时旋转查看中间结果。官方产品页确认 Mac/Windows、本地处理和许可分层，但没有提供公开的 1.6.1 独立 changelog，因此本期没有把它写成实测。\nBasic 适合非商用入门，商业使用落在 Enterprise；训练预览会增加保存和显示开销。升级前应先用一份固定素材核对训练模式、墙钟时间、输出兼容性与停止任务后的结果完整度。\n产品与当前方案 · 版本发现记录\nDJI 用同一漫游出口承接网格、点云与高斯\nDJI 的 World Heritage 3D Conservation Initiative 公布了龙门石窟、拉斯班塔斯斗牛场、武陵源和卡帕多奇亚等获奖项目。参赛者用 DJI Reality 把三维模型生成 MP4 漫游，输入可以是 mesh、point cloud 或 3DGS。\n官方没有披露每个获奖项目具体用了哪种表示，因此不能把获奖作品全部算作高斯案例。更可靠的结论是，厂商已经把 3DGS 与传统航测结果放进同一个文化遗产交付入口。\n获奖作品\nPentimento 用 splat 记录施工现场为什么偏离 CAD\nPentimento 把现场视频、口述说明、Gaussian splat 和 CAD 模型注册到同一个浏览器时间线，用来记录回收木材施工中不断发生的临场调整。论文在 ACADIA’26 获 Best Paper，Cornell 的公告让这项 6 月首发、10 月更新的研究在本期成为行业应用新闻。\n它是获奖原型，不是已经可以部署的产品。论文没有代码，评估主要是单一建筑案例与定性观察，也没有用户研究；它的价值在于提出了一种“把空间变化和变化原因一起保存”的记录方式。\n论文原文 · Cornell 公告"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32429,138 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "annx-studio-1.6.1",
+      "kind": "news",
+      "title": "ANNX Studio 在 Mac 上扩充训练模型并开放训练中预览",
+      "summary": "Radiance Fields 记录的 ANNX Studio 1.6.1 为 Apple Silicon 加入 MCMC、Xsplat 和默认 gsplat 训练，并允许训练时旋转查看中间结果。官方产品页确认 Mac/Windows、本地处理和许可分层，但没有提供公开的 1.6.1 独立 changelog，因此本期没有把它写成实测。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/19/#event-annx-studio-1-6-1",
+      "text": "ANNX Studio 在 Mac 上扩充训练模型并开放训练中预览 Radiance Fields 记录的 ANNX Studio 1.6.1 为 Apple Silicon 加入 MCMC、Xsplat 和默认 gsplat 训练，并允许训练时旋转查看中间结果。官方产品页确认 Mac/Windows、本地处理和许可分层，但没有提供公开的 1.6.1 独立 changelog，因此本期没有把它写成实测。 https://annx.studio/ ANNX Studio 在 Mac 上扩充训练模型并开放训练中预览 ## ANNX Studio 在 Mac 上扩充训练模型并开放训练中预览\n\nRadiance Fields 记录的 ANNX Studio 1.6.1 为 Apple Silicon 加入 MCMC、Xsplat 和默认 gsplat 训练，并允许训练时旋转查看中间结果。官方产品页确认 Mac/Windows、本地处理和许可分层，但没有提供公开的 1.6.1 独立 changelog，因此本期没有把它写成实测。\n\nBasic 适合非商用入门，商业使用落在 Enterprise；训练预览会增加保存和显示开销。升级前应先用一份固定素材核对训练模式、墙钟时间、输出兼容性与停止任务后的结果完整度。\n\n[产品与当前方案](https://annx.studio/) · [版本发现记录](https://radiancefields.com/annx-studio-1-6-1-brings-mcmc-and-xsplat-training-to-mac)"
+    },
+    {
+      "id": "arcgis-reality-server-ga-12.2",
+      "kind": "news",
+      "title": "ArcGIS Reality Server 把高斯生成放进企业任务队列",
+      "summary": "ArcGIS Reality Server 随 Enterprise 12.2 正式 GA，能在自管服务器或私有云上分布式处理无人机、航空和卫星影像，并把 Gaussian splat 与 true ortho、DSM、点云和网格一起作为产品。ArcGIS Pro、Python API、REST API 和 beta Web App 提供了桌面、自动化与浏览器入口。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/19/#event-arcgis-reality-server-ga",
+      "text": "ArcGIS Reality Server 把高斯生成放进企业任务队列 ArcGIS Reality Server 随 Enterprise 12.2 正式 GA，能在自管服务器或私有云上分布式处理无人机、航空和卫星影像，并把 Gaussian splat 与 true ortho、DSM、点云和网格一起作为产品。ArcGIS Pro、Python API、REST API 和 beta Web App 提供了桌面、自动化与浏览器入口。 https://www.esri.com/arcgis-blog/products/arcgis-reality-server/imagery/arcgis-reality-server-is-now-available ArcGIS Reality Server 把高斯生成放进企业任务队列 ## ArcGIS Reality Server 把高斯生成放进企业任务队列\n\nArcGIS Reality Server 随 Enterprise 12.2 正式 GA，能在自管服务器或私有云上分布式处理无人机、航空和卫星影像，并把 Gaussian splat 与 true ortho、DSM、点云和网格一起作为产品。ArcGIS Pro、Python API、REST API 和 beta Web App 提供了桌面、自动化与浏览器入口。\n\n这条路线面向已经有 ArcGIS Enterprise、数据治理和多人协作需求的组织。每台参与高斯处理的服务器至少需要 64 GB 内存、8 GB NVIDIA 显存、计算能力 7.5 与 CUDA 13；价格仍需联系客户经理。个人扫描用户不会因为它 GA 就得到更轻的工作流。\n\n[Esri 正式公告](https://www.esri.com/arcgis-blog/products/arcgis-reality-server/imagery/arcgis-reality-server-is-now-available)"
+    },
+    {
+      "id": "arxiv:2606.19609",
+      "kind": "paper",
+      "title": "Pentimento 获奖说明 splat 正在承载“为什么现场会偏离 CAD”",
+      "summary": "Pentimento 把现场视频、口述说明、Gaussian splat 和 CAD 模型注册到同一个浏览器时间线，用来记录回收木材施工中不断发生的临场调整。论文在 ACADIA’26 获 Best Paper，Cornell 的公告让这项 6 月首发、10 月更新的研究在本期成为行业应用新闻。",
+      "date": "2026-11-19",
+      "topics": [
+        "industry"
+      ],
+      "url": "/daily/2026/11/19/#paper-2606-19609-pentimento",
+      "text": "Pentimento 获奖说明 splat 正在承载“为什么现场会偏离 CAD” Pentimento 把现场视频、口述说明、Gaussian splat 和 CAD 模型注册到同一个浏览器时间线，用来记录回收木材施工中不断发生的临场调整。论文在 ACADIA’26 获 Best Paper，Cornell 的公告让这项 6 月首发、10 月更新的研究在本期成为行业应用新闻。 https://arxiv.org/abs/2606.19609 Pentimento 用 splat 记录施工现场为什么偏离 CAD ## Pentimento 用 splat 记录施工现场为什么偏离 CAD\n\nPentimento 把现场视频、口述说明、Gaussian splat 和 CAD 模型注册到同一个浏览器时间线，用来记录回收木材施工中不断发生的临场调整。论文在 ACADIA’26 获 Best Paper，Cornell 的公告让这项 6 月首发、10 月更新的研究在本期成为行业应用新闻。\n\n它是获奖原型，不是已经可以部署的产品。论文没有代码，评估主要是单一建筑案例与定性观察，也没有用户研究；它的价值在于提出了一种“把空间变化和变化原因一起保存”的记录方式。\n\n[论文原文](https://arxiv.org/abs/2606.19609) · [Cornell 公告](https://news.cornell.edu/stories/2026/11/tracking-flaws-used-building-materials-facilitates-reuse)"
+    },
+    {
+      "id": "dji-heritage-awards-2026",
+      "kind": "news",
+      "title": "DJI 用同一漫游出口承接网格、点云与高斯",
+      "summary": "DJI 的 World Heritage 3D Conservation Initiative 公布了龙门石窟、拉斯班塔斯斗牛场、武陵源和卡帕多奇亚等获奖项目。参赛者用 DJI Reality 把三维模型生成 MP4 漫游，输入可以是 mesh、point cloud 或 3DGS。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/19/#event-dji-heritage-awards",
+      "text": "DJI 用同一漫游出口承接网格、点云与高斯 DJI 的 World Heritage 3D Conservation Initiative 公布了龙门石窟、拉斯班塔斯斗牛场、武陵源和卡帕多奇亚等获奖项目。参赛者用 DJI Reality 把三维模型生成 MP4 漫游，输入可以是 mesh、point cloud 或 3DGS。 https://enterprise.dji.com/3dheritage-2026/awards DJI 用同一漫游出口承接网格、点云与高斯 ## DJI 用同一漫游出口承接网格、点云与高斯\n\nDJI 的 World Heritage 3D Conservation Initiative 公布了龙门石窟、拉斯班塔斯斗牛场、武陵源和卡帕多奇亚等获奖项目。参赛者用 DJI Reality 把三维模型生成 MP4 漫游，输入可以是 mesh、point cloud 或 3DGS。\n\n官方没有披露每个获奖项目具体用了哪种表示，因此不能把获奖作品全部算作高斯案例。更可靠的结论是，厂商已经把 3DGS 与传统航测结果放进同一个文化遗产交付入口。\n\n[获奖作品](https://enterprise.dji.com/3dheritage-2026/awards)"
+    },
+    {
+      "id": "lichtfeld-panorama-fisheye-2026-11-18",
+      "kind": "tool",
+      "title": "LichtFeld 用共享 pose 的针孔切片训练全景与鱼眼",
+      "summary": "LichtFeld 把一张等距柱状全景切为六个针孔视图，把覆盖半球以上的鱼眼切为五个视图，同时仍让这些派生视图共享原始照片的一套相机姿态。这样能复用快速栅格器，也避免相机优化把同一镜头的切片当成多台独立相机漂移。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/19/#event-lichtfeld-panorama-fisheye",
+      "text": "LichtFeld 用共享 pose 的针孔切片训练全景与鱼眼 LichtFeld 把一张等距柱状全景切为六个针孔视图，把覆盖半球以上的鱼眼切为五个视图，同时仍让这些派生视图共享原始照片的一套相机姿态。这样能复用快速栅格器，也避免相机优化把同一镜头的切片当成多台独立相机漂移。 https://github.com/MrNeRF/LichtFeld-Studio/commit/979ed5dee72e692150f2fa9072c60ef37d967cc7 LichtFeld 用共享 pose 的针孔切片训练全景与鱼眼 ## LichtFeld 用共享 pose 的针孔切片训练全景与鱼眼\n\nLichtFeld 把一张等距柱状全景切为六个针孔视图，把覆盖半球以上的鱼眼切为五个视图，同时仍让这些派生视图共享原始照片的一套相机姿态。这样能复用快速栅格器，也避免相机优化把同一镜头的切片当成多台独立相机漂移。\n\n后台 autosave 遇到显存不足时会延后快照，并保留部分捕获结果。这比让保存任务挤垮训练更稳健，但不保证快照完成；批处理仍需监控 deferred 状态。全景、鱼眼与快照变化都只在 GPL-3.0 主干。\n\n[全景训练提交](https://github.com/MrNeRF/LichtFeld-Studio/commit/979ed5dee72e692150f2fa9072c60ef37d967cc7) · [超广角鱼眼提交](https://github.com/MrNeRF/LichtFeld-Studio/commit/db400bc3ff81110c897857cb307e20568e695cd5) · [快照显存处理](https://github.com/MrNeRF/LichtFeld-Studio/commit/73579832efa8c08c92f175708bd105d1a1ada987)"
+    },
+    {
+      "id": "open4dgs-2026-11-18",
+      "kind": "tool",
+      "title": "Open4DGS 用画面运动补上多机位硬件同步",
+      "summary": "Open4DGS 把消费级多机位视频变成动态高斯：先从极线运动估计相机间的亚帧偏移与滚动快门读出，再用 RoMa v2、MEMFOF 和 TRiGS 路线初始化、训练与导出。Core 与训练器分别采用 MIT 和 AGPL-3.0，公开数据另有非商用限制。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/19/#event-open4dgs-genlock-free",
+      "text": "Open4DGS 用画面运动补上多机位硬件同步 Open4DGS 把消费级多机位视频变成动态高斯：先从极线运动估计相机间的亚帧偏移与滚动快门读出，再用 RoMa v2、MEMFOF 和 TRiGS 路线初始化、训练与导出。Core 与训练器分别采用 MIT 和 AGPL-3.0，公开数据另有非商用限制。 https://open4dgs.asunemlabs.com/ Open4DGS 用画面运动补上多机位硬件同步 ## Open4DGS 用画面运动补上多机位硬件同步\n\nOpen4DGS 把消费级多机位视频变成动态高斯：先从极线运动估计相机间的亚帧偏移与滚动快门读出，再用 RoMa v2、MEMFOF 和 TRiGS 路线初始化、训练与导出。Core 与训练器分别采用 MIT 和 AGPL-3.0，公开数据另有非商用限制。\n\n现在最需要看到的是边界而不是宣传语。仓库把自己称为初始研究发布，分拆版本尚未完成一次全新端到端 GPU 跑通；测试环境集中在 Ubuntu 24.04、Python 3.11、CUDA 12.8 与 RTX 3090。`.trigsbin` 仍是大体量中间格式，不支持当前所说的 streaming，Unity、Web SDK 与压缩也只是 roadmap。\n\n[项目页](https://open4dgs.asunemlabs.com/) · [准备与导出代码](https://github.com/ASU-NEM-Labs/open4dgs-core) · [训练器](https://github.com/ASU-NEM-Labs/open4dgs-trigs)"
+    },
+    {
+      "id": "spirula-2dgs-tsdf-2026-11-18",
+      "kind": "tool",
+      "title": "Spirula 把 2DGS 训练和 TSDF 网格出口接到一起",
+      "summary": "Spirula 的新主干可以直接训练 2DGS surfel，并用 spirula mesh --method tsdf 从各相机的中值深度融合表面。CUDA 与 Vulkan 都接入了相同的 ray-disc 求交；同一轮还加入 OpenGL 硬件栅格器回退、Voronoi 分区和更准确的渐进分辨率显存预测。",
+      "date": "2026-11-19",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/19/#event-spirula-2dgs-tsdf",
+      "text": "Spirula 把 2DGS 训练和 TSDF 网格出口接到一起 Spirula 的新主干可以直接训练 2DGS surfel，并用 spirula mesh --method tsdf 从各相机的中值深度融合表面。CUDA 与 Vulkan 都接入了相同的 ray-disc 求交；同一轮还加入 OpenGL 硬件栅格器回退、Voronoi 分区和更准确的渐进分辨率显存预测。 https://github.com/harry7557558/spirula-studio/commit/5806955241ec653a1ba279cf2e73dc17e6d03cba Spirula 把 2DGS 训练和 TSDF 网格出口接到一起 ## Spirula 把 2DGS 训练和 TSDF 网格出口接到一起\n\nSpirula 的新主干可以直接训练 2DGS surfel，并用 `spirula mesh --method tsdf` 从各相机的中值深度融合表面。CUDA 与 Vulkan 都接入了相同的 ray-disc 求交；同一轮还加入 OpenGL 硬件栅格器回退、Voronoi 分区和更准确的渐进分辨率显存预测。\n\n作者的对照给出了适用边界：在 action-camera 样例里，2DGS 用 TSDF 与 opacity field 的网格 F-score 接近；3DGS 用 TSDF 反而留下更多 floaters，F-score 更低。TSDF 因此是 2DGS 的候选出口，而不是所有高斯模型的新默认。这些变化还没有正式 tag。\n\n[2DGS 与 TSDF 合并提交](https://github.com/harry7557558/spirula-studio/commit/5806955241ec653a1ba279cf2e73dc17e6d03cba) · [低显存显示路径](https://github.com/harry7557558/spirula-studio/commit/303d1c6fdfaeaab1d604b18a78c7063a38dd7135)"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",
