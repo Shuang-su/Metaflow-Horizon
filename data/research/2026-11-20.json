@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-20",
+  "mode": "scheduled",
+  "window": {"start": "2026-11-19T08:50:00+08:00", "end": "2026-11-20T08:53:00+08:00"},
+  "reviewedAt": "2026-11-20T08:53:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields", "status": "candidates", "checkedAt": "2026-11-20T08:14:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"],
+      "candidateIds": ["3ds-max-2027.3-gaussian-splat", "splat-studio-1.0", "01splat-0.5.6", "arcgis-xr-viewer-gaussian-layer", "arxiv:2611.23935", "arxiv:2611.23416", "arxiv:2611.23444"],
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "candidates", "checkedAt": "2026-11-20T08:13:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "candidates", "checkedAt": "2026-11-20T08:14:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official", "status": "candidates", "checkedAt": "2026-11-20T08:30:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": ["3ds-max-2027.3-gaussian-splat", "splat-studio-1.0", "01splat-0.5.6", "arcgis-xr-viewer-gaussian-layer"],
+      "gap": "Blender News 返回 HTTP 403；PlayCanvas 博客可读但最新文章仍为 11 月 9 日。Autodesk 与 Superhive 候选改由各自官方文档和产品页核验；01Splat 与 ArcGIS XR 缺少可读的独立官方版本页。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-20T08:15:00+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-20T08:16:00+08:00", "gap": "HTTP 403，未取得可验证正文。"},
+        {"url": "https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-6B92C7C0-714E-4823-BF73-41EAAEB2F921", "status": "candidates", "checkedAt": "2026-11-20T08:19:00+08:00"},
+        {"url": "https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-2EE47C36-BBA0-4DD5-85C4-8AA73B146613", "status": "candidates", "checkedAt": "2026-11-20T08:21:00+08:00"},
+        {"url": "https://superhivemarket.com/products/splat-studio", "status": "candidates", "checkedAt": "2026-11-20T08:24:00+08:00"},
+        {"url": "https://01splat.com/", "status": "unavailable", "checkedAt": "2026-11-20T08:27:00+08:00", "gap": "官方页仅显示 coming-soon，无法核对 0.5.6 changelog。"},
+        {"url": "https://www.esri.com/arcgis-blog/", "status": "checked-no-new", "checkedAt": "2026-11-20T08:30:00+08:00", "gap": "没有找到 ArcGIS XR Viewer Gaussian layer 的独立官方发布页。"}
+      ]
+    },
+    {
+      "sourceId": "x", "status": "unavailable", "checkedAt": "2026-11-20T08:18:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "candidateIds": [],
+      "gap": "4 个登记账号均返回 403 或 DisabledError；候选改由厂商文档、项目页、论文和 GitHub 一手记录核验。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-20T08:16:30+08:00", "gap": "DisabledError，无可验证原帖。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-20T08:17:00+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-20T08:17:30+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-20T08:18:00+08:00", "gap": "DisabledError，无可验证原帖。"}
+      ]
+    },
+    {
+      "sourceId": "research", "status": "candidates", "checkedAt": "2026-11-20T08:38:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"],
+      "candidateIds": ["arxiv:2611.23935", "arxiv:2611.23416", "arxiv:2611.23444"],
+      "gap": "arXiv export API 未能直接读取；Hugging Face Papers 可读但可见的 11 月 19 日条目与本栏目无关。相关论文由 arXiv 原文与作者仓库核验。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-20T08:31:00+08:00", "gap": "API 端点未能直接读取。"},
+        {"url": "https://huggingface.co/papers", "status": "checked-no-new", "checkedAt": "2026-11-20T08:32:00+08:00"},
+        {"url": "https://arxiv.org/abs/2611.23935", "status": "candidates", "checkedAt": "2026-11-20T08:34:00+08:00"},
+        {"url": "https://arxiv.org/abs/2611.23416", "status": "candidates", "checkedAt": "2026-11-20T08:36:00+08:00"},
+        {"url": "https://arxiv.org/abs/2611.23444", "status": "candidates", "checkedAt": "2026-11-20T08:38:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github", "status": "candidates", "checkedAt": "2026-11-20T08:48:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": ["splat-transform-3.12.0", "supersplat-3.9.1-3.9.2", "lichtfeld-priors-calibration-2026-11-20", "spirula-meshing-ac156157", "arxiv:2611.23935", "arxiv:2611.23444"],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "candidates", "checkedAt": "2026-11-20T08:39:00+08:00"},
+        {"url": "https://github.com/playcanvas/supersplat-viewer", "status": "checked-no-new", "checkedAt": "2026-11-20T08:40:00+08:00", "gap": "最新版本仍是 11 月 17 日已进入未合并稿件的 1.43.3。"},
+        {"url": "https://github.com/playcanvas/splat-transform", "status": "candidates", "checkedAt": "2026-11-20T08:41:00+08:00"},
+        {"url": "https://github.com/playcanvas/engine", "status": "checked-no-new", "checkedAt": "2026-11-20T08:42:00+08:00", "gap": "窗口内没有核实到新的 Gaussian splat 专项提交。"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "candidates", "checkedAt": "2026-11-20T08:43:00+08:00"},
+        {"url": "https://github.com/harry7557558/spirula-studio", "status": "candidates", "checkedAt": "2026-11-20T08:44:00+08:00"},
+        {"url": "https://github.com/edward62740/Facet-SLAM", "status": "candidates", "checkedAt": "2026-11-20T08:46:00+08:00"},
+        {"url": "https://github.com/nalinimsingh/gaussian-splatoms", "status": "candidates", "checkedAt": "2026-11-20T08:48:00+08:00", "gap": "仓库存在真实训练流程，但 README 的论文标题与会议表述仍滞后于新 arXiv 版本。"}
+      ]
+    },
+    {
+      "sourceId": "community", "status": "candidates", "checkedAt": "2026-11-20T08:52:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": ["reddit-dinovi-2026-11-20"],
+      "gap": "Reddit 可读但候选以自报演示和讨论为主；B 站只返回浏览器兼容提示；少数派没有取得带明确日期与原始链接的新事件。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "candidates", "checkedAt": "2026-11-20T08:50:00+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "unavailable", "checkedAt": "2026-11-20T08:51:00+08:00", "gap": "仅返回浏览器版本过旧提示。"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-20T08:52:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "splat-transform-3.12.0", "title": "SplatTransform 3.12.0 用颜色误差目标选择 SOG SH 调色板", "eventDate": "2026-11-19", "reportDate": "2026-11-20", "importance": "important", "disposition": "included", "reason": "可直接测试的压缩构建链变化，把每个 LOD 单元的 SH palette 从固定大小改为误差目标驱动，并披露完整权衡基准。", "sources": ["https://github.com/playcanvas/splat-transform/pull/383", "https://github.com/playcanvas/splat-transform/commit/cdad941a4514f04fd442cdde650c5116407d7cd5", "https://github.com/playcanvas/splat-transform/commit/5d5be2bca17f634f7e706d9fa63a47f2e0112520"], "eventId": "splat-transform-3.12.0"
+    },
+    {
+      "id": "supersplat-3.9.1-3.9.2", "title": "SuperSplat 3.9.1/3.9.2 自动化大场景 LOD 并修复导出目录卡死", "eventDate": "2026-11-19", "reportDate": "2026-11-20", "importance": "important", "disposition": "included", "reason": "发布默认值、SH 阶数来源和浏览器导出稳定性直接影响现有编辑与发布工作流。", "sources": ["https://github.com/playcanvas/supersplat/pull/1114", "https://github.com/playcanvas/supersplat/commit/e5916452960ca814774ae85084790cc403f123f4", "https://github.com/playcanvas/supersplat/commit/292f53b8f6924a5533d993c0fa1ce078be91f042", "https://github.com/playcanvas/supersplat/pull/1115", "https://github.com/playcanvas/supersplat/commit/c3f9228b60593b13651453bdaaf8c750b15f6fca", "https://github.com/playcanvas/supersplat/commit/7912e1d518f04326ca7f2c674b5af9b72a5409ab"], "eventId": "supersplat-3.9.1-3.9.2"
+    },
+    {
+      "id": "3ds-max-2027.3-gaussian-splat", "title": "3ds Max 2027.3 增加 Gaussian splat 视口与 4DGS PLY 序列时间线", "eventDate": "2026-11-19", "reportDate": "2026-11-20", "importance": "important", "disposition": "included", "reason": "大型商业 DCC 的正式文档把静态 PLY/SPZ 与动态 PLY 序列纳入可见时间线工作流。", "sources": ["https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-6B92C7C0-714E-4823-BF73-41EAAEB2F921", "https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-2EE47C36-BBA0-4DD5-85C4-8AA73B146613", "https://radiancefields.com/3ds-max-2027-3-adds-gaussian-splatting-and-4dgs-support"], "eventId": "3ds-max-2027.3-gaussian-splat"
+    },
+    {
+      "id": "lichtfeld-priors-calibration-2026-11-20", "title": "LichtFeld 主干降低深度/法线先验缓存并默认开启标定校正", "eventDate": "2026-11-19", "reportDate": "2026-11-20", "importance": "important", "disposition": "included", "reason": "有条件的 RAM/显存下降、相机标定默认值和 CUDA stream 正确性保护对大图训练与非阻塞流有直接工程价值。", "sources": ["https://github.com/MrNeRF/LichtFeld-Studio/pull/4133", "https://github.com/MrNeRF/LichtFeld-Studio/commit/dff7cd2e3a4bb16c3b5989204f8946681a00a905", "https://github.com/MrNeRF/LichtFeld-Studio/pull/4147", "https://github.com/MrNeRF/LichtFeld-Studio/commit/872ed78f11f6ef051088b63a7e06b5d417b3d4f9", "https://github.com/MrNeRF/LichtFeld-Studio/pull/4154", "https://github.com/MrNeRF/LichtFeld-Studio/commit/6a609de8523715bced2c9e749a909a23b6097d3f"], "eventId": "lichtfeld-priors-calibration-2026-11-20"
+    },
+    {
+      "id": "arxiv:2611.23935", "title": "Facet-SLAM 公开实时三角形 splatting RGB-D SLAM 代码", "eventDate": "2026-11-18", "reportDate": "2026-11-20", "importance": "important", "disposition": "included", "reason": "迟到索引补收；论文与最小研究代码同时可用，表示层直接提供表面拓扑并报告桌面与 Jetson 实时结果。", "sources": ["https://arxiv.org/abs/2611.23935", "https://github.com/edward62740/Facet-SLAM"], "eventId": "arxiv:2611.23935"
+    },
+    {
+      "id": "spirula-meshing-ac156157", "title": "Spirula 主干改进 2DGS/3DGS 网格融合与拓扑清理", "eventDate": "2026-11-20", "reportDate": "2026-11-20", "importance": "important", "disposition": "included", "reason": "在前一日 2DGS/TSDF 基础上继续修复场融合、补洞、交叉与折叠面，并披露 3DGS 样例轻微回退。", "sources": ["https://github.com/harry7557558/spirula-studio/commit/ac156157dd8c4216e440b88ec265b7bdaf63a4e5"], "eventId": "spirula-meshing-ac156157"
+    },
+    {
+      "id": "splat-studio-1.0", "title": "Splat Studio 1.0 为 Blender 5.3 提供高斯编辑与渲染插件", "eventDate": "2026-11-19", "reportDate": "2026-11-20", "importance": "important", "disposition": "included", "reason": "可购买的 GPL 创作插件，把非破坏编辑、EEVEE/Cycles 渲染和标准 PLY 导出带到 Blender 5.3。", "sources": ["https://superhivemarket.com/products/splat-studio", "https://radiancefields.com/splat-studio-1-0-brings-gaussian-splats-into-blender"], "eventId": "splat-studio-1.0"
+    },
+    {
+      "id": "01splat-0.5.6", "title": "01Splat 0.5.6 提供 Windows 本地高斯工作流", "eventDate": "2026-11-19", "reportDate": "2026-11-20", "importance": "standard", "disposition": "included", "reason": "商业工具更新值得记录，但官方页仍是 coming-soon，正文只保留 Radiance Fields 可核验的版本、平台与价格口径，并明确未实测。", "sources": ["https://radiancefields.com/01splat-0-5-6-adds-a-local-gaussian-splatting-workflow-for-windows", "https://01splat.com/"], "eventId": "01splat-0.5.6"
+    },
+    {
+      "id": "arcgis-xr-viewer-gaussian-layer", "title": "ArcGIS XR Viewer beta 增加初始 Gaussian Splat 图层", "eventDate": "2026-11-19", "reportDate": "2026-11-20", "importance": "standard", "disposition": "merged", "reason": "与 01Splat 合并为商业工具入口简讯；缺少独立官方发布页，保留 beta、视觉与性能限制。", "sources": ["https://radiancefields.com/arcgis-xr-viewer-adds-gaussian-splatting-for-spatial-data"], "eventId": "01splat-0.5.6"
+    },
+    {
+      "id": "arxiv:2611.23416", "title": "OCLDA-GS 用对象中心锚点管理动态高斯流式传输", "eventDate": "2026-11-17", "reportDate": "2026-11-20", "importance": "standard", "disposition": "included", "reason": "迟到索引补收；对象级锚点与 refinement drop 指标值得跟踪，但没有找到官方代码。", "sources": ["https://arxiv.org/abs/2611.23416"], "eventId": "arxiv:2611.23416"
+    },
+    {
+      "id": "arxiv:2611.23444", "title": "Gaussian Splatoms 用高斯表示原子级元素与热参数", "eventDate": "2026-11-17", "reportDate": "2026-11-20", "importance": "standard", "disposition": "merged", "reason": "与 OCLDA-GS 合并为研究简讯；有作者代码，但 README 与新 arXiv 版本尚未完全同步。", "sources": ["https://arxiv.org/abs/2611.23444", "https://github.com/nalinimsingh/gaussian-splatoms"], "eventId": "arxiv:2611.23416"
+    },
+    {
+      "id": "evergine-gs-duplicate-2026-11-20", "title": "Evergine Gaussian Splatting 引擎支持重新进入搜索结果", "eventDate": "2026-11-12", "reportDate": "2026-11-20", "importance": "standard", "disposition": "excluded", "reason": "同一官方公告和能力已经在 11 月 12 日归档，本轮没有新增版本、API 或兼容性事实。", "sources": ["https://evergine.com/gaussian-splatting-now-available-in-evergine/"], "exclusionEvidence": "docs/reading/2026-11-12.md 已记录相同公告与事件身份。"
+    },
+    {
+      "id": "get3d-7.1.11-unverified-2026-11-20", "title": "Get3D 7.1.11 出现在工具索引", "eventDate": "2026-11-19", "reportDate": "2026-11-20", "importance": "standard", "disposition": "deferred", "reason": "只取得 Radiance Fields 目录条目，未在本轮找到可稳定读取的官方 changelog 核对具体新增事实。", "sources": ["https://radiancefields.com/"], "eventId": "get3d-7.1.11"
+    },
+    {
+      "id": "reddit-dinovi-2026-11-20", "title": "Dinovi 自报演示进入 Reddit 可见列表", "eventDate": "2026-11-20", "reportDate": "2026-11-20", "importance": "standard", "disposition": "excluded", "reason": "社区自报信号缺少可稳定核验的作者官网、版本记录、商店页或代码仓库，不能据此发布功能结论。", "sources": ["https://www.reddit.com/r/GaussianSplatting/"], "exclusionEvidence": "本轮只取得 Reddit 可见帖子列表，没有第二个独立来源或第一手稳定产品页。"
+    }
+  ]
+}

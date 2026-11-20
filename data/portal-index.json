@@ -1,7 +1,229 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-20",
   "daily": [
+    {
+      "id": "gsd-2026-11-20",
+      "contentHash": "c950dc64c761be03941b3f36ee3bf402cdb0b2b3f4693c219b7e9779e7737859",
+      "date": "2026-11-20",
+      "title": "Horizon 行业日报 — 2026-11-20",
+      "headline": "SOG 压缩改用误差目标，3ds Max 把 4DGS 带进时间线",
+      "summary": "SplatTransform 3.12.0 为每个 LOD 单元按颜色误差选择 SH 调色板；SuperSplat 3.9.1/3.9.2 同步调整大场景发布并修复导出卡死。3ds Max 2027.3 开始用 PLY 序列承载 4DGS，LichtFeld、Spirula 与 Facet-SLAM 则推进训练、网格和实时 SLAM。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-20.md",
+      "sourceCount": 3,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "splat-transform-3.12.0",
+          "anchor": "event-splat-transform-3-12-0",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/splat-transform/pull/383",
+          "title": "SplatTransform 让 SOG 调色板跟随颜色误差目标",
+          "summary": "SplatTransform 3.12.0 不再给每个 LOD 单元套用固定 SH 调色板，而是选择满足颜色误差目标的最小 palette。这样可以把质量预算写进构建参数，也让复杂区域和简单区域分别承担合适的成本。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "supersplat-3.9.1-3.9.2",
+          "anchor": "event-supersplat-3-9-1-3-9-2",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/supersplat/pull/1114",
+          "title": "SuperSplat 自动处理百万级场景，并避免旧目录拖死导出",
+          "summary": "SuperSplat 3.9.1 对至少 100 万个 splat 的场景自动生成 LOD，并始终按源场景自身的 SH 阶数发布，避免编辑器预览设置意外降低成品质量。3.9.2 又为 IndexedDB 中失联的导出目录增加 2 秒超时，让用户重新选择目录。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "3ds-max-2027.3-gaussian-splat",
+          "anchor": "event-3ds-max-2027-3-4dgs",
+          "kind": "news",
+          "source": "https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-6B92C7C0-714E-4823-BF73-41EAAEB2F921",
+          "title": "3ds Max 2027.3 用 PLY 序列承载 4DGS 时间线",
+          "summary": "3ds Max 的 Editable Point 对象现在可以读取静态 PLY/SPZ，也可以把按帧编号的 PLY 序列随时间线播放。对镜头布局、资产检查和合成前预览来说，动态高斯第一次获得了官方 DCC 时间线入口。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "lichtfeld-priors-calibration-2026-11-20",
+          "anchor": "event-lichtfeld-priors-calibration",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/pull/4133",
+          "title": "LichtFeld 降低先验缓存占用，并默认校正相机标定",
+          "summary": "LichtFeld 主干把深度和法线先验保留在自身分辨率，到损失函数读取时再放大；RAM 缓存同时使用无损 JPEG 2000。作者的大图工作站测试显示 RAM、显存和首轮吞吐都明显改善，但硬件、图片数量与先验尺寸条件必须随结果一起保留。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.23935",
+          "anchor": "paper-2611-23935-facet-slam",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.23935",
+          "title": "Facet‑SLAM 用三角形 splatting 直接维护表面",
+          "summary": "Facet‑SLAM 把增量 Delaunay 网格、可微分三角形渲染和 RGB‑D 跟踪放在同一系统里。论文作者报告桌面 GPU 约 100 fps、Jetson AGX Orin 可达传感器帧率，并在 Replica 上改善网格 Chamfer distance；这些数字仍需按原硬件、数据集和对照口径复现。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "spirula-meshing-ac156157",
+          "anchor": "event-spirula-meshing-ac156157",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/ac156157dd8c4216e440b88ec265b7bdaf63a4e5",
+          "title": "Spirula 继续清理 2DGS 与 3DGS 网格拓扑",
+          "summary": "Spirula 新提交改进场融合、patch 剔除、补洞、交叉与折叠面修复。作者样例中 2DGS 和 2DGS TSDF 的 F-score 上升，3DGS 却略有下降，说明网格清理仍要按表示和数据集分别调参。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "splat-studio-1.0",
+          "anchor": "event-splat-studio-1-0",
+          "kind": "tool",
+          "source": "https://superhivemarket.com/products/splat-studio",
+          "title": "Splat Studio 1.0 把高斯编辑带进 Blender 5.3",
+          "summary": "Splat Studio 是一款 12.99 美元的 GPL 插件，在 Blender 5.3+ 的 EEVEE 与 Cycles 中提供裁剪、清理、颜色、发光、reveal 动画和有限重照明，并能导出标准 3DGS PLY。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "01splat-0.5.6",
+          "anchor": "event-commercial-tools-xr-2026-11-20",
+          "kind": "news",
+          "source": "https://radiancefields.com/01splat-0-5-6-adds-a-local-gaussian-splatting-workflow-for-windows",
+          "title": "01Splat 与 ArcGIS XR 扩展商业工具入口",
+          "summary": "Radiance Fields 记录的 01Splat 0.5.6 为 Windows 提供本地照片到高斯流程，采用免费非商业层与每月 40 美元 Pro 层；官方页仍是 coming-soon，版本细节无法独立核对。ArcGIS XR Viewer beta 则加入初始 Gaussian Splat 图层，同时保留视觉和性能限制。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.23416",
+          "anchor": "paper-2611-23416-ocl-da-gs",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.23416",
+          "title": "OCLDA‑GS 与 Gaussian Splatoms 扩展动态流式和科学成像",
+          "summary": "OCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。",
+          "date": "2026-11-20",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 4,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、厂商文档、论文、项目页、GitHub 提交与合并 PR 编辑阅读版。未独立运行软件、复现实验、验证作者性能数字或进行设备验收；包版本、仓库主干与正式商业发行已分别标注。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-20.md",
+        "contentHash": "6b1f2075fbb35992e8b62e9c4dd0ab036a72839b4978666bbbfcb5c28e4d76ef"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17744,193 @@
   ],
   "entries": [
     {
+      "id": "01splat-0.5.6",
+      "anchor": "event-commercial-tools-xr-2026-11-20",
+      "kind": "news",
+      "source": "https://radiancefields.com/01splat-0-5-6-adds-a-local-gaussian-splatting-workflow-for-windows",
+      "title": "01Splat 与 ArcGIS XR 扩展商业工具入口",
+      "summary": "Radiance Fields 记录的 01Splat 0.5.6 为 Windows 提供本地照片到高斯流程，采用免费非商业层与每月 40 美元 Pro 层；官方页仍是 coming-soon，版本细节无法独立核对。ArcGIS XR Viewer beta 则加入初始 Gaussian Splat 图层，同时保留视觉和性能限制。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "3ds-max-2027.3-gaussian-splat",
+      "anchor": "event-3ds-max-2027-3-4dgs",
+      "kind": "news",
+      "source": "https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-6B92C7C0-714E-4823-BF73-41EAAEB2F921",
+      "title": "3ds Max 2027.3 用 PLY 序列承载 4DGS 时间线",
+      "summary": "3ds Max 的 Editable Point 对象现在可以读取静态 PLY/SPZ，也可以把按帧编号的 PLY 序列随时间线播放。对镜头布局、资产检查和合成前预览来说，动态高斯第一次获得了官方 DCC 时间线入口。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "arxiv:2611.23416",
+      "kind": "paper",
+      "date": "2026-11-20",
+      "title": "两篇论文分别处理动态流式锚点与原子级结构重建",
+      "summary": "OCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。",
+      "source": "https://arxiv.org/abs/2611.23416",
+      "anchor": "paper-2611-23416-ocl-da-gs",
+      "topics": [
+        "3dgs",
+        "4dgs",
+        "streaming"
+      ]
+    },
+    {
+      "id": "arxiv:2611.23444",
+      "kind": "paper",
+      "date": "2026-11-20",
+      "title": "两篇论文分别处理动态流式锚点与原子级结构重建",
+      "summary": "OCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。",
+      "source": "https://arxiv.org/abs/2611.23444",
+      "anchor": "section-两篇论文分别处理动态流式锚点与原子级结构重建",
+      "topics": [
+        "3dgs",
+        "4dgs",
+        "streaming"
+      ]
+    },
+    {
+      "id": "arxiv:2611.23935",
+      "kind": "paper",
+      "date": "2026-11-20",
+      "title": "Facet‑SLAM 公开实时三角形 splatting 的 RGB‑D SLAM 代码",
+      "summary": "Facet‑SLAM 把增量 Delaunay 网格、可微分三角形渲染和 RGB‑D 跟踪放在同一系统里。论文作者报告桌面 GPU 约 100 fps、Jetson AGX Orin 可达传感器帧率，并在 Replica 上改善网格 Chamfer distance；这些数字仍需按原硬件、数据集和对照口径复现。",
+      "source": "https://arxiv.org/abs/2611.23935",
+      "anchor": "paper-2611-23935-facet-slam",
+      "topics": [
+        "slam"
+      ]
+    },
+    {
+      "id": "lichtfeld-priors-calibration-2026-11-20",
+      "anchor": "event-lichtfeld-priors-calibration",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/pull/4133",
+      "title": "LichtFeld 降低先验缓存占用，并默认校正相机标定",
+      "summary": "LichtFeld 主干把深度和法线先验保留在自身分辨率，到损失函数读取时再放大；RAM 缓存同时使用无损 JPEG 2000。作者的大图工作站测试显示 RAM、显存和首轮吞吐都明显改善，但硬件、图片数量与先验尺寸条件必须随结果一起保留。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "spirula-meshing-ac156157",
+      "anchor": "event-spirula-meshing-ac156157",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/ac156157dd8c4216e440b88ec265b7bdaf63a4e5",
+      "title": "Spirula 继续清理 2DGS 与 3DGS 网格拓扑",
+      "summary": "Spirula 新提交改进场融合、patch 剔除、补洞、交叉与折叠面修复。作者样例中 2DGS 和 2DGS TSDF 的 F-score 上升，3DGS 却略有下降，说明网格清理仍要按表示和数据集分别调参。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "splat-studio-1.0",
+      "anchor": "event-splat-studio-1-0",
+      "kind": "tool",
+      "source": "https://superhivemarket.com/products/splat-studio",
+      "title": "Splat Studio 1.0 把高斯编辑带进 Blender 5.3",
+      "summary": "Splat Studio 是一款 12.99 美元的 GPL 插件，在 Blender 5.3+ 的 EEVEE 与 Cycles 中提供裁剪、清理、颜色、发光、reveal 动画和有限重照明，并能导出标准 3DGS PLY。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "splat-transform-3.12.0",
+      "anchor": "event-splat-transform-3-12-0",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/splat-transform/pull/383",
+      "title": "SplatTransform 让 SOG 调色板跟随颜色误差目标",
+      "summary": "SplatTransform 3.12.0 不再给每个 LOD 单元套用固定 SH 调色板，而是选择满足颜色误差目标的最小 palette。这样可以把质量预算写进构建参数，也让复杂区域和简单区域分别承担合适的成本。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "supersplat-3.9.1-3.9.2",
+      "anchor": "event-supersplat-3-9-1-3-9-2",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/supersplat/pull/1114",
+      "title": "SuperSplat 自动处理百万级场景，并避免旧目录拖死导出",
+      "summary": "SuperSplat 3.9.1 对至少 100 万个 splat 的场景自动生成 LOD，并始终按源场景自身的 SH 阶数发布，避免编辑器预览设置意外降低成品质量。3.9.2 又为 IndexedDB 中失联的导出目录增加 2 秒超时，让用户重新选择目录。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31214,27 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-20",
+      "kind": "daily",
+      "title": "SOG 压缩改用误差目标，3ds Max 把 4DGS 带进时间线",
+      "summary": "SplatTransform 3.12.0 为每个 LOD 单元按颜色误差选择 SH 调色板；SuperSplat 3.9.1/3.9.2 同步调整大场景发布并修复导出卡死。3ds Max 2027.3 开始用 PLY 序列承载 4DGS，LichtFeld、Spirula 与 Facet-SLAM 则推进训练、网格和实时 SLAM。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/20/",
+      "text": "SplatTransform 让 SOG 调色板跟随颜色误差目标\nSplatTransform 3.12.0 不再给每个 LOD 单元套用固定 SH 调色板，而是选择满足颜色误差目标的最小 palette。这样可以把质量预算写进构建参数，也让复杂区域和简单区域分别承担合适的成本。\n默认目标 5 并不是“更小更快”：作者的 30 场景汇总显示，编码时间约增加 12%、文件约增加 9%；不同场景会在体积与 SH PSNR 之间产生相反结果，GPU 峰值也可能上升。团队应对同一资产试跑误差 4、5、6，再决定生产默认值。\n合并 PR · 3.12.0 提交\nSuperSplat 自动处理百万级场景，并避免旧目录拖死导出\nSuperSplat 3.9.1 对至少 100 万个 splat 的场景自动生成 LOD，并始终按源场景自身的 SH 阶数发布，避免编辑器预览设置意外降低成品质量。3.9.2 又为 IndexedDB 中失联的导出目录增加 2 秒超时，让用户重新选择目录。\nViewer 本窗口没有新版本，SOG 解码协议也没有变化；真正需要验证的是编辑器和发布端。使用网络盘、USB 盘或大场景的团队应对比 3.9.0 与 3.9.2 的 LOD、SH、文件大小、首屏时间与断盘恢复。\n发布逻辑 PR · 导出超时 PR\n3ds Max 2027.3 用 PLY 序列承载 4DGS 时间线\n3ds Max 的 Editable Point 对象现在可以读取静态 PLY/SPZ，也可以把按帧编号的 PLY 序列随时间线播放。对镜头布局、资产检查和合成前预览来说，动态高斯第一次获得了官方 DCC 时间线入口。\n这不等于 3ds Max 已经能训练 4DGS，也没有公开的单文件动态容器。官方把 SPZ 放在静态输入，把 PLY 序列用于动态播放；互操作测试应重点检查命名、帧率、缺帧、属性 preset、内存和导出保真度。\n2027.3 更新说明 · Editable Point 文档\nLichtFeld 降低先验缓存占用，并默认校正相机标定\nLichtFeld 主干把深度和法线先验保留在自身分辨率，到损失函数读取时再放大；RAM 缓存同时使用无损 JPEG 2000。作者的大图工作站测试显示 RAM、显存和首轮吞吐都明显改善，但硬件、图片数量与先验尺寸条件必须随结果一起保留。\n标定校正现在对新项目默认开启，平均对齐 PSNR 有所提高，代价是约 3%—4% 训练时间；普通室内 held-out 视图也可能下降。旧项目不被静默改成开启，生产验证应同时比较开关、资源峰值、普通指标和对齐指标。\n先验缓存 PR · 标定校正 PR · CUDA stream PR\nFacet‑SLAM 用三角形 splatting 直接维护表面\nFacet‑SLAM 把增量 Delaunay 网格、可微分三角形渲染和 RGB‑D 跟踪放在同一系统里。论文作者报告桌面 GPU 约 100 fps、Jetson AGX Orin 可达传感器帧率，并在 Replica 上改善网格 Chamfer distance；这些数字仍需按原硬件、数据集和对照口径复现。\n仓库已有 TUM、Replica、ScanNet 和 RealSense D435 路径，但需要 PCL、Ceres 2.2、PyTorch、CUDA 12.x 与多个自定义扩展，许可也以研究、非商业使用为主。它目前是可复现的最小研究发布，不是生产 SLAM SDK。\n论文 · 研究代码\nSpirula 继续清理 2DGS 与 3DGS 网格拓扑\nSpirula 新提交改进场融合、patch 剔除、补洞、交叉与折叠面修复。作者样例中 2DGS 和 2DGS TSDF 的 F-score 上升，3DGS 却略有下降，说明网格清理仍要按表示和数据集分别调参。\n这只是主干提交。11 月 19 日已经记录的 2DGS、TSDF、OpenGL 显示和 Voronoi 分区没有重复算作今天的新功能；实际测试应同时记录 precision、recall、F-score、孔洞、floaters、时间、RAM 与显存。\n网格改进提交\nSplat Studio 1.0 把高斯编辑带进 Blender 5.3\nSplat Studio 是一款 12.99 美元的 GPL 插件，在 Blender 5.3+ 的 EEVEE 与 Cycles 中提供裁剪、清理、颜色、发光、reveal 动画和有限重照明，并能导出标准 3DGS PLY。\n作者明确说明重照明不会生成真实阴影；大型扫描“约 1 秒更新”也没有在本期复测。它更像创作与镜头工具，而不是扫描重建器或完整物理材质系统。\n产品页\n01Splat 与 ArcGIS XR 扩展商业工具入口\nRadiance Fields 记录的 01Splat 0.5.6 为 Windows 提供本地照片到高斯流程，采用免费非商业层与每月 40 美元 Pro 层；官方页仍是 coming-soon，版本细节无法独立核对。ArcGIS XR Viewer beta 则加入初始 Gaussian Splat 图层，同时保留视觉和性能限制。\n两者都没有经过本期实测。ArcGIS XR Viewer 也不能与已经 GA 的 ArcGIS Reality Server 混为同一产品事件；它们更适合作为“入口正在扩展”的商业信号，而不是成熟度结论。\n01Splat 版本发现记录 · ArcGIS XR 发现记录\nOCLDA‑GS 与 Gaussian Splatoms 扩展动态流式和科学成像\nOCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。\nGaussian Splatoms 则把高斯属性扩展到原子元素、占据和热参数，已有作者研究代码，但仓库 README 与新 arXiv 版本尚未完全同步。两篇论文分别服务动态内容传输和原子结构重建，都不是通用查看器的即插即用升级。\nOCLDA‑GS · Gaussian Splatoms · Splatoms 代码"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32535,193 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "01splat-0.5.6",
+      "kind": "news",
+      "title": "01Splat 与 ArcGIS XR 扩展商业工具入口",
+      "summary": "Radiance Fields 记录的 01Splat 0.5.6 为 Windows 提供本地照片到高斯流程，采用免费非商业层与每月 40 美元 Pro 层；官方页仍是 coming-soon，版本细节无法独立核对。ArcGIS XR Viewer beta 则加入初始 Gaussian Splat 图层，同时保留视觉和性能限制。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/20/#event-commercial-tools-xr-2026-11-20",
+      "text": "01Splat 与 ArcGIS XR 扩展商业工具入口 Radiance Fields 记录的 01Splat 0.5.6 为 Windows 提供本地照片到高斯流程，采用免费非商业层与每月 40 美元 Pro 层；官方页仍是 coming-soon，版本细节无法独立核对。ArcGIS XR Viewer beta 则加入初始 Gaussian Splat 图层，同时保留视觉和性能限制。 https://radiancefields.com/01splat-0-5-6-adds-a-local-gaussian-splatting-workflow-for-windows 01Splat 与 ArcGIS XR 扩展商业工具入口 ## 01Splat 与 ArcGIS XR 扩展商业工具入口\n\nRadiance Fields 记录的 01Splat 0.5.6 为 Windows 提供本地照片到高斯流程，采用免费非商业层与每月 40 美元 Pro 层；官方页仍是 coming-soon，版本细节无法独立核对。ArcGIS XR Viewer beta 则加入初始 Gaussian Splat 图层，同时保留视觉和性能限制。\n\n两者都没有经过本期实测。ArcGIS XR Viewer 也不能与已经 GA 的 ArcGIS Reality Server 混为同一产品事件；它们更适合作为“入口正在扩展”的商业信号，而不是成熟度结论。\n\n[01Splat 版本发现记录](https://radiancefields.com/01splat-0-5-6-adds-a-local-gaussian-splatting-workflow-for-windows) · [ArcGIS XR 发现记录](https://radiancefields.com/arcgis-xr-viewer-adds-gaussian-splatting-for-spatial-data)"
+    },
+    {
+      "id": "3ds-max-2027.3-gaussian-splat",
+      "kind": "news",
+      "title": "3ds Max 2027.3 用 PLY 序列承载 4DGS 时间线",
+      "summary": "3ds Max 的 Editable Point 对象现在可以读取静态 PLY/SPZ，也可以把按帧编号的 PLY 序列随时间线播放。对镜头布局、资产检查和合成前预览来说，动态高斯第一次获得了官方 DCC 时间线入口。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/20/#event-3ds-max-2027-3-4dgs",
+      "text": "3ds Max 2027.3 用 PLY 序列承载 4DGS 时间线 3ds Max 的 Editable Point 对象现在可以读取静态 PLY/SPZ，也可以把按帧编号的 PLY 序列随时间线播放。对镜头布局、资产检查和合成前预览来说，动态高斯第一次获得了官方 DCC 时间线入口。 https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-6B92C7C0-714E-4823-BF73-41EAAEB2F921 3ds Max 2027.3 用 PLY 序列承载 4DGS 时间线 ## 3ds Max 2027.3 用 PLY 序列承载 4DGS 时间线\n\n3ds Max 的 Editable Point 对象现在可以读取静态 PLY/SPZ，也可以把按帧编号的 PLY 序列随时间线播放。对镜头布局、资产检查和合成前预览来说，动态高斯第一次获得了官方 DCC 时间线入口。\n\n这不等于 3ds Max 已经能训练 4DGS，也没有公开的单文件动态容器。官方把 SPZ 放在静态输入，把 PLY 序列用于动态播放；互操作测试应重点检查命名、帧率、缺帧、属性 preset、内存和导出保真度。\n\n[2027.3 更新说明](https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-6B92C7C0-714E-4823-BF73-41EAAEB2F921) · [Editable Point 文档](https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-2EE47C36-BBA0-4DD5-85C4-8AA73B146613)"
+    },
+    {
+      "id": "arxiv:2611.23416",
+      "kind": "paper",
+      "title": "两篇论文分别处理动态流式锚点与原子级结构重建",
+      "summary": "OCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。",
+      "date": "2026-11-20",
+      "topics": [
+        "3dgs",
+        "4dgs",
+        "streaming"
+      ],
+      "url": "/daily/2026/11/20/#paper-2611-23416-ocl-da-gs",
+      "text": "两篇论文分别处理动态流式锚点与原子级结构重建 OCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。 https://arxiv.org/abs/2611.23416 OCLDA‑GS 与 Gaussian Splatoms 扩展动态流式和科学成像 ## OCLDA‑GS 与 Gaussian Splatoms 扩展动态流式和科学成像\n\nOCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。\n\nGaussian Splatoms 则把高斯属性扩展到原子元素、占据和热参数，已有作者研究代码，但仓库 README 与新 arXiv 版本尚未完全同步。两篇论文分别服务动态内容传输和原子结构重建，都不是通用查看器的即插即用升级。\n\n[OCLDA‑GS](https://arxiv.org/abs/2611.23416) · [Gaussian Splatoms](https://arxiv.org/abs/2611.23444) · [Splatoms 代码](https://github.com/nalinimsingh/gaussian-splatoms)"
+    },
+    {
+      "id": "arxiv:2611.23444",
+      "kind": "paper",
+      "title": "两篇论文分别处理动态流式锚点与原子级结构重建",
+      "summary": "OCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。",
+      "date": "2026-11-20",
+      "topics": [
+        "3dgs",
+        "4dgs",
+        "streaming"
+      ],
+      "url": "/daily/2026/11/20/#section-两篇论文分别处理动态流式锚点与原子级结构重建",
+      "text": "两篇论文分别处理动态流式锚点与原子级结构重建 OCLDA‑GS 用对象中心锚点管理动态高斯的分层流式，作者报告相对 IGS 的 PSNR 小幅提升和 refinement drop 降低；目前没有找到官方代码，结论不能脱离数据集、码率与作者评测口径。 https://arxiv.org/abs/2611.23444 两篇论文分别处理动态流式锚点与原子级结构重建"
+    },
+    {
+      "id": "arxiv:2611.23935",
+      "kind": "paper",
+      "title": "Facet‑SLAM 公开实时三角形 splatting 的 RGB‑D SLAM 代码",
+      "summary": "Facet‑SLAM 把增量 Delaunay 网格、可微分三角形渲染和 RGB‑D 跟踪放在同一系统里。论文作者报告桌面 GPU 约 100 fps、Jetson AGX Orin 可达传感器帧率，并在 Replica 上改善网格 Chamfer distance；这些数字仍需按原硬件、数据集和对照口径复现。",
+      "date": "2026-11-20",
+      "topics": [
+        "slam"
+      ],
+      "url": "/daily/2026/11/20/#paper-2611-23935-facet-slam",
+      "text": "Facet‑SLAM 公开实时三角形 splatting 的 RGB‑D SLAM 代码 Facet‑SLAM 把增量 Delaunay 网格、可微分三角形渲染和 RGB‑D 跟踪放在同一系统里。论文作者报告桌面 GPU 约 100 fps、Jetson AGX Orin 可达传感器帧率，并在 Replica 上改善网格 Chamfer distance；这些数字仍需按原硬件、数据集和对照口径复现。 https://arxiv.org/abs/2611.23935 Facet‑SLAM 用三角形 splatting 直接维护表面 ## Facet‑SLAM 用三角形 splatting 直接维护表面\n\nFacet‑SLAM 把增量 Delaunay 网格、可微分三角形渲染和 RGB‑D 跟踪放在同一系统里。论文作者报告桌面 GPU 约 100 fps、Jetson AGX Orin 可达传感器帧率，并在 Replica 上改善网格 Chamfer distance；这些数字仍需按原硬件、数据集和对照口径复现。\n\n仓库已有 TUM、Replica、ScanNet 和 RealSense D435 路径，但需要 PCL、Ceres 2.2、PyTorch、CUDA 12.x 与多个自定义扩展，许可也以研究、非商业使用为主。它目前是可复现的最小研究发布，不是生产 SLAM SDK。\n\n[论文](https://arxiv.org/abs/2611.23935) · [研究代码](https://github.com/edward62740/Facet-SLAM)"
+    },
+    {
+      "id": "lichtfeld-priors-calibration-2026-11-20",
+      "kind": "tool",
+      "title": "LichtFeld 降低先验缓存占用，并默认校正相机标定",
+      "summary": "LichtFeld 主干把深度和法线先验保留在自身分辨率，到损失函数读取时再放大；RAM 缓存同时使用无损 JPEG 2000。作者的大图工作站测试显示 RAM、显存和首轮吞吐都明显改善，但硬件、图片数量与先验尺寸条件必须随结果一起保留。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/20/#event-lichtfeld-priors-calibration",
+      "text": "LichtFeld 降低先验缓存占用，并默认校正相机标定 LichtFeld 主干把深度和法线先验保留在自身分辨率，到损失函数读取时再放大；RAM 缓存同时使用无损 JPEG 2000。作者的大图工作站测试显示 RAM、显存和首轮吞吐都明显改善，但硬件、图片数量与先验尺寸条件必须随结果一起保留。 https://github.com/MrNeRF/LichtFeld-Studio/pull/4133 LichtFeld 降低先验缓存占用，并默认校正相机标定 ## LichtFeld 降低先验缓存占用，并默认校正相机标定\n\nLichtFeld 主干把深度和法线先验保留在自身分辨率，到损失函数读取时再放大；RAM 缓存同时使用无损 JPEG 2000。作者的大图工作站测试显示 RAM、显存和首轮吞吐都明显改善，但硬件、图片数量与先验尺寸条件必须随结果一起保留。\n\n标定校正现在对新项目默认开启，平均对齐 PSNR 有所提高，代价是约 3%—4% 训练时间；普通室内 held-out 视图也可能下降。旧项目不被静默改成开启，生产验证应同时比较开关、资源峰值、普通指标和对齐指标。\n\n[先验缓存 PR](https://github.com/MrNeRF/LichtFeld-Studio/pull/4133) · [标定校正 PR](https://github.com/MrNeRF/LichtFeld-Studio/pull/4147) · [CUDA stream PR](https://github.com/MrNeRF/LichtFeld-Studio/pull/4154)"
+    },
+    {
+      "id": "spirula-meshing-ac156157",
+      "kind": "tool",
+      "title": "Spirula 继续清理 2DGS 与 3DGS 网格拓扑",
+      "summary": "Spirula 新提交改进场融合、patch 剔除、补洞、交叉与折叠面修复。作者样例中 2DGS 和 2DGS TSDF 的 F-score 上升，3DGS 却略有下降，说明网格清理仍要按表示和数据集分别调参。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/20/#event-spirula-meshing-ac156157",
+      "text": "Spirula 继续清理 2DGS 与 3DGS 网格拓扑 Spirula 新提交改进场融合、patch 剔除、补洞、交叉与折叠面修复。作者样例中 2DGS 和 2DGS TSDF 的 F-score 上升，3DGS 却略有下降，说明网格清理仍要按表示和数据集分别调参。 https://github.com/harry7557558/spirula-studio/commit/ac156157dd8c4216e440b88ec265b7bdaf63a4e5 Spirula 继续清理 2DGS 与 3DGS 网格拓扑 ## Spirula 继续清理 2DGS 与 3DGS 网格拓扑\n\nSpirula 新提交改进场融合、patch 剔除、补洞、交叉与折叠面修复。作者样例中 2DGS 和 2DGS TSDF 的 F-score 上升，3DGS 却略有下降，说明网格清理仍要按表示和数据集分别调参。\n\n这只是主干提交。11 月 19 日已经记录的 2DGS、TSDF、OpenGL 显示和 Voronoi 分区没有重复算作今天的新功能；实际测试应同时记录 precision、recall、F-score、孔洞、floaters、时间、RAM 与显存。\n\n[网格改进提交](https://github.com/harry7557558/spirula-studio/commit/ac156157dd8c4216e440b88ec265b7bdaf63a4e5)"
+    },
+    {
+      "id": "splat-studio-1.0",
+      "kind": "tool",
+      "title": "Splat Studio 1.0 把高斯编辑带进 Blender 5.3",
+      "summary": "Splat Studio 是一款 12.99 美元的 GPL 插件，在 Blender 5.3+ 的 EEVEE 与 Cycles 中提供裁剪、清理、颜色、发光、reveal 动画和有限重照明，并能导出标准 3DGS PLY。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/20/#event-splat-studio-1-0",
+      "text": "Splat Studio 1.0 把高斯编辑带进 Blender 5.3 Splat Studio 是一款 12.99 美元的 GPL 插件，在 Blender 5.3+ 的 EEVEE 与 Cycles 中提供裁剪、清理、颜色、发光、reveal 动画和有限重照明，并能导出标准 3DGS PLY。 https://superhivemarket.com/products/splat-studio Splat Studio 1.0 把高斯编辑带进 Blender 5.3 ## Splat Studio 1.0 把高斯编辑带进 Blender 5.3\n\nSplat Studio 是一款 12.99 美元的 GPL 插件，在 Blender 5.3+ 的 EEVEE 与 Cycles 中提供裁剪、清理、颜色、发光、reveal 动画和有限重照明，并能导出标准 3DGS PLY。\n\n作者明确说明重照明不会生成真实阴影；大型扫描“约 1 秒更新”也没有在本期复测。它更像创作与镜头工具，而不是扫描重建器或完整物理材质系统。\n\n[产品页](https://superhivemarket.com/products/splat-studio)"
+    },
+    {
+      "id": "splat-transform-3.12.0",
+      "kind": "tool",
+      "title": "SplatTransform 让 SOG 调色板跟随颜色误差目标",
+      "summary": "SplatTransform 3.12.0 不再给每个 LOD 单元套用固定 SH 调色板，而是选择满足颜色误差目标的最小 palette。这样可以把质量预算写进构建参数，也让复杂区域和简单区域分别承担合适的成本。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/20/#event-splat-transform-3-12-0",
+      "text": "SplatTransform 让 SOG 调色板跟随颜色误差目标 SplatTransform 3.12.0 不再给每个 LOD 单元套用固定 SH 调色板，而是选择满足颜色误差目标的最小 palette。这样可以把质量预算写进构建参数，也让复杂区域和简单区域分别承担合适的成本。 https://github.com/playcanvas/splat-transform/pull/383 SplatTransform 让 SOG 调色板跟随颜色误差目标 ## SplatTransform 让 SOG 调色板跟随颜色误差目标\n\nSplatTransform 3.12.0 不再给每个 LOD 单元套用固定 SH 调色板，而是选择满足颜色误差目标的最小 palette。这样可以把质量预算写进构建参数，也让复杂区域和简单区域分别承担合适的成本。\n\n默认目标 5 并不是“更小更快”：作者的 30 场景汇总显示，编码时间约增加 12%、文件约增加 9%；不同场景会在体积与 SH PSNR 之间产生相反结果，GPU 峰值也可能上升。团队应对同一资产试跑误差 4、5、6，再决定生产默认值。\n\n[合并 PR](https://github.com/playcanvas/splat-transform/pull/383) · [3.12.0 提交](https://github.com/playcanvas/splat-transform/commit/5d5be2bca17f634f7e706d9fa63a47f2e0112520)"
+    },
+    {
+      "id": "supersplat-3.9.1-3.9.2",
+      "kind": "tool",
+      "title": "SuperSplat 自动处理百万级场景，并避免旧目录拖死导出",
+      "summary": "SuperSplat 3.9.1 对至少 100 万个 splat 的场景自动生成 LOD，并始终按源场景自身的 SH 阶数发布，避免编辑器预览设置意外降低成品质量。3.9.2 又为 IndexedDB 中失联的导出目录增加 2 秒超时，让用户重新选择目录。",
+      "date": "2026-11-20",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/20/#event-supersplat-3-9-1-3-9-2",
+      "text": "SuperSplat 自动处理百万级场景，并避免旧目录拖死导出 SuperSplat 3.9.1 对至少 100 万个 splat 的场景自动生成 LOD，并始终按源场景自身的 SH 阶数发布，避免编辑器预览设置意外降低成品质量。3.9.2 又为 IndexedDB 中失联的导出目录增加 2 秒超时，让用户重新选择目录。 https://github.com/playcanvas/supersplat/pull/1114 SuperSplat 自动处理百万级场景，并避免旧目录拖死导出 ## SuperSplat 自动处理百万级场景，并避免旧目录拖死导出\n\nSuperSplat 3.9.1 对至少 100 万个 splat 的场景自动生成 LOD，并始终按源场景自身的 SH 阶数发布，避免编辑器预览设置意外降低成品质量。3.9.2 又为 IndexedDB 中失联的导出目录增加 2 秒超时，让用户重新选择目录。\n\nViewer 本窗口没有新版本，SOG 解码协议也没有变化；真正需要验证的是编辑器和发布端。使用网络盘、USB 盘或大场景的团队应对比 3.9.0 与 3.9.2 的 LOD、SH、文件大小、首屏时间与断盘恢复。\n\n[发布逻辑 PR](https://github.com/playcanvas/supersplat/pull/1114) · [导出超时 PR](https://github.com/playcanvas/supersplat/pull/1115)"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",

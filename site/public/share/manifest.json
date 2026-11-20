@@ -18,10 +18,19 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-20",
+    "sha256": "3e00cfb6c654fa88d1f639dbf687a0bc7bcbc69938e20cd595ef34a2ee7a0896"
   },
   "reports": {
+    "2026-11-20": {
+      "date": "2026-11-20",
+      "url": "/share/2026-11-20.png",
+      "title": "SOG 压缩改用误差目标，3ds Max 把 4DGS 带进时间线",
+      "contentHash": "c950dc64c761be03941b3f36ee3bf402cdb0b2b3f4693c219b7e9779e7737859",
+      "inputHash": "e54076b05439673b6aa9988d72aabad03011fe655a4f6e608e177f411e435667",
+      "sha256": "3e00cfb6c654fa88d1f639dbf687a0bc7bcbc69938e20cd595ef34a2ee7a0896",
+      "bytes": 29529
+    },
     "2026-09-18": {
       "date": "2026-09-18",
       "url": "/share/2026-09-18.png",
