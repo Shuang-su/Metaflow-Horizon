@@ -1,7 +1,208 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-21",
   "daily": [
+    {
+      "id": "gsd-2026-11-21",
+      "contentHash": "5f96613a2e65df7ba4b4be16d268a4c609852358ea297bd8b8f9663c7e5379ec",
+      "date": "2026-11-21",
+      "title": "Horizon 行业日报 — 2026-11-21",
+      "headline": "Animated SOG 把 4D 高斯装进单文件，LichtFeld 自动筛模糊相机",
+      "summary": "Arrival.Space 公开 .asog v1、编码器与 Web 播放器，把 4D 高斯推进到可流式交付；LichtFeld 和 Spirula 更新输入清洗与渲染主干，VDC Viewer 则给出建筑现场产品的格式、权限和价格边界。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-21.md",
+      "sourceCount": 4,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "github.com/arrival-space/animated-sog",
+          "anchor": "event-animated-sog-v1",
+          "kind": "tool",
+          "source": "https://github.com/arrival-space/animated-sog",
+          "title": "Animated SOG 把 4D 高斯装进一个可流式播放的文件",
+          "summary": ".asog v1 把运动高斯、球谐和可选音频放进单文件，并同时给出 Python 编码器、流式 JavaScript 解码器、PlayCanvas WebGPU/WebGL 与 Three.js WebGL 2 播放器。对网页交付来说，它把逐帧 PLY/SOG 文件夹收束成可缓存、可渐进下载的资产。",
+          "date": "2026-11-21",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0",
+          "anchor": "event-lichtfeld-blurry-portability",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0",
+          "title": "LichtFeld 自动预选模糊相机，并让 Save As 后的数据引用更可靠",
+          "summary": "LichtFeld 主干加入 Select Blurry，把清晰度评分并行化、缓存到项目会话，并让已驻留 GPU 的视频帧在 CUDA 上评分后再回读。它减少人工翻图，却不是可以直接批量删除相机的质量保证；运动模糊、景深虚化和低纹理仍需抽样复核。",
+          "date": "2026-11-21",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "vdc-viewer-2026-11-20",
+          "anchor": "event-vdc-viewer-aec",
+          "kind": "news",
+          "source": "https://prtimes.jp/main/html/rd/p/000000001.000194723.html",
+          "title": "VDC Viewer 把 3DGS、BIM 和现场协作放进同一浏览器产品",
+          "summary": "VDC Viewer 月费 50,000 日元起，支持 PC 与平板，把 3DGS、BIM/网格、360°全景和 DXF 图纸放在同一空间，提供量测、注释、模型叠加、URL 分享、项目权限、MFA/SSO 和日本境内数据存储。",
+          "date": "2026-11-21",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20",
+          "anchor": "event-spirula-tile-culling",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20",
+          "title": "Spirula 收紧 3DGUT 与 2DGS 的 tile 相交和剔除",
+          "summary": "Spirula 主干改进 Gaussian—tile 相交与 culling，目标是避免过松测试带来无效排序/光栅工作，也避免过紧测试裁掉边缘贡献。它是前一日 2DGS、TSDF 与网格更新的后续修正，不是一套新的 primitive。",
+          "date": "2026-11-21",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.26045",
+          "anchor": "paper-2611-26045-pavesplat",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.26045",
+          "title": "PaveSplat 让 feed-forward surfel 在放大后继续覆盖表面",
+          "summary": "PaveSplat 在解析表面对齐协方差上学习四元数残差，修正训练分辨率下被一像素 footprint 掩盖、到 2×—8× 重渲染才暴露的 surfel 朝向和表面空洞。论文把收益重点放在高分辨率复用，而不是原生分辨率的小幅指标变化。",
+          "date": "2026-11-21",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "quest-large-splat-delivery-2026-11-21",
+          "anchor": "event-quest-large-splat-delivery",
+          "kind": "news",
+          "source": "https://radiancefields.com/daniel-skaale-releases-splatbox-1-3-for-unity",
+          "title": "Quest 大场景交付分成端侧 LOD 与 PC 串流",
+          "summary": "SplatBox 1.3 采用分页 LOD、固定显存图集和 GPU 排序，把大场景留在 Quest 3 端侧；Splatara Cloud Renderer 则在 PC 渲染，再向最多四台 Quest 串流，并加入共位和现实遮挡。前者换取离线与本地交付，后者用 PC、网络和延迟预算换更大资产。",
+          "date": "2026-11-21",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "splat-creative-media-2026-11-21",
+          "anchor": "event-splat-creative-media",
+          "kind": "tool",
+          "source": "https://github.com/remorses/splat-paint",
+          "title": "Splat Paint 与 Vintage Click 把高斯变成绘画和摄影媒介",
+          "summary": "Splat Paint 在浏览器里把输入 PLY 变成固定于三维空间的油画笔触，适合观察高斯的非写实表现；仓库没有声明许可证，目前不应直接复用到产品。Vintage Click 0.6.1 则在高斯扫描中模拟 1970 年代相机、镜头、胶片和有体积的 splat 积雪。",
+          "date": "2026-11-21",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv-research-roundup-2026-11-21",
+          "anchor": "paper-roundup-2026-11-21",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.25934",
+          "title": "高斯研究扩展到超分、冷冻电镜与参数合并式重照明",
+          "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+          "date": "2026-11-21",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 4,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、公司公告、论文、项目页、GitHub 提交与发布记录编辑阅读版。未独立运行软件、复现实验、验证作者性能数字或进行设备验收；正式发布、仓库主干、商业产品和媒体发现已分别标注。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-21.md",
+        "contentHash": "fe22320e55f537e47418738f5d1ac3ff18b609e4b1873c7495c95cf0c51d9065"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17723,199 @@
   ],
   "entries": [
     {
+      "id": "arxiv-research-roundup-2026-11-21",
+      "anchor": "paper-roundup-2026-11-21",
+      "kind": "paper",
+      "source": "https://arxiv.org/abs/2611.25934",
+      "title": "高斯研究扩展到超分、冷冻电镜与参数合并式重照明",
+      "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "arxiv:2611.25523",
+      "kind": "paper",
+      "date": "2026-11-21",
+      "title": "三篇论文把高斯带到超分、冷冻电镜和重照明",
+      "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+      "source": "https://arxiv.org/abs/2611.25523",
+      "anchor": "section-三篇论文把高斯带到超分冷冻电镜和重照明",
+      "topics": [
+        "3dgs"
+      ]
+    },
+    {
+      "id": "arxiv:2611.25934",
+      "kind": "paper",
+      "date": "2026-11-21",
+      "title": "三篇论文把高斯带到超分、冷冻电镜和重照明",
+      "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+      "source": "https://arxiv.org/abs/2611.25934",
+      "anchor": "section-三篇论文把高斯带到超分冷冻电镜和重照明",
+      "topics": [
+        "3dgs"
+      ]
+    },
+    {
+      "id": "arxiv:2611.26045",
+      "kind": "paper",
+      "date": "2026-11-21",
+      "title": "PaveSplat 公开代码、权重和高分辨率复现实验",
+      "summary": "PaveSplat 在解析表面对齐协方差上学习四元数残差，修正训练分辨率下被一像素 footprint 掩盖、到 2×—8× 重渲染才暴露的 surfel 朝向和表面空洞。论文把收益重点放在高分辨率复用，而不是原生分辨率的小幅指标变化。",
+      "source": "https://arxiv.org/abs/2611.26045",
+      "anchor": "paper-2611-26045-pavesplat",
+      "topics": []
+    },
+    {
+      "id": "arxiv:2611.26128",
+      "kind": "paper",
+      "date": "2026-11-21",
+      "title": "三篇论文把高斯带到超分、冷冻电镜和重照明",
+      "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+      "source": "https://arxiv.org/abs/2611.26128",
+      "anchor": "section-三篇论文把高斯带到超分冷冻电镜和重照明",
+      "topics": [
+        "3dgs"
+      ]
+    },
+    {
+      "id": "github.com/arrival-space/animated-sog",
+      "anchor": "event-animated-sog-v1",
+      "kind": "tool",
+      "source": "https://github.com/arrival-space/animated-sog",
+      "title": "Animated SOG 把 4D 高斯装进一个可流式播放的文件",
+      "summary": ".asog v1 把运动高斯、球谐和可选音频放进单文件，并同时给出 Python 编码器、流式 JavaScript 解码器、PlayCanvas WebGPU/WebGL 与 Three.js WebGL 2 播放器。对网页交付来说，它把逐帧 PLY/SOG 文件夹收束成可缓存、可渐进下载的资产。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20",
+      "anchor": "event-spirula-tile-culling",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20",
+      "title": "Spirula 收紧 3DGUT 与 2DGS 的 tile 相交和剔除",
+      "summary": "Spirula 主干改进 Gaussian—tile 相交与 culling，目标是避免过松测试带来无效排序/光栅工作，也避免过紧测试裁掉边缘贡献。它是前一日 2DGS、TSDF 与网格更新的后续修正，不是一套新的 primitive。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0",
+      "anchor": "event-lichtfeld-blurry-portability",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0",
+      "title": "LichtFeld 自动预选模糊相机，并让 Save As 后的数据引用更可靠",
+      "summary": "LichtFeld 主干加入 Select Blurry，把清晰度评分并行化、缓存到项目会话，并让已驻留 GPU 的视频帧在 CUDA 上评分后再回读。它减少人工翻图，却不是可以直接批量删除相机的质量保证；运动模糊、景深虚化和低纹理仍需抽样复核。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "quest-large-splat-delivery-2026-11-21",
+      "anchor": "event-quest-large-splat-delivery",
+      "kind": "news",
+      "source": "https://radiancefields.com/daniel-skaale-releases-splatbox-1-3-for-unity",
+      "title": "Quest 大场景交付分成端侧 LOD 与 PC 串流",
+      "summary": "SplatBox 1.3 采用分页 LOD、固定显存图集和 GPU 排序，把大场景留在 Quest 3 端侧；Splatara Cloud Renderer 则在 PC 渲染，再向最多四台 Quest 串流，并加入共位和现实遮挡。前者换取离线与本地交付，后者用 PC、网络和延迟预算换更大资产。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "splat-creative-media-2026-11-21",
+      "anchor": "event-splat-creative-media",
+      "kind": "tool",
+      "source": "https://github.com/remorses/splat-paint",
+      "title": "Splat Paint 与 Vintage Click 把高斯变成绘画和摄影媒介",
+      "summary": "Splat Paint 在浏览器里把输入 PLY 变成固定于三维空间的油画笔触，适合观察高斯的非写实表现；仓库没有声明许可证，目前不应直接复用到产品。Vintage Click 0.6.1 则在高斯扫描中模拟 1970 年代相机、镜头、胶片和有体积的 splat 积雪。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "vdc-viewer-2026-11-20",
+      "anchor": "event-vdc-viewer-aec",
+      "kind": "news",
+      "source": "https://prtimes.jp/main/html/rd/p/000000001.000194723.html",
+      "title": "VDC Viewer 把 3DGS、BIM 和现场协作放进同一浏览器产品",
+      "summary": "VDC Viewer 月费 50,000 日元起，支持 PC 与平板，把 3DGS、BIM/网格、360°全景和 DXF 图纸放在同一空间，提供量测、注释、模型叠加、URL 分享、项目权限、MFA/SSO 和日本境内数据存储。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31199,27 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-21",
+      "kind": "daily",
+      "title": "Animated SOG 把 4D 高斯装进单文件，LichtFeld 自动筛模糊相机",
+      "summary": "Arrival.Space 公开 .asog v1、编码器与 Web 播放器，把 4D 高斯推进到可流式交付；LichtFeld 和 Spirula 更新输入清洗与渲染主干，VDC Viewer 则给出建筑现场产品的格式、权限和价格边界。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/21/",
+      "text": "Animated SOG 把 4D 高斯装进一个可流式播放的文件\n.asog v1 把运动高斯、球谐和可选音频放进单文件，并同时给出 Python 编码器、流式 JavaScript 解码器、PlayCanvas WebGPU/WebGL 与 Three.js WebGL 2 播放器。对网页交付来说，它把逐帧 PLY/SOG 文件夹收束成可缓存、可渐进下载的资产。\n作者样例显示约 11 倍体积缩减，但结果依赖资产、修剪和硬件。格式沿用 SOG v2 静态压缩、采用 TRiGS 运动模型，flip-book 管线还要 CUDA 与外部 AGPL Open4DGS；仓库没有正式 release，播放器依赖少量 PlayCanvas 2.22 内部 API。\n格式与工具链 · PlayCanvas 样例 · Three.js 样例\nLichtFeld 自动预选模糊相机，并让 Save As 后的数据引用更可靠\nLichtFeld 主干加入 Select Blurry，把清晰度评分并行化、缓存到项目会话，并让已驻留 GPU 的视频帧在 CUDA 上评分后再回读。它减少人工翻图，却不是可以直接批量删除相机的质量保证；运动模糊、景深虚化和低纹理仍需抽样复核。\n同一批提交修复嵌入数据、迁移外部数据以及首次 Save As 后的相机路径，使相邻数据集继续保持可移动引用。变化都没有进入正式 tag，跨机器或外置盘项目应锁提交验证保存、移动、缺图恢复和重新打开。\nSelect Blurry · CUDA 评分 · Save As 可移植性\nVDC Viewer 把 3DGS、BIM 和现场协作放进同一浏览器产品\nVDC Viewer 月费 50,000 日元起，支持 PC 与平板，把 3DGS、BIM/网格、360°全景和 DXF 图纸放在同一空间，提供量测、注释、模型叠加、URL 分享、项目权限、MFA/SSO 和日本境内数据存储。\n官方列出的高斯格式覆盖 PLY、compressed PLY、SOG、SPZ、LCC/LCC2 等，并声称可处理数千万点和厘米级测量。本期没有取得公开硬件、网络和误差样本；采购前应以真实项目测试转换时间、平板帧率、坐标对齐、量测误差和数据退出机制。\n公司公告 · 产品页\nSpirula 收紧 3DGUT 与 2DGS 的 tile 相交和剔除\nSpirula 主干改进 Gaussian—tile 相交与 culling，目标是避免过松测试带来无效排序/光栅工作，也避免过紧测试裁掉边缘贡献。它是前一日 2DGS、TSDF 与网格更新的后续修正，不是一套新的 primitive。\n维护者没有给出完整性能数字，正式 release 也尚未包含该提交。测试应覆盖近裁面、大椭圆、斜视 surfel、广角和鱼眼相机，并同时记录像素差、边缘缺失、tile 工作量和耗时。\n主干提交\nPaveSplat 让 feed-forward surfel 在放大后继续覆盖表面\nPaveSplat 在解析表面对齐协方差上学习四元数残差，修正训练分辨率下被一像素 footprint 掩盖、到 2×—8× 重渲染才暴露的 surfel 朝向和表面空洞。论文把收益重点放在高分辨率复用，而不是原生分辨率的小幅指标变化。\n作者已公开代码、两个 ViT-L 权重、哈希和复现脚本；测试栈为 Python 3.12、PyTorch 2.7.1/CUDA 12.8，论文训练使用两张 GPU 和 150k optimizer steps。代码、rasterizer 与权重均有非商业或 research-only 许可，适合先做权重评估，不宜直接进入商业依赖。\n论文 · 代码与复现说明 · 权重\nQuest 大场景交付分成端侧 LOD 与 PC 串流\nSplatBox 1.3 采用分页 LOD、固定显存图集和 GPU 排序，把大场景留在 Quest 3 端侧；Splatara Cloud Renderer 则在 PC 渲染，再向最多四台 Quest 串流，并加入共位和现实遮挡。前者换取离线与本地交付，后者用 PC、网络和延迟预算换更大资产。\nSplatBox 的原始 X 帖本轮不可读，商店也没有独立 1.3 changelog；730 万 splat 和促销价格应按媒体/作者转述理解。两条路线都需要在目标场地按同一资产、路由器、PC GPU、头显数量和持续运行时间验收。\nSplatBox 发现记录 · Splatara\nSplat Paint 与 Vintage Click 把高斯变成绘画和摄影媒介\nSplat Paint 在浏览器里把输入 PLY 变成固定于三维空间的油画笔触，适合观察高斯的非写实表现；仓库没有声明许可证，目前不应直接复用到产品。Vintage Click 0.6.1 则在高斯扫描中模拟 1970 年代相机、镜头、胶片和有体积的 splat 积雪。\nVintage Click 为 GPL-3.0，当前 0.6.1 构建只面向 Apple Silicon 与 macOS 15.2+，Windows 版本落后一代。两者共同说明，创作者开始把高斯当作可编程视觉材料，而不只是重建输出。\nSplat Paint · Vintage Click 0.6.1\n高斯研究扩展到超分、冷冻电镜与参数合并式重照明\nAGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。\nMergeableRF 则让共享几何、不同 basis light 的外观网络能够直接合并参数，一次渲染得到目标光照，同时覆盖 NeRF 与 3DGS。它仍要求已知 basis lights 的多视图采集。三篇目前都应按论文结果理解，性能与质量数字不能脱离各自任务和数据集外推。\nAGSR · CryoGaussian · MergeableRF"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32520,199 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "arxiv-research-roundup-2026-11-21",
+      "kind": "paper",
+      "title": "高斯研究扩展到超分、冷冻电镜与参数合并式重照明",
+      "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/21/#paper-roundup-2026-11-21",
+      "text": "高斯研究扩展到超分、冷冻电镜与参数合并式重照明 AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。 https://arxiv.org/abs/2611.25934 高斯研究扩展到超分、冷冻电镜与参数合并式重照明 ## 高斯研究扩展到超分、冷冻电镜与参数合并式重照明\n\nAGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。\n\nMergeableRF 则让共享几何、不同 basis light 的外观网络能够直接合并参数，一次渲染得到目标光照，同时覆盖 NeRF 与 3DGS。它仍要求已知 basis lights 的多视图采集。三篇目前都应按论文结果理解，性能与质量数字不能脱离各自任务和数据集外推。\n\n[AGSR](https://arxiv.org/abs/2611.25934) · [CryoGaussian](https://arxiv.org/abs/2611.26128) · [MergeableRF](https://arxiv.org/abs/2611.25523)"
+    },
+    {
+      "id": "arxiv:2611.25523",
+      "kind": "paper",
+      "title": "三篇论文把高斯带到超分、冷冻电镜和重照明",
+      "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+      "date": "2026-11-21",
+      "topics": [
+        "3dgs"
+      ],
+      "url": "/daily/2026/11/21/#section-三篇论文把高斯带到超分冷冻电镜和重照明",
+      "text": "三篇论文把高斯带到超分、冷冻电镜和重照明 AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。 https://arxiv.org/abs/2611.25523 三篇论文把高斯带到超分、冷冻电镜和重照明"
+    },
+    {
+      "id": "arxiv:2611.25934",
+      "kind": "paper",
+      "title": "三篇论文把高斯带到超分、冷冻电镜和重照明",
+      "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+      "date": "2026-11-21",
+      "topics": [
+        "3dgs"
+      ],
+      "url": "/daily/2026/11/21/#section-三篇论文把高斯带到超分冷冻电镜和重照明",
+      "text": "三篇论文把高斯带到超分、冷冻电镜和重照明 AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。 https://arxiv.org/abs/2611.25934 三篇论文把高斯带到超分、冷冻电镜和重照明"
+    },
+    {
+      "id": "arxiv:2611.26045",
+      "kind": "paper",
+      "title": "PaveSplat 公开代码、权重和高分辨率复现实验",
+      "summary": "PaveSplat 在解析表面对齐协方差上学习四元数残差，修正训练分辨率下被一像素 footprint 掩盖、到 2×—8× 重渲染才暴露的 surfel 朝向和表面空洞。论文把收益重点放在高分辨率复用，而不是原生分辨率的小幅指标变化。",
+      "date": "2026-11-21",
+      "topics": [],
+      "url": "/daily/2026/11/21/#paper-2611-26045-pavesplat",
+      "text": "PaveSplat 公开代码、权重和高分辨率复现实验 PaveSplat 在解析表面对齐协方差上学习四元数残差，修正训练分辨率下被一像素 footprint 掩盖、到 2×—8× 重渲染才暴露的 surfel 朝向和表面空洞。论文把收益重点放在高分辨率复用，而不是原生分辨率的小幅指标变化。 https://arxiv.org/abs/2611.26045 PaveSplat 让 feed-forward surfel 在放大后继续覆盖表面 ## PaveSplat 让 feed-forward surfel 在放大后继续覆盖表面\n\nPaveSplat 在解析表面对齐协方差上学习四元数残差，修正训练分辨率下被一像素 footprint 掩盖、到 2×—8× 重渲染才暴露的 surfel 朝向和表面空洞。论文把收益重点放在高分辨率复用，而不是原生分辨率的小幅指标变化。\n\n作者已公开代码、两个 ViT-L 权重、哈希和复现脚本；测试栈为 Python 3.12、PyTorch 2.7.1/CUDA 12.8，论文训练使用两张 GPU 和 150k optimizer steps。代码、rasterizer 与权重均有非商业或 research-only 许可，适合先做权重评估，不宜直接进入商业依赖。\n\n[论文](https://arxiv.org/abs/2611.26045) · [代码与复现说明](https://github.com/janghunn/pavesplat) · [权重](https://huggingface.co/janghunn/pavesplat)"
+    },
+    {
+      "id": "arxiv:2611.26128",
+      "kind": "paper",
+      "title": "三篇论文把高斯带到超分、冷冻电镜和重照明",
+      "summary": "AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。",
+      "date": "2026-11-21",
+      "topics": [
+        "3dgs"
+      ],
+      "url": "/daily/2026/11/21/#section-三篇论文把高斯带到超分冷冻电镜和重照明",
+      "text": "三篇论文把高斯带到超分、冷冻电镜和重照明 AGSR 在推理期收缩投影协方差，并融合多 aperture 渲染来恢复 footprint 压掉的细节；它获 MMSP 2026 Best Paper，当前没有找到作者代码。CryoGaussian 把显式高斯密度拟合到冷冻电镜粒子图像，面向稀有组成和连续构象，作者报告专用 rasterizer 带来 12.8—28.0 倍训练加速。 https://arxiv.org/abs/2611.26128 三篇论文把高斯带到超分、冷冻电镜和重照明"
+    },
+    {
+      "id": "github.com/arrival-space/animated-sog",
+      "kind": "tool",
+      "title": "Animated SOG 把 4D 高斯装进一个可流式播放的文件",
+      "summary": ".asog v1 把运动高斯、球谐和可选音频放进单文件，并同时给出 Python 编码器、流式 JavaScript 解码器、PlayCanvas WebGPU/WebGL 与 Three.js WebGL 2 播放器。对网页交付来说，它把逐帧 PLY/SOG 文件夹收束成可缓存、可渐进下载的资产。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/21/#event-animated-sog-v1",
+      "text": "Animated SOG 把 4D 高斯装进一个可流式播放的文件 .asog v1 把运动高斯、球谐和可选音频放进单文件，并同时给出 Python 编码器、流式 JavaScript 解码器、PlayCanvas WebGPU/WebGL 与 Three.js WebGL 2 播放器。对网页交付来说，它把逐帧 PLY/SOG 文件夹收束成可缓存、可渐进下载的资产。 https://github.com/arrival-space/animated-sog Animated SOG 把 4D 高斯装进一个可流式播放的文件 ## Animated SOG 把 4D 高斯装进一个可流式播放的文件\n\n`.asog` v1 把运动高斯、球谐和可选音频放进单文件，并同时给出 Python 编码器、流式 JavaScript 解码器、PlayCanvas WebGPU/WebGL 与 Three.js WebGL 2 播放器。对网页交付来说，它把逐帧 PLY/SOG 文件夹收束成可缓存、可渐进下载的资产。\n\n作者样例显示约 11 倍体积缩减，但结果依赖资产、修剪和硬件。格式沿用 SOG v2 静态压缩、采用 TRiGS 运动模型，flip-book 管线还要 CUDA 与外部 AGPL Open4DGS；仓库没有正式 release，播放器依赖少量 PlayCanvas 2.22 内部 API。\n\n[格式与工具链](https://github.com/arrival-space/animated-sog) · [PlayCanvas 样例](https://arrival-space.github.io/animated-sog/examples/playcanvas/) · [Three.js 样例](https://arrival-space.github.io/animated-sog/examples/three/)"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20",
+      "kind": "tool",
+      "title": "Spirula 收紧 3DGUT 与 2DGS 的 tile 相交和剔除",
+      "summary": "Spirula 主干改进 Gaussian—tile 相交与 culling，目标是避免过松测试带来无效排序/光栅工作，也避免过紧测试裁掉边缘贡献。它是前一日 2DGS、TSDF 与网格更新的后续修正，不是一套新的 primitive。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/21/#event-spirula-tile-culling",
+      "text": "Spirula 收紧 3DGUT 与 2DGS 的 tile 相交和剔除 Spirula 主干改进 Gaussian—tile 相交与 culling，目标是避免过松测试带来无效排序/光栅工作，也避免过紧测试裁掉边缘贡献。它是前一日 2DGS、TSDF 与网格更新的后续修正，不是一套新的 primitive。 https://github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20 Spirula 收紧 3DGUT 与 2DGS 的 tile 相交和剔除 ## Spirula 收紧 3DGUT 与 2DGS 的 tile 相交和剔除\n\nSpirula 主干改进 Gaussian—tile 相交与 culling，目标是避免过松测试带来无效排序/光栅工作，也避免过紧测试裁掉边缘贡献。它是前一日 2DGS、TSDF 与网格更新的后续修正，不是一套新的 primitive。\n\n维护者没有给出完整性能数字，正式 release 也尚未包含该提交。测试应覆盖近裁面、大椭圆、斜视 surfel、广角和鱼眼相机，并同时记录像素差、边缘缺失、tile 工作量和耗时。\n\n[主干提交](https://github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20)"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0",
+      "kind": "tool",
+      "title": "LichtFeld 自动预选模糊相机，并让 Save As 后的数据引用更可靠",
+      "summary": "LichtFeld 主干加入 Select Blurry，把清晰度评分并行化、缓存到项目会话，并让已驻留 GPU 的视频帧在 CUDA 上评分后再回读。它减少人工翻图，却不是可以直接批量删除相机的质量保证；运动模糊、景深虚化和低纹理仍需抽样复核。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/21/#event-lichtfeld-blurry-portability",
+      "text": "LichtFeld 自动预选模糊相机，并让 Save As 后的数据引用更可靠 LichtFeld 主干加入 Select Blurry，把清晰度评分并行化、缓存到项目会话，并让已驻留 GPU 的视频帧在 CUDA 上评分后再回读。它减少人工翻图，却不是可以直接批量删除相机的质量保证；运动模糊、景深虚化和低纹理仍需抽样复核。 https://github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0 LichtFeld 自动预选模糊相机，并让 Save As 后的数据引用更可靠 ## LichtFeld 自动预选模糊相机，并让 Save As 后的数据引用更可靠\n\nLichtFeld 主干加入 Select Blurry，把清晰度评分并行化、缓存到项目会话，并让已驻留 GPU 的视频帧在 CUDA 上评分后再回读。它减少人工翻图，却不是可以直接批量删除相机的质量保证；运动模糊、景深虚化和低纹理仍需抽样复核。\n\n同一批提交修复嵌入数据、迁移外部数据以及首次 Save As 后的相机路径，使相邻数据集继续保持可移动引用。变化都没有进入正式 tag，跨机器或外置盘项目应锁提交验证保存、移动、缺图恢复和重新打开。\n\n[Select Blurry](https://github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0) · [CUDA 评分](https://github.com/MrNeRF/LichtFeld-Studio/commit/3d138e7583a39384539ae25da3a62863a81ab17f) · [Save As 可移植性](https://github.com/MrNeRF/LichtFeld-Studio/commit/719f36356c159dfabc7c75ce04be5d9c43d4a711)"
+    },
+    {
+      "id": "quest-large-splat-delivery-2026-11-21",
+      "kind": "news",
+      "title": "Quest 大场景交付分成端侧 LOD 与 PC 串流",
+      "summary": "SplatBox 1.3 采用分页 LOD、固定显存图集和 GPU 排序，把大场景留在 Quest 3 端侧；Splatara Cloud Renderer 则在 PC 渲染，再向最多四台 Quest 串流，并加入共位和现实遮挡。前者换取离线与本地交付，后者用 PC、网络和延迟预算换更大资产。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/21/#event-quest-large-splat-delivery",
+      "text": "Quest 大场景交付分成端侧 LOD 与 PC 串流 SplatBox 1.3 采用分页 LOD、固定显存图集和 GPU 排序，把大场景留在 Quest 3 端侧；Splatara Cloud Renderer 则在 PC 渲染，再向最多四台 Quest 串流，并加入共位和现实遮挡。前者换取离线与本地交付，后者用 PC、网络和延迟预算换更大资产。 https://radiancefields.com/daniel-skaale-releases-splatbox-1-3-for-unity Quest 大场景交付分成端侧 LOD 与 PC 串流 ## Quest 大场景交付分成端侧 LOD 与 PC 串流\n\nSplatBox 1.3 采用分页 LOD、固定显存图集和 GPU 排序，把大场景留在 Quest 3 端侧；Splatara Cloud Renderer 则在 PC 渲染，再向最多四台 Quest 串流，并加入共位和现实遮挡。前者换取离线与本地交付，后者用 PC、网络和延迟预算换更大资产。\n\nSplatBox 的原始 X 帖本轮不可读，商店也没有独立 1.3 changelog；730 万 splat 和促销价格应按媒体/作者转述理解。两条路线都需要在目标场地按同一资产、路由器、PC GPU、头显数量和持续运行时间验收。\n\n[SplatBox 发现记录](https://radiancefields.com/daniel-skaale-releases-splatbox-1-3-for-unity) · [Splatara](https://splatara.cloud/)"
+    },
+    {
+      "id": "splat-creative-media-2026-11-21",
+      "kind": "tool",
+      "title": "Splat Paint 与 Vintage Click 把高斯变成绘画和摄影媒介",
+      "summary": "Splat Paint 在浏览器里把输入 PLY 变成固定于三维空间的油画笔触，适合观察高斯的非写实表现；仓库没有声明许可证，目前不应直接复用到产品。Vintage Click 0.6.1 则在高斯扫描中模拟 1970 年代相机、镜头、胶片和有体积的 splat 积雪。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/21/#event-splat-creative-media",
+      "text": "Splat Paint 与 Vintage Click 把高斯变成绘画和摄影媒介 Splat Paint 在浏览器里把输入 PLY 变成固定于三维空间的油画笔触，适合观察高斯的非写实表现；仓库没有声明许可证，目前不应直接复用到产品。Vintage Click 0.6.1 则在高斯扫描中模拟 1970 年代相机、镜头、胶片和有体积的 splat 积雪。 https://github.com/remorses/splat-paint Splat Paint 与 Vintage Click 把高斯变成绘画和摄影媒介 ## Splat Paint 与 Vintage Click 把高斯变成绘画和摄影媒介\n\nSplat Paint 在浏览器里把输入 PLY 变成固定于三维空间的油画笔触，适合观察高斯的非写实表现；仓库没有声明许可证，目前不应直接复用到产品。Vintage Click 0.6.1 则在高斯扫描中模拟 1970 年代相机、镜头、胶片和有体积的 splat 积雪。\n\nVintage Click 为 GPL-3.0，当前 0.6.1 构建只面向 Apple Silicon 与 macOS 15.2+，Windows 版本落后一代。两者共同说明，创作者开始把高斯当作可编程视觉材料，而不只是重建输出。\n\n[Splat Paint](https://github.com/remorses/splat-paint) · [Vintage Click 0.6.1](https://github.com/timfennell/vintage-click/releases/tag/v0.6.1)"
+    },
+    {
+      "id": "vdc-viewer-2026-11-20",
+      "kind": "news",
+      "title": "VDC Viewer 把 3DGS、BIM 和现场协作放进同一浏览器产品",
+      "summary": "VDC Viewer 月费 50,000 日元起，支持 PC 与平板，把 3DGS、BIM/网格、360°全景和 DXF 图纸放在同一空间，提供量测、注释、模型叠加、URL 分享、项目权限、MFA/SSO 和日本境内数据存储。",
+      "date": "2026-11-21",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/21/#event-vdc-viewer-aec",
+      "text": "VDC Viewer 把 3DGS、BIM 和现场协作放进同一浏览器产品 VDC Viewer 月费 50,000 日元起，支持 PC 与平板，把 3DGS、BIM/网格、360°全景和 DXF 图纸放在同一空间，提供量测、注释、模型叠加、URL 分享、项目权限、MFA/SSO 和日本境内数据存储。 https://prtimes.jp/main/html/rd/p/000000001.000194723.html VDC Viewer 把 3DGS、BIM 和现场协作放进同一浏览器产品 ## VDC Viewer 把 3DGS、BIM 和现场协作放进同一浏览器产品\n\nVDC Viewer 月费 50,000 日元起，支持 PC 与平板，把 3DGS、BIM/网格、360°全景和 DXF 图纸放在同一空间，提供量测、注释、模型叠加、URL 分享、项目权限、MFA/SSO 和日本境内数据存储。\n\n官方列出的高斯格式覆盖 PLY、compressed PLY、SOG、SPZ、LCC/LCC2 等，并声称可处理数千万点和厘米级测量。本期没有取得公开硬件、网络和误差样本；采购前应以真实项目测试转换时间、平板帧率、坐标对齐、量测误差和数据退出机制。\n\n[公司公告](https://prtimes.jp/main/html/rd/p/000000001.000194723.html) · [产品页](https://vdcjp.com/vdc-viewer/)"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",

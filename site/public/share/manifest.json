@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-21",
+    "sha256": "1025b71147163efb20213f2f7c176e8ae891f778f20f42244ee20407c172cef3"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-21": {
+      "date": "2026-11-21",
+      "url": "/share/2026-11-21.png",
+      "title": "Animated SOG 把 4D 高斯装进单文件，LichtFeld 自动筛模糊相机",
+      "contentHash": "5f96613a2e65df7ba4b4be16d268a4c609852358ea297bd8b8f9663c7e5379ec",
+      "inputHash": "59f433496bf355fdf0b4efe08f7d1e0a4d84623d5f2bee19e4fcb829cfe76795",
+      "sha256": "1025b71147163efb20213f2f7c176e8ae891f778f20f42244ee20407c172cef3",
+      "bytes": 31679
     }
   }
 }
