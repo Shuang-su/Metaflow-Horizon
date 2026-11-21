@@ -1,7 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-16T08:19:00+08:00",
+  "generated_at": "2026-11-21T08:39:00+08:00",
   "items": [
+    {
+      "date": "2026-11-21",
+      "title": "Horizon 行业日报 — 2026-11-21",
+      "status": "published",
+      "source_count": 4,
+      "path": "docs/daily/2026/11/2026-11-21.md"
+    },
     {
       "date": "2026-11-16",
       "title": "Horizon 行业日报 — 2026-11-16",

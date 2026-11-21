@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-21",
+  "mode": "scheduled",
+  "window": {"start": "2026-11-20T08:53:00+08:00", "end": "2026-11-21T08:39:00+08:00"},
+  "reviewedAt": "2026-11-21T08:39:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields",
+      "status": "candidates",
+      "checkedAt": "2026-11-21T08:22:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"],
+      "candidateIds": ["github.com/arrival-space/animated-sog", "vdc-viewer-2026-11-20", "splatbox-1.3", "splatara-cloud-renderer", "github.com/remorses/splat-paint", "github.com/timfennell/vintage-click/releases/tag/v0.6.1", "arxiv:2611.25934", "arxiv:2611.26045", "arxiv:2611.26128", "arxiv:2611.25523", "preimage-bim-splats-repeat-2026-11-21"],
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "candidates", "checkedAt": "2026-11-21T08:21:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "candidates", "checkedAt": "2026-11-21T08:22:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official",
+      "status": "candidates",
+      "checkedAt": "2026-11-21T08:24:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": ["vdc-viewer-2026-11-20"],
+      "gap": "PlayCanvas 博客可读但没有本窗口新文章；Blender News 返回 HTTP 403。VDC Viewer 由公司公告继续核验。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-21T08:23:00+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-21T08:24:00+08:00", "gap": "HTTP 403，未取得可验证正文。"}
+      ]
+    },
+    {
+      "sourceId": "x",
+      "status": "unavailable",
+      "checkedAt": "2026-11-21T08:26:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "candidateIds": [],
+      "gap": "4 个登记账号分别返回 HTTP 403 或 DisabledError；改由作者仓库、公司公告和项目页核验，SplatBox 的作者原帖仍保留访问缺口。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-21T08:25:00+08:00", "gap": "DisabledError，无可验证原帖。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-21T08:25:20+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-21T08:25:40+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-21T08:26:00+08:00", "gap": "DisabledError，无可验证原帖。"}
+      ]
+    },
+    {
+      "sourceId": "research",
+      "status": "candidates",
+      "checkedAt": "2026-11-21T08:29:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"],
+      "candidateIds": ["arxiv:2611.25934", "arxiv:2611.26045", "arxiv:2611.26128", "arxiv:2611.25523"],
+      "gap": "arXiv export API 未能直接读取；Hugging Face Papers 首页未提供完整相关批次。论文由 arXiv 原文、作者项目页和 GitHub 仓库核验。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-21T08:28:00+08:00", "gap": "API 端点未取得可验证响应。"},
+        {"url": "https://huggingface.co/papers", "status": "candidates", "checkedAt": "2026-11-21T08:29:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github",
+      "status": "candidates",
+      "checkedAt": "2026-11-21T08:33:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": ["github.com/arrival-space/animated-sog", "github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0", "github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20", "arxiv:2611.26045", "github.com/remorses/splat-paint", "github.com/timfennell/vintage-click/releases/tag/v0.6.1"],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "checked-no-new", "checkedAt": "2026-11-21T08:30:00+08:00"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "candidates", "checkedAt": "2026-11-21T08:31:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "community",
+      "status": "candidates",
+      "checkedAt": "2026-11-21T08:36:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": ["quicksplat-preview-unverified-2026-11-21", "splatara-cloud-renderer"],
+      "gap": "Reddit 可读；B 站检索只取得旧于窗口的视频；少数派可读但未取得带明确事件日期和一手链接的新候选。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "candidates", "checkedAt": "2026-11-21T08:34:00+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "checked-no-new", "checkedAt": "2026-11-21T08:35:00+08:00"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-21T08:36:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "github.com/arrival-space/animated-sog",
+      "title": "Arrival.Space 公开 Animated SOG 单文件 4D 高斯格式与工具链",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "critical",
+      "disposition": "included",
+      "reason": "格式规范、编码器、流式解码器、PlayCanvas/Three.js 播放器与样例同时公开，直接影响 4D 高斯的 Web 交付路径。",
+      "sources": ["https://github.com/arrival-space/animated-sog", "https://github.com/arrival-space/animated-sog/blob/main/README.md", "https://radiancefields.com/arrival-space-publishes-animated-sog-for-4d-gaussian-splats"],
+      "eventId": "github.com/arrival-space/animated-sog"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0",
+      "title": "LichtFeld 主干加入模糊相机筛选并修复项目迁移路径",
+      "eventDate": "2026-11-21",
+      "reportDate": "2026-11-21",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "一组连续合并提交改善输入清洗、CUDA/CPU 评分路径和 Save As 后的数据引用可靠性。",
+      "sources": ["https://github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0", "https://github.com/MrNeRF/LichtFeld-Studio/commit/a5b49d2c67174eb6c3b8431ac8c7bd3060740956", "https://github.com/MrNeRF/LichtFeld-Studio/commit/ea3ab5181fd1cd03ac951304d67a21d64838c73b", "https://github.com/MrNeRF/LichtFeld-Studio/commit/3d138e7583a39384539ae25da3a62863a81ab17f", "https://github.com/MrNeRF/LichtFeld-Studio/commit/719f36356c159dfabc7c75ce04be5d9c43d4a711"],
+      "eventId": "github.com/MrNeRF/LichtFeld-Studio/commit/55a0c6e4235a0d5aa8e6f48a3c9291898aa256f0"
+    },
+    {
+      "id": "vdc-viewer-2026-11-20",
+      "title": "VDC Viewer 公布建筑现场 3DGS/BIM 产品与价格边界",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "公司正式公告给出价格、支持格式、规模、协作、认证和数据存储口径，代表可采购的 AEC 高斯应用。",
+      "sources": ["https://prtimes.jp/main/html/rd/p/000000001.000194723.html", "https://vdcjp.com/vdc-viewer/", "https://radiancefields.com/vdc-viewer-opens-large-gaussian-splats-in-the-browser"],
+      "eventId": "vdc-viewer-2026-11-20"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20",
+      "title": "Spirula 改进 3DGUT/2DGS 的 Gaussian—tile 相交和剔除",
+      "eventDate": "2026-11-21",
+      "reportDate": "2026-11-21",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "晚于上一增量窗口的主干渲染修正，可能同时影响边缘正确性和 tile 工作量。",
+      "sources": ["https://github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20"],
+      "eventId": "github.com/harry7557558/spirula-studio/commit/254eb5efd4561c314604855c407fc1a83a478d20"
+    },
+    {
+      "id": "arxiv:2611.26045",
+      "title": "PaveSplat 公开分辨率鲁棒 feed-forward 高斯代码和权重",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "论文、代码、两个 ViT-L 权重、哈希和复现脚本可用，直接针对 2×—8× 重渲染的表面空洞。",
+      "sources": ["https://arxiv.org/abs/2611.26045", "https://github.com/janghunn/pavesplat", "https://huggingface.co/janghunn/pavesplat"],
+      "eventId": "arxiv:2611.26045"
+    },
+    {
+      "id": "splatbox-1.3",
+      "title": "SplatBox 1.3 用分页 LOD 把大场景带到 Quest 3",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "与 Splatara 的 PC 串流路线合并比较；原始 X 帖不可读且商店无独立 changelog，保留媒体转述限制。",
+      "sources": ["https://radiancefields.com/daniel-skaale-releases-splatbox-1-3-for-unity", "https://simulacrum.dk/Shop#unity-gsp"],
+      "eventId": "quest-large-splat-delivery-2026-11-21"
+    },
+    {
+      "id": "splatara-cloud-renderer",
+      "title": "Splatara Cloud Renderer 从 PC 向多台 Quest 串流高斯",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "standard",
+      "disposition": "merged",
+      "reason": "与 SplatBox 的端侧分页 LOD 合并，形成 Quest 大场景交付的两种工程路线。",
+      "sources": ["https://splatara.cloud/", "https://radiancefields.com/splatara-cloud-renderer-streams-splats-to-quest", "https://www.reddit.com/r/GaussianSplatting/comments/1y05kdf/streaming_multigb_gaussian_splats_to_quest_3_from/"],
+      "eventId": "quest-large-splat-delivery-2026-11-21"
+    },
+    {
+      "id": "github.com/remorses/splat-paint",
+      "title": "Splat Paint 把 PLY 高斯转成三维油画笔触",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "与迟到补收的 Vintage Click 合并为高斯创作媒介信号；仓库未声明许可证。",
+      "sources": ["https://github.com/remorses/splat-paint", "https://splat-paint.kimaki.dev", "https://radiancefields.com/splat-paint-turns-gaussian-splats-into-oil-paintings"],
+      "eventId": "splat-creative-media-2026-11-21"
+    },
+    {
+      "id": "github.com/timfennell/vintage-click/releases/tag/v0.6.1",
+      "title": "Vintage Click 0.6.1 用高斯体积积雪扩展摄影作品",
+      "eventDate": "2026-11-15",
+      "reportDate": "2026-11-21",
+      "importance": "standard",
+      "disposition": "merged",
+      "reason": "7 日重查迟到补收；与 Splat Paint 合并呈现高斯作为绘画和摄影媒介的趋势。",
+      "sources": ["https://github.com/timfennell/vintage-click/releases/tag/v0.6.1", "https://radiancefields.com/vintage-click-puts-a-1970s-slr-inside-gaussian-splats"],
+      "eventId": "splat-creative-media-2026-11-21"
+    },
+    {
+      "id": "arxiv:2611.25934",
+      "title": "AGSR 用多 aperture 渲染做推理期高斯超分",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "与 CryoGaussian、MergeableRF 合并为论文简讯；获 MMSP 2026 Best Paper，但未找到代码。",
+      "sources": ["https://arxiv.org/abs/2611.25934"],
+      "eventId": "arxiv-research-roundup-2026-11-21"
+    },
+    {
+      "id": "arxiv:2611.26128",
+      "title": "CryoGaussian 用显式高斯重建异质冷冻电镜结构",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "important",
+      "disposition": "merged",
+      "reason": "把高斯扩展到异质 cryo-EM 并报告专用 rasterizer 加速；当前没有找到代码。",
+      "sources": ["https://arxiv.org/abs/2611.26128"],
+      "eventId": "arxiv-research-roundup-2026-11-21"
+    },
+    {
+      "id": "arxiv:2611.25523",
+      "title": "MergeableRF 通过参数合并实现 NeRF/3DGS 重照明",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "standard",
+      "disposition": "merged",
+      "reason": "一次渲染完成目标光照、支持 NeRF 和 3DGS；需要 basis-light 多视图输入且未找到代码。",
+      "sources": ["https://arxiv.org/abs/2611.25523"],
+      "eventId": "arxiv-research-roundup-2026-11-21"
+    },
+    {
+      "id": "preimage-bim-splats-repeat-2026-11-21",
+      "title": "Preimage 再次宣传 3DGS 与 BIM Viewer",
+      "eventDate": "2026-11-20",
+      "reportDate": "2026-11-21",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "11 月 20 日公告主要重新打包 2025—2026 年逐步上线的既有能力，没有足够新的版本或价格边界。",
+      "sources": ["https://radiancefields.com/preimage-brings-gaussian-splats-and-bim-into-its-site-viewer"],
+      "exclusionEvidence": "媒体文章明确指出 3DGS、Viewer、BIM 和无人机输出此前已分期上线；本轮没有独立新 release。"
+    },
+    {
+      "id": "quicksplat-preview-unverified-2026-11-21",
+      "title": "QuickSplat 社区帖自报 Finder/Explorer 快速预览器",
+      "eventDate": "2026-11-21",
+      "reportDate": "2026-11-21",
+      "importance": "standard",
+      "disposition": "deferred",
+      "reason": "社区帖给出格式和性能陈述，但本轮没有取得可稳定核验的作者仓库、发行页或产品页；等待一手链接后再发布。",
+      "sources": ["https://www.reddit.com/r/GaussianSplatting/comments/1y0zw7e/press_space_see_the_splat_i_made_a_quick_look_for/"]
+    }
+  ]
+}
