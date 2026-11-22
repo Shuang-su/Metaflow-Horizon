@@ -1,7 +1,208 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-22",
   "daily": [
+    {
+      "id": "gsd-2026-11-22",
+      "contentHash": "5c98ece047a9ec36401b598ca220e24d9dd21aca7942dda4ba3b239426ddc8d2",
+      "date": "2026-11-22",
+      "title": "Horizon 行业日报 — 2026-11-22",
+      "headline": "高斯日报：QuickSplat 接管系统预览，ITHACA 为 Unity 接入 .trgz 4DGS",
+      "summary": "QuickSplat v0.4.0 让 Explorer 与 Finder 直接预览多种高斯格式；ITHACA、Spirula、PinchDrop 和 LichtFeld 则把 4D 播放、低内存退化、Vision Pro 交互与数据集兼容继续推向可测试工程。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-22.md",
+      "sourceCount": 0,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "github.com/gabriverga/QuickSplat/releases/tag/v0.4.0",
+          "anchor": "event-quicksplat-v040",
+          "kind": "tool",
+          "source": "https://github.com/gabriverga/QuickSplat/releases/tag/v0.4.0",
+          "title": "QuickSplat 让高斯资产进入系统级空格预览",
+          "summary": "QuickSplat v0.4.0 为 Windows QuickLook 和 macOS Quick Look 提供共享的离线高斯查看器，支持 PLY、compressed PLY、SPLAT、KSPLAT、SPZ、SOG 与常见点云。它的意义不在新增一个完整编辑器，而在让素材筛选、交付确认和格式迁移前检查少开一次重型工具。",
+          "date": "2026-11-22",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92",
+          "anchor": "event-ithaca-trgz",
+          "kind": "tool",
+          "source": "https://github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92",
+          "title": "ITHACA 把 .trgz 高精度 4DGS 接进 Unity 时间线",
+          "summary": "ITHACA 的 Unity 主干现在能直接读取 .trgz，解码 Trigs，并以旋转加平移的 screw motion 驱动每个 splat；片段既能独立播放，也能装入 .4dgs 单文件容器。随后提交又把时间原点对齐到第一张训练帧，避免 crossfade 按错误局部时间起算。",
+          "date": "2026-11-22",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8",
+          "anchor": "event-spirula-stochastic-memory",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8",
+          "title": "Spirula 同时更新随机式预览和低内存故障路径",
+          "summary": "Spirula 新增 stochastic splats 预览并调整硬件渲染缓冲，但提交没有提供完整 benchmark，因此不能把“加速”直接转写成倍数。更确定的工程收益来自默认 worker 内存不足时退回串行执行，以及稠密重建写入失败时报告具体文件和 errno。",
+          "date": "2026-11-22",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/xibihe/PinchDrop",
+          "anchor": "event-pinchdrop-vision-pro",
+          "kind": "tool",
+          "source": "https://github.com/xibihe/PinchDrop",
+          "title": "PinchDrop 用手机照片锚定 Vision Pro 高斯场景",
+          "summary": "PinchDrop 先把参考照片与准备好的高斯模型配对，再由 Vision Pro 用 ARKit 跟踪手机图像和手势，本地把粒子聚到掌心并展开场景。它不是从单张手机照片即时重建三维，手势期间也不需要把模型传到云端。",
+          "date": "2026-11-22",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f",
+          "anchor": "event-lichtfeld-path-panels",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f",
+          "title": "LichtFeld Studio 修正非标准图片目录并扩展桌面面板",
+          "summary": "LichtFeld Studio 让预处理与加载器共享 sidecar 相对路径规则，修正图片不在 images/ 时先验图自动生成失败的问题。另一个主干提交为支持的外置面板增加会话级固定控制，Wayland 原生窗口会隐藏该功能。",
+          "date": "2026-11-22",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819",
+          "anchor": "event-supersplat-viewer-theme",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819",
+          "title": "SuperSplat Viewer 统一主题样式",
+          "summary": "SuperSplat Viewer 主干统一了主题颜色和字体在界面各处的应用。它没有改变 SOG/SPZ/PLY 解码、LOD、streaming 或排序，SuperSplat Editor 与 SplatTransform 本窗口也没有新提交，因此只需要常规 UI 回归。",
+          "date": "2026-11-22",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "unity-splatbridge-1.3.2",
+          "anchor": "event-splatbridge-132",
+          "kind": "tool",
+          "source": "https://assetstore.unity.com/packages/tools/utilities/splatbridge-3d-gaussian-splatting-import-stream-play-real-world--392164",
+          "title": "SplatBridge 1.3.2 把 Unity 内编辑与流式加载放进正式商品",
+          "summary": "Unity Asset Store 已把 SplatBridge 1.3.2 标为 11 月 18 日发行，支持 Unity 6000.3.28f1 的 Built-in、URP 与 HDRP。工具覆盖体积选择、套索、笔刷、拆分删除、过滤、颜色与透明度、LOD 重建、SOG／streamed SOG ZIP／PLY 导出，以及 HTTP 分块加载。",
+          "date": "2026-11-22",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "playshrunk.pages.dev",
+          "anchor": "event-shrunk-game",
+          "kind": "news",
+          "source": "https://playshrunk.pages.dev/",
+          "title": "Shrunk 把用户扫描变成多人捉迷藏房间",
+          "summary": "Shrunk 已能在浏览器中运行，7 个样板房间免费，Home Pass 接收用户自己的 SPZ 或 PLY 扫描。它展示了高斯资产不经传统关卡重建也能进入多人游戏，但项目没有公开源码或许可，处理后房间还会进入服务存储并分发给同房玩家。",
+          "date": "2026-11-22",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 3,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、正式商店页面、项目 README、release 与 commit 记录编辑阅读版。未独立运行软件、复现作者性能数字或进行设备验收；主干提交不等同于正式发行。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-22.md",
+        "contentHash": "9e1cf94c7281d42c9be328c085264acdb28de0052c09fbac9431a8832538a806"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17723,174 @@
   ],
   "entries": [
     {
+      "id": "github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92",
+      "anchor": "event-ithaca-trgz",
+      "kind": "tool",
+      "source": "https://github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92",
+      "title": "ITHACA 把 .trgz 高精度 4DGS 接进 Unity 时间线",
+      "summary": "ITHACA 的 Unity 主干现在能直接读取 .trgz，解码 Trigs，并以旋转加平移的 screw motion 驱动每个 splat；片段既能独立播放，也能装入 .4dgs 单文件容器。随后提交又把时间原点对齐到第一张训练帧，避免 crossfade 按错误局部时间起算。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/gabriverga/QuickSplat/releases/tag/v0.4.0",
+      "anchor": "event-quicksplat-v040",
+      "kind": "tool",
+      "source": "https://github.com/gabriverga/QuickSplat/releases/tag/v0.4.0",
+      "title": "QuickSplat 让高斯资产进入系统级空格预览",
+      "summary": "QuickSplat v0.4.0 为 Windows QuickLook 和 macOS Quick Look 提供共享的离线高斯查看器，支持 PLY、compressed PLY、SPLAT、KSPLAT、SPZ、SOG 与常见点云。它的意义不在新增一个完整编辑器，而在让素材筛选、交付确认和格式迁移前检查少开一次重型工具。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8",
+      "anchor": "event-spirula-stochastic-memory",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8",
+      "title": "Spirula 同时更新随机式预览和低内存故障路径",
+      "summary": "Spirula 新增 stochastic splats 预览并调整硬件渲染缓冲，但提交没有提供完整 benchmark，因此不能把“加速”直接转写成倍数。更确定的工程收益来自默认 worker 内存不足时退回串行执行，以及稠密重建写入失败时报告具体文件和 errno。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f",
+      "anchor": "event-lichtfeld-path-panels",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f",
+      "title": "LichtFeld Studio 修正非标准图片目录并扩展桌面面板",
+      "summary": "LichtFeld Studio 让预处理与加载器共享 sidecar 相对路径规则，修正图片不在 images/ 时先验图自动生成失败的问题。另一个主干提交为支持的外置面板增加会话级固定控制，Wayland 原生窗口会隐藏该功能。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819",
+      "anchor": "event-supersplat-viewer-theme",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819",
+      "title": "SuperSplat Viewer 统一主题样式",
+      "summary": "SuperSplat Viewer 主干统一了主题颜色和字体在界面各处的应用。它没有改变 SOG/SPZ/PLY 解码、LOD、streaming 或排序，SuperSplat Editor 与 SplatTransform 本窗口也没有新提交，因此只需要常规 UI 回归。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/xibihe/PinchDrop",
+      "anchor": "event-pinchdrop-vision-pro",
+      "kind": "tool",
+      "source": "https://github.com/xibihe/PinchDrop",
+      "title": "PinchDrop 用手机照片锚定 Vision Pro 高斯场景",
+      "summary": "PinchDrop 先把参考照片与准备好的高斯模型配对，再由 Vision Pro 用 ARKit 跟踪手机图像和手势，本地把粒子聚到掌心并展开场景。它不是从单张手机照片即时重建三维，手势期间也不需要把模型传到云端。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "playshrunk.pages.dev",
+      "anchor": "event-shrunk-game",
+      "kind": "news",
+      "source": "https://playshrunk.pages.dev/",
+      "title": "Shrunk 把用户扫描变成多人捉迷藏房间",
+      "summary": "Shrunk 已能在浏览器中运行，7 个样板房间免费，Home Pass 接收用户自己的 SPZ 或 PLY 扫描。它展示了高斯资产不经传统关卡重建也能进入多人游戏，但项目没有公开源码或许可，处理后房间还会进入服务存储并分发给同房玩家。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "unity-splatbridge-1.3.2",
+      "anchor": "event-splatbridge-132",
+      "kind": "tool",
+      "source": "https://assetstore.unity.com/packages/tools/utilities/splatbridge-3d-gaussian-splatting-import-stream-play-real-world--392164",
+      "title": "SplatBridge 1.3.2 把 Unity 内编辑与流式加载放进正式商品",
+      "summary": "Unity Asset Store 已把 SplatBridge 1.3.2 标为 11 月 18 日发行，支持 Unity 6000.3.28f1 的 Built-in、URP 与 HDRP。工具覆盖体积选择、套索、笔刷、拆分删除、过滤、颜色与透明度、LOD 重建、SOG／streamed SOG ZIP／PLY 导出，以及 HTTP 分块加载。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31174,27 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-22",
+      "kind": "daily",
+      "title": "高斯日报：QuickSplat 接管系统预览，ITHACA 为 Unity 接入 .trgz 4DGS",
+      "summary": "QuickSplat v0.4.0 让 Explorer 与 Finder 直接预览多种高斯格式；ITHACA、Spirula、PinchDrop 和 LichtFeld 则把 4D 播放、低内存退化、Vision Pro 交互与数据集兼容继续推向可测试工程。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/",
+      "text": "QuickSplat 让高斯资产进入系统级空格预览\nQuickSplat v0.4.0 为 Windows QuickLook 和 macOS Quick Look 提供共享的离线高斯查看器，支持 PLY、compressed PLY、SPLAT、KSPLAT、SPZ、SOG 与常见点云。它的意义不在新增一个完整编辑器，而在让素材筛选、交付确认和格式迁移前检查少开一次重型工具。\nWindows 需要 QuickLook 与 WebView2，macOS 需要 13 以上版本并走终端安装；项目采用 GPL-3.0。团队应先用自己的超大文件、SOG v2/v3 和异常元数据文件验证首帧、内存、坐标与坏文件隔离。\n正式发行 · 实现提交\nITHACA 把 .trgz 高精度 4DGS 接进 Unity 时间线\nITHACA 的 Unity 主干现在能直接读取 .trgz，解码 Trigs，并以旋转加平移的 screw motion 驱动每个 splat；片段既能独立播放，也能装入 .4dgs 单文件容器。随后提交又把时间原点对齐到第一张训练帧，避免 crossfade 按错误局部时间起算。\n这是一条可安装的 Unity 6000 + URP 工程链路，但没有正式 tag，Windows 编辑器路径还要求 DX12 或 Vulkan。第一轮验收应先看时间原点、循环边界和片段转场，再测画质与 XR 性能。\n核心提交 · 时间原点修正\nSpirula 同时更新随机式预览和低内存故障路径\nSpirula 新增 stochastic splats 预览并调整硬件渲染缓冲，但提交没有提供完整 benchmark，因此不能把“加速”直接转写成倍数。更确定的工程收益来自默认 worker 内存不足时退回串行执行，以及稠密重建写入失败时报告具体文件和 errno。\n串行回退避免立即失败，也可能让任务明显变慢。无人值守任务应记录回退触发、预计内存、墙钟时间和磁盘占用；随机式预览则要在相同相机下比较噪声、响应与显存。\n随机式预览 · 内存回退 · 写入诊断\nPinchDrop 用手机照片锚定 Vision Pro 高斯场景\nPinchDrop 先把参考照片与准备好的高斯模型配对，再由 Vision Pro 用 ARKit 跟踪手机图像和手势，本地把粒子聚到掌心并展开场景。它不是从单张手机照片即时重建三维，手势期间也不需要把模型传到云端。\n项目提供完整 Xcode 工程、4 个作品和 Mac 预览，接受 SOG v2、SPLAT、SPZ 与兼容 PLY。代码、作品和 Apple 生成权重分别受非商业条款约束，商业原型必须先替换资产并重审生成链路。\n项目与安装说明 · compositor 修正\nLichtFeld Studio 修正非标准图片目录并扩展桌面面板\nLichtFeld Studio 让预处理与加载器共享 sidecar 相对路径规则，修正图片不在 images/ 时先验图自动生成失败的问题。另一个主干提交为支持的外置面板增加会话级固定控制，Wayland 原生窗口会隐藏该功能。\n这两项都是主干变化而非新 release，前者更值得数据集目录复杂的团队优先回归。\n路径修正 · 外置面板\nSuperSplat Viewer 统一主题样式\nSuperSplat Viewer 主干统一了主题颜色和字体在界面各处的应用。它没有改变 SOG/SPZ/PLY 解码、LOD、streaming 或排序，SuperSplat Editor 与 SplatTransform 本窗口也没有新提交，因此只需要常规 UI 回归。\nViewer 提交\nSplatBridge 1.3.2 把 Unity 内编辑与流式加载放进正式商品\nUnity Asset Store 已把 SplatBridge 1.3.2 标为 11 月 18 日发行，支持 Unity 6000.3.28f1 的 Built-in、URP 与 HDRP。工具覆盖体积选择、套索、笔刷、拆分删除、过滤、颜色与透明度、LOD 重建、SOG／streamed SOG ZIP／PLY 导出，以及 HTTP 分块加载。\n它是闭源商业扩展，WebGL 不受支持，Quest 3 仍是实验性范围；商店价格还会因地区和税费变化。\nUnity Asset Store · 更新说明\nShrunk 把用户扫描变成多人捉迷藏房间\nShrunk 已能在浏览器中运行，7 个样板房间免费，Home Pass 接收用户自己的 SPZ 或 PLY 扫描。它展示了高斯资产不经传统关卡重建也能进入多人游戏，但项目没有公开源码或许可，处理后房间还会进入服务存储并分发给同房玩家。\n在线体验 · 产品说明"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32495,174 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92",
+      "kind": "tool",
+      "title": "ITHACA 把 .trgz 高精度 4DGS 接进 Unity 时间线",
+      "summary": "ITHACA 的 Unity 主干现在能直接读取 .trgz，解码 Trigs，并以旋转加平移的 screw motion 驱动每个 splat；片段既能独立播放，也能装入 .4dgs 单文件容器。随后提交又把时间原点对齐到第一张训练帧，避免 crossfade 按错误局部时间起算。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/#event-ithaca-trgz",
+      "text": "ITHACA 把 .trgz 高精度 4DGS 接进 Unity 时间线 ITHACA 的 Unity 主干现在能直接读取 .trgz，解码 Trigs，并以旋转加平移的 screw motion 驱动每个 splat；片段既能独立播放，也能装入 .4dgs 单文件容器。随后提交又把时间原点对齐到第一张训练帧，避免 crossfade 按错误局部时间起算。 https://github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92 ITHACA 把 .trgz 高精度 4DGS 接进 Unity 时间线 ## ITHACA 把 `.trgz` 高精度 4DGS 接进 Unity 时间线\n\nITHACA 的 Unity 主干现在能直接读取 `.trgz`，解码 Trigs，并以旋转加平移的 screw motion 驱动每个 splat；片段既能独立播放，也能装入 `.4dgs` 单文件容器。随后提交又把时间原点对齐到第一张训练帧，避免 crossfade 按错误局部时间起算。\n\n这是一条可安装的 Unity 6000 + URP 工程链路，但没有正式 tag，Windows 编辑器路径还要求 DX12 或 Vulkan。第一轮验收应先看时间原点、循环边界和片段转场，再测画质与 XR 性能。\n\n[核心提交](https://github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92) · [时间原点修正](https://github.com/frenchtouchXR/ithaca-4dgs-unity/commit/7068ac6e489ea1d0e3d5f18f80a9d464d0a50fbd)"
+    },
+    {
+      "id": "github.com/gabriverga/QuickSplat/releases/tag/v0.4.0",
+      "kind": "tool",
+      "title": "QuickSplat 让高斯资产进入系统级空格预览",
+      "summary": "QuickSplat v0.4.0 为 Windows QuickLook 和 macOS Quick Look 提供共享的离线高斯查看器，支持 PLY、compressed PLY、SPLAT、KSPLAT、SPZ、SOG 与常见点云。它的意义不在新增一个完整编辑器，而在让素材筛选、交付确认和格式迁移前检查少开一次重型工具。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/#event-quicksplat-v040",
+      "text": "QuickSplat 让高斯资产进入系统级空格预览 QuickSplat v0.4.0 为 Windows QuickLook 和 macOS Quick Look 提供共享的离线高斯查看器，支持 PLY、compressed PLY、SPLAT、KSPLAT、SPZ、SOG 与常见点云。它的意义不在新增一个完整编辑器，而在让素材筛选、交付确认和格式迁移前检查少开一次重型工具。 https://github.com/gabriverga/QuickSplat/releases/tag/v0.4.0 QuickSplat 让高斯资产进入系统级空格预览 ## QuickSplat 让高斯资产进入系统级空格预览\n\nQuickSplat v0.4.0 为 Windows QuickLook 和 macOS Quick Look 提供共享的离线高斯查看器，支持 PLY、compressed PLY、SPLAT、KSPLAT、SPZ、SOG 与常见点云。它的意义不在新增一个完整编辑器，而在让素材筛选、交付确认和格式迁移前检查少开一次重型工具。\n\nWindows 需要 QuickLook 与 WebView2，macOS 需要 13 以上版本并走终端安装；项目采用 GPL-3.0。团队应先用自己的超大文件、SOG v2/v3 和异常元数据文件验证首帧、内存、坐标与坏文件隔离。\n\n[正式发行](https://github.com/gabriverga/QuickSplat/releases/tag/v0.4.0) · [实现提交](https://github.com/gabriverga/QuickSplat/commit/a5d4d8e6e48437908c73a2fa370346a036f06cc1)"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8",
+      "kind": "tool",
+      "title": "Spirula 同时更新随机式预览和低内存故障路径",
+      "summary": "Spirula 新增 stochastic splats 预览并调整硬件渲染缓冲，但提交没有提供完整 benchmark，因此不能把“加速”直接转写成倍数。更确定的工程收益来自默认 worker 内存不足时退回串行执行，以及稠密重建写入失败时报告具体文件和 errno。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/#event-spirula-stochastic-memory",
+      "text": "Spirula 同时更新随机式预览和低内存故障路径 Spirula 新增 stochastic splats 预览并调整硬件渲染缓冲，但提交没有提供完整 benchmark，因此不能把“加速”直接转写成倍数。更确定的工程收益来自默认 worker 内存不足时退回串行执行，以及稠密重建写入失败时报告具体文件和 errno。 https://github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8 Spirula 同时更新随机式预览和低内存故障路径 ## Spirula 同时更新随机式预览和低内存故障路径\n\nSpirula 新增 stochastic splats 预览并调整硬件渲染缓冲，但提交没有提供完整 benchmark，因此不能把“加速”直接转写成倍数。更确定的工程收益来自默认 worker 内存不足时退回串行执行，以及稠密重建写入失败时报告具体文件和 errno。\n\n串行回退避免立即失败，也可能让任务明显变慢。无人值守任务应记录回退触发、预计内存、墙钟时间和磁盘占用；随机式预览则要在相同相机下比较噪声、响应与显存。\n\n[随机式预览](https://github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8) · [内存回退](https://github.com/harry7557558/spirula-studio/commit/3ca045c89d7c6ebd69aaf911cd3e19e0eeafa029) · [写入诊断](https://github.com/harry7557558/spirula-studio/commit/9a807429dafc5a165c06bd2a0ffe1c99efef766b)"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f",
+      "kind": "tool",
+      "title": "LichtFeld Studio 修正非标准图片目录并扩展桌面面板",
+      "summary": "LichtFeld Studio 让预处理与加载器共享 sidecar 相对路径规则，修正图片不在 images/ 时先验图自动生成失败的问题。另一个主干提交为支持的外置面板增加会话级固定控制，Wayland 原生窗口会隐藏该功能。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/#event-lichtfeld-path-panels",
+      "text": "LichtFeld Studio 修正非标准图片目录并扩展桌面面板 LichtFeld Studio 让预处理与加载器共享 sidecar 相对路径规则，修正图片不在 images/ 时先验图自动生成失败的问题。另一个主干提交为支持的外置面板增加会话级固定控制，Wayland 原生窗口会隐藏该功能。 https://github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f LichtFeld Studio 修正非标准图片目录并扩展桌面面板 ## LichtFeld Studio 修正非标准图片目录并扩展桌面面板\n\nLichtFeld Studio 让预处理与加载器共享 sidecar 相对路径规则，修正图片不在 `images/` 时先验图自动生成失败的问题。另一个主干提交为支持的外置面板增加会话级固定控制，Wayland 原生窗口会隐藏该功能。\n\n这两项都是主干变化而非新 release，前者更值得数据集目录复杂的团队优先回归。\n\n[路径修正](https://github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f) · [外置面板](https://github.com/MrNeRF/LichtFeld-Studio/commit/53e307ce451a26b7ccc668242e71114e408ed834)"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819",
+      "kind": "tool",
+      "title": "SuperSplat Viewer 统一主题样式",
+      "summary": "SuperSplat Viewer 主干统一了主题颜色和字体在界面各处的应用。它没有改变 SOG/SPZ/PLY 解码、LOD、streaming 或排序，SuperSplat Editor 与 SplatTransform 本窗口也没有新提交，因此只需要常规 UI 回归。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/#event-supersplat-viewer-theme",
+      "text": "SuperSplat Viewer 统一主题样式 SuperSplat Viewer 主干统一了主题颜色和字体在界面各处的应用。它没有改变 SOG/SPZ/PLY 解码、LOD、streaming 或排序，SuperSplat Editor 与 SplatTransform 本窗口也没有新提交，因此只需要常规 UI 回归。 https://github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819 SuperSplat Viewer 统一主题样式 ## SuperSplat Viewer 统一主题样式\n\nSuperSplat Viewer 主干统一了主题颜色和字体在界面各处的应用。它没有改变 SOG/SPZ/PLY 解码、LOD、streaming 或排序，SuperSplat Editor 与 SplatTransform 本窗口也没有新提交，因此只需要常规 UI 回归。\n\n[Viewer 提交](https://github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819)"
+    },
+    {
+      "id": "github.com/xibihe/PinchDrop",
+      "kind": "tool",
+      "title": "PinchDrop 用手机照片锚定 Vision Pro 高斯场景",
+      "summary": "PinchDrop 先把参考照片与准备好的高斯模型配对，再由 Vision Pro 用 ARKit 跟踪手机图像和手势，本地把粒子聚到掌心并展开场景。它不是从单张手机照片即时重建三维，手势期间也不需要把模型传到云端。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/#event-pinchdrop-vision-pro",
+      "text": "PinchDrop 用手机照片锚定 Vision Pro 高斯场景 PinchDrop 先把参考照片与准备好的高斯模型配对，再由 Vision Pro 用 ARKit 跟踪手机图像和手势，本地把粒子聚到掌心并展开场景。它不是从单张手机照片即时重建三维，手势期间也不需要把模型传到云端。 https://github.com/xibihe/PinchDrop PinchDrop 用手机照片锚定 Vision Pro 高斯场景 ## PinchDrop 用手机照片锚定 Vision Pro 高斯场景\n\nPinchDrop 先把参考照片与准备好的高斯模型配对，再由 Vision Pro 用 ARKit 跟踪手机图像和手势，本地把粒子聚到掌心并展开场景。它不是从单张手机照片即时重建三维，手势期间也不需要把模型传到云端。\n\n项目提供完整 Xcode 工程、4 个作品和 Mac 预览，接受 SOG v2、SPLAT、SPZ 与兼容 PLY。代码、作品和 Apple 生成权重分别受非商业条款约束，商业原型必须先替换资产并重审生成链路。\n\n[项目与安装说明](https://github.com/xibihe/PinchDrop) · [compositor 修正](https://github.com/xibihe/PinchDrop/commit/fa87d7d5c636a48ecbf698dbabeb46c8a93025a4)"
+    },
+    {
+      "id": "playshrunk.pages.dev",
+      "kind": "news",
+      "title": "Shrunk 把用户扫描变成多人捉迷藏房间",
+      "summary": "Shrunk 已能在浏览器中运行，7 个样板房间免费，Home Pass 接收用户自己的 SPZ 或 PLY 扫描。它展示了高斯资产不经传统关卡重建也能进入多人游戏，但项目没有公开源码或许可，处理后房间还会进入服务存储并分发给同房玩家。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/#event-shrunk-game",
+      "text": "Shrunk 把用户扫描变成多人捉迷藏房间 Shrunk 已能在浏览器中运行，7 个样板房间免费，Home Pass 接收用户自己的 SPZ 或 PLY 扫描。它展示了高斯资产不经传统关卡重建也能进入多人游戏，但项目没有公开源码或许可，处理后房间还会进入服务存储并分发给同房玩家。 https://playshrunk.pages.dev/ Shrunk 把用户扫描变成多人捉迷藏房间 ## Shrunk 把用户扫描变成多人捉迷藏房间\n\nShrunk 已能在浏览器中运行，7 个样板房间免费，Home Pass 接收用户自己的 SPZ 或 PLY 扫描。它展示了高斯资产不经传统关卡重建也能进入多人游戏，但项目没有公开源码或许可，处理后房间还会进入服务存储并分发给同房玩家。\n\n[在线体验](https://playshrunk.pages.dev/) · [产品说明](https://radiancefields.com/shrunk-turns-phone-scans-into-hide-and-seek-maps)"
+    },
+    {
+      "id": "unity-splatbridge-1.3.2",
+      "kind": "tool",
+      "title": "SplatBridge 1.3.2 把 Unity 内编辑与流式加载放进正式商品",
+      "summary": "Unity Asset Store 已把 SplatBridge 1.3.2 标为 11 月 18 日发行，支持 Unity 6000.3.28f1 的 Built-in、URP 与 HDRP。工具覆盖体积选择、套索、笔刷、拆分删除、过滤、颜色与透明度、LOD 重建、SOG／streamed SOG ZIP／PLY 导出，以及 HTTP 分块加载。",
+      "date": "2026-11-22",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/22/#event-splatbridge-132",
+      "text": "SplatBridge 1.3.2 把 Unity 内编辑与流式加载放进正式商品 Unity Asset Store 已把 SplatBridge 1.3.2 标为 11 月 18 日发行，支持 Unity 6000.3.28f1 的 Built-in、URP 与 HDRP。工具覆盖体积选择、套索、笔刷、拆分删除、过滤、颜色与透明度、LOD 重建、SOG／streamed SOG ZIP／PLY 导出，以及 HTTP 分块加载。 https://assetstore.unity.com/packages/tools/utilities/splatbridge-3d-gaussian-splatting-import-stream-play-real-world--392164 SplatBridge 1.3.2 把 Unity 内编辑与流式加载放进正式商品 ## SplatBridge 1.3.2 把 Unity 内编辑与流式加载放进正式商品\n\nUnity Asset Store 已把 SplatBridge 1.3.2 标为 11 月 18 日发行，支持 Unity 6000.3.28f1 的 Built-in、URP 与 HDRP。工具覆盖体积选择、套索、笔刷、拆分删除、过滤、颜色与透明度、LOD 重建、SOG／streamed SOG ZIP／PLY 导出，以及 HTTP 分块加载。\n\n它是闭源商业扩展，WebGL 不受支持，Quest 3 仍是实验性范围；商店价格还会因地区和税费变化。\n\n[Unity Asset Store](https://assetstore.unity.com/packages/tools/utilities/splatbridge-3d-gaussian-splatting-import-stream-play-real-world--392164) · [更新说明](https://radiancefields.com/splatbridge-now-edits-gaussian-splats-inside-unity)"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",

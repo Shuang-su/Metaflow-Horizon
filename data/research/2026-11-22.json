@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-22",
+  "mode": "scheduled",
+  "window": {"start": "2026-11-15T08:28:00+08:00", "end": "2026-11-22T08:13:00+08:00"},
+  "reviewedAt": "2026-11-22T08:13:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields", "status": "candidates", "checkedAt": "2026-11-22T08:06:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"],
+      "candidateIds": ["github.com/gabriverga/QuickSplat/releases/tag/v0.4.0", "github.com/xibihe/PinchDrop", "github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92", "unity-splatbridge-1.3.2", "playshrunk.pages.dev"],
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "candidates", "checkedAt": "2026-11-22T08:05:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "checked-no-new", "checkedAt": "2026-11-22T08:06:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official", "status": "candidates", "checkedAt": "2026-11-22T08:07:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": ["unity-splatbridge-1.3.2"],
+      "gap": "Blender News 返回 HTTP 403；PlayCanvas 博客可读且最新仍为 11 月 9 日，产品事实另由 Unity Asset Store 正式页面核验。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-22T08:06:30+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-22T08:07:00+08:00", "gap": "HTTP 403，未取得可验证正文。"}
+      ]
+    },
+    {
+      "sourceId": "x", "status": "unavailable", "checkedAt": "2026-11-22T08:08:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "candidateIds": [],
+      "gap": "4 个登记账号均返回 403 或 DisabledError；未把登录外壳、摘要或转述当作原帖，改由 GitHub、作者项目页和正式商店页面核验。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-22T08:07:15+08:00", "gap": "DisabledError，无可验证原帖。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-22T08:07:30+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-22T08:07:45+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-22T08:08:00+08:00", "gap": "DisabledError，无可验证原帖。"}
+      ]
+    },
+    {
+      "sourceId": "research", "status": "unavailable", "checkedAt": "2026-11-22T08:09:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"], "candidateIds": [],
+      "gap": "arXiv export API 未能直接读取；Hugging Face Papers 可读并停在 11 月 20 日，没有取得晚于已归档批次且可由原论文页核验的新论文。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-22T08:08:30+08:00", "gap": "API 端点不可由当前检索器直接访问。"},
+        {"url": "https://huggingface.co/papers", "status": "checked-no-new", "checkedAt": "2026-11-22T08:09:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github", "status": "candidates", "checkedAt": "2026-11-22T08:11:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": ["github.com/gabriverga/QuickSplat/releases/tag/v0.4.0", "github.com/xibihe/PinchDrop", "github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92", "github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8", "github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f", "github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819"],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "candidates", "checkedAt": "2026-11-22T08:10:00+08:00", "gap": "SuperSplat Editor 本身无新提交；同一工具链的 Viewer 主干有新提交并单独核验。"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "candidates", "checkedAt": "2026-11-22T08:11:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "community", "status": "candidates", "checkedAt": "2026-11-22T08:12:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": ["reddit-zillow-spirula-supersplat-2026-11-22", "kiri-white-paper-showcase-2026-11-21"],
+      "gap": "B 站首页只返回浏览器兼容提示；中文可读来源未取得带原始证据的新候选。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "candidates", "checkedAt": "2026-11-22T08:11:15+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "unavailable", "checkedAt": "2026-11-22T08:11:30+08:00", "gap": "仅返回浏览器版本过旧提示，未取得当日内容流。"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-22T08:12:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "github.com/gabriverga/QuickSplat/releases/tag/v0.4.0", "title": "QuickSplat v0.4.0 为 Explorer 与 Finder 加入离线高斯预览", "eventDate": "2026-11-20", "reportDate": "2026-11-22", "importance": "important", "disposition": "included", "reason": "迟到索引补收；正式 release、跨平台实现与格式清单均可由一手仓库核验，直接减少资产筛选摩擦。", "sources": ["https://github.com/gabriverga/QuickSplat/releases/tag/v0.4.0", "https://github.com/gabriverga/QuickSplat/commit/a5d4d8e6e48437908c73a2fa370346a036f06cc1", "https://radiancefields.com/quicksplat-previews-gaussian-splats-with-the-space-bar"], "eventId": "github.com/gabriverga/QuickSplat/releases/tag/v0.4.0"
+    },
+    {
+      "id": "github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92", "title": "ITHACA Unity 播放器接入 .trgz 高精度 4DGS", "eventDate": "2026-11-22", "reportDate": "2026-11-22", "importance": "important", "disposition": "included", "reason": "主干新增 Trigs 解码、逐 splat screw motion 与容器播放，并在截止前修正训练首帧时间原点。", "sources": ["https://github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92", "https://github.com/frenchtouchXR/ithaca-4dgs-unity/commit/7068ac6e489ea1d0e3d5f18f80a9d464d0a50fbd"], "eventId": "github.com/frenchtouchXR/ithaca-4dgs-unity/commit/8fdac5957f94af1f4ea3fd4688ede1f2804b7a92"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8", "title": "Spirula 加入随机式预览、低内存串行回退和失败诊断", "eventDate": "2026-11-22", "reportDate": "2026-11-22", "importance": "important", "disposition": "included", "reason": "连续主干提交改变预览路径，并改善内存不足、磁盘写入和导入拒绝后的恢复行为。", "sources": ["https://github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8", "https://github.com/harry7557558/spirula-studio/commit/3ca045c89d7c6ebd69aaf911cd3e19e0eeafa029", "https://github.com/harry7557558/spirula-studio/commit/9a807429dafc5a165c06bd2a0ffe1c99efef766b", "https://github.com/harry7557558/spirula-studio/commit/aea763135c56c2cf542bce1d1f127308d28ee577"], "eventId": "github.com/harry7557558/spirula-studio/commit/e8b5b5fe3ef5296fb772f73f4b0e459a8fae5bf8"
+    },
+    {
+      "id": "github.com/xibihe/PinchDrop", "title": "PinchDrop 公开 Vision Pro 照片锚定与高斯展开工程", "eventDate": "2026-11-21", "reportDate": "2026-11-22", "importance": "important", "disposition": "included", "reason": "完整工程与配对素材可复现，且许可、设备与格式边界清楚。", "sources": ["https://github.com/xibihe/PinchDrop", "https://github.com/xibihe/PinchDrop/commit/fa87d7d5c636a48ecbf698dbabeb46c8a93025a4"], "eventId": "github.com/xibihe/PinchDrop"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f", "title": "LichtFeld Studio 修正数据集相对路径并扩展外置面板", "eventDate": "2026-11-22", "reportDate": "2026-11-22", "importance": "standard", "disposition": "included", "reason": "主干修复非标准图片目录的先验图生成，并改善桌面面板会话。", "sources": ["https://github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f", "https://github.com/MrNeRF/LichtFeld-Studio/commit/53e307ce451a26b7ccc668242e71114e408ed834"], "eventId": "github.com/MrNeRF/LichtFeld-Studio/commit/9790b11906d5c4dee78bd2c6364e85effe779b2f"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819", "title": "SuperSplat Viewer 统一主题色与字体", "eventDate": "2026-11-22", "reportDate": "2026-11-22", "importance": "standard", "disposition": "included", "reason": "Viewer 主干有明确 UI 修正；Editor 与 SplatTransform 本窗口无新提交，正文保留组件边界。", "sources": ["https://github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819"], "eventId": "github.com/playcanvas/supersplat-viewer/commit/453059cefd395e51444188a9909df0b617e3b819"
+    },
+    {
+      "id": "unity-splatbridge-1.3.2", "title": "SplatBridge 1.3.2 正式商品页记录 Unity 内编辑与 streaming", "eventDate": "2026-11-18", "reportDate": "2026-11-22", "importance": "important", "disposition": "included", "reason": "迟到索引补收；正式商店已确认版本、日期、兼容性、许可和商品边界。", "sources": ["https://assetstore.unity.com/packages/tools/utilities/splatbridge-3d-gaussian-splatting-import-stream-play-real-world--392164", "https://radiancefields.com/splatbridge-now-edits-gaussian-splats-inside-unity"], "eventId": "unity-splatbridge-1.3.2"
+    },
+    {
+      "id": "playshrunk.pages.dev", "title": "Shrunk 把手机高斯扫描变成多人捉迷藏地图", "eventDate": "2026-11-20", "reportDate": "2026-11-22", "importance": "standard", "disposition": "included", "reason": "迟到索引补收；浏览器产品已可玩，价格、输入格式和隐私边界可由产品说明核对。", "sources": ["https://playshrunk.pages.dev/", "https://radiancefields.com/shrunk-turns-phone-scans-into-hide-and-seek-maps"], "eventId": "playshrunk.pages.dev"
+    },
+    {
+      "id": "kiri-white-paper-showcase-2026-11-21", "title": "KIRI 展示白纸 3DGS-to-Mesh 压力测试", "eventDate": "2026-11-21", "reportDate": "2026-11-22", "importance": "standard", "disposition": "deferred", "reason": "可访问内容只有第三方对 X 演示的转述；官方功能页能证明既有 Mesh-Inclusive 3DGS，但不能证明本轮出现新版本、参数或可复现实验。", "sources": ["https://news.splatman.net/items/kiri-3dgs-to-mesh-white-paper/", "https://www.kiriengine.app/features/mesh-inclusive-3dgs"]
+    },
+    {
+      "id": "reddit-zillow-spirula-supersplat-2026-11-22", "title": "社区教程把房产照片串到 Spirula、SuperSplat 与 Unreal", "eventDate": "2026-11-22", "reportDate": "2026-11-22", "importance": "standard", "disposition": "excluded", "reason": "单一社区帖子明确承认仍有 floaters，且没有独立项目版本、数据集或可复现实验记录；不提升为已验证产品能力。", "sources": ["https://www.reddit.com/r/GaussianSplatting/"], "exclusionEvidence": "帖子自身把流程描述为免费教程与实验，并说明结果不如专用扫描且仍有 floaters。"
+    }
+  ]
+}
