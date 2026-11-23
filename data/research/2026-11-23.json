@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-23",
+  "mode": "scheduled",
+  "window": {"start": "2026-11-15T08:28:00+08:00", "end": "2026-11-23T08:45:00+08:00"},
+  "reviewedAt": "2026-11-23T08:45:00+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields", "status": "checked-no-new", "checkedAt": "2026-11-23T08:19:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"], "candidateIds": [],
+      "gap": "首页当前可见最新重点仍是已在 11 月 22 日归档的 QuickSplat；工具目录可读，但没有取得带明确新日期的变化。",
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "checked-no-new", "checkedAt": "2026-11-23T08:18:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "checked-no-new", "checkedAt": "2026-11-23T08:19:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official", "status": "candidates", "checkedAt": "2026-11-23T08:24:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": ["esri-xr-viewer-gaussian-splats-2026-11", "superspl.at/scene/cbf5b0c9"],
+      "gap": "Blender News 返回 HTTP 403；PlayCanvas 博客可读但最新文章仍是 11 月 9 日。行业候选改由 Esri 官方博客和 SuperSplat 官方作品页核验。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-23T08:22:00+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-23T08:23:00+08:00", "gap": "HTTP 403，未取得可验证正文。"}
+      ]
+    },
+    {
+      "sourceId": "x", "status": "unavailable", "checkedAt": "2026-11-23T08:27:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "candidateIds": [],
+      "gap": "4 个登记账号分别返回 403、禁用错误或登录外壳，没有取得可验证原帖；相关候选改由作者项目页、官网与 GitHub 一手记录核验。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-23T08:25:00+08:00", "gap": "DisabledError，无可验证原帖。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-23T08:25:40+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-23T08:26:20+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-23T08:27:00+08:00", "gap": "DisabledError，无可验证原帖。"}
+      ]
+    },
+    {
+      "sourceId": "research", "status": "candidates", "checkedAt": "2026-11-23T08:31:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"],
+      "candidateIds": ["arxiv:2611.25338"],
+      "gap": "arXiv export API 未能直接读取；Hugging Face Papers 可读但日期入口停在 11 月 20 日。VideoRNG 改由 arXiv 原文页和作者项目仓库核验。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-23T08:29:00+08:00", "gap": "API 端点未能直接读取。"},
+        {"url": "https://huggingface.co/papers", "status": "candidates", "checkedAt": "2026-11-23T08:31:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github", "status": "candidates", "checkedAt": "2026-11-23T08:37:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": ["github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4", "github.com/siliconjungle/shapeshift-labs-ink-studio", "github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593", "github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c", "github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae"],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "checked-no-new", "checkedAt": "2026-11-23T08:34:00+08:00", "gap": "编辑器仓库最近提交仍为 11 月 19 日；运行时新增改由 PlayCanvas Engine 提交核验。"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "candidates", "checkedAt": "2026-11-23T08:37:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "community", "status": "candidates", "checkedAt": "2026-11-23T08:42:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": ["superspl.at/scene/cbf5b0c9", "github.com/hi3d-official/Hi3Dv1.0"],
+      "gap": "B 站首页只返回浏览器兼容提示；少数派可读，但没有找到同时具备明确日期、原始链接与新增事实的相关候选。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "candidates", "checkedAt": "2026-11-23T08:39:00+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "unavailable", "checkedAt": "2026-11-23T08:41:00+08:00", "gap": "仅返回浏览器版本过旧提示。"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-23T08:42:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4", "title": "PlayCanvas Engine 为 SOG 共享纹理加入应用级引用计数缓存", "eventDate": "2026-11-23", "reportDate": "2026-11-23", "importance": "important", "disposition": "included", "reason": "主干修复多个 SOG/LOD 文件共享纹理时卸载其中一个文件会破坏其余文件的稳定性问题，同时避免重复下载和 GPU 纹理。", "sources": ["https://github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4", "https://github.com/playcanvas/engine/pull/10110"], "eventId": "github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4"
+    },
+    {
+      "id": "github.com/siliconjungle/shapeshift-labs-ink-studio", "title": "Ink Studio 把程序化体积、像素化 splat 与交互行为装进 JavaScript 工具包", "eventDate": "2026-11-16", "reportDate": "2026-11-23", "importance": "important", "disposition": "included", "reason": "7 日重查补收；MIT 工具包可从 GitHub 安装，兼有 CPU、WebGL 2 渲染、动画、交互和 GLB 导出，代表直接创作而非扫描的工具路线。", "sources": ["https://github.com/siliconjungle/shapeshift-labs-ink-studio", "https://www.npmjs.com/package/@shapeshift-labs/ink-studio"], "eventId": "github.com/siliconjungle/shapeshift-labs-ink-studio"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593", "title": "Spirula 抬高 Delaunay 点数上限并加入三分类遮罩训练", "eventDate": "2026-11-22", "reportDate": "2026-11-23", "importance": "important", "disposition": "included", "reason": "连续主干提交扩展极大点云网格化的索引与内存保护，并新增前景、背景和忽略区三分类遮罩。", "sources": ["https://github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593", "https://github.com/harry7557558/spirula-studio/commit/09d146228f11616327505037390de9c0fa1dcf8c", "https://github.com/harry7557558/spirula-studio/commit/ee2934f92af0a57f69195c2fb1c3865caca160da"], "eventId": "github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593"
+    },
+    {
+      "id": "github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c", "title": "Animated SOG 增加逐帧稠密 flipbook 训练方案", "eventDate": "2026-11-23", "reportDate": "2026-11-23", "importance": "important", "disposition": "included", "reason": "在 11 月 21 日首次归档之后出现实质增量：新配方开放每帧关键帧、随机稀疏化和自由短寿命，并公开作者条件下的质量与体积数字。", "sources": ["https://github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c", "https://github.com/arrival-space/animated-sog"], "eventId": "github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae", "title": "LichtFeld Studio 重排 Windows portable 包并修复许可证读取停顿", "eventDate": "2026-11-23", "reportDate": "2026-11-23", "importance": "standard", "disposition": "included", "reason": "主干改善便携包根目录、运行库、资源定位和 MCP 自动启动路径，并修复 Windows 第三方许可证读取反复或停顿。", "sources": ["https://github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae", "https://github.com/MrNeRF/LichtFeld-Studio/commit/a40b6f3f49417b10c3c847461080f283dff650f4"], "eventId": "github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae"
+    },
+    {
+      "id": "arxiv:2611.25338", "title": "VideoRNG 从图像或文本生成可重光照的高斯资产", "eventDate": "2026-11-19", "reportDate": "2026-11-23", "importance": "important", "disposition": "included", "reason": "迟到索引补收；论文把结构化 RGBA 转台视频、前馈高斯重建和神经外观解码器接成可重光照生成管线，但未核实到代码或权重。", "sources": ["https://arxiv.org/abs/2611.25338", "https://github.com/videorng/videorng.github.io"], "eventId": "arxiv:2611.25338"
+    },
+    {
+      "id": "esri-xr-viewer-gaussian-splats-2026-11", "title": "ArcGIS XR Viewer beta 初步支持 Gaussian splat 图层", "eventDate": "2026-11-19", "reportDate": "2026-11-23", "importance": "important", "disposition": "included", "reason": "迟到官方更新；它让 Web Scene 中的高斯图层进入桌面和 VR 浏览，但 Esri 明确标注功能、视觉和性能仍有限。", "sources": ["https://www.esri.com/arcgis-blog/products/arcgis/3d-gis/whats-new-in-xr-viewer-beta-november-2026"], "eventId": "esri-xr-viewer-gaussian-splats-2026-11"
+    },
+    {
+      "id": "superspl.at/scene/cbf5b0c9", "title": "Randers 作品把 6 平方公里航摄影像组织成 6 亿高斯场景", "eventDate": "2026-11-22", "reportDate": "2026-11-23", "importance": "standard", "disposition": "included", "reason": "SuperSplat 官方作品页给出 606.8M splats、9.39 GB 与 6 km² 元数据；作者社区帖补充切片和接缝处理，但这些实现说明未独立复现。", "sources": ["https://superspl.at/scene/cbf5b0c9", "https://www.reddit.com/r/GaussianSplatting/comments/1y2tru8/randers_600_million_gaussians/"], "eventId": "superspl.at/scene/cbf5b0c9"
+    },
+    {
+      "id": "github.com/hi3d-official/Hi3Dv1.0", "title": "Hi3D 1.0 开源信息在本周媒体重新出现", "eventDate": "2026-10-23", "reportDate": "2026-11-23", "importance": "standard", "disposition": "excluded", "reason": "代码与权重开放事件发生于 10 月 23 日，本窗口没有核实到新 release、提交或能力变化；媒体重新索引不是新事件。", "sources": ["https://github.com/hi3d-official/Hi3Dv1.0", "https://www.hi3d.ai/hi3d-1-0-open-source"], "exclusionEvidence": "官方页面和仓库均把 1.0 开放日期指向 2026-10-23；本轮搜索未取得 2026-11-16—23 的新增一手记录。"
+    },
+    {
+      "id": "chinese-community-unverified-webgs-2026-11-23", "title": "中文搜索出现 Electron 与鸿蒙高斯渲染转述", "eventDate": "2026-11-17", "reportDate": "2026-11-23", "importance": "standard", "disposition": "excluded", "reason": "只取得聚合或二次文章，未找到可把性能、兼容性和发布日期落到原始仓库或厂商公告的证据。", "sources": ["https://atomgit.com/"], "exclusionEvidence": "登记中文来源未提供对应原始提交、release、设备条件或厂商公告，不能将搜索摘要当作已核实产品更新。"
+    }
+  ]
+}

@@ -1,7 +1,208 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-23",
   "daily": [
+    {
+      "id": "gsd-2026-11-23",
+      "contentHash": "2bc0cbccbcc2466adbc896b0be82a9039169a7b23d4128429305dfe91cd69efc",
+      "date": "2026-11-23",
+      "title": "Horizon 行业日报 — 2026-11-23",
+      "headline": "高斯日报：PlayCanvas 修复 SOG 共享纹理，Ink Studio 扩展程序化创作",
+      "summary": "PlayCanvas Engine 为分块与 LOD SOG 场景补上引用计数纹理缓存；Ink Studio 把程序化体积、像素化 splat、动画与交互组织成 JavaScript 工具包。Spirula、Animated SOG、VideoRNG、ArcGIS XR Viewer 和 Randers 大场景分别推进大数据、动态内容、可重光照生成与沉浸发布。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-23.md",
+      "sourceCount": 1,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4",
+          "anchor": "event-playcanvas-sog-texture-cache",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4",
+          "title": "PlayCanvas 修复多文件 SOG 的共享纹理生命周期",
+          "summary": "多个 SOG 文件引用同一纹理时，旧路径会让任一文件的卸载销毁共享 GPU 资源。新的应用级缓存按 URL 去重下载和纹理对象，用引用计数决定最终释放，并处理加载途中释放后再次引用的竞态。",
+          "date": "2026-11-23",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/siliconjungle/shapeshift-labs-ink-studio",
+          "anchor": "event-ink-studio",
+          "kind": "tool",
+          "source": "https://github.com/siliconjungle/shapeshift-labs-ink-studio",
+          "title": "Ink Studio 扩展程序化 splat 创作工具层",
+          "summary": "Ink Studio 从 SDF 实体出发，烘焙像素化 Gaussian splat，并把动画、反应、破碎、生长、粒子和角色放进同一个 JavaScript 场景。Node CLI 提供 CPU 路径，浏览器使用 WebGL 2，也支持网格、深度图输入与 GLB 导出。",
+          "date": "2026-11-23",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593",
+          "anchor": "event-spirula-delaunay-mask",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593",
+          "title": "Spirula 扩展超大点云与遮罩训练控制",
+          "summary": "Spirula 用 64 位索引将 Delaunay 代码上限从 1.5 亿点提高到 5 亿点，并按约 300 bytes/point 做 RAM 预检；每个 Gaussian 也可以只取一个样本，降低网格化负担。5 亿点对应的核心工作集已接近 150 GB，因此这是软件范围，不是普通硬件承诺。",
+          "date": "2026-11-23",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c",
+          "anchor": "event-animated-sog-dense-recipe",
+          "kind": "tool",
+          "source": "https://github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c",
+          "title": "Animated SOG 增加逐帧稠密 flipbook 配方",
+          "summary": "新的 dense recipe 把每帧设为关键帧，开放短生命周期和随机 thinning，并关闭 relocation 与 opacity regularizer。它为短动态片段提供简单、可运行的基线，也会增加时间冗余和体积压力。",
+          "date": "2026-11-23",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.25338",
+          "anchor": "event-videorng",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.25338",
+          "title": "VideoRNG 尝试生成可重光照高斯资产",
+          "summary": "VideoRNG 先从文本或单图生成已知相机与光照条件的 RGBA 转台视频，再由视频 latent 前馈预测数百万各向异性 Gaussian；共享方向解码器和随机 Gaussian ray tracer 负责随视角与光照变化的外观。它瞄准毛发、羽毛和蛛网等难网格化结构，并用前景 token 与按成本采样控制预测规模。",
+          "date": "2026-11-23",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "esri-xr-viewer-gaussian-splats-2026-11",
+          "anchor": "event-esri-xr-viewer-splats",
+          "kind": "news",
+          "source": "https://www.esri.com/arcgis-blog/products/arcgis/3d-gis/whats-new-in-xr-viewer-beta-november-2026",
+          "title": "ArcGIS XR Viewer beta 初步接入 Gaussian splat 图层",
+          "summary": "Esri 让 Web Scene 中的高斯图层进入桌面和 VR 浏览，与 Reality Server 的 splat 生成能力形成初步链路。XR Viewer 仍在 Early Adopter beta，官方明确保留功能、视觉和性能限制，VR 草图也不能保存。",
+          "date": "2026-11-23",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae",
+          "anchor": "event-lichtfeld-windows-portable",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae",
+          "title": "LichtFeld 改善 Windows portable 包与 MCP 启动",
+          "summary": "LichtFeld 把 portable 可执行文件放到包根目录，将运行库整理到 bin，并修正资源和 MCP 自动启动定位；后续提交避免第三方许可证读取停顿。它改善部署与启动，不改变训练和渲染质量，且尚无对应 release。",
+          "date": "2026-11-23",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "superspl.at/scene/cbf5b0c9",
+          "anchor": "event-randers-600m",
+          "kind": "news",
+          "source": "https://superspl.at/scene/cbf5b0c9",
+          "title": "Randers 作品把 6 亿高斯放进浏览器交付",
+          "summary": "SuperSplat 作品页标注 606.8M splats、9.39 GB 和 6 km²，并提供多个细节档。作者称用 250 m cell、1 km tile 和接缝统一组织训练；这部分只是作者公开说明，未独立复现。",
+          "date": "2026-11-23",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 3,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、官方页面、论文、项目说明和 GitHub 提交编辑阅读版。未独立运行软件、复现实验、验证作者性能数字或进行设备验收；主干提交不等同于正式发行，beta 不等同于正式可用。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-23.md",
+        "contentHash": "7a93eb78300a9c1918013b4e0bc4ec4c8fce2fe27a8393f80dd323d90482d360"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17723,165 @@
   ],
   "entries": [
     {
+      "id": "arxiv:2611.25338",
+      "kind": "paper",
+      "date": "2026-11-23",
+      "title": "Animated SOG 新增逐帧关键帧的稠密 flipbook 配方",
+      "summary": "VideoRNG 先从文本或单图生成已知相机与光照条件的 RGBA 转台视频，再由视频 latent 前馈预测数百万各向异性 Gaussian；共享方向解码器和随机 Gaussian ray tracer 负责随视角与光照变化的外观。它瞄准毛发、羽毛和蛛网等难网格化结构，并用前景 token 与按成本采样控制预测规模。",
+      "source": "https://arxiv.org/abs/2611.25338",
+      "anchor": "event-videorng",
+      "topics": [
+        "formats"
+      ]
+    },
+    {
+      "id": "esri-xr-viewer-gaussian-splats-2026-11",
+      "anchor": "event-esri-xr-viewer-splats",
+      "kind": "news",
+      "source": "https://www.esri.com/arcgis-blog/products/arcgis/3d-gis/whats-new-in-xr-viewer-beta-november-2026",
+      "title": "ArcGIS XR Viewer beta 初步接入 Gaussian splat 图层",
+      "summary": "Esri 让 Web Scene 中的高斯图层进入桌面和 VR 浏览，与 Reality Server 的 splat 生成能力形成初步链路。XR Viewer 仍在 Early Adopter beta，官方明确保留功能、视觉和性能限制，VR 草图也不能保存。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c",
+      "anchor": "event-animated-sog-dense-recipe",
+      "kind": "tool",
+      "source": "https://github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c",
+      "title": "Animated SOG 增加逐帧稠密 flipbook 配方",
+      "summary": "新的 dense recipe 把每帧设为关键帧，开放短生命周期和随机 thinning，并关闭 relocation 与 opacity regularizer。它为短动态片段提供简单、可运行的基线，也会增加时间冗余和体积压力。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593",
+      "anchor": "event-spirula-delaunay-mask",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593",
+      "title": "Spirula 扩展超大点云与遮罩训练控制",
+      "summary": "Spirula 用 64 位索引将 Delaunay 代码上限从 1.5 亿点提高到 5 亿点，并按约 300 bytes/point 做 RAM 预检；每个 Gaussian 也可以只取一个样本，降低网格化负担。5 亿点对应的核心工作集已接近 150 GB，因此这是软件范围，不是普通硬件承诺。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae",
+      "anchor": "event-lichtfeld-windows-portable",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae",
+      "title": "LichtFeld 改善 Windows portable 包与 MCP 启动",
+      "summary": "LichtFeld 把 portable 可执行文件放到包根目录，将运行库整理到 bin，并修正资源和 MCP 自动启动定位；后续提交避免第三方许可证读取停顿。它改善部署与启动，不改变训练和渲染质量，且尚无对应 release。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4",
+      "anchor": "event-playcanvas-sog-texture-cache",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4",
+      "title": "PlayCanvas 修复多文件 SOG 的共享纹理生命周期",
+      "summary": "多个 SOG 文件引用同一纹理时，旧路径会让任一文件的卸载销毁共享 GPU 资源。新的应用级缓存按 URL 去重下载和纹理对象，用引用计数决定最终释放，并处理加载途中释放后再次引用的竞态。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/siliconjungle/shapeshift-labs-ink-studio",
+      "anchor": "event-ink-studio",
+      "kind": "tool",
+      "source": "https://github.com/siliconjungle/shapeshift-labs-ink-studio",
+      "title": "Ink Studio 扩展程序化 splat 创作工具层",
+      "summary": "Ink Studio 从 SDF 实体出发，烘焙像素化 Gaussian splat，并把动画、反应、破碎、生长、粒子和角色放进同一个 JavaScript 场景。Node CLI 提供 CPU 路径，浏览器使用 WebGL 2，也支持网格、深度图输入与 GLB 导出。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "superspl.at/scene/cbf5b0c9",
+      "anchor": "event-randers-600m",
+      "kind": "news",
+      "source": "https://superspl.at/scene/cbf5b0c9",
+      "title": "Randers 作品把 6 亿高斯放进浏览器交付",
+      "summary": "SuperSplat 作品页标注 606.8M splats、9.39 GB 和 6 km²，并提供多个细节档。作者称用 250 m cell、1 km tile 和接缝统一组织训练；这部分只是作者公开说明，未独立复现。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31165,27 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-23",
+      "kind": "daily",
+      "title": "高斯日报：PlayCanvas 修复 SOG 共享纹理，Ink Studio 扩展程序化创作",
+      "summary": "PlayCanvas Engine 为分块与 LOD SOG 场景补上引用计数纹理缓存；Ink Studio 把程序化体积、像素化 splat、动画与交互组织成 JavaScript 工具包。Spirula、Animated SOG、VideoRNG、ArcGIS XR Viewer 和 Randers 大场景分别推进大数据、动态内容、可重光照生成与沉浸发布。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/",
+      "text": "PlayCanvas 修复多文件 SOG 的共享纹理生命周期\n多个 SOG 文件引用同一纹理时，旧路径会让任一文件的卸载销毁共享 GPU 资源。新的应用级缓存按 URL 去重下载和纹理对象，用引用计数决定最终释放，并处理加载途中释放后再次引用的竞态。\n这项修改对 LOD、分块与流式场景最重要，现有资产不需要因此重编码。它仍是 Engine 主干变化，生产项目应先锁提交测试加载、卸载、取消与重新加载，再等待正式版本。\n提交与代码差异 · PR #10110\nInk Studio 扩展程序化 splat 创作工具层\nInk Studio 从 SDF 实体出发，烘焙像素化 Gaussian splat，并把动画、反应、破碎、生长、粒子和角色放进同一个 JavaScript 场景。Node CLI 提供 CPU 路径，浏览器使用 WebGL 2，也支持网格、深度图输入与 GLB 导出。\nMIT 代码可直接从 GitHub 安装，Node.js 18+ 是当前门槛；但包仍标为 private，没有 npm 正式发行或 GitHub release。它适合小场景验证，不应被描述为成熟 DCC 替代品。\n代码、安装与示例\nSpirula 扩展超大点云与遮罩训练控制\nSpirula 用 64 位索引将 Delaunay 代码上限从 1.5 亿点提高到 5 亿点，并按约 300 bytes/point 做 RAM 预检；每个 Gaussian 也可以只取一个样本，降低网格化负担。5 亿点对应的核心工作集已接近 150 GB，因此这是软件范围，不是普通硬件承诺。\n新的三分类遮罩把前景、背景和忽略区分开，适合动态遮挡与不可靠区域。两类变化都只在主干，应分别验证峰值内存、网格质量和遮罩边界。\nDelaunay 提交 · 三分类遮罩提交\nAnimated SOG 增加逐帧稠密 flipbook 配方\n新的 dense recipe 把每帧设为关键帧，开放短生命周期和随机 thinning，并关闭 relocation 与 opacity regularizer。它为短动态片段提供简单、可运行的基线，也会增加时间冗余和体积压力。\n作者报告的 PSNR、splat 数与文件大小来自特定篮球片段、裁剪和留出设置，本期没有复现。仓库代码为 MIT，上游训练分支、数据和权重仍需单独核对。\n配方提交\nVideoRNG 尝试生成可重光照高斯资产\nVideoRNG 先从文本或单图生成已知相机与光照条件的 RGBA 转台视频，再由视频 latent 前馈预测数百万各向异性 Gaussian；共享方向解码器和随机 Gaussian ray tracer 负责随视角与光照变化的外观。它瞄准毛发、羽毛和蛛网等难网格化结构，并用前景 token 与按成本采样控制预测规模。\n目前只能核实论文和项目展示，没有训练或推理代码、权重与独立复现，因此它是表示与数据管线信号，不是可部署工具。\n论文原文 · 项目展示仓库\nArcGIS XR Viewer beta 初步接入 Gaussian splat 图层\nEsri 让 Web Scene 中的高斯图层进入桌面和 VR 浏览，与 Reality Server 的 splat 生成能力形成初步链路。XR Viewer 仍在 Early Adopter beta，官方明确保留功能、视觉和性能限制，VR 草图也不能保存。\n官方更新\nLichtFeld 改善 Windows portable 包与 MCP 启动\nLichtFeld 把 portable 可执行文件放到包根目录，将运行库整理到 bin，并修正资源和 MCP 自动启动定位；后续提交避免第三方许可证读取停顿。它改善部署与启动，不改变训练和渲染质量，且尚无对应 release。\nportable 包提交 · 许可证读取修复\nRanders 作品把 6 亿高斯放进浏览器交付\nSuperSplat 作品页标注 606.8M splats、9.39 GB 和 6 km²，并提供多个细节档。作者称用 250 m cell、1 km tile 和接缝统一组织训练；这部分只是作者公开说明，未独立复现。\n该作品适合作为大范围航摄高斯的 LOD、分块与在线浏览案例，而不是已开放训练工具或通用性能基准。\n在线作品 · 作者社区说明"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32486,165 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "arxiv:2611.25338",
+      "kind": "paper",
+      "title": "Animated SOG 新增逐帧关键帧的稠密 flipbook 配方",
+      "summary": "VideoRNG 先从文本或单图生成已知相机与光照条件的 RGBA 转台视频，再由视频 latent 前馈预测数百万各向异性 Gaussian；共享方向解码器和随机 Gaussian ray tracer 负责随视角与光照变化的外观。它瞄准毛发、羽毛和蛛网等难网格化结构，并用前景 token 与按成本采样控制预测规模。",
+      "date": "2026-11-23",
+      "topics": [
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/#event-videorng",
+      "text": "Animated SOG 新增逐帧关键帧的稠密 flipbook 配方 VideoRNG 先从文本或单图生成已知相机与光照条件的 RGBA 转台视频，再由视频 latent 前馈预测数百万各向异性 Gaussian；共享方向解码器和随机 Gaussian ray tracer 负责随视角与光照变化的外观。它瞄准毛发、羽毛和蛛网等难网格化结构，并用前景 token 与按成本采样控制预测规模。 https://arxiv.org/abs/2611.25338 VideoRNG 尝试生成可重光照高斯资产 ## VideoRNG 尝试生成可重光照高斯资产\n\nVideoRNG 先从文本或单图生成已知相机与光照条件的 RGBA 转台视频，再由视频 latent 前馈预测数百万各向异性 Gaussian；共享方向解码器和随机 Gaussian ray tracer 负责随视角与光照变化的外观。它瞄准毛发、羽毛和蛛网等难网格化结构，并用前景 token 与按成本采样控制预测规模。\n\n目前只能核实论文和项目展示，没有训练或推理代码、权重与独立复现，因此它是表示与数据管线信号，不是可部署工具。\n\n[论文原文](https://arxiv.org/abs/2611.25338) · [项目展示仓库](https://github.com/videorng/videorng.github.io)"
+    },
+    {
+      "id": "esri-xr-viewer-gaussian-splats-2026-11",
+      "kind": "news",
+      "title": "ArcGIS XR Viewer beta 初步接入 Gaussian splat 图层",
+      "summary": "Esri 让 Web Scene 中的高斯图层进入桌面和 VR 浏览，与 Reality Server 的 splat 生成能力形成初步链路。XR Viewer 仍在 Early Adopter beta，官方明确保留功能、视觉和性能限制，VR 草图也不能保存。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/#event-esri-xr-viewer-splats",
+      "text": "ArcGIS XR Viewer beta 初步接入 Gaussian splat 图层 Esri 让 Web Scene 中的高斯图层进入桌面和 VR 浏览，与 Reality Server 的 splat 生成能力形成初步链路。XR Viewer 仍在 Early Adopter beta，官方明确保留功能、视觉和性能限制，VR 草图也不能保存。 https://www.esri.com/arcgis-blog/products/arcgis/3d-gis/whats-new-in-xr-viewer-beta-november-2026 ArcGIS XR Viewer beta 初步接入 Gaussian splat 图层 ## ArcGIS XR Viewer beta 初步接入 Gaussian splat 图层\n\nEsri 让 Web Scene 中的高斯图层进入桌面和 VR 浏览，与 Reality Server 的 splat 生成能力形成初步链路。XR Viewer 仍在 Early Adopter beta，官方明确保留功能、视觉和性能限制，VR 草图也不能保存。\n\n[官方更新](https://www.esri.com/arcgis-blog/products/arcgis/3d-gis/whats-new-in-xr-viewer-beta-november-2026)"
+    },
+    {
+      "id": "github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c",
+      "kind": "tool",
+      "title": "Animated SOG 增加逐帧稠密 flipbook 配方",
+      "summary": "新的 dense recipe 把每帧设为关键帧，开放短生命周期和随机 thinning，并关闭 relocation 与 opacity regularizer。它为短动态片段提供简单、可运行的基线，也会增加时间冗余和体积压力。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/#event-animated-sog-dense-recipe",
+      "text": "Animated SOG 增加逐帧稠密 flipbook 配方 新的 dense recipe 把每帧设为关键帧，开放短生命周期和随机 thinning，并关闭 relocation 与 opacity regularizer。它为短动态片段提供简单、可运行的基线，也会增加时间冗余和体积压力。 https://github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c Animated SOG 增加逐帧稠密 flipbook 配方 ## Animated SOG 增加逐帧稠密 flipbook 配方\n\n新的 dense recipe 把每帧设为关键帧，开放短生命周期和随机 thinning，并关闭 relocation 与 opacity regularizer。它为短动态片段提供简单、可运行的基线，也会增加时间冗余和体积压力。\n\n作者报告的 PSNR、splat 数与文件大小来自特定篮球片段、裁剪和留出设置，本期没有复现。仓库代码为 MIT，上游训练分支、数据和权重仍需单独核对。\n\n[配方提交](https://github.com/arrival-space/animated-sog/commit/05364cf2641ce80a95b12888625714b2657d467c)"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593",
+      "kind": "tool",
+      "title": "Spirula 扩展超大点云与遮罩训练控制",
+      "summary": "Spirula 用 64 位索引将 Delaunay 代码上限从 1.5 亿点提高到 5 亿点，并按约 300 bytes/point 做 RAM 预检；每个 Gaussian 也可以只取一个样本，降低网格化负担。5 亿点对应的核心工作集已接近 150 GB，因此这是软件范围，不是普通硬件承诺。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/#event-spirula-delaunay-mask",
+      "text": "Spirula 扩展超大点云与遮罩训练控制 Spirula 用 64 位索引将 Delaunay 代码上限从 1.5 亿点提高到 5 亿点，并按约 300 bytes/point 做 RAM 预检；每个 Gaussian 也可以只取一个样本，降低网格化负担。5 亿点对应的核心工作集已接近 150 GB，因此这是软件范围，不是普通硬件承诺。 https://github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593 Spirula 扩展超大点云与遮罩训练控制 ## Spirula 扩展超大点云与遮罩训练控制\n\nSpirula 用 64 位索引将 Delaunay 代码上限从 1.5 亿点提高到 5 亿点，并按约 300 bytes/point 做 RAM 预检；每个 Gaussian 也可以只取一个样本，降低网格化负担。5 亿点对应的核心工作集已接近 150 GB，因此这是软件范围，不是普通硬件承诺。\n\n新的三分类遮罩把前景、背景和忽略区分开，适合动态遮挡与不可靠区域。两类变化都只在主干，应分别验证峰值内存、网格质量和遮罩边界。\n\n[Delaunay 提交](https://github.com/harry7557558/spirula-studio/commit/9578f5a6bfcf8416fb1bfbfe4e2808c531108593) · [三分类遮罩提交](https://github.com/harry7557558/spirula-studio/commit/ee2934f92af0a57f69195c2fb1c3865caca160da)"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae",
+      "kind": "tool",
+      "title": "LichtFeld 改善 Windows portable 包与 MCP 启动",
+      "summary": "LichtFeld 把 portable 可执行文件放到包根目录，将运行库整理到 bin，并修正资源和 MCP 自动启动定位；后续提交避免第三方许可证读取停顿。它改善部署与启动，不改变训练和渲染质量，且尚无对应 release。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/#event-lichtfeld-windows-portable",
+      "text": "LichtFeld 改善 Windows portable 包与 MCP 启动 LichtFeld 把 portable 可执行文件放到包根目录，将运行库整理到 bin，并修正资源和 MCP 自动启动定位；后续提交避免第三方许可证读取停顿。它改善部署与启动，不改变训练和渲染质量，且尚无对应 release。 https://github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae LichtFeld 改善 Windows portable 包与 MCP 启动 ## LichtFeld 改善 Windows portable 包与 MCP 启动\n\nLichtFeld 把 portable 可执行文件放到包根目录，将运行库整理到 `bin`，并修正资源和 MCP 自动启动定位；后续提交避免第三方许可证读取停顿。它改善部署与启动，不改变训练和渲染质量，且尚无对应 release。\n\n[portable 包提交](https://github.com/MrNeRF/LichtFeld-Studio/commit/f6d3885bba3993a29acb8dfcc5e758baa9b2c2ae) · [许可证读取修复](https://github.com/MrNeRF/LichtFeld-Studio/commit/a40b6f3f49417b10c3c847461080f283dff650f4)"
+    },
+    {
+      "id": "github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4",
+      "kind": "tool",
+      "title": "PlayCanvas 修复多文件 SOG 的共享纹理生命周期",
+      "summary": "多个 SOG 文件引用同一纹理时，旧路径会让任一文件的卸载销毁共享 GPU 资源。新的应用级缓存按 URL 去重下载和纹理对象，用引用计数决定最终释放，并处理加载途中释放后再次引用的竞态。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/#event-playcanvas-sog-texture-cache",
+      "text": "PlayCanvas 修复多文件 SOG 的共享纹理生命周期 多个 SOG 文件引用同一纹理时，旧路径会让任一文件的卸载销毁共享 GPU 资源。新的应用级缓存按 URL 去重下载和纹理对象，用引用计数决定最终释放，并处理加载途中释放后再次引用的竞态。 https://github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4 PlayCanvas 修复多文件 SOG 的共享纹理生命周期 ## PlayCanvas 修复多文件 SOG 的共享纹理生命周期\n\n多个 SOG 文件引用同一纹理时，旧路径会让任一文件的卸载销毁共享 GPU 资源。新的应用级缓存按 URL 去重下载和纹理对象，用引用计数决定最终释放，并处理加载途中释放后再次引用的竞态。\n\n这项修改对 LOD、分块与流式场景最重要，现有资产不需要因此重编码。它仍是 Engine 主干变化，生产项目应先锁提交测试加载、卸载、取消与重新加载，再等待正式版本。\n\n[提交与代码差异](https://github.com/playcanvas/engine/commit/9ce5b4de061358d761440ebf79d7bc9645734fc4) · [PR #10110](https://github.com/playcanvas/engine/pull/10110)"
+    },
+    {
+      "id": "github.com/siliconjungle/shapeshift-labs-ink-studio",
+      "kind": "tool",
+      "title": "Ink Studio 扩展程序化 splat 创作工具层",
+      "summary": "Ink Studio 从 SDF 实体出发，烘焙像素化 Gaussian splat，并把动画、反应、破碎、生长、粒子和角色放进同一个 JavaScript 场景。Node CLI 提供 CPU 路径，浏览器使用 WebGL 2，也支持网格、深度图输入与 GLB 导出。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/#event-ink-studio",
+      "text": "Ink Studio 扩展程序化 splat 创作工具层 Ink Studio 从 SDF 实体出发，烘焙像素化 Gaussian splat，并把动画、反应、破碎、生长、粒子和角色放进同一个 JavaScript 场景。Node CLI 提供 CPU 路径，浏览器使用 WebGL 2，也支持网格、深度图输入与 GLB 导出。 https://github.com/siliconjungle/shapeshift-labs-ink-studio Ink Studio 扩展程序化 splat 创作工具层 ## Ink Studio 扩展程序化 splat 创作工具层\n\nInk Studio 从 SDF 实体出发，烘焙像素化 Gaussian splat，并把动画、反应、破碎、生长、粒子和角色放进同一个 JavaScript 场景。Node CLI 提供 CPU 路径，浏览器使用 WebGL 2，也支持网格、深度图输入与 GLB 导出。\n\nMIT 代码可直接从 GitHub 安装，Node.js 18+ 是当前门槛；但包仍标为 private，没有 npm 正式发行或 GitHub release。它适合小场景验证，不应被描述为成熟 DCC 替代品。\n\n[代码、安装与示例](https://github.com/siliconjungle/shapeshift-labs-ink-studio)"
+    },
+    {
+      "id": "superspl.at/scene/cbf5b0c9",
+      "kind": "news",
+      "title": "Randers 作品把 6 亿高斯放进浏览器交付",
+      "summary": "SuperSplat 作品页标注 606.8M splats、9.39 GB 和 6 km²，并提供多个细节档。作者称用 250 m cell、1 km tile 和接缝统一组织训练；这部分只是作者公开说明，未独立复现。",
+      "date": "2026-11-23",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/23/#event-randers-600m",
+      "text": "Randers 作品把 6 亿高斯放进浏览器交付 SuperSplat 作品页标注 606.8M splats、9.39 GB 和 6 km²，并提供多个细节档。作者称用 250 m cell、1 km tile 和接缝统一组织训练；这部分只是作者公开说明，未独立复现。 https://superspl.at/scene/cbf5b0c9 Randers 作品把 6 亿高斯放进浏览器交付 ## Randers 作品把 6 亿高斯放进浏览器交付\n\nSuperSplat 作品页标注 606.8M splats、9.39 GB 和 6 km²，并提供多个细节档。作者称用 250 m cell、1 km tile 和接缝统一组织训练；这部分只是作者公开说明，未独立复现。\n\n该作品适合作为大范围航摄高斯的 LOD、分块与在线浏览案例，而不是已开放训练工具或通用性能基准。\n\n[在线作品](https://superspl.at/scene/cbf5b0c9) · [作者社区说明](https://www.reddit.com/r/GaussianSplatting/comments/1y2tru8/randers_600_million_gaussians/)"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",
