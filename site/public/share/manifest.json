@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-23",
+    "sha256": "6909c9df2bdf48f157e48610d0d7deba3edc4ae256e2c96091b2d87b0a5c67a7"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-23": {
+      "date": "2026-11-23",
+      "url": "/share/2026-11-23.png",
+      "title": "高斯日报：PlayCanvas 修复 SOG 共享纹理，Ink Studio 扩展程序化创作",
+      "contentHash": "2bc0cbccbcc2466adbc896b0be82a9039169a7b23d4128429305dfe91cd69efc",
+      "inputHash": "e6627e831537ee3eb55caaf716ddf939ab349e4c2e229a08018b4e96d5a543f9",
+      "sha256": "6909c9df2bdf48f157e48610d0d7deba3edc4ae256e2c96091b2d87b0a5c67a7",
+      "bytes": 34674
     }
   }
 }
