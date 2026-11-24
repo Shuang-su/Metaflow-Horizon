@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-24",
+    "sha256": "8aebd9be41d937e11f4f96753f5654ea64563ef9b150f1ee8ef1101ca26d9c42"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-24": {
+      "date": "2026-11-24",
+      "url": "/share/2026-11-24.png",
+      "title": "Horizon：PlayCanvas 修复旧 Apple GPU 瓶颈，LichtFeld 迎来 VR 与训练大版本",
+      "contentHash": "f74309e39e0c4ca000bb479d4446942f7fc545399691585b173c27b3180b044b",
+      "inputHash": "49105bb40ffd55282a5311a3ee45a803c817ba33fd97c17a54f79a06351f9f5b",
+      "sha256": "8aebd9be41d937e11f4f96753f5654ea64563ef9b150f1ee8ef1101ca26d9c42",
+      "bytes": 37034
     }
   }
 }
