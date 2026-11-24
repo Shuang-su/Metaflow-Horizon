@@ -1,7 +1,217 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-24",
   "daily": [
+    {
+      "id": "gsd-2026-11-24",
+      "contentHash": "f74309e39e0c4ca000bb479d4446942f7fc545399691585b173c27b3180b044b",
+      "date": "2026-11-24",
+      "title": "Horizon 行业日报 — 2026-11-24",
+      "headline": "Horizon：PlayCanvas 修复旧 Apple GPU 瓶颈，LichtFeld 迎来 VR 与训练大版本",
+      "summary": "PlayCanvas Engine v2.24.3 正式移除旧一代 Apple GPU 上昂贵的浮点 flat 插值；LichtFeld Studio v0.5.4.3 把 OpenXR、碰撞行走、相机模型和训练改进带进正式版。SpAItial 多扫描合并 API 与《狂野时代》生产案例进一步说明，高斯正在进入可采购的重建服务和跨部门影视流程。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-24.md",
+      "sourceCount": 4,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "github.com/playcanvas/engine/releases/tag/v2.24.3",
+          "anchor": "event-playcanvas-engine-2-24-3",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/engine/releases/tag/v2.24.3",
+          "title": "PlayCanvas Engine 正式修复旧 Apple GPU 的 splat shader 瓶颈",
+          "summary": "v2.24.3 不再对 per-splat 浮点 varying 使用 flat 插值，只让整数 varying 保持 flat。维护者测试指出，旧于 Apple9 的 GPU 曾把 20%—60% GPU 时间花在这条路径上，而其他平台的收益很小；这是明确针对 M1/M2 与 A14—A16 一代设备的正式性能修复。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3",
+          "anchor": "event-lichtfeld-0-5-4-3",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3",
+          "title": "LichtFeld Studio 用一个正式版推进 VR、相机与训练链路",
+          "summary": "v0.5.4.3 加入 OpenXR、手部与抓取、碰撞行走、gamepad/sequencer、Slang 用户 shader 和多种视图模式；训练侧默认启用相机校正，新增姿态优化，并让 360° 与鱼眼进入快速 rasterizer。SOG 调色板确定性、跨平台项目、SAM 2.1、文本选区和批量训练也进入同一发布。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "docs.spaitial.ai/api/capture-worlds",
+          "anchor": "event-spaitial-multiscan",
+          "kind": "tool",
+          "source": "https://docs.spaitial.ai/api/capture-worlds",
+          "title": "SpAItial 把多扫描合并变成有公开边界的 API",
+          "summary": "Echo-3 现在可在一次请求中接收最多 8 个扫描 ZIP，要求相同分辨率与方向，姿态必须全部提供或全部省略，扫描间还要有足够重叠，总上传量不超过 8 GiB。无法对齐的扫描可能被跳过，却仍按帧计费。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "xgrids.com/resurrection-virtual-scouting",
+          "anchor": "event-xgrids-resurrection",
+          "kind": "news",
+          "source": "https://www.xgrids.com/intl/blogs/case-studies/virtual-location-scouting-previs-resurrection",
+          "title": "《狂野时代》展示 3DGS 如何进入影视跨部门协作",
+          "summary": "XGRIDS 的官方案例称，剧组在 3 天内采集约 50,000 平方米寺庙与码头，并把 LCC Studio 和 Unreal Engine 中的高斯场景用于虚拟勘景、长镜头预演和 VFX 空间对齐。重点不是单次视觉展示，而是同一个空间副本被多个制作环节复用。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2",
+          "anchor": "event-lichtfeld-blender-beta",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2",
+          "title": "LichtFeld for Blender beta 缩短合成场景到高斯资产的路径",
+          "summary": "插件从 Blender 5.3 场景组织 4,000—10,000 个训练视角，支持 Cycles/EEVEE、可选 Float32 TIFF 深度与法线监督，并通过 CPU shared memory 实时预览训练。任务可恢复，也能导入 portal gallery。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "reddit.com/r/GaussianSplatting/1y3f52l",
+          "anchor": "event-community-obb-sog",
+          "kind": "news",
+          "source": "https://www.reddit.com/r/GaussianSplatting/comments/1y3f52l/",
+          "title": "社区原型探索把 3D OBB 标签写回 SOG",
+          "summary": "作者演示用网页中的单视图或多视图 2D 框提升 3D 有向包围盒，并尝试把空间标签保存回 SOG。方向值得关注，但没有稳定仓库、许可、格式契约或准确率评估，因此只作为编辑与语义标注的早期信号。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.27525",
+          "anchor": "event-pennygs",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.27525",
+          "title": "PennyGS 把全分辨率 4K 训练压到消费级显存口径",
+          "summary": "PennyGS 报告在 RTX 3060、Mip-NeRF 360、30,000 次迭代条件下约 6 分 25 秒完成训练，峰值显存低于 2 GB，并在论文选择的 10 种方法中至少快 3.9 倍。方法目标是用采样与调度降低 4K 输入的峰值和迭代成本。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.27407",
+          "anchor": "event-blader",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.27407",
+          "title": "BladeR 把高分辨率 UAV、高斯重建与风机巡检相结合",
+          "summary": "BladeR 面向 45 MP 无人机影像，用 GPS/IMU、形状先验和层次化场景组织辅助定位与高斯重建，再进行叶片缺陷定位。这让高分辨率输入、细长重复结构和工业约束进入同一研究管线。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.27719",
+          "anchor": "event-veilgs",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.27719",
+          "title": "VeilGS 面向没有正常曝光对照的低照度采集",
+          "summary": "VeilGS 只使用低照度多视图，将观测拆成反照率、光照和空间变化的 gain veil，再通过全局 tone 映射恢复可查看的高斯场景。它不要求成对正常曝光数据，贴近夜间采集的现实约束。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.27224",
+          "anchor": "event-east",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.27224",
+          "title": "EAST 连接事件相机、SDF 与 Gaussian surface",
+          "summary": "EAST 用事件相机的高时间分辨率信号约束 SDF 表面，再让 Gaussian 承担可微渲染和外观，目标是高速运动、运动模糊和普通帧曝光不足时的几何恢复。",
+          "date": "2026-11-24",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "webgpu",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 4,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、官方发布、文档、论文、项目页和 GitHub 记录编辑阅读版。未独立运行软件、复现实验、验证厂商性能或精度数字，也未进行设备验收；社区原型与无代码论文均明确降级。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-24.md",
+        "contentHash": "5231617578ea1b0c70287c2a93c2818a99a4da3b128cf9123fac08c2d995f7d2"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17732,162 @@
   ],
   "entries": [
     {
+      "id": "arxiv:2611.27224",
+      "kind": "paper",
+      "date": "2026-11-24",
+      "title": "VeilGS 在没有成对正常曝光数据时分解低照度场景",
+      "summary": "EAST 用事件相机的高时间分辨率信号约束 SDF 表面，再让 Gaussian 承担可微渲染和外观，目标是高速运动、运动模糊和普通帧曝光不足时的几何恢复。",
+      "source": "https://arxiv.org/abs/2611.27224",
+      "anchor": "event-east",
+      "topics": []
+    },
+    {
+      "id": "arxiv:2611.27407",
+      "kind": "paper",
+      "date": "2026-11-24",
+      "title": "PennyGS 用低于 2 GB 峰值显存训练全分辨率 4K 场景",
+      "summary": "BladeR 面向 45 MP 无人机影像，用 GPS/IMU、形状先验和层次化场景组织辅助定位与高斯重建，再进行叶片缺陷定位。这让高分辨率输入、细长重复结构和工业约束进入同一研究管线。",
+      "source": "https://arxiv.org/abs/2611.27407",
+      "anchor": "event-blader",
+      "topics": [
+        "3dgs"
+      ]
+    },
+    {
+      "id": "arxiv:2611.27525",
+      "kind": "paper",
+      "date": "2026-11-24",
+      "title": "论文与研究",
+      "summary": "PennyGS 报告在 RTX 3060、Mip-NeRF 360、30,000 次迭代条件下约 6 分 25 秒完成训练，峰值显存低于 2 GB，并在论文选择的 10 种方法中至少快 3.9 倍。方法目标是用采样与调度降低 4K 输入的峰值和迭代成本。",
+      "source": "https://arxiv.org/abs/2611.27525",
+      "anchor": "event-pennygs",
+      "topics": [
+        "spatial-ai"
+      ]
+    },
+    {
+      "id": "arxiv:2611.27719",
+      "kind": "paper",
+      "date": "2026-11-24",
+      "title": "BladeR 把 45 MP 无人机影像与层次化高斯用于风机叶片检测",
+      "summary": "VeilGS 只使用低照度多视图，将观测拆成反照率、光照和空间变化的 gain veil，再通过全局 tone 映射恢复可查看的高斯场景。它不要求成对正常曝光数据，贴近夜间采集的现实约束。",
+      "source": "https://arxiv.org/abs/2611.27719",
+      "anchor": "event-veilgs",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "3dgs"
+      ]
+    },
+    {
+      "id": "docs.spaitial.ai/api/capture-worlds",
+      "anchor": "event-spaitial-multiscan",
+      "kind": "tool",
+      "source": "https://docs.spaitial.ai/api/capture-worlds",
+      "title": "SpAItial 把多扫描合并变成有公开边界的 API",
+      "summary": "Echo-3 现在可在一次请求中接收最多 8 个扫描 ZIP，要求相同分辨率与方向，姿态必须全部提供或全部省略，扫描间还要有足够重叠，总上传量不超过 8 GiB。无法对齐的扫描可能被跳过，却仍按帧计费。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2",
+      "anchor": "event-lichtfeld-blender-beta",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2",
+      "title": "LichtFeld for Blender beta 缩短合成场景到高斯资产的路径",
+      "summary": "插件从 Blender 5.3 场景组织 4,000—10,000 个训练视角，支持 Cycles/EEVEE、可选 Float32 TIFF 深度与法线监督，并通过 CPU shared memory 实时预览训练。任务可恢复，也能导入 portal gallery。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3",
+      "anchor": "event-lichtfeld-0-5-4-3",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3",
+      "title": "LichtFeld Studio 用一个正式版推进 VR、相机与训练链路",
+      "summary": "v0.5.4.3 加入 OpenXR、手部与抓取、碰撞行走、gamepad/sequencer、Slang 用户 shader 和多种视图模式；训练侧默认启用相机校正，新增姿态优化，并让 360° 与鱼眼进入快速 rasterizer。SOG 调色板确定性、跨平台项目、SAM 2.1、文本选区和批量训练也进入同一发布。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/engine/releases/tag/v2.24.3",
+      "anchor": "event-playcanvas-engine-2-24-3",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/engine/releases/tag/v2.24.3",
+      "title": "PlayCanvas Engine 正式修复旧 Apple GPU 的 splat shader 瓶颈",
+      "summary": "v2.24.3 不再对 per-splat 浮点 varying 使用 flat 插值，只让整数 varying 保持 flat。维护者测试指出，旧于 Apple9 的 GPU 曾把 20%—60% GPU 时间花在这条路径上，而其他平台的收益很小；这是明确针对 M1/M2 与 A14—A16 一代设备的正式性能修复。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "reddit.com/r/GaussianSplatting/1y3f52l",
+      "anchor": "event-community-obb-sog",
+      "kind": "news",
+      "source": "https://www.reddit.com/r/GaussianSplatting/comments/1y3f52l/",
+      "title": "社区原型探索把 3D OBB 标签写回 SOG",
+      "summary": "作者演示用网页中的单视图或多视图 2D 框提升 3D 有向包围盒，并尝试把空间标签保存回 SOG。方向值得关注，但没有稳定仓库、许可、格式契约或准确率评估，因此只作为编辑与语义标注的早期信号。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
+      "id": "xgrids.com/resurrection-virtual-scouting",
+      "anchor": "event-xgrids-resurrection",
+      "kind": "news",
+      "source": "https://www.xgrids.com/intl/blogs/case-studies/virtual-location-scouting-previs-resurrection",
+      "title": "《狂野时代》展示 3DGS 如何进入影视跨部门协作",
+      "summary": "XGRIDS 的官方案例称，剧组在 3 天内采集约 50,000 平方米寺庙与码头，并把 LCC Studio 和 Unreal Engine 中的高斯场景用于虚拟勘景、长镜头预演和 VFX 空间对齐。重点不是单次视觉展示，而是同一个空间副本被多个制作环节复用。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31171,24 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-24",
+      "kind": "daily",
+      "title": "Horizon：PlayCanvas 修复旧 Apple GPU 瓶颈，LichtFeld 迎来 VR 与训练大版本",
+      "summary": "PlayCanvas Engine v2.24.3 正式移除旧一代 Apple GPU 上昂贵的浮点 flat 插值；LichtFeld Studio v0.5.4.3 把 OpenXR、碰撞行走、相机模型和训练改进带进正式版。SpAItial 多扫描合并 API 与《狂野时代》生产案例进一步说明，高斯正在进入可采购的重建服务和跨部门影视流程。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/24/",
+      "text": "PlayCanvas Engine 正式修复旧 Apple GPU 的 splat shader 瓶颈\nv2.24.3 不再对 per-splat 浮点 varying 使用 flat 插值，只让整数 varying 保持 flat。维护者测试指出，旧于 Apple9 的 GPU 曾把 20%—60% GPU 时间花在这条路径上，而其他平台的收益很小；这是明确针对 M1/M2 与 A14—A16 一代设备的正式性能修复。\n资产格式、排序与投影没有改变，PLY、SPZ 和 SOG 无需重编码。升级应覆盖 WebGL/WebGPU、旧与新 Apple GPU、非 Apple 对照和视觉一致性；11 月 24 日主干的 WebGPU depth-grab 修复不属于该 tag。\n正式版本 · PR #10112 · 提交\nLichtFeld Studio 用一个正式版推进 VR、相机与训练链路\nv0.5.4.3 加入 OpenXR、手部与抓取、碰撞行走、gamepad/sequencer、Slang 用户 shader 和多种视图模式；训练侧默认启用相机校正，新增姿态优化，并让 360° 与鱼眼进入快速 rasterizer。SOG 调色板确定性、跨平台项目、SAM 2.1、文本选区和批量训练也进入同一发布。\n这是一轮大范围升级，不是单一 UI 小修。GPL 源码可编译，Windows 预构建包另有 portal 条件；现有用户应复制项目后逐项验证相机、收敛、导出、VR 与扩展，不能只看作者报告的 13%—22% 单步加速。\n正式版本与完整说明\nSpAItial 把多扫描合并变成有公开边界的 API\nEcho-3 现在可在一次请求中接收最多 8 个扫描 ZIP，要求相同分辨率与方向，姿态必须全部提供或全部省略，扫描间还要有足够重叠，总上传量不超过 8 GiB。无法对齐的扫描可能被跳过，却仍按帧计费。\n官方价格是每作业 900 credits 加每帧 1 credit，即页面口径下 9 美元加每帧 0.01 美元。团队应先用两段小扫描验证重叠、坐标、失败扣费与 SOG/SPZ 输出，再扩展到多房间或跨楼层。\nAPI 文档 · 计费文档\n《狂野时代》展示 3DGS 如何进入影视跨部门协作\nXGRIDS 的官方案例称，剧组在 3 天内采集约 50,000 平方米寺庙与码头，并把 LCC Studio 和 Unreal Engine 中的高斯场景用于虚拟勘景、长镜头预演和 VFX 空间对齐。重点不是单次视觉展示，而是同一个空间副本被多个制作环节复用。\n事件本身由官方案例确认，但约 1 cm 相对精度是厂商声明，页面没有公开测量流程、误差分布、资产体量或 UE 帧率。它可作为生产组织参考，不能替代项目自己的精度与性能验收。\nXGRIDS 官方案例\nLichtFeld for Blender beta 缩短合成场景到高斯资产的路径\n插件从 Blender 5.3 场景组织 4,000—10,000 个训练视角，支持 Cycles/EEVEE、可选 Float32 TIFF 深度与法线监督，并通过 CPU shared memory 实时预览训练。任务可恢复，也能导入 portal gallery。\nGPL 代码和 beta release 已公开，但当前主要测试平台是 Windows，仍依赖 LichtFeld 后端。建议从小场景验证透明材质、相机覆盖、深度定义、坐标和恢复流程，不应把 beta 当成成熟批处理替代品。\nbeta.2 版本 · 代码仓库\n社区原型探索把 3D OBB 标签写回 SOG\n作者演示用网页中的单视图或多视图 2D 框提升 3D 有向包围盒，并尝试把空间标签保存回 SOG。方向值得关注，但没有稳定仓库、许可、格式契约或准确率评估，因此只作为编辑与语义标注的早期信号。\n社区原帖\nPennyGS 把全分辨率 4K 训练压到消费级显存口径\nPennyGS 报告在 RTX 3060、Mip-NeRF 360、30,000 次迭代条件下约 6 分 25 秒完成训练，峰值显存低于 2 GB，并在论文选择的 10 种方法中至少快 3.9 倍。方法目标是用采样与调度降低 4K 输入的峰值和迭代成本。\n本期没有找到官方代码或权重，GPU、4K 输入、30k 迭代、数据集和质量指标不能从数字中剥离。它值得优先复现，但还不是可下载工具。\n论文原文\nBladeR 把高分辨率 UAV、高斯重建与风机巡检相结合\nBladeR 面向 45 MP 无人机影像，用 GPS/IMU、形状先验和层次化场景组织辅助定位与高斯重建，再进行叶片缺陷定位。这让高分辨率输入、细长重复结构和工业约束进入同一研究管线。\n论文列为 VISAPP 2026 工作，但没有核实到代码、权重、公开数据集或独立工业验收。它应进入能源巡检观察清单，不应按现成检测系统理解。\n论文原文\nVeilGS 面向没有正常曝光对照的低照度采集\nVeilGS 只使用低照度多视图，将观测拆成反照率、光照和空间变化的 gain veil，再通过全局 tone 映射恢复可查看的高斯场景。它不要求成对正常曝光数据，贴近夜间采集的现实约束。\n项目页有方法和结果，但没有核实到训练代码、权重或第三方复现。噪声、白平衡与动态范围可能被错误分配到材质或光照，必须等代码与 RAW/曝光条件再判断。\n论文原文 · 项目页\nEAST 连接事件相机、SDF 与 Gaussian surface\nEAST 用事件相机的高时间分辨率信号约束 SDF 表面，再让 Gaussian 承担可微渲染和外观，目标是高速运动、运动模糊和普通帧曝光不足时的几何恢复。\n目前只有论文条目，没有代码、权重、事件相机型号、同步或标定配置。硬件条件会显著影响可复现性，因此短期只适合方法跟踪。\n论文原文"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32489,162 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "arxiv:2611.27224",
+      "kind": "paper",
+      "title": "VeilGS 在没有成对正常曝光数据时分解低照度场景",
+      "summary": "EAST 用事件相机的高时间分辨率信号约束 SDF 表面，再让 Gaussian 承担可微渲染和外观，目标是高速运动、运动模糊和普通帧曝光不足时的几何恢复。",
+      "date": "2026-11-24",
+      "topics": [],
+      "url": "/daily/2026/11/24/#event-east",
+      "text": "VeilGS 在没有成对正常曝光数据时分解低照度场景 EAST 用事件相机的高时间分辨率信号约束 SDF 表面，再让 Gaussian 承担可微渲染和外观，目标是高速运动、运动模糊和普通帧曝光不足时的几何恢复。 https://arxiv.org/abs/2611.27224 EAST 连接事件相机、SDF 与 Gaussian surface ## EAST 连接事件相机、SDF 与 Gaussian surface\n\nEAST 用事件相机的高时间分辨率信号约束 SDF 表面，再让 Gaussian 承担可微渲染和外观，目标是高速运动、运动模糊和普通帧曝光不足时的几何恢复。\n\n目前只有论文条目，没有代码、权重、事件相机型号、同步或标定配置。硬件条件会显著影响可复现性，因此短期只适合方法跟踪。\n\n[论文原文](https://arxiv.org/abs/2611.27224)"
+    },
+    {
+      "id": "arxiv:2611.27407",
+      "kind": "paper",
+      "title": "PennyGS 用低于 2 GB 峰值显存训练全分辨率 4K 场景",
+      "summary": "BladeR 面向 45 MP 无人机影像，用 GPS/IMU、形状先验和层次化场景组织辅助定位与高斯重建，再进行叶片缺陷定位。这让高分辨率输入、细长重复结构和工业约束进入同一研究管线。",
+      "date": "2026-11-24",
+      "topics": [
+        "3dgs"
+      ],
+      "url": "/daily/2026/11/24/#event-blader",
+      "text": "PennyGS 用低于 2 GB 峰值显存训练全分辨率 4K 场景 BladeR 面向 45 MP 无人机影像，用 GPS/IMU、形状先验和层次化场景组织辅助定位与高斯重建，再进行叶片缺陷定位。这让高分辨率输入、细长重复结构和工业约束进入同一研究管线。 https://arxiv.org/abs/2611.27407 BladeR 把高分辨率 UAV、高斯重建与风机巡检相结合 ## BladeR 把高分辨率 UAV、高斯重建与风机巡检相结合\n\nBladeR 面向 45 MP 无人机影像，用 GPS/IMU、形状先验和层次化场景组织辅助定位与高斯重建，再进行叶片缺陷定位。这让高分辨率输入、细长重复结构和工业约束进入同一研究管线。\n\n论文列为 VISAPP 2026 工作，但没有核实到代码、权重、公开数据集或独立工业验收。它应进入能源巡检观察清单，不应按现成检测系统理解。\n\n[论文原文](https://arxiv.org/abs/2611.27407)"
+    },
+    {
+      "id": "arxiv:2611.27525",
+      "kind": "paper",
+      "title": "论文与研究",
+      "summary": "PennyGS 报告在 RTX 3060、Mip-NeRF 360、30,000 次迭代条件下约 6 分 25 秒完成训练，峰值显存低于 2 GB，并在论文选择的 10 种方法中至少快 3.9 倍。方法目标是用采样与调度降低 4K 输入的峰值和迭代成本。",
+      "date": "2026-11-24",
+      "topics": [
+        "spatial-ai"
+      ],
+      "url": "/daily/2026/11/24/#event-pennygs",
+      "text": "论文与研究 PennyGS 报告在 RTX 3060、Mip-NeRF 360、30,000 次迭代条件下约 6 分 25 秒完成训练，峰值显存低于 2 GB，并在论文选择的 10 种方法中至少快 3.9 倍。方法目标是用采样与调度降低 4K 输入的峰值和迭代成本。 https://arxiv.org/abs/2611.27525 PennyGS 把全分辨率 4K 训练压到消费级显存口径 ## PennyGS 把全分辨率 4K 训练压到消费级显存口径\n\nPennyGS 报告在 RTX 3060、Mip-NeRF 360、30,000 次迭代条件下约 6 分 25 秒完成训练，峰值显存低于 2 GB，并在论文选择的 10 种方法中至少快 3.9 倍。方法目标是用采样与调度降低 4K 输入的峰值和迭代成本。\n\n本期没有找到官方代码或权重，GPU、4K 输入、30k 迭代、数据集和质量指标不能从数字中剥离。它值得优先复现，但还不是可下载工具。\n\n[论文原文](https://arxiv.org/abs/2611.27525)"
+    },
+    {
+      "id": "arxiv:2611.27719",
+      "kind": "paper",
+      "title": "BladeR 把 45 MP 无人机影像与层次化高斯用于风机叶片检测",
+      "summary": "VeilGS 只使用低照度多视图，将观测拆成反照率、光照和空间变化的 gain veil，再通过全局 tone 映射恢复可查看的高斯场景。它不要求成对正常曝光数据，贴近夜间采集的现实约束。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "3dgs"
+      ],
+      "url": "/daily/2026/11/24/#event-veilgs",
+      "text": "BladeR 把 45 MP 无人机影像与层次化高斯用于风机叶片检测 VeilGS 只使用低照度多视图，将观测拆成反照率、光照和空间变化的 gain veil，再通过全局 tone 映射恢复可查看的高斯场景。它不要求成对正常曝光数据，贴近夜间采集的现实约束。 https://arxiv.org/abs/2611.27719 VeilGS 面向没有正常曝光对照的低照度采集 ## VeilGS 面向没有正常曝光对照的低照度采集\n\nVeilGS 只使用低照度多视图，将观测拆成反照率、光照和空间变化的 gain veil，再通过全局 tone 映射恢复可查看的高斯场景。它不要求成对正常曝光数据，贴近夜间采集的现实约束。\n\n项目页有方法和结果，但没有核实到训练代码、权重或第三方复现。噪声、白平衡与动态范围可能被错误分配到材质或光照，必须等代码与 RAW/曝光条件再判断。\n\n[论文原文](https://arxiv.org/abs/2611.27719) · [项目页](https://errorlogic1211.github.io/VeilGS/)"
+    },
+    {
+      "id": "docs.spaitial.ai/api/capture-worlds",
+      "kind": "tool",
+      "title": "SpAItial 把多扫描合并变成有公开边界的 API",
+      "summary": "Echo-3 现在可在一次请求中接收最多 8 个扫描 ZIP，要求相同分辨率与方向，姿态必须全部提供或全部省略，扫描间还要有足够重叠，总上传量不超过 8 GiB。无法对齐的扫描可能被跳过，却仍按帧计费。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/24/#event-spaitial-multiscan",
+      "text": "SpAItial 把多扫描合并变成有公开边界的 API Echo-3 现在可在一次请求中接收最多 8 个扫描 ZIP，要求相同分辨率与方向，姿态必须全部提供或全部省略，扫描间还要有足够重叠，总上传量不超过 8 GiB。无法对齐的扫描可能被跳过，却仍按帧计费。 https://docs.spaitial.ai/api/capture-worlds SpAItial 把多扫描合并变成有公开边界的 API ## SpAItial 把多扫描合并变成有公开边界的 API\n\nEcho-3 现在可在一次请求中接收最多 8 个扫描 ZIP，要求相同分辨率与方向，姿态必须全部提供或全部省略，扫描间还要有足够重叠，总上传量不超过 8 GiB。无法对齐的扫描可能被跳过，却仍按帧计费。\n\n官方价格是每作业 900 credits 加每帧 1 credit，即页面口径下 9 美元加每帧 0.01 美元。团队应先用两段小扫描验证重叠、坐标、失败扣费与 SOG/SPZ 输出，再扩展到多房间或跨楼层。\n\n[API 文档](https://docs.spaitial.ai/api/capture-worlds) · [计费文档](https://docs.spaitial.ai/billing/credits-and-plans)"
+    },
+    {
+      "id": "github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2",
+      "kind": "tool",
+      "title": "LichtFeld for Blender beta 缩短合成场景到高斯资产的路径",
+      "summary": "插件从 Blender 5.3 场景组织 4,000—10,000 个训练视角，支持 Cycles/EEVEE、可选 Float32 TIFF 深度与法线监督，并通过 CPU shared memory 实时预览训练。任务可恢复，也能导入 portal gallery。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/24/#event-lichtfeld-blender-beta",
+      "text": "LichtFeld for Blender beta 缩短合成场景到高斯资产的路径 插件从 Blender 5.3 场景组织 4,000—10,000 个训练视角，支持 Cycles/EEVEE、可选 Float32 TIFF 深度与法线监督，并通过 CPU shared memory 实时预览训练。任务可恢复，也能导入 portal gallery。 https://github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2 LichtFeld for Blender beta 缩短合成场景到高斯资产的路径 ## LichtFeld for Blender beta 缩短合成场景到高斯资产的路径\n\n插件从 Blender 5.3 场景组织 4,000—10,000 个训练视角，支持 Cycles/EEVEE、可选 Float32 TIFF 深度与法线监督，并通过 CPU shared memory 实时预览训练。任务可恢复，也能导入 portal gallery。\n\nGPL 代码和 beta release 已公开，但当前主要测试平台是 Windows，仍依赖 LichtFeld 后端。建议从小场景验证透明材质、相机覆盖、深度定义、坐标和恢复流程，不应把 beta 当成成熟批处理替代品。\n\n[beta.2 版本](https://github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2) · [代码仓库](https://github.com/MrNeRF/lichtfeld-blender-plugin)"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3",
+      "kind": "tool",
+      "title": "LichtFeld Studio 用一个正式版推进 VR、相机与训练链路",
+      "summary": "v0.5.4.3 加入 OpenXR、手部与抓取、碰撞行走、gamepad/sequencer、Slang 用户 shader 和多种视图模式；训练侧默认启用相机校正，新增姿态优化，并让 360° 与鱼眼进入快速 rasterizer。SOG 调色板确定性、跨平台项目、SAM 2.1、文本选区和批量训练也进入同一发布。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/24/#event-lichtfeld-0-5-4-3",
+      "text": "LichtFeld Studio 用一个正式版推进 VR、相机与训练链路 v0.5.4.3 加入 OpenXR、手部与抓取、碰撞行走、gamepad/sequencer、Slang 用户 shader 和多种视图模式；训练侧默认启用相机校正，新增姿态优化，并让 360° 与鱼眼进入快速 rasterizer。SOG 调色板确定性、跨平台项目、SAM 2.1、文本选区和批量训练也进入同一发布。 https://github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3 LichtFeld Studio 用一个正式版推进 VR、相机与训练链路 ## LichtFeld Studio 用一个正式版推进 VR、相机与训练链路\n\nv0.5.4.3 加入 OpenXR、手部与抓取、碰撞行走、gamepad/sequencer、Slang 用户 shader 和多种视图模式；训练侧默认启用相机校正，新增姿态优化，并让 360° 与鱼眼进入快速 rasterizer。SOG 调色板确定性、跨平台项目、SAM 2.1、文本选区和批量训练也进入同一发布。\n\n这是一轮大范围升级，不是单一 UI 小修。GPL 源码可编译，Windows 预构建包另有 portal 条件；现有用户应复制项目后逐项验证相机、收敛、导出、VR 与扩展，不能只看作者报告的 13%—22% 单步加速。\n\n[正式版本与完整说明](https://github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3)"
+    },
+    {
+      "id": "github.com/playcanvas/engine/releases/tag/v2.24.3",
+      "kind": "tool",
+      "title": "PlayCanvas Engine 正式修复旧 Apple GPU 的 splat shader 瓶颈",
+      "summary": "v2.24.3 不再对 per-splat 浮点 varying 使用 flat 插值，只让整数 varying 保持 flat。维护者测试指出，旧于 Apple9 的 GPU 曾把 20%—60% GPU 时间花在这条路径上，而其他平台的收益很小；这是明确针对 M1/M2 与 A14—A16 一代设备的正式性能修复。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/24/#event-playcanvas-engine-2-24-3",
+      "text": "PlayCanvas Engine 正式修复旧 Apple GPU 的 splat shader 瓶颈 v2.24.3 不再对 per-splat 浮点 varying 使用 flat 插值，只让整数 varying 保持 flat。维护者测试指出，旧于 Apple9 的 GPU 曾把 20%—60% GPU 时间花在这条路径上，而其他平台的收益很小；这是明确针对 M1/M2 与 A14—A16 一代设备的正式性能修复。 https://github.com/playcanvas/engine/releases/tag/v2.24.3 PlayCanvas Engine 正式修复旧 Apple GPU 的 splat shader 瓶颈 ## PlayCanvas Engine 正式修复旧 Apple GPU 的 splat shader 瓶颈\n\nv2.24.3 不再对 per-splat 浮点 varying 使用 `flat` 插值，只让整数 varying 保持 flat。维护者测试指出，旧于 Apple9 的 GPU 曾把 20%—60% GPU 时间花在这条路径上，而其他平台的收益很小；这是明确针对 M1/M2 与 A14—A16 一代设备的正式性能修复。\n\n资产格式、排序与投影没有改变，PLY、SPZ 和 SOG 无需重编码。升级应覆盖 WebGL/WebGPU、旧与新 Apple GPU、非 Apple 对照和视觉一致性；11 月 24 日主干的 WebGPU depth-grab 修复不属于该 tag。\n\n[正式版本](https://github.com/playcanvas/engine/releases/tag/v2.24.3) · [PR #10112](https://github.com/playcanvas/engine/pull/10112) · [提交](https://github.com/playcanvas/engine/commit/3a9f6fa304c302e38746921d81bf9444634db4ac)"
+    },
+    {
+      "id": "reddit.com/r/GaussianSplatting/1y3f52l",
+      "kind": "news",
+      "title": "社区原型探索把 3D OBB 标签写回 SOG",
+      "summary": "作者演示用网页中的单视图或多视图 2D 框提升 3D 有向包围盒，并尝试把空间标签保存回 SOG。方向值得关注，但没有稳定仓库、许可、格式契约或准确率评估，因此只作为编辑与语义标注的早期信号。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/24/#event-community-obb-sog",
+      "text": "社区原型探索把 3D OBB 标签写回 SOG 作者演示用网页中的单视图或多视图 2D 框提升 3D 有向包围盒，并尝试把空间标签保存回 SOG。方向值得关注，但没有稳定仓库、许可、格式契约或准确率评估，因此只作为编辑与语义标注的早期信号。 https://www.reddit.com/r/GaussianSplatting/comments/1y3f52l/ 社区原型探索把 3D OBB 标签写回 SOG ## 社区原型探索把 3D OBB 标签写回 SOG\n\n作者演示用网页中的单视图或多视图 2D 框提升 3D 有向包围盒，并尝试把空间标签保存回 SOG。方向值得关注，但没有稳定仓库、许可、格式契约或准确率评估，因此只作为编辑与语义标注的早期信号。\n\n[社区原帖](https://www.reddit.com/r/GaussianSplatting/comments/1y3f52l/)"
+    },
+    {
+      "id": "xgrids.com/resurrection-virtual-scouting",
+      "kind": "news",
+      "title": "《狂野时代》展示 3DGS 如何进入影视跨部门协作",
+      "summary": "XGRIDS 的官方案例称，剧组在 3 天内采集约 50,000 平方米寺庙与码头，并把 LCC Studio 和 Unreal Engine 中的高斯场景用于虚拟勘景、长镜头预演和 VFX 空间对齐。重点不是单次视觉展示，而是同一个空间副本被多个制作环节复用。",
+      "date": "2026-11-24",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "webgpu",
+        "formats"
+      ],
+      "url": "/daily/2026/11/24/#event-xgrids-resurrection",
+      "text": "《狂野时代》展示 3DGS 如何进入影视跨部门协作 XGRIDS 的官方案例称，剧组在 3 天内采集约 50,000 平方米寺庙与码头，并把 LCC Studio 和 Unreal Engine 中的高斯场景用于虚拟勘景、长镜头预演和 VFX 空间对齐。重点不是单次视觉展示，而是同一个空间副本被多个制作环节复用。 https://www.xgrids.com/intl/blogs/case-studies/virtual-location-scouting-previs-resurrection 《狂野时代》展示 3DGS 如何进入影视跨部门协作 ## 《狂野时代》展示 3DGS 如何进入影视跨部门协作\n\nXGRIDS 的官方案例称，剧组在 3 天内采集约 50,000 平方米寺庙与码头，并把 LCC Studio 和 Unreal Engine 中的高斯场景用于虚拟勘景、长镜头预演和 VFX 空间对齐。重点不是单次视觉展示，而是同一个空间副本被多个制作环节复用。\n\n事件本身由官方案例确认，但约 1 cm 相对精度是厂商声明，页面没有公开测量流程、误差分布、资产体量或 UE 帧率。它可作为生产组织参考，不能替代项目自己的精度与性能验收。\n\n[XGRIDS 官方案例](https://www.xgrids.com/intl/blogs/case-studies/virtual-location-scouting-previs-resurrection)"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",

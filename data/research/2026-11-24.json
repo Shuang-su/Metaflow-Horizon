@@ -1,0 +1,182 @@
+{
+  "date": "2026-11-24",
+  "mode": "scheduled",
+  "window": {
+    "start": "2026-11-15T08:28:00+08:00",
+    "end": "2026-11-24T08:56:00+08:00",
+    "overlapStart": "2026-11-17T00:00:00+08:00",
+    "note": "从上次公开读回成功窗口继续，并重查最近 7 天；11 月 17—23 日的独立待合并稿件用于去重，不冒充 main 已发布记录。"
+  },
+  "checks": [
+    {
+      "sourceId": "radiancefields",
+      "status": "candidates",
+      "checkedAt": "2026-11-24T08:12:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"],
+      "candidateIds": [
+        "radiancefields.com/spaitial-echo-3-api-merges-up-to-eight-scans",
+        "radiancefields.com/bi-gans-resurrection-crew-planned-its-long-take-in-3dgs",
+        "radiancefields.com/lichtfeld-for-blender-trains-splats-from-blender-scenes"
+      ],
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "candidates", "checkedAt": "2026-11-24T08:10:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "checked-no-new", "checkedAt": "2026-11-24T08:12:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official",
+      "status": "candidates",
+      "checkedAt": "2026-11-24T08:18:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": [
+        "github.com/playcanvas/engine/releases/tag/v2.24.3",
+        "docs.spaitial.ai/api/capture-worlds",
+        "xgrids.com/resurrection-virtual-scouting"
+      ],
+      "gap": "Blender News 返回 HTTP 403；LichtFeld Blender 插件改由其 GitHub release 核验。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-24T08:16:00+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-24T08:18:00+08:00", "gap": "HTTP 403，无法直接读取新闻列表。"}
+      ]
+    },
+    {
+      "sourceId": "x",
+      "status": "unavailable",
+      "checkedAt": "2026-11-24T08:23:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "gap": "四个登记账号均返回 403、禁用错误或只有登录外壳；没有把搜索摘要或失败页面记成无新增，候选改由作者官网、GitHub 与官方文档核验。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-24T08:20:00+08:00", "gap": "返回访问限制或登录外壳。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-24T08:21:00+08:00", "gap": "返回访问限制或登录外壳。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-24T08:22:00+08:00", "gap": "返回访问限制或登录外壳。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-24T08:23:00+08:00", "gap": "返回访问限制或登录外壳。"}
+      ]
+    },
+    {
+      "sourceId": "research",
+      "status": "candidates",
+      "checkedAt": "2026-11-24T08:34:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"],
+      "candidateIds": ["arxiv:2611.27525", "arxiv:2611.27407", "arxiv:2611.27719", "arxiv:2611.27224"],
+      "gap": "arXiv export API 未能直接读取；候选改由各自 arXiv 页面和作者项目页核验。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-24T08:29:00+08:00", "gap": "API 端点未能直接读取。"},
+        {"url": "https://huggingface.co/papers", "status": "checked-no-new", "checkedAt": "2026-11-24T08:34:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github",
+      "status": "candidates",
+      "checkedAt": "2026-11-24T08:43:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": [
+        "github.com/playcanvas/engine/releases/tag/v2.24.3",
+        "github.com/playcanvas/engine/pull/10126",
+        "github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3",
+        "github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2"
+      ],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "checked-no-new", "checkedAt": "2026-11-24T08:38:00+08:00"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "candidates", "checkedAt": "2026-11-24T08:43:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "community",
+      "status": "candidates",
+      "checkedAt": "2026-11-24T08:50:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": ["reddit.com/r/GaussianSplatting/1y3f52l", "reddit.com/r/GaussianSplatting/1y3fymg", "chinese-community-no-primary-2026-11-24"],
+      "gap": "B 站首页只返回浏览器兼容提示；少数派可读，知乎、CSDN 与掘金的定向搜索未取得同时具备新日期、原始链接与实质增量的候选。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "candidates", "checkedAt": "2026-11-24T08:46:00+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "unavailable", "checkedAt": "2026-11-24T08:48:00+08:00", "gap": "只返回浏览器版本过旧提示。"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-24T08:50:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "github.com/playcanvas/engine/releases/tag/v2.24.3",
+      "title": "PlayCanvas Engine v2.24.3 正式移除旧 Apple GPU 上昂贵的浮点 flat 插值",
+      "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "important", "disposition": "included",
+      "reason": "正式版本纳入 per-splat shader 插值修复，维护者测试显示 Apple9 之前 GPU 的显著 GPU 时间问题被移除。",
+      "sources": ["https://github.com/playcanvas/engine/releases/tag/v2.24.3", "https://github.com/playcanvas/engine/pull/10112", "https://github.com/playcanvas/engine/commit/3a9f6fa304c302e38746921d81bf9444634db4ac"],
+      "eventId": "github.com/playcanvas/engine/releases/tag/v2.24.3"
+    },
+    {
+      "id": "github.com/playcanvas/engine/pull/10126",
+      "title": "PlayCanvas 主干在 v2.24.3 之后继续修复 WebGPU depth grab",
+      "eventDate": "2026-11-24", "reportDate": "2026-11-24", "importance": "standard", "disposition": "merged",
+      "reason": "该修复影响 WebGPU 深度读取，但尚未进入 v2.24.3；合并进正式版事件用于清楚标注版本边界。",
+      "sources": ["https://github.com/playcanvas/engine/pull/10126"],
+      "eventId": "github.com/playcanvas/engine/releases/tag/v2.24.3"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3",
+      "title": "LichtFeld Studio v0.5.4.3 发布 VR、碰撞行走、相机模型与训练改进",
+      "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "important", "disposition": "included",
+      "reason": "正式 release 同时改变交互、训练默认值、相机模型、扩展接口和 SOG 输出，值得现有用户完整回归。",
+      "sources": ["https://github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3", "https://lichtfeld.io/"],
+      "eventId": "github.com/MrNeRF/LichtFeld-Studio/releases/tag/v0.5.4.3"
+    },
+    {
+      "id": "docs.spaitial.ai/api/capture-worlds",
+      "title": "SpAItial Echo-3 API 支持合并最多 8 次扫描",
+      "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "important", "disposition": "included",
+      "reason": "官方 API 明确了多扫描上传、姿态、重叠、8 GiB 与计费契约，直接改变大空间采集工作流。",
+      "sources": ["https://docs.spaitial.ai/api/capture-worlds", "https://docs.spaitial.ai/billing/credits-and-plans"],
+      "eventId": "docs.spaitial.ai/api/capture-worlds"
+    },
+    {
+      "id": "xgrids.com/resurrection-virtual-scouting",
+      "title": "电影《狂野时代》把 3DGS 用于虚拟勘景、预演与 VFX 空间基准",
+      "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "important", "disposition": "included",
+      "reason": "官方案例呈现 3DGS 从采集进入影视跨部门协作的真实生产路径，但性能和精度仍按厂商口径处理。",
+      "sources": ["https://www.xgrids.com/intl/blogs/case-studies/virtual-location-scouting-previs-resurrection"],
+      "eventId": "xgrids.com/resurrection-virtual-scouting"
+    },
+    {
+      "id": "github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2",
+      "title": "LichtFeld for Blender beta 把合成场景训练任务放进 Blender",
+      "eventDate": "2026-11-20", "reportDate": "2026-11-24", "importance": "important", "disposition": "included",
+      "reason": "7 日重查补收；beta 已提供 release、GPL 代码、相机生成、可选深度/法线监督与实时预览。",
+      "sources": ["https://github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2", "https://github.com/MrNeRF/lichtfeld-blender-plugin"],
+      "eventId": "github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2"
+    },
+    {
+      "id": "reddit.com/r/GaussianSplatting/1y3f52l",
+      "title": "社区原型尝试把网页 2D 框提升成 3D OBB 并写回 SOG",
+      "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "standard", "disposition": "included",
+      "reason": "只作为语义标注产品方向的社区信号，正文明确缺少代码、许可和准确率验证。",
+      "sources": ["https://www.reddit.com/r/GaussianSplatting/comments/1y3f52l/"],
+      "eventId": "reddit.com/r/GaussianSplatting/1y3f52l"
+    },
+    {
+      "id": "arxiv:2611.27525", "title": "PennyGS 报告低于 2 GB 峰值显存的全分辨率 4K 训练", "eventDate": "2026-11-20", "reportDate": "2026-11-24", "importance": "important", "disposition": "included", "reason": "迟到索引补收；训练资源口径可能影响消费级 GPU 工作流，但未找到官方代码。", "sources": ["https://arxiv.org/abs/2611.27525"], "eventId": "arxiv:2611.27525"
+    },
+    {
+      "id": "arxiv:2611.27407", "title": "BladeR 用层次化高斯处理 45 MP 风机叶片巡检影像", "eventDate": "2026-11-20", "reportDate": "2026-11-24", "importance": "standard", "disposition": "included", "reason": "将高分辨率 UAV、GPS/IMU、形状先验与工业缺陷定位接入同一研究管线。", "sources": ["https://arxiv.org/abs/2611.27407"], "eventId": "arxiv:2611.27407"
+    },
+    {
+      "id": "arxiv:2611.27719", "title": "VeilGS 在无成对正常曝光数据时分解低照度场景", "eventDate": "2026-11-20", "reportDate": "2026-11-24", "importance": "standard", "disposition": "included", "reason": "低照度分解针对真实夜间采集约束，但目前只有论文与项目页。", "sources": ["https://arxiv.org/abs/2611.27719", "https://errorlogic1211.github.io/VeilGS/"], "eventId": "arxiv:2611.27719"
+    },
+    {
+      "id": "arxiv:2611.27224", "title": "EAST 把事件相机 SDF 与 Gaussian surface 相结合", "eventDate": "2026-11-20", "reportDate": "2026-11-24", "importance": "standard", "disposition": "included", "reason": "事件视觉为高速运动和低曝光表面重建提供新路线，但没有核实到代码和硬件配置。", "sources": ["https://arxiv.org/abs/2611.27224"], "eventId": "arxiv:2611.27224"
+    },
+    {
+      "id": "radiancefields.com/spaitial-echo-3-api-merges-up-to-eight-scans", "title": "Radiance Fields 发现 SpAItial 多扫描合并更新", "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "standard", "disposition": "merged", "reason": "保留媒体发现链，事实与计费改由 SpAItial 官方文档核验。", "sources": ["https://radiancefields.com/spaitial-echo-3-api-merges-up-to-eight-scans", "https://docs.spaitial.ai/api/capture-worlds"], "eventId": "docs.spaitial.ai/api/capture-worlds"
+    },
+    {
+      "id": "radiancefields.com/bi-gans-resurrection-crew-planned-its-long-take-in-3dgs", "title": "Radiance Fields 发现《狂野时代》3DGS 生产案例", "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "standard", "disposition": "merged", "reason": "保留发现链接，生产事实和限制回到 XGRIDS 官方案例。", "sources": ["https://radiancefields.com/bi-gans-resurrection-crew-planned-its-long-take-in-3dgs", "https://www.xgrids.com/intl/blogs/case-studies/virtual-location-scouting-previs-resurrection"], "eventId": "xgrids.com/resurrection-virtual-scouting"
+    },
+    {
+      "id": "radiancefields.com/lichtfeld-for-blender-trains-splats-from-blender-scenes", "title": "Radiance Fields 补充介绍 LichtFeld Blender beta", "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "standard", "disposition": "merged", "reason": "媒体在 11 月 23 日迟到索引，版本和依赖事实由 GitHub release 核验。", "sources": ["https://radiancefields.com/lichtfeld-for-blender-trains-splats-from-blender-scenes", "https://github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2"], "eventId": "github.com/MrNeRF/lichtfeld-blender-plugin/releases/tag/v0.1.0-beta.2"
+    },
+    {
+      "id": "reddit.com/r/GaussianSplatting/1y3fymg", "title": "社区提出对低质量扫描进行 AI 补洞的技能设想", "eventDate": "2026-11-23", "reportDate": "2026-11-24", "importance": "standard", "disposition": "excluded", "reason": "只有概念帖子，没有代码、数据、前后对照或原始项目。", "sources": ["https://www.reddit.com/r/GaussianSplatting/comments/1y3fymg/"], "exclusionEvidence": "帖子没有提供可下载实现、可复现实验、许可或能区分几何补洞与纹理生成的证据。"
+    },
+    {
+      "id": "chinese-community-no-primary-2026-11-24", "title": "中文定向搜索出现若干旧教程与二次转述", "eventDate": "2026-11-24", "reportDate": "2026-11-24", "importance": "standard", "disposition": "excluded", "reason": "没有取得同时具备新日期、原始链接和实质新增的候选。", "sources": ["https://www.bilibili.com/", "https://sspai.com/"], "exclusionEvidence": "B 站入口不可直接读取；少数派及知乎、CSDN、掘金定向搜索没有找到可回溯到当天一手发布、提交或版本的新增事实。"
+    }
+  ]
+}
