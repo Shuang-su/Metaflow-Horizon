@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-25",
+  "mode": "scheduled",
+  "window": {"start": "2026-11-15T08:28:00+08:00", "end": "2026-11-25T08:41:30+08:00"},
+  "overlapStart": "2026-11-18T00:00:00+08:00",
+  "reviewedAt": "2026-11-25T08:41:30+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields", "status": "candidates", "checkedAt": "2026-11-25T08:08:00+08:00",
+      "urls": ["https://radiancefields.com/", "https://radiancefields.com/platforms"],
+      "candidateIds": ["vizrt-viz-engine-5.6", "opensplat4d-v0.3.0", "xangle-orbit-v26.11.23", "maxsplat-studio-v8.5.4"],
+      "urlResults": [
+        {"url": "https://radiancefields.com/", "status": "candidates", "checkedAt": "2026-11-25T08:07:00+08:00"},
+        {"url": "https://radiancefields.com/platforms", "status": "candidates", "checkedAt": "2026-11-25T08:08:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "official", "status": "candidates", "checkedAt": "2026-11-25T08:13:00+08:00",
+      "urls": ["https://blog.playcanvas.com/", "https://www.blender.org/news/"],
+      "candidateIds": ["vizrt-viz-engine-5.6", "xangle-orbit-v26.11.23", "maxsplat-studio-v8.5.4"],
+      "gap": "Blender News 返回 HTTP 403；PlayCanvas 博客可读但无晚于已归档内容，相关主干变化由官方 GitHub PR 与提交核验。",
+      "urlResults": [
+        {"url": "https://blog.playcanvas.com/", "status": "checked-no-new", "checkedAt": "2026-11-25T08:12:00+08:00"},
+        {"url": "https://www.blender.org/news/", "status": "unavailable", "checkedAt": "2026-11-25T08:13:00+08:00", "gap": "HTTP 403，未取得可验证正文。"}
+      ]
+    },
+    {
+      "sourceId": "x", "status": "unavailable", "checkedAt": "2026-11-25T08:18:00+08:00",
+      "urls": ["https://x.com/radiancefields", "https://x.com/playcanvas", "https://x.com/willeastcott", "https://x.com/valigurskym"],
+      "candidateIds": [],
+      "gap": "4 个登记账号均返回 403 或禁用错误，未取得可验证原帖；候选改由作者官网、项目页与 GitHub 一手记录核验。",
+      "urlResults": [
+        {"url": "https://x.com/radiancefields", "status": "unavailable", "checkedAt": "2026-11-25T08:16:30+08:00", "gap": "DisabledError，无可验证原帖。"},
+        {"url": "https://x.com/playcanvas", "status": "unavailable", "checkedAt": "2026-11-25T08:17:00+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/willeastcott", "status": "unavailable", "checkedAt": "2026-11-25T08:17:30+08:00", "gap": "HTTP 403，无可验证原帖。"},
+        {"url": "https://x.com/valigurskym", "status": "unavailable", "checkedAt": "2026-11-25T08:18:00+08:00", "gap": "DisabledError，无可验证原帖。"}
+      ]
+    },
+    {
+      "sourceId": "research", "status": "candidates", "checkedAt": "2026-11-25T08:28:00+08:00",
+      "urls": ["https://export.arxiv.org/api/query", "https://huggingface.co/papers"],
+      "candidateIds": ["arxiv-2611.31023", "arxiv-2611.28792", "arxiv-2611.30102", "arxiv-2611.29236", "arxiv-2611.30351", "arxiv-2611.28636", "arxiv-2611.29282", "arxiv-2611.29388", "arxiv-2611.30283", "arxiv-2611.28111", "arxiv-2611.28802", "arxiv-2611.30602-reindex"],
+      "gap": "arXiv export API 未能直接读取；用 Hugging Face Papers、arXiv 原页、作者项目页与 GitHub 交叉核验。",
+      "urlResults": [
+        {"url": "https://export.arxiv.org/api/query", "status": "unavailable", "checkedAt": "2026-11-25T08:20:00+08:00", "gap": "API 端点未能直接读取。"},
+        {"url": "https://huggingface.co/papers", "status": "candidates", "checkedAt": "2026-11-25T08:21:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "github", "status": "candidates", "checkedAt": "2026-11-25T08:34:00+08:00",
+      "urls": ["https://github.com/playcanvas/supersplat", "https://github.com/MrNeRF/LichtFeld-Studio"],
+      "candidateIds": ["opensplat4d-v0.3.0", "playcanvas-engine-pr-10013", "spirula-dataset-gui-2026-11-25", "arxiv-2611.31023", "arxiv-2611.28792", "arxiv-2611.28636"],
+      "urlResults": [
+        {"url": "https://github.com/playcanvas/supersplat", "status": "checked-no-new", "checkedAt": "2026-11-25T08:32:00+08:00"},
+        {"url": "https://github.com/MrNeRF/LichtFeld-Studio", "status": "checked-no-new", "checkedAt": "2026-11-25T08:33:00+08:00"}
+      ]
+    },
+    {
+      "sourceId": "community", "status": "unavailable", "checkedAt": "2026-11-25T08:39:00+08:00",
+      "urls": ["https://www.reddit.com/r/GaussianSplatting/", "https://www.bilibili.com/", "https://sspai.com/"],
+      "candidateIds": [],
+      "gap": "Reddit 可读但当前结果缺少稳定日期与可独立核验的新事实；B 站只返回浏览器兼容外壳；少数派可读但无符合本期条件的候选。",
+      "urlResults": [
+        {"url": "https://www.reddit.com/r/GaussianSplatting/", "status": "checked-no-new", "checkedAt": "2026-11-25T08:37:00+08:00"},
+        {"url": "https://www.bilibili.com/", "status": "unavailable", "checkedAt": "2026-11-25T08:38:00+08:00", "gap": "仅返回浏览器版本过旧提示，无法核实视频与日期。"},
+        {"url": "https://sspai.com/", "status": "checked-no-new", "checkedAt": "2026-11-25T08:39:00+08:00"}
+      ]
+    }
+  ],
+  "candidates": [
+    {"id":"vizrt-viz-engine-5.6","title":"Viz Engine 5.6 原生支持 Gaussian Splatting","eventDate":"2026-11-19","reportDate":"2026-11-25","importance":"important","disposition":"included","reason":"迟到索引补收；正式商业广播引擎把高斯纳入 Viz Artist 与播出工作流。","sources":["https://documentation.vizrt.com/viz-engine-rn/5.6/Viz_Engine_Release_Notes.html","https://radiancefields.com/vizrt-brings-gaussian-splats-to-viz-engine-5-6"],"eventId":"vizrt:viz-engine-5.6"},
+    {"id":"opensplat4d-v0.3.0","title":"OpenSplat4D 0.3 完整开源 Unreal 3D/4DGS 插件","eventDate":"2026-11-24","reportDate":"2026-11-25","importance":"important","disposition":"included","reason":"插件源码、Win64 包与多种静态/动态格式路径已经可下载测试。","sources":["https://github.com/YuanBaoSMadLab/OpenSplat4D/releases/tag/v0.3.0","https://github.com/YuanBaoSMadLab/OpenSplat4D/commit/683db2f"],"eventId":"github.com/YuanBaoSMadLab/OpenSplat4D/releases/tag/v0.3.0"},
+    {"id":"xangle-orbit-v26.11.23","title":"Orbit 增加多机位视频到 4DGS 的 beta 训练","eventDate":"2026-11-23","reportDate":"2026-11-25","importance":"important","disposition":"included","reason":"官方版本日志确认训练入口、动画序列导出、代理与备份修复。","sources":["https://xangleapps.com/orbit/changelog/v26.11.23"],"eventId":"xangle:orbit-v26.11.23"},
+    {"id":"playcanvas-engine-pr-10013","title":"PlayCanvas WebGPU 相机加入 reverse-Z，Gaussian 与 XR 未覆盖","eventDate":"2026-11-24","reportDate":"2026-11-25","importance":"important","disposition":"included","reason":"主干架构更新会影响深度精度选择，但高斯投影与 XR 有明确兼容缺口。","sources":["https://github.com/playcanvas/engine/pull/10013","https://github.com/playcanvas/engine/commit/429141c8d2f58c315c7e0bfc8e4cc3bfe5d593d0"],"eventId":"github.com/playcanvas/engine/pull/10013"},
+    {"id":"arxiv-2611.31023","title":"WildAnySplat 开放无标定野外多视图重建代码与权重","eventDate":"2026-11-23","reportDate":"2026-11-25","importance":"important","disposition":"included","reason":"不依赖 COLMAP 的推理管线、预训练权重与 SuperSplat PLY 输出均已公开。","sources":["https://arxiv.org/abs/2611.31023","https://github.com/wildanysplat/WildAnySplat","https://huggingface.co/wildanysplat/WildAnySplat"],"eventId":"github.com/wildanysplat/WildAnySplat"},
+    {"id":"arxiv-2611.28792","title":"ArgsWorld 统一高斯重建、生成与世界外推并开放权重","eventDate":"2026-11-21","reportDate":"2026-11-25","importance":"important","disposition":"included","reason":"自回归扩散世界模型已有代码、权重、PLY 与视频输出路径。","sources":["https://arxiv.org/abs/2611.28792","https://github.com/M4A1TasteGood/ArgsWorld"],"eventId":"github.com/M4A1TasteGood/ArgsWorld"},
+    {"id":"spirula-dataset-gui-2026-11-25","title":"Spirula 重构数据集创建 GUI 与 SfM 配对模式","eventDate":"2026-11-25","reportDate":"2026-11-25","importance":"important","disposition":"included","reason":"主干明确区分 prefilter/sequential，统一 GUI/CLI mapper 选项并移除默认帧上限。","sources":["https://github.com/harry7557558/spirula-studio/commit/0530582a28c12bc0ef38a007cd6e02089c0d2b0d","https://github.com/harry7557558/spirula-studio/commit/8aece782d346be3bbf2120ec7080327b136549d9","https://github.com/harry7557558/spirula-studio/commit/7d728ff1e2f469f5961c3f2c35ede87df6fc63f3"],"eventId":"github.com/harry7557558/spirula-studio/commit/0530582a28c12bc0ef38a007cd6e02089c0d2b0d"},
+    {"id":"maxsplat-studio-v8.5.4","title":"MaxSplat Studio 8.5.4 把 3ds Max 场景转换为高斯 PLY","eventDate":"2026-11-21","reportDate":"2026-11-25","importance":"standard","disposition":"included","reason":"商业工具页面与作者工作流可核实，但兼容表和额外依赖仍不完整。","sources":["https://jamiecardoso.gumroad.com/l/maxsplat-studio-3ds-max-gaussian-splat-glb?a=555385955","https://jamiecardoso.co.uk/jc_tutorials/maxsplat-studio-3ds-max-gaussian-splat-glb-v8-5-4/"],"eventId":"maxsplat:studio-v8.5.4"},
+    {"id":"arxiv-2611.30102","title":"LMnOP 用语言模型计划对象移除流程","eventDate":"2026-11-23","reportDate":"2026-11-25","importance":"standard","disposition":"included","reason":"无代码但提出无需微调的模块编排路径，作者实验结论值得跟踪。","sources":["https://arxiv.org/abs/2611.30102"],"eventId":"research:editing-relighting-2026-11-25"},
+    {"id":"arxiv-2611.29236","title":"REVEAL 在不重训冻结高斯时修正深度","eventDate":"2026-11-22","reportDate":"2026-11-25","importance":"standard","disposition":"merged","reason":"与对象编辑和半透明重光照论文合并为方法研究简讯，保留独立论文链接。","sources":["https://arxiv.org/abs/2611.29236"],"eventId":"research:editing-relighting-2026-11-25"},
+    {"id":"arxiv-2611.30351","title":"NNS-GS 表示半透明物体的非局部散射","eventDate":"2026-11-23","reportDate":"2026-11-25","importance":"standard","disposition":"merged","reason":"与同期编辑和几何修正研究合并呈现，实验依赖受控光源。","sources":["https://arxiv.org/abs/2611.30351"],"eventId":"research:editing-relighting-2026-11-25"},
+    {"id":"arxiv-2611.28636","title":"SemGuard 检测 3D/4D Gaussian 渲染攻击","eventDate":"2026-11-21","reportDate":"2026-11-25","importance":"standard","disposition":"included","reason":"代码与处理资产已公开，许可和上游依赖仍需审计。","sources":["https://arxiv.org/abs/2611.28636","https://github.com/shisyy/SemGuard"],"eventId":"arxiv:2611.28636"},
+    {"id":"arxiv-2611.29282","title":"RadioWorld 建模城市无线电传播场","eventDate":"2026-11-22","reportDate":"2026-11-25","importance":"standard","disposition":"included","reason":"跨领域世界模型与新基准值得跟踪，但代码和数据仅承诺接收后发布。","sources":["https://arxiv.org/abs/2611.29282"],"eventId":"research:cross-domain-2026-11-25"},
+    {"id":"arxiv-2611.29388","title":"SpectralGS 从 RGB 做无监督高光谱重建","eventDate":"2026-11-22","reportDate":"2026-11-25","importance":"standard","disposition":"merged","reason":"合并进跨领域高斯研究简讯，无官方代码。","sources":["https://arxiv.org/abs/2611.29388"],"eventId":"research:cross-domain-2026-11-25"},
+    {"id":"arxiv-2611.30283","title":"AdvMTO 用 2DGS 研究时序多模态自动驾驶攻击","eventDate":"2026-11-23","reportDate":"2026-11-25","importance":"standard","disposition":"merged","reason":"合并进跨领域安全研究简讯，无官方代码。","sources":["https://arxiv.org/abs/2611.30283"],"eventId":"research:cross-domain-2026-11-25"},
+    {"id":"arxiv-2611.28111","title":"GC-GS 把多视图梯度冲突作为几何信号","eventDate":"2026-11-18","reportDate":"2026-11-25","importance":"standard","disposition":"included","reason":"7 日重查补收的 WACV 2027 论文，无官方实现。","sources":["https://arxiv.org/abs/2611.28111"],"eventId":"research:sparse-view-2026-11-25"},
+    {"id":"arxiv-2611.28802","title":"Not All Directions Are Flat 修正稀疏视图方向曲率","eventDate":"2026-11-21","reportDate":"2026-11-25","importance":"standard","disposition":"merged","reason":"与 GC-GS 合并为稀疏视图几何研究简讯，无官方代码。","sources":["https://arxiv.org/abs/2611.28802"],"eventId":"research:sparse-view-2026-11-25"},
+    {"id":"arxiv-2611.30602-reindex","title":"GSDet 旧论文重新出现在 arXiv 索引","eventDate":"2025-04-01","reportDate":"2026-11-25","importance":"standard","disposition":"excluded","reason":"这是 IJCAI 2025 已发表工作的重新索引，不是 2026 年 11 月的新方法或新代码发布。","sources":["https://arxiv.org/abs/2611.30602","https://github.com/wokaikaixinxin/GSDet"],"exclusionEvidence":"论文与仓库说明均指向 IJCAI 2025 既有工作；本期未发现新的 release、权重或核心结论。"}
+  ]
+}
