@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-25",
+    "sha256": "02a04f8e8ff598914c84ef4aed8328775b9f5d982b08e94dbeff8191b4bf1935"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-25": {
+      "date": "2026-11-25",
+      "url": "/share/2026-11-25.png",
+      "title": "Viz Engine 原生接入高斯，OpenSplat4D 0.3 开源 Unreal 插件",
+      "contentHash": "b1dd5df42bf473123bd6ab4cbf774031bd2e9cf2189f79b7bc9c2e2391b47417",
+      "inputHash": "ca50167cf62578170b70ace41a64852d9373bf6a1bc9dca12c2ac6ec04d0ebaa",
+      "sha256": "02a04f8e8ff598914c84ef4aed8328775b9f5d982b08e94dbeff8191b4bf1935",
+      "bytes": 29364
     }
   }
 }
