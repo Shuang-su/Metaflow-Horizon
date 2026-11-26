@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "mode": "scheduled",
+  "window": {
+    "start": "2026-11-15T08:28:00+08:00",
+    "end": "2026-11-26T08:51:26+08:00"
+  },
+  "overlapStart": "2026-11-19T00:00:00+08:00",
+  "reviewedAt": "2026-11-26T08:51:26+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields",
+      "status": "candidates",
+      "checkedAt": "2026-11-26T08:08:00+08:00",
+      "urls": [
+        "https://radiancefields.com/",
+        "https://radiancefields.com/platforms"
+      ],
+      "candidateIds": [
+        "storysplat-2.6"
+      ],
+      "urlResults": [
+        {
+          "url": "https://radiancefields.com/",
+          "status": "candidates",
+          "checkedAt": "2026-11-26T08:07:00+08:00"
+        },
+        {
+          "url": "https://radiancefields.com/platforms",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-26T08:08:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "official",
+      "status": "candidates",
+      "checkedAt": "2026-11-26T08:14:00+08:00",
+      "urls": [
+        "https://blog.playcanvas.com/",
+        "https://www.blender.org/news/"
+      ],
+      "candidateIds": [
+        "storysplat-2.6",
+        "niantic-seeing-from-above-2026-11-25"
+      ],
+      "gap": "PlayCanvas 博客可读但无晚于已归档内容；Blender News 返回 HTTP 403。StorySplat 与 Niantic 候选由产品官网、官方文章及一手代码记录核验。",
+      "urlResults": [
+        {
+          "url": "https://blog.playcanvas.com/",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-26T08:12:00+08:00"
+        },
+        {
+          "url": "https://www.blender.org/news/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-26T08:13:00+08:00",
+          "gap": "HTTP 403，未取得可验证正文。"
+        }
+      ]
+    },
+    {
+      "sourceId": "x",
+      "status": "unavailable",
+      "checkedAt": "2026-11-26T08:19:00+08:00",
+      "urls": [
+        "https://x.com/radiancefields",
+        "https://x.com/playcanvas",
+        "https://x.com/willeastcott",
+        "https://x.com/valigurskym"
+      ],
+      "candidateIds": [],
+      "gap": "4 个登记账号均返回 HTTP 403 或禁用错误，未取得可验证原帖；相关候选改由作者官网、项目页与 GitHub 一手记录核验。",
+      "urlResults": [
+        {
+          "url": "https://x.com/radiancefields",
+          "status": "unavailable",
+          "checkedAt": "2026-11-26T08:16:00+08:00",
+          "gap": "DisabledError，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/playcanvas",
+          "status": "unavailable",
+          "checkedAt": "2026-11-26T08:17:00+08:00",
+          "gap": "HTTP 403，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/willeastcott",
+          "status": "unavailable",
+          "checkedAt": "2026-11-26T08:18:00+08:00",
+          "gap": "HTTP 403，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/valigurskym",
+          "status": "unavailable",
+          "checkedAt": "2026-11-26T08:19:00+08:00",
+          "gap": "DisabledError，无可验证原帖。"
+        }
+      ]
+    },
+    {
+      "sourceId": "research",
+      "status": "candidates",
+      "checkedAt": "2026-11-26T08:30:00+08:00",
+      "urls": [
+        "https://export.arxiv.org/api/query",
+        "https://huggingface.co/papers"
+      ],
+      "candidateIds": [
+        "arxiv-2611.28649",
+        "arxiv-2611.32554",
+        "arxiv-2611.30219"
+      ],
+      "gap": "arXiv export API 未能直接读取；用 Hugging Face Papers、arXiv 原页、作者项目页与 GitHub 交叉核验。",
+      "urlResults": [
+        {
+          "url": "https://export.arxiv.org/api/query",
+          "status": "unavailable",
+          "checkedAt": "2026-11-26T08:20:00+08:00",
+          "gap": "API 端点未能直接读取。"
+        },
+        {
+          "url": "https://huggingface.co/papers",
+          "status": "candidates",
+          "checkedAt": "2026-11-26T08:21:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "github",
+      "status": "candidates",
+      "checkedAt": "2026-11-26T08:39:00+08:00",
+      "urls": [
+        "https://github.com/playcanvas/supersplat",
+        "https://github.com/MrNeRF/LichtFeld-Studio"
+      ],
+      "candidateIds": [
+        "supersplat-viewer-pr-374",
+        "supersplat-viewer-pr-371",
+        "supersplat-viewer-pr-373",
+        "splat-transform-pr-382",
+        "splat-transform-pr-355",
+        "lichtfeld-pr-4184",
+        "spirula-meshing-2026-11-25",
+        "arxiv-2611.28649",
+        "arxiv-2611.32554",
+        "arxiv-2611.30219",
+        "supersplat-viewer-pr-375"
+      ],
+      "urlResults": [
+        {
+          "url": "https://github.com/playcanvas/supersplat",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-26T08:32:00+08:00"
+        },
+        {
+          "url": "https://github.com/MrNeRF/LichtFeld-Studio",
+          "status": "candidates",
+          "checkedAt": "2026-11-26T08:33:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "community",
+      "status": "unavailable",
+      "checkedAt": "2026-11-26T08:46:00+08:00",
+      "urls": [
+        "https://www.reddit.com/r/GaussianSplatting/",
+        "https://www.bilibili.com/",
+        "https://sspai.com/"
+      ],
+      "candidateIds": [
+        "community-undated-product-posts-2026-11-26"
+      ],
+      "gap": "Reddit 可读但当前条目缺少稳定日期与一手新增事实；B 站只返回浏览器兼容外壳；少数派请求超时。中文站点搜索主要返回旧教程与转述。",
+      "urlResults": [
+        {
+          "url": "https://www.reddit.com/r/GaussianSplatting/",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-26T08:43:00+08:00"
+        },
+        {
+          "url": "https://www.bilibili.com/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-26T08:44:00+08:00",
+          "gap": "仅返回浏览器版本过旧提示，无法核实视频与日期。"
+        },
+        {
+          "url": "https://sspai.com/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-26T08:45:00+08:00",
+          "gap": "请求超时，未取得可验证正文。"
+        }
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "storysplat-2.6",
+      "title": "StorySplat 2.6 支持 Open4DGS 与 Animated SOG 4D 播放",
+      "eventDate": "2026-11-25",
+      "reportDate": "2026-11-26",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "浏览器端直接读取两种带运动轨迹的 4D Gaussian 格式，并接入灯光、阴影、触发与剪辑工作流。",
+      "sources": [
+        "https://radiancefields.com/storysplat-2-6-plays-open4dgs-and-animated-sog-4d-splats",
+        "https://docs.storysplat.com/",
+        "https://storysplat.com/pricing/"
+      ],
+      "eventId": "storysplat:2.6"
+    },
+    {
+      "id": "supersplat-viewer-pr-374",
+      "title": "SuperSplat Viewer 重构宿主嵌入契约",
+      "eventDate": "2026-11-26",
+      "reportDate": "2026-11-26",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "信息面板、全屏、快捷键与滚动边界转由宿主控制，会直接影响既有自托管嵌入。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat-viewer/pull/374",
+        "https://github.com/playcanvas/supersplat-viewer/commit/6b8a3dfd047f98c903fee2e937e7833eea03f24f"
+      ],
+      "eventId": "github.com/playcanvas/supersplat-viewer/pull/374"
+    },
+    {
+      "id": "supersplat-viewer-pr-371",
+      "title": "SuperSplat Viewer 为导出 HTML 增加安全 title 选项",
+      "eventDate": "2026-11-26",
+      "reportDate": "2026-11-26",
+      "importance": "standard",
+      "disposition": "merged",
+      "reason": "与同日嵌入契约更新合并呈现，保留独立 PR 与提交。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat-viewer/pull/371",
+        "https://github.com/playcanvas/supersplat-viewer/commit/e6badd1a3acca0381be5d4c57f29aa6a0528154d"
+      ],
+      "eventId": "github.com/playcanvas/supersplat-viewer/pull/374"
+    },
+    {
+      "id": "supersplat-viewer-pr-373",
+      "title": "SuperSplat Viewer 修正 Orbit/Fly 目标光标尺度",
+      "eventDate": "2026-11-26",
+      "reportDate": "2026-11-26",
+      "importance": "standard",
+      "disposition": "merged",
+      "reason": "同属 viewer 主干嵌入与导航体验更新，固定 28 px 光标避免近大远小。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat-viewer/pull/373",
+        "https://github.com/playcanvas/supersplat-viewer/commit/533eed0770ffa3ccf9744177febae25d5fca9f4d"
+      ],
+      "eventId": "github.com/playcanvas/supersplat-viewer/pull/374"
+    },
+    {
+      "id": "lichtfeld-pr-4184",
+      "title": "LichtFeld Studio 增加双 splat 人工点对齐",
+      "eventDate": "2026-11-26",
+      "reportDate": "2026-11-26",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "解决独立采集间的尺度、旋转与平移差异，已有交互、残差与撤销路径。",
+      "sources": [
+        "https://github.com/MrNeRF/LichtFeld-Studio/pull/4184",
+        "https://github.com/MrNeRF/LichtFeld-Studio/commit/4859ed2514ae62b7a32292e97fc36bd5e499af85"
+      ],
+      "eventId": "github.com/MrNeRF/LichtFeld-Studio/pull/4184"
+    },
+    {
+      "id": "splat-transform-pr-382",
+      "title": "SplatTransform 增加 CSV 输入",
+      "eventDate": "2026-11-25",
+      "reportDate": "2026-11-26",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "CSV 从单向调试输出变为可回读输入，并明确列组、坐标空间和精度边界。",
+      "sources": [
+        "https://github.com/playcanvas/splat-transform/pull/382",
+        "https://github.com/playcanvas/splat-transform/commit/d10d746202d670fd4c833035390ee68b41d43cdc"
+      ],
+      "eventId": "github.com/playcanvas/splat-transform/pull/382"
+    },
+    {
+      "id": "splat-transform-pr-355",
+      "title": "SplatTransform 隔离压缩 PLY chunk 中的非有限值",
+      "eventDate": "2026-11-25",
+      "reportDate": "2026-11-26",
+      "importance": "important",
+      "disposition": "merged",
+      "reason": "与 CSV 输入合并为数据互操作事件；单个 NaN 不再污染 256 个 splat，且保留 -Infinity 尺度语义。",
+      "sources": [
+        "https://github.com/playcanvas/splat-transform/pull/355",
+        "https://github.com/playcanvas/splat-transform/commit/386b3d6fd878dbab2688e7c7d7164dcbd6e80e34"
+      ],
+      "eventId": "github.com/playcanvas/splat-transform/pull/382"
+    },
+    {
+      "id": "spirula-meshing-2026-11-25",
+      "title": "Spirula 重做网格预览并限制超大点云预览资源",
+      "eventDate": "2026-11-25",
+      "reportDate": "2026-11-26",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "主干同时改善网格参数迭代、5.85 亿点级数据预览和数据集结束自动化。",
+      "sources": [
+        "https://github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391",
+        "https://github.com/harry7557558/spirula-studio/commit/2a04de62ec50a1fd6702d8ca3a9c5d8ae31df309",
+        "https://github.com/harry7557558/spirula-studio/commit/77d8d8cefe3b0398e08d6cf0c0df1b85f3d2a085"
+      ],
+      "eventId": "github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391"
+    },
+    {
+      "id": "arxiv-2611.28649",
+      "title": "S-Mind 内化多视图几何并开放代码、权重与数据",
+      "eventDate": "2026-11-21",
+      "reportDate": "2026-11-26",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "11 月 25 日迟到索引补收；完整 checkpoint、数据和 probe 使空间 token 结论可实际复现。",
+      "sources": [
+        "https://arxiv.org/abs/2611.28649",
+        "https://github.com/KANABOON1/S-Mind",
+        "https://huggingface.co/KANABOON1/S-Mind"
+      ],
+      "eventId": "arxiv:2611.28649"
+    },
+    {
+      "id": "niantic-seeing-from-above-2026-11-25",
+      "title": "Niantic Spatial 展示地面与无人机 VPS 融合",
+      "eventDate": "2026-11-25",
+      "reportDate": "2026-11-26",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "官方文章提供大尺度空间图与航拍 Gaussian 的方向和作者 benchmark，但不是产品发布。",
+      "sources": [
+        "https://www.nianticspatial.com/blog/seeing-from-above"
+      ],
+      "eventId": "niantic:seeing-from-above-2026-11-25"
+    },
+    {
+      "id": "arxiv-2611.32554",
+      "title": "PartAgent 用闭环 agent 整合 2D/3D 专家做部件分割",
+      "eventDate": "2026-11-24",
+      "reportDate": "2026-11-26",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "论文与演示已公开，但官方仓库明确代码尚未发布。",
+      "sources": [
+        "https://arxiv.org/abs/2611.32554",
+        "https://yangcaoai.github.io/PartAgent_ProjectPage/",
+        "https://github.com/yangcaoai/PartAgent_Agent_for_3D_Part_Seg"
+      ],
+      "eventId": "research:structured-3d-2026-11-26"
+    },
+    {
+      "id": "arxiv-2611.30219",
+      "title": "RoomTokens 用结构化离散 token 生成室内布局",
+      "eventDate": "2026-11-23",
+      "reportDate": "2026-11-26",
+      "importance": "standard",
+      "disposition": "merged",
+      "reason": "与 PartAgent 合并为三维结构推理简讯；官方仓库仅有占位 README。",
+      "sources": [
+        "https://arxiv.org/abs/2611.30219",
+        "https://github.com/3dlg-hcvc/RoomToken"
+      ],
+      "eventId": "research:structured-3d-2026-11-26"
+    },
+    {
+      "id": "supersplat-viewer-pr-375",
+      "title": "SuperSplat Viewer 更新依赖",
+      "eventDate": "2026-11-26",
+      "reportDate": "2026-11-26",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "依赖维护提交本身没有独立用户能力；其中 PlayCanvas Engine 高斯修复已在 11 月 14 与 16 日旧稿中逐项归档。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat-viewer/pull/375"
+      ],
+      "exclusionEvidence": "PR 主要更新依赖版本；Engine PR #10021 与 #10025 已存在于 docs/daily/2026/11/2026-11-14.md 和 2026-11-16.md。"
+    },
+    {
+      "id": "autodesk-3ds-max-2027.3-reindex",
+      "title": "3ds Max 2027.3 Gaussian Splatting 再次出现在检索结果",
+      "eventDate": "2026-11-18",
+      "reportDate": "2026-11-26",
+      "importance": "important",
+      "disposition": "excluded",
+      "reason": "同一正式版本与同一 Gaussian viewport/PLY/SPZ/序列事件已在 11 月 20 日待处理日报归档。",
+      "sources": [
+        "https://help.autodesk.com/view/3DSMAX/2027/ENU/?guid=GUID-9F33E1C0-DB15-44F2-BC50-97760A0F2DE6"
+      ],
+      "exclusionEvidence": "origin/automation/daily/2026-11-20 的研究稿与阅读稿已包含事件 3ds-max-2027.3-gaussian-splat。"
+    },
+    {
+      "id": "community-undated-product-posts-2026-11-26",
+      "title": "社区页面出现产品与作品帖子，但日期和一手新增事实不完整",
+      "eventDate": "2026-11-26",
+      "reportDate": "2026-11-26",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "无法建立稳定事件日期，且未找到足以独立核验的新增事实。",
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/"
+      ],
+      "exclusionEvidence": "抓取页缺少稳定日期；相关产品名未能在本窗口内回溯到新的官方发布、提交或版本记录。"
+    }
+  ]
+}
