@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-26",
+    "sha256": "441273815ce8f5aa1d0540547ed435a6eb64f99f0330220c401926d3a33389ef"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-26": {
+      "date": "2026-11-26",
+      "url": "/share/2026-11-26.png",
+      "title": "StorySplat 2.6 播放两种 4D 格式，PlayCanvas 与 LichtFeld 改进发布和拼接",
+      "contentHash": "f731c306d1d730701527e3af691c23eb2f181f133cc7368054e9e477eb45fc25",
+      "inputHash": "b7bdc06fee0a7bc8bbcfcffc9b6eee3f71da63023c4fd9d32514e0a85634b722",
+      "sha256": "441273815ce8f5aa1d0540547ed435a6eb64f99f0330220c401926d3a33389ef",
+      "bytes": 35933
     }
   }
 }

@@ -1,7 +1,199 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-26",
   "daily": [
+    {
+      "id": "gsd-2026-11-26",
+      "contentHash": "f731c306d1d730701527e3af691c23eb2f181f133cc7368054e9e477eb45fc25",
+      "date": "2026-11-26",
+      "title": "Horizon 行业日报 — 2026-11-26",
+      "headline": "StorySplat 2.6 播放两种 4D 格式，PlayCanvas 与 LichtFeld 改进发布和拼接",
+      "summary": "StorySplat 2.6 把 Open4DGS 与 Animated SOG 变成可互动的浏览器场景对象；SuperSplat Viewer、LichtFeld、SplatTransform 和 Spirula 同日补齐嵌入、对齐与数据处理边界。S-Mind 已开放代码、权重和数据。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-26.md",
+      "sourceCount": 3,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "storysplat:2.6",
+          "anchor": "event-storysplat-2-6",
+          "kind": "tool",
+          "source": "https://radiancefields.com/storysplat-2-6-plays-open4dgs-and-animated-sog-4d-splats",
+          "title": "StorySplat 2.6 让两种 4D Gaussian 进入浏览器场景",
+          "summary": "StorySplat 2.6 可直接读取 Open4DGS .trigsbin 和 Animated SOG .asog，动态片段能够参与灯光、阴影、热点、触发和剪辑，不再只是逐帧文件播放器。播放要求 viewer 2.16.0 以上，WebGPU 与 WebGL 2 都在支持范围。",
+          "date": "2026-11-26",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/playcanvas/supersplat-viewer/pull/374",
+          "anchor": "event-supersplat-viewer-embed-contract",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/supersplat-viewer/pull/374",
+          "title": "SuperSplat Viewer 把嵌入控制权交给宿主",
+          "summary": "SuperSplat Viewer 主干不再假设自己拥有整张页面：信息面板改由 onInfo 回调提供，全屏只覆盖宿主容器，滚轮和快捷键也能服从宿主。导出 HTML 还能设置经过转义的页面标题，Orbit/Fly 目标则用固定 28 px 光标保持近远一致。",
+          "date": "2026-11-26",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MrNeRF/LichtFeld-Studio/pull/4184",
+          "anchor": "event-lichtfeld-point-pair-alignment",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/pull/4184",
+          "title": "LichtFeld 用对应点对齐两次独立采集",
+          "summary": "LichtFeld Studio 允许在两个独立视图中标注同一物理细节，用至少 3 对不共线点求出正统一尺度、旋转和平移。预览会给出尺度、RMS 残差和最差点对，并支持分离、叠加与联动相机；应用后只产生一个撤销记录。",
+          "date": "2026-11-26",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/playcanvas/splat-transform/pull/382",
+          "anchor": "event-splattransform-csv-nan",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/splat-transform/pull/382",
+          "title": "SplatTransform 补上 CSV 回读并隔离压缩坏值",
+          "summary": "CSV 现在既能写出也能读回，适合表格分析和调试；reader 会检查标准列组完整性，并明确使用 PLY 坐标空间和 32 位浮点。它仍是常驻内存的文本路径，不应被当成新的高效资产格式。",
+          "date": "2026-11-26",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391",
+          "anchor": "event-spirula-meshing-preview",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391",
+          "title": "Spirula 给网格和点云预览设定资源边界",
+          "summary": "Spirula 重做网格提取界面，让生成过程可以预览，并根据设备内存计算预览预算。数据集点云预览则最多显示 1,000 万点：对提交中提到的 5.85 亿点输入，GUI 不再为全部点分配主机和 GPU 缓冲，原始数据和训练输入不受抽样影响。",
+          "date": "2026-11-26",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.28649",
+          "anchor": "event-s-mind",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.28649",
+          "title": "S-Mind 让“模型内部有没有三维场景”可以复现",
+          "summary": "S-Mind 在 Qwen3.5 4B/9B 中加入空间 token：先融合多个视图，再随着推理视角变化重新表达同一场景。作者不仅报告最终答题结果，还用 readout 检查隐藏状态里的三维点和相机，使“模型是否真的形成共享几何”成为可测问题。",
+          "date": "2026-11-26",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "niantic:seeing-from-above-2026-11-25",
+          "anchor": "event-niantic-seeing-from-above",
+          "kind": "news",
+          "source": "https://www.nianticspatial.com/blog/seeing-from-above",
+          "title": "Niantic 尝试把无人机和地面定位放进同一空间图",
+          "summary": "Niantic Spatial 展示了把手机、360 相机、无人机、卫星影像与矢量地图放进统一模型的方向，并从消费级无人机图像生成带地理参照和尺度的 Gaussian splat。作者称航拍 VPS 在捕获区域内有 85%—90% 位姿与方向定位成功率。",
+          "date": "2026-11-26",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        },
+        {
+          "id": "research:structured-3d-2026-11-26",
+          "anchor": "event-structured-3d-research",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.32554",
+          "title": "PartAgent 与 RoomTokens 都把三维结构变成中间表示",
+          "summary": "PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。",
+          "date": "2026-11-26",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "streaming",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 3,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、产品官网、GitHub PR/提交、论文原页和作者仓库编辑阅读版。未购买 StorySplat，未运行手机或 GPU 测试，未编译相关主干，也未独立复现作者性能与论文指标；主干提交不等同于正式发行。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-26.md",
+        "contentHash": "cd167fa1a08dc91240afd7b3844dcd2d79e0b160dd60cb8aba92721ebd9eb055"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17714,182 @@
   ],
   "entries": [
     {
+      "id": "arxiv:2611.28649",
+      "kind": "paper",
+      "date": "2026-11-26",
+      "title": "S-Mind：把多视图几何内化为空间智能",
+      "summary": "S-Mind 在 Qwen3.5 4B/9B 中加入空间 token：先融合多个视图，再随着推理视角变化重新表达同一场景。作者不仅报告最终答题结果，还用 readout 检查隐藏状态里的三维点和相机，使“模型是否真的形成共享几何”成为可测问题。",
+      "source": "https://arxiv.org/abs/2611.28649",
+      "anchor": "event-s-mind",
+      "topics": [
+        "spatial-ai"
+      ]
+    },
+    {
+      "id": "arxiv:2611.30219",
+      "kind": "paper",
+      "date": "2026-11-26",
+      "title": "RoomTokens：面向室内场景合成的结构化 token 掩码扩散",
+      "summary": "PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。",
+      "source": "https://arxiv.org/abs/2611.30219",
+      "anchor": "section-partagent-与-roomtokens-展示了两种三维结构推理但代码尚未释放",
+      "topics": [
+        "xr"
+      ]
+    },
+    {
+      "id": "arxiv:2611.32554",
+      "kind": "paper",
+      "date": "2026-11-26",
+      "title": "PartAgent：通过专家整合与闭环改进实现三维部件分割",
+      "summary": "PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。",
+      "source": "https://arxiv.org/abs/2611.32554",
+      "anchor": "section-partagent-与-roomtokens-展示了两种三维结构推理但代码尚未释放",
+      "topics": [
+        "xr"
+      ]
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391",
+      "anchor": "event-spirula-meshing-preview",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391",
+      "title": "Spirula 给网格和点云预览设定资源边界",
+      "summary": "Spirula 重做网格提取界面，让生成过程可以预览，并根据设备内存计算预览预算。数据集点云预览则最多显示 1,000 万点：对提交中提到的 5.85 亿点输入，GUI 不再为全部点分配主机和 GPU 缓冲，原始数据和训练输入不受抽样影响。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/pull/4184",
+      "anchor": "event-lichtfeld-point-pair-alignment",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/pull/4184",
+      "title": "LichtFeld 用对应点对齐两次独立采集",
+      "summary": "LichtFeld Studio 允许在两个独立视图中标注同一物理细节，用至少 3 对不共线点求出正统一尺度、旋转和平移。预览会给出尺度、RMS 残差和最差点对，并支持分离、叠加与联动相机；应用后只产生一个撤销记录。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/splat-transform/pull/382",
+      "anchor": "event-splattransform-csv-nan",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/splat-transform/pull/382",
+      "title": "SplatTransform 补上 CSV 回读并隔离压缩坏值",
+      "summary": "CSV 现在既能写出也能读回，适合表格分析和调试；reader 会检查标准列组完整性，并明确使用 PLY 坐标空间和 32 位浮点。它仍是常驻内存的文本路径，不应被当成新的高效资产格式。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/pull/374",
+      "anchor": "event-supersplat-viewer-embed-contract",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/supersplat-viewer/pull/374",
+      "title": "SuperSplat Viewer 把嵌入控制权交给宿主",
+      "summary": "SuperSplat Viewer 主干不再假设自己拥有整张页面：信息面板改由 onInfo 回调提供，全屏只覆盖宿主容器，滚轮和快捷键也能服从宿主。导出 HTML 还能设置经过转义的页面标题，Orbit/Fly 目标则用固定 28 px 光标保持近远一致。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "niantic:seeing-from-above-2026-11-25",
+      "anchor": "event-niantic-seeing-from-above",
+      "kind": "news",
+      "source": "https://www.nianticspatial.com/blog/seeing-from-above",
+      "title": "Niantic 尝试把无人机和地面定位放进同一空间图",
+      "summary": "Niantic Spatial 展示了把手机、360 相机、无人机、卫星影像与矢量地图放进统一模型的方向，并从消费级无人机图像生成带地理参照和尺度的 Gaussian splat。作者称航拍 VPS 在捕获区域内有 85%—90% 位姿与方向定位成功率。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "research:structured-3d-2026-11-26",
+      "anchor": "event-structured-3d-research",
+      "kind": "paper",
+      "source": "https://arxiv.org/abs/2611.32554",
+      "title": "PartAgent 与 RoomTokens 都把三维结构变成中间表示",
+      "summary": "PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
+      "id": "storysplat:2.6",
+      "anchor": "event-storysplat-2-6",
+      "kind": "tool",
+      "source": "https://radiancefields.com/storysplat-2-6-plays-open4dgs-and-animated-sog-4d-splats",
+      "title": "StorySplat 2.6 让两种 4D Gaussian 进入浏览器场景",
+      "summary": "StorySplat 2.6 可直接读取 Open4DGS .trigsbin 和 Animated SOG .asog，动态片段能够参与灯光、阴影、热点、触发和剪辑，不再只是逐帧文件播放器。播放要求 viewer 2.16.0 以上，WebGPU 与 WebGL 2 都在支持范围。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31173,26 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-26",
+      "kind": "daily",
+      "title": "StorySplat 2.6 播放两种 4D 格式，PlayCanvas 与 LichtFeld 改进发布和拼接",
+      "summary": "StorySplat 2.6 把 Open4DGS 与 Animated SOG 变成可互动的浏览器场景对象；SuperSplat Viewer、LichtFeld、SplatTransform 和 Spirula 同日补齐嵌入、对齐与数据处理边界。S-Mind 已开放代码、权重和数据。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/26/",
+      "text": "StorySplat 2.6 让两种 4D Gaussian 进入浏览器场景\nStorySplat 2.6 可直接读取 Open4DGS .trigsbin 和 Animated SOG .asog，动态片段能够参与灯光、阴影、热点、触发和剪辑，不再只是逐帧文件播放器。播放要求 viewer 2.16.0 以上，WebGPU 与 WebGL 2 都在支持范围。\n真正的限制在交付端：两种格式都不流式，整份文件下载后才出现；公开 Open4DGS 示例达到 319—817 MB，手机播放也尚未验证。免费版只允许公开非商业发布，自托管商业项目至少需要 Plus；发布说明和价格页应一起看。\nSuperSplat Viewer 把嵌入控制权交给宿主\nSuperSplat Viewer 主干不再假设自己拥有整张页面：信息面板改由 onInfo 回调提供，全屏只覆盖宿主容器，滚轮和快捷键也能服从宿主。导出 HTML 还能设置经过转义的页面标题，Orbit/Fly 目标则用固定 28 px 光标保持近远一致。\n这会改善多 viewer、iframe 和产品化嵌入，却也改变旧页面依赖的 UI 契约。PR #374已经合并，但没有对应正式 release；生产项目应锁提交回归，而不是让依赖范围自动漂移。\nLichtFeld 用对应点对齐两次独立采集\nLichtFeld Studio 允许在两个独立视图中标注同一物理细节，用至少 3 对不共线点求出正统一尺度、旋转和平移。预览会给出尺度、RMS 残差和最差点对，并支持分离、叠加与联动相机；应用后只产生一个撤销记录。\n它解决的是多次采集坐标不一致，不会自动寻找对应，也不把两份高斯合成一份。PR #4184只完成 Windows 和局部工作流验证，Linux 与完整 CI 仍待补齐。\nSplatTransform 补上 CSV 回读并隔离压缩坏值\nCSV 现在既能写出也能读回，适合表格分析和调试；reader 会检查标准列组完整性，并明确使用 PLY 坐标空间和 32 位浮点。它仍是常驻内存的文本路径，不应被当成新的高效资产格式。\n更关键的健壮性修复阻止一个 NaN 污染整个 256-splat compressed PLY chunk，同时保留 -Infinity 尺度代表的零厚度语义。CSV PR与NaN PR都已合并到主干，但尚未形成新 tag。\nSpirula 给网格和点云预览设定资源边界\nSpirula 重做网格提取界面，让生成过程可以预览，并根据设备内存计算预览预算。数据集点云预览则最多显示 1,000 万点：对提交中提到的 5.85 亿点输入，GUI 不再为全部点分配主机和 GPU 缓冲，原始数据和训练输入不受抽样影响。\n数据集任务结束后还可以直接运行命令，成功或失败都会触发、取消则跳过，且不经过 shell。主提交尚未进入正式发行；自动命令适合通知和流水线，但也扩大了本地执行权限面。\nS-Mind 让“模型内部有没有三维场景”可以复现\nS-Mind 在 Qwen3.5 4B/9B 中加入空间 token：先融合多个视图，再随着推理视角变化重新表达同一场景。作者不仅报告最终答题结果，还用 readout 检查隐藏状态里的三维点和相机，使“模型是否真的形成共享几何”成为可测问题。\n代码、4B/9B 权重、SFT 数据和 notebook 已以 Apache-2.0 开放；训练配置使用 Python 3.12、CUDA 12.9，并以 H100 80 GB 为作者环境。作者报告最多提升 22.26 个点和约 100 倍推理速度，尚无独立复现。先用 4B checkpoint 跑公开 probe，比直接训练更合理。论文 · 代码\nNiantic 尝试把无人机和地面定位放进同一空间图\nNiantic Spatial 展示了把手机、360 相机、无人机、卫星影像与矢量地图放进统一模型的方向，并从消费级无人机图像生成带地理参照和尺度的 Gaussian splat。作者称航拍 VPS 在捕获区域内有 85%—90% 位姿与方向定位成功率。\n这是一篇研究和产品方向文章，不是新 SDK 发布；样本量、误差阈值和场景分布没有公开，不能把数字外推到通用地图。它值得关注的仍是地面—空中数据的统一坐标、更新频率和授权边界。官方文章\nPartAgent 与 RoomTokens 都把三维结构变成中间表示\nPartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。\nRoomTokens 则用离散网格同时保存语义、实例身份和朝向，再在楼层平面约束下生成室内布局。它面向场景合成，不是扫描或 viewer；MIT 仓库目前也只有占位 README。两项都提供了值得跟踪的结构化路线，现阶段仍是论文与演示，而不是可下载工具。论文"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32493,182 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "arxiv:2611.28649",
+      "kind": "paper",
+      "title": "S-Mind：把多视图几何内化为空间智能",
+      "summary": "S-Mind 在 Qwen3.5 4B/9B 中加入空间 token：先融合多个视图，再随着推理视角变化重新表达同一场景。作者不仅报告最终答题结果，还用 readout 检查隐藏状态里的三维点和相机，使“模型是否真的形成共享几何”成为可测问题。",
+      "date": "2026-11-26",
+      "topics": [
+        "spatial-ai"
+      ],
+      "url": "/daily/2026/11/26/#event-s-mind",
+      "text": "S-Mind：把多视图几何内化为空间智能 S-Mind 在 Qwen3.5 4B/9B 中加入空间 token：先融合多个视图，再随着推理视角变化重新表达同一场景。作者不仅报告最终答题结果，还用 readout 检查隐藏状态里的三维点和相机，使“模型是否真的形成共享几何”成为可测问题。 https://arxiv.org/abs/2611.28649 S-Mind 让“模型内部有没有三维场景”可以复现 ## S-Mind 让“模型内部有没有三维场景”可以复现\n\nS-Mind 在 Qwen3.5 4B/9B 中加入空间 token：先融合多个视图，再随着推理视角变化重新表达同一场景。作者不仅报告最终答题结果，还用 readout 检查隐藏状态里的三维点和相机，使“模型是否真的形成共享几何”成为可测问题。\n\n代码、4B/9B 权重、SFT 数据和 notebook 已以 Apache-2.0 开放；训练配置使用 Python 3.12、CUDA 12.9，并以 H100 80 GB 为作者环境。作者报告最多提升 22.26 个点和约 100 倍推理速度，尚无独立复现。先用 4B checkpoint 跑公开 probe，比直接训练更合理。[论文](https://arxiv.org/abs/2611.28649) · [代码](https://github.com/KANABOON1/S-Mind)"
+    },
+    {
+      "id": "arxiv:2611.30219",
+      "kind": "paper",
+      "title": "RoomTokens：面向室内场景合成的结构化 token 掩码扩散",
+      "summary": "PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。",
+      "date": "2026-11-26",
+      "topics": [
+        "xr"
+      ],
+      "url": "/daily/2026/11/26/#section-partagent-与-roomtokens-展示了两种三维结构推理但代码尚未释放",
+      "text": "RoomTokens：面向室内场景合成的结构化 token 掩码扩散 PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。 https://arxiv.org/abs/2611.30219 PartAgent 与 RoomTokens 展示了两种三维结构推理，但代码尚未释放"
+    },
+    {
+      "id": "arxiv:2611.32554",
+      "kind": "paper",
+      "title": "PartAgent：通过专家整合与闭环改进实现三维部件分割",
+      "summary": "PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。",
+      "date": "2026-11-26",
+      "topics": [
+        "xr"
+      ],
+      "url": "/daily/2026/11/26/#section-partagent-与-roomtokens-展示了两种三维结构推理但代码尚未释放",
+      "text": "PartAgent：通过专家整合与闭环改进实现三维部件分割 PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。 https://arxiv.org/abs/2611.32554 PartAgent 与 RoomTokens 展示了两种三维结构推理，但代码尚未释放"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391",
+      "kind": "tool",
+      "title": "Spirula 给网格和点云预览设定资源边界",
+      "summary": "Spirula 重做网格提取界面，让生成过程可以预览，并根据设备内存计算预览预算。数据集点云预览则最多显示 1,000 万点：对提交中提到的 5.85 亿点输入，GUI 不再为全部点分配主机和 GPU 缓冲，原始数据和训练输入不受抽样影响。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/26/#event-spirula-meshing-preview",
+      "text": "Spirula 给网格和点云预览设定资源边界 Spirula 重做网格提取界面，让生成过程可以预览，并根据设备内存计算预览预算。数据集点云预览则最多显示 1,000 万点：对提交中提到的 5.85 亿点输入，GUI 不再为全部点分配主机和 GPU 缓冲，原始数据和训练输入不受抽样影响。 https://github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391 Spirula 给网格和点云预览设定资源边界 ## Spirula 给网格和点云预览设定资源边界\n\nSpirula 重做网格提取界面，让生成过程可以预览，并根据设备内存计算预览预算。数据集点云预览则最多显示 1,000 万点：对提交中提到的 5.85 亿点输入，GUI 不再为全部点分配主机和 GPU 缓冲，原始数据和训练输入不受抽样影响。\n\n数据集任务结束后还可以直接运行命令，成功或失败都会触发、取消则跳过，且不经过 shell。[主提交](https://github.com/harry7557558/spirula-studio/commit/28a7bd624e3f297e3a4a42b7703fc850aa7d9391)尚未进入正式发行；自动命令适合通知和流水线，但也扩大了本地执行权限面。"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/pull/4184",
+      "kind": "tool",
+      "title": "LichtFeld 用对应点对齐两次独立采集",
+      "summary": "LichtFeld Studio 允许在两个独立视图中标注同一物理细节，用至少 3 对不共线点求出正统一尺度、旋转和平移。预览会给出尺度、RMS 残差和最差点对，并支持分离、叠加与联动相机；应用后只产生一个撤销记录。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/26/#event-lichtfeld-point-pair-alignment",
+      "text": "LichtFeld 用对应点对齐两次独立采集 LichtFeld Studio 允许在两个独立视图中标注同一物理细节，用至少 3 对不共线点求出正统一尺度、旋转和平移。预览会给出尺度、RMS 残差和最差点对，并支持分离、叠加与联动相机；应用后只产生一个撤销记录。 https://github.com/MrNeRF/LichtFeld-Studio/pull/4184 LichtFeld 用对应点对齐两次独立采集 ## LichtFeld 用对应点对齐两次独立采集\n\nLichtFeld Studio 允许在两个独立视图中标注同一物理细节，用至少 3 对不共线点求出正统一尺度、旋转和平移。预览会给出尺度、RMS 残差和最差点对，并支持分离、叠加与联动相机；应用后只产生一个撤销记录。\n\n它解决的是多次采集坐标不一致，不会自动寻找对应，也不把两份高斯合成一份。[PR #4184](https://github.com/MrNeRF/LichtFeld-Studio/pull/4184)只完成 Windows 和局部工作流验证，Linux 与完整 CI 仍待补齐。"
+    },
+    {
+      "id": "github.com/playcanvas/splat-transform/pull/382",
+      "kind": "tool",
+      "title": "SplatTransform 补上 CSV 回读并隔离压缩坏值",
+      "summary": "CSV 现在既能写出也能读回，适合表格分析和调试；reader 会检查标准列组完整性，并明确使用 PLY 坐标空间和 32 位浮点。它仍是常驻内存的文本路径，不应被当成新的高效资产格式。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/26/#event-splattransform-csv-nan",
+      "text": "SplatTransform 补上 CSV 回读并隔离压缩坏值 CSV 现在既能写出也能读回，适合表格分析和调试；reader 会检查标准列组完整性，并明确使用 PLY 坐标空间和 32 位浮点。它仍是常驻内存的文本路径，不应被当成新的高效资产格式。 https://github.com/playcanvas/splat-transform/pull/382 SplatTransform 补上 CSV 回读并隔离压缩坏值 ## SplatTransform 补上 CSV 回读并隔离压缩坏值\n\nCSV 现在既能写出也能读回，适合表格分析和调试；reader 会检查标准列组完整性，并明确使用 PLY 坐标空间和 32 位浮点。它仍是常驻内存的文本路径，不应被当成新的高效资产格式。\n\n更关键的健壮性修复阻止一个 `NaN` 污染整个 256-splat compressed PLY chunk，同时保留 `-Infinity` 尺度代表的零厚度语义。[CSV PR](https://github.com/playcanvas/splat-transform/pull/382)与[NaN PR](https://github.com/playcanvas/splat-transform/pull/355)都已合并到主干，但尚未形成新 tag。"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/pull/374",
+      "kind": "tool",
+      "title": "SuperSplat Viewer 把嵌入控制权交给宿主",
+      "summary": "SuperSplat Viewer 主干不再假设自己拥有整张页面：信息面板改由 onInfo 回调提供，全屏只覆盖宿主容器，滚轮和快捷键也能服从宿主。导出 HTML 还能设置经过转义的页面标题，Orbit/Fly 目标则用固定 28 px 光标保持近远一致。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/26/#event-supersplat-viewer-embed-contract",
+      "text": "SuperSplat Viewer 把嵌入控制权交给宿主 SuperSplat Viewer 主干不再假设自己拥有整张页面：信息面板改由 onInfo 回调提供，全屏只覆盖宿主容器，滚轮和快捷键也能服从宿主。导出 HTML 还能设置经过转义的页面标题，Orbit/Fly 目标则用固定 28 px 光标保持近远一致。 https://github.com/playcanvas/supersplat-viewer/pull/374 SuperSplat Viewer 把嵌入控制权交给宿主 ## SuperSplat Viewer 把嵌入控制权交给宿主\n\nSuperSplat Viewer 主干不再假设自己拥有整张页面：信息面板改由 `onInfo` 回调提供，全屏只覆盖宿主容器，滚轮和快捷键也能服从宿主。导出 HTML 还能设置经过转义的页面标题，Orbit/Fly 目标则用固定 28 px 光标保持近远一致。\n\n这会改善多 viewer、iframe 和产品化嵌入，却也改变旧页面依赖的 UI 契约。[PR #374](https://github.com/playcanvas/supersplat-viewer/pull/374)已经合并，但没有对应正式 release；生产项目应锁提交回归，而不是让依赖范围自动漂移。"
+    },
+    {
+      "id": "niantic:seeing-from-above-2026-11-25",
+      "kind": "news",
+      "title": "Niantic 尝试把无人机和地面定位放进同一空间图",
+      "summary": "Niantic Spatial 展示了把手机、360 相机、无人机、卫星影像与矢量地图放进统一模型的方向，并从消费级无人机图像生成带地理参照和尺度的 Gaussian splat。作者称航拍 VPS 在捕获区域内有 85%—90% 位姿与方向定位成功率。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/26/#event-niantic-seeing-from-above",
+      "text": "Niantic 尝试把无人机和地面定位放进同一空间图 Niantic Spatial 展示了把手机、360 相机、无人机、卫星影像与矢量地图放进统一模型的方向，并从消费级无人机图像生成带地理参照和尺度的 Gaussian splat。作者称航拍 VPS 在捕获区域内有 85%—90% 位姿与方向定位成功率。 https://www.nianticspatial.com/blog/seeing-from-above Niantic 尝试把无人机和地面定位放进同一空间图 ## Niantic 尝试把无人机和地面定位放进同一空间图\n\nNiantic Spatial 展示了把手机、360 相机、无人机、卫星影像与矢量地图放进统一模型的方向，并从消费级无人机图像生成带地理参照和尺度的 Gaussian splat。作者称航拍 VPS 在捕获区域内有 85%—90% 位姿与方向定位成功率。\n\n这是一篇研究和产品方向文章，不是新 SDK 发布；样本量、误差阈值和场景分布没有公开，不能把数字外推到通用地图。它值得关注的仍是地面—空中数据的统一坐标、更新频率和授权边界。[官方文章](https://www.nianticspatial.com/blog/seeing-from-above)"
+    },
+    {
+      "id": "research:structured-3d-2026-11-26",
+      "kind": "paper",
+      "title": "PartAgent 与 RoomTokens 都把三维结构变成中间表示",
+      "summary": "PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/26/#event-structured-3d-research",
+      "text": "PartAgent 与 RoomTokens 都把三维结构变成中间表示 PartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但官方仓库明确写着代码尚未发布（论文）。 https://arxiv.org/abs/2611.32554 PartAgent 与 RoomTokens 都把三维结构变成中间表示 ## PartAgent 与 RoomTokens 都把三维结构变成中间表示\n\nPartAgent 让 3D 专家提供结构区域、2D 多视图专家提供语义证据，再由 agent 选择检查、修复和组合动作。作者报告五个部件分割 benchmark 领先，但[官方仓库](https://github.com/yangcaoai/PartAgent_Agent_for_3D_Part_Seg)明确写着代码尚未发布（[论文](https://arxiv.org/abs/2611.32554)）。\n\nRoomTokens 则用离散网格同时保存语义、实例身份和朝向，再在楼层平面约束下生成室内布局。它面向场景合成，不是扫描或 viewer；[MIT 仓库](https://github.com/3dlg-hcvc/RoomToken)目前也只有占位 README。两项都提供了值得跟踪的结构化路线，现阶段仍是论文与演示，而不是可下载工具。[论文](https://arxiv.org/abs/2611.30219)"
+    },
+    {
+      "id": "storysplat:2.6",
+      "kind": "tool",
+      "title": "StorySplat 2.6 让两种 4D Gaussian 进入浏览器场景",
+      "summary": "StorySplat 2.6 可直接读取 Open4DGS .trigsbin 和 Animated SOG .asog，动态片段能够参与灯光、阴影、热点、触发和剪辑，不再只是逐帧文件播放器。播放要求 viewer 2.16.0 以上，WebGPU 与 WebGL 2 都在支持范围。",
+      "date": "2026-11-26",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "streaming",
+        "formats"
+      ],
+      "url": "/daily/2026/11/26/#event-storysplat-2-6",
+      "text": "StorySplat 2.6 让两种 4D Gaussian 进入浏览器场景 StorySplat 2.6 可直接读取 Open4DGS .trigsbin 和 Animated SOG .asog，动态片段能够参与灯光、阴影、热点、触发和剪辑，不再只是逐帧文件播放器。播放要求 viewer 2.16.0 以上，WebGPU 与 WebGL 2 都在支持范围。 https://radiancefields.com/storysplat-2-6-plays-open4dgs-and-animated-sog-4d-splats StorySplat 2.6 让两种 4D Gaussian 进入浏览器场景 ## StorySplat 2.6 让两种 4D Gaussian 进入浏览器场景\n\nStorySplat 2.6 可直接读取 Open4DGS `.trigsbin` 和 Animated SOG `.asog`，动态片段能够参与灯光、阴影、热点、触发和剪辑，不再只是逐帧文件播放器。播放要求 viewer 2.16.0 以上，WebGPU 与 WebGL 2 都在支持范围。\n\n真正的限制在交付端：两种格式都不流式，整份文件下载后才出现；公开 Open4DGS 示例达到 319—817 MB，手机播放也尚未验证。免费版只允许公开非商业发布，自托管商业项目至少需要 Plus；[发布说明](https://radiancefields.com/storysplat-2-6-plays-open4dgs-and-animated-sog-4d-splats)和[价格页](https://storysplat.com/pricing/)应一起看。"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",
