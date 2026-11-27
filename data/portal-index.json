@@ -1,7 +1,261 @@
 {
   "schemaVersion": 1,
-  "updatedThrough": "2026-11-16",
+  "updatedThrough": "2026-11-27",
   "daily": [
+    {
+      "id": "gsd-2026-11-27",
+      "contentHash": "791a2b3d72323db4c303b9f3ff4a55510fddf3b741e1e005321900f2a6f81d8c",
+      "date": "2026-11-27",
+      "title": "Horizon 行业日报 — 2026-11-27",
+      "headline": "PERF-GS 跨 NVIDIA/AMD 开放训练，SuperSplat Viewer 1.44.0 上线",
+      "summary": "EA SEED 用 Slang、Vulkan 与 D3D12 做出可下载的跨厂商 3DGS 训练器；SuperSplat Viewer 正式收拢嵌入、XR 与随机光栅更新。KIRI、HoloLab、LichtFeld、Spirula 和 NCore 也有可行动的新变化。",
+      "status": "published",
+      "path": "docs/daily/2026/11/2026-11-27.md",
+      "sourceCount": 2,
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "highlights": [
+        {
+          "id": "github.com/electronicarts/perf-gs/releases/tag/v1.0.0",
+          "anchor": "event-perf-gs-v1-0-0",
+          "kind": "tool",
+          "source": "https://github.com/electronicarts/perf-gs/releases/tag/v1.0.0",
+          "title": "PERF-GS 用图形计算栈打开跨厂商训练路线",
+          "summary": "EA SEED 发布的 PERF-GS v1.0.0 以 Slang 编写训练核心，走 Vulkan 或 D3D12，在 NVIDIA 与 AMD GPU 上运行，不依赖 CUDA 或 PyTorch。独立应用把 COLMAP、检查、训练、查看和导出串在一起，也保留无界面入口。发行页和仓库都已公开。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/playcanvas/supersplat-viewer/releases/tag/v1.44.0",
+          "anchor": "event-supersplat-viewer-v1-44-0",
+          "kind": "tool",
+          "source": "https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.44.0",
+          "title": "SuperSplat Viewer 1.44.0 要求跨设备验收",
+          "summary": "SuperSplat Viewer v1.44.0 正式包含宿主控制信息面板、容器全屏、滚轮与快捷键的嵌入改造，并允许完全关闭 info 入口。XR 双手缩放扩大到 0.1—10 倍，VR 中新增地面网格；两项仍缺头显实测。正式 release已可用。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "hololab:robot-simulation-starter-kit-2026-11-26",
+          "anchor": "event-hololab-robot-simulation-kit",
+          "kind": "news",
+          "source": "https://prtimes.jp/main/html/rd/p/000000161.000023638.html",
+          "title": "HoloLab 把真实扫描交付为机器人仿真场景",
+          "summary": "HoloLab 的 Robot Simulation Starter Kit 用 XGRIDS 扫描现实空间，把 3DGS 作为视觉层、网格作为碰撞层，再导入 NVIDIA Isaac Sim。首批目标包括 Unitree G1、Go2 和 Boston Dynamics Spot，另有现场扫描、PC 配置、地形训练与真机验证服务。官方新闻稿给出的价格口径是询价。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "kiri-engine:4.4.0",
+          "anchor": "event-kiri-engine-4-4-0",
+          "kind": "tool",
+          "source": "https://apps.apple.com/us/app/kiri-engine-3d-scanner-lidar/id1577127142",
+          "title": "KIRI Engine 4.4.0 支持 360 视频直传 3DGS",
+          "summary": "KIRI Engine 4.4.0 的 App Store 记录确认：Web 端 3DGS Scan 接受 360 视频，Manual Capture 可以录制视频，单次输入提高到 500 张照片或 5 分钟视频。它减少了全景视频拆帧与整理步骤，也给长走拍明确了上限。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MrNeRF/LichtFeld-Studio/pull/4081",
+          "anchor": "event-lichtfeld-roi-crop-separation",
+          "kind": "tool",
+          "source": "https://github.com/MrNeRF/LichtFeld-Studio/pull/4081",
+          "title": "LichtFeld 分开训练 ROI 与点云裁剪",
+          "summary": "LichtFeld Studio 的 PR #4081让训练 ROI 和点云 crop 拥有独立的形状、变换、可见性、撤销与序列化 role。ROI 会跨越训练、暂停和完成状态，点云裁剪则继续支持椭球；旧工程缺少 role 时仍按原行为读取。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/harry7557558/spirula-studio/pull/429",
+          "anchor": "event-spirula-backward-epnp",
+          "kind": "tool",
+          "source": "https://github.com/harry7557558/spirula-studio/pull/429",
+          "title": "Spirula 减少反向无效像素并加入 EPnP",
+          "summary": "Spirula 的 PR #429在 8×8 tile 内跳过零梯度并压缩活跃像素，CUDA 与 Vulkan 共用路径；PR 给出了精确性测试，没有统一性能数字。另一项 EPnP 更新进入 RANSAC PnP 的局部重拟合，覆盖平面、近似平面和广角/鱼眼 bearing。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/NVIDIA/ncore/releases/tag/v20.0.0",
+          "anchor": "event-ncore-v20",
+          "kind": "tool",
+          "source": "https://github.com/NVIDIA/ncore/releases/tag/v20.0.0",
+          "title": "NCore 20 重做远端与异步传感器数据读",
+          "summary": "NVIDIA NCore 20.0.0同时支持 zarr-python 2/3、可选 zarr format v3，并为组件 reader 和 sequence open 增加异步 API。远端 .itar 可并发读取精确字节范围，本地路径加入缓存、positional read 和少复制优化。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "github.com/MicroPasts/splat-viewer/releases/tag/v0.1.2",
+          "anchor": "event-micropasts-splat-viewer",
+          "kind": "tool",
+          "source": "https://github.com/MicroPasts/splat-viewer",
+          "title": "MicroPasts 为文化遗产 viewer 补上比例与来源语境",
+          "summary": "MicroPasts/splat-viewer 0.1.2 是面向 React 18 与 WebGL 2 的 MIT 组件，支持 PLY、SPZ、SPLAT、KSPLAT、SOG，以及可分页的 RAD。它把比例尺、paradata 和 splat telemetry 作为一等界面：只有明确 mmPerUnit 才显示真实尺度，并记录采集、重建、来源和衍生资产。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "splatbridge:1.4.0-unconfirmed",
+          "anchor": "event-splatbridge-version-conflict",
+          "kind": "news",
+          "source": "https://assetstore.unity.com/packages/tools/particles-effects/splatbridge-real-time-3d-gaussian-splatting-3dgs-for-unity-334403",
+          "title": "SplatBridge 1.4.0 的 Web 发布尚未在商店页闭环",
+          "summary": "媒体报道和演示称 SplatBridge 1.4.0 已支持 Unity WebGL2 与 WebGPU，但本期核对 Unity Asset Store时，官方页面仍显示 1.3.2，并写明 WebGL 不支持。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        },
+        {
+          "id": "arxiv:2611.33374",
+          "anchor": "event-versiongs-sprintgs",
+          "kind": "paper",
+          "source": "https://arxiv.org/abs/2611.33374",
+          "title": "VersionGS 与 SprintGS 分别重写动态存储和快速训练成本",
+          "summary": "VersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。论文。",
+          "date": "2026-11-27",
+          "topics": [
+            "capture",
+            "spatial-ai",
+            "xr",
+            "industry",
+            "3dgs",
+            "4dgs",
+            "webgpu",
+            "lod",
+            "streaming",
+            "slam",
+            "formats"
+          ]
+        }
+      ],
+      "prs": [],
+      "readingMinutes": 4,
+      "unresolvedSources": 0,
+      "editorialDisclosure": "Codex 依据本期实时检索、GitHub release/PR/提交、App Store、厂商新闻稿、商店页和论文原页编辑阅读版。未安装或购买相关产品，未运行 GPU、手机、XR 或机器人仿真测试，也未独立复现作者性能与论文指标；主干提交不等同于正式发行。",
+      "readingEdition": {
+        "path": "docs/reading/2026-11-27.md",
+        "contentHash": "ddc58cc588a5b44fce428616e5bb13e2ee73bc105ca8392391d48d6eccf6504c"
+      }
+    },
     {
       "id": "gsd-2026-11-16",
       "contentHash": "35e46dd80bd90d338db7989a47d93664c89ffde0200592a7a064bdf10ceb43fd",
@@ -17522,6 +17776,227 @@
   ],
   "entries": [
     {
+      "id": "arxiv:2611.33374",
+      "kind": "paper",
+      "date": "2026-11-27",
+      "title": "VersionGS：基于版本化高斯的紧凑、抗运动动态高斯泼溅",
+      "summary": "VersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。论文。",
+      "source": "https://arxiv.org/abs/2611.33374",
+      "anchor": "event-versiongs-sprintgs",
+      "topics": []
+    },
+    {
+      "id": "arxiv:2611.33796",
+      "kind": "paper",
+      "date": "2026-11-27",
+      "title": "SprintGS：消除冗余以加速三维高斯泼溅训练",
+      "summary": "VersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。论文。",
+      "source": "https://arxiv.org/abs/2611.33796",
+      "anchor": "section-versiongs用版本字典保存快速运动动态高斯",
+      "topics": [
+        "3dgs",
+        "4dgs"
+      ]
+    },
+    {
+      "id": "github.com/electronicarts/perf-gs/releases/tag/v1.0.0",
+      "anchor": "event-perf-gs-v1-0-0",
+      "kind": "tool",
+      "source": "https://github.com/electronicarts/perf-gs/releases/tag/v1.0.0",
+      "title": "PERF-GS 用图形计算栈打开跨厂商训练路线",
+      "summary": "EA SEED 发布的 PERF-GS v1.0.0 以 Slang 编写训练核心，走 Vulkan 或 D3D12，在 NVIDIA 与 AMD GPU 上运行，不依赖 CUDA 或 PyTorch。独立应用把 COLMAP、检查、训练、查看和导出串在一起，也保留无界面入口。发行页和仓库都已公开。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/pull/429",
+      "anchor": "event-spirula-backward-epnp",
+      "kind": "tool",
+      "source": "https://github.com/harry7557558/spirula-studio/pull/429",
+      "title": "Spirula 减少反向无效像素并加入 EPnP",
+      "summary": "Spirula 的 PR #429在 8×8 tile 内跳过零梯度并压缩活跃像素，CUDA 与 Vulkan 共用路径；PR 给出了精确性测试，没有统一性能数字。另一项 EPnP 更新进入 RANSAC PnP 的局部重拟合，覆盖平面、近似平面和广角/鱼眼 bearing。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MicroPasts/splat-viewer/releases/tag/v0.1.2",
+      "anchor": "event-micropasts-splat-viewer",
+      "kind": "tool",
+      "source": "https://github.com/MicroPasts/splat-viewer",
+      "title": "MicroPasts 为文化遗产 viewer 补上比例与来源语境",
+      "summary": "MicroPasts/splat-viewer 0.1.2 是面向 React 18 与 WebGL 2 的 MIT 组件，支持 PLY、SPZ、SPLAT、KSPLAT、SOG，以及可分页的 RAD。它把比例尺、paradata 和 splat telemetry 作为一等界面：只有明确 mmPerUnit 才显示真实尺度，并记录采集、重建、来源和衍生资产。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/pull/4081",
+      "anchor": "event-lichtfeld-roi-crop-separation",
+      "kind": "tool",
+      "source": "https://github.com/MrNeRF/LichtFeld-Studio/pull/4081",
+      "title": "LichtFeld 分开训练 ROI 与点云裁剪",
+      "summary": "LichtFeld Studio 的 PR #4081让训练 ROI 和点云 crop 拥有独立的形状、变换、可见性、撤销与序列化 role。ROI 会跨越训练、暂停和完成状态，点云裁剪则继续支持椭球；旧工程缺少 role 时仍按原行为读取。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/NVIDIA/ncore/releases/tag/v20.0.0",
+      "anchor": "event-ncore-v20",
+      "kind": "tool",
+      "source": "https://github.com/NVIDIA/ncore/releases/tag/v20.0.0",
+      "title": "NCore 20 重做远端与异步传感器数据读",
+      "summary": "NVIDIA NCore 20.0.0同时支持 zarr-python 2/3、可选 zarr format v3，并为组件 reader 和 sequence open 增加异步 API。远端 .itar 可并发读取精确字节范围，本地路径加入缓存、positional read 和少复制优化。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/releases/tag/v1.44.0",
+      "anchor": "event-supersplat-viewer-v1-44-0",
+      "kind": "tool",
+      "source": "https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.44.0",
+      "title": "SuperSplat Viewer 1.44.0 要求跨设备验收",
+      "summary": "SuperSplat Viewer v1.44.0 正式包含宿主控制信息面板、容器全屏、滚轮与快捷键的嵌入改造，并允许完全关闭 info 入口。XR 双手缩放扩大到 0.1—10 倍，VR 中新增地面网格；两项仍缺头显实测。正式 release已可用。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "hololab:robot-simulation-starter-kit-2026-11-26",
+      "anchor": "event-hololab-robot-simulation-kit",
+      "kind": "news",
+      "source": "https://prtimes.jp/main/html/rd/p/000000161.000023638.html",
+      "title": "HoloLab 把真实扫描交付为机器人仿真场景",
+      "summary": "HoloLab 的 Robot Simulation Starter Kit 用 XGRIDS 扫描现实空间，把 3DGS 作为视觉层、网格作为碰撞层，再导入 NVIDIA Isaac Sim。首批目标包括 Unitree G1、Go2 和 Boston Dynamics Spot，另有现场扫描、PC 配置、地形训练与真机验证服务。官方新闻稿给出的价格口径是询价。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "kiri-engine:4.4.0",
+      "anchor": "event-kiri-engine-4-4-0",
+      "kind": "tool",
+      "source": "https://apps.apple.com/us/app/kiri-engine-3d-scanner-lidar/id1577127142",
+      "title": "KIRI Engine 4.4.0 支持 360 视频直传 3DGS",
+      "summary": "KIRI Engine 4.4.0 的 App Store 记录确认：Web 端 3DGS Scan 接受 360 视频，Manual Capture 可以录制视频，单次输入提高到 500 张照片或 5 分钟视频。它减少了全景视频拆帧与整理步骤，也给长走拍明确了上限。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
+      "id": "splatbridge:1.4.0-unconfirmed",
+      "anchor": "event-splatbridge-version-conflict",
+      "kind": "news",
+      "source": "https://assetstore.unity.com/packages/tools/particles-effects/splatbridge-real-time-3d-gaussian-splatting-3dgs-for-unity-334403",
+      "title": "SplatBridge 1.4.0 的 Web 发布尚未在商店页闭环",
+      "summary": "媒体报道和演示称 SplatBridge 1.4.0 已支持 Unity WebGL2 与 WebGPU，但本期核对 Unity Asset Store时，官方页面仍显示 1.3.2，并写明 WebGL 不支持。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ]
+    },
+    {
       "id": "github.com/BudgetAny/Budget3D",
       "anchor": "event-budget3d-adaptive-tokens",
       "kind": "tool",
@@ -30805,6 +31280,28 @@
   ],
   "search": [
     {
+      "id": "gsd-2026-11-27",
+      "kind": "daily",
+      "title": "PERF-GS 跨 NVIDIA/AMD 开放训练，SuperSplat Viewer 1.44.0 上线",
+      "summary": "EA SEED 用 Slang、Vulkan 与 D3D12 做出可下载的跨厂商 3DGS 训练器；SuperSplat Viewer 正式收拢嵌入、XR 与随机光栅更新。KIRI、HoloLab、LichtFeld、Spirula 和 NCore 也有可行动的新变化。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/",
+      "text": "PERF-GS 用图形计算栈打开跨厂商训练路线\nEA SEED 发布的 PERF-GS v1.0.0 以 Slang 编写训练核心，走 Vulkan 或 D3D12，在 NVIDIA 与 AMD GPU 上运行，不依赖 CUDA 或 PyTorch。独立应用把 COLMAP、检查、训练、查看和导出串在一起，也保留无界面入口。发行页和仓库都已公开。\n作者的 RTX 4090 数据把训练循环压到 10.51—122.66 秒区间，RTX 4050 6 GB 的 Balanced 记录约 2.80 GiB；但它们不含 COLMAP、载入和导出。Windows 的 NVIDIA/AMD 路径最清楚，Linux 与 macOS 未验证。真正值得做的是同数据、同预设的 RTX/RX 端到端对照，而不是直接转述“秒级训练”。\nSuperSplat Viewer 1.44.0 要求跨设备验收\nSuperSplat Viewer v1.44.0 正式包含宿主控制信息面板、容器全屏、滚轮与快捷键的嵌入改造，并允许完全关闭 info 入口。XR 双手缩放扩大到 0.1—10 倍，VR 中新增地面网格；两项仍缺头显实测。正式 release已可用。\nstochastic raster 把颜色解码移到 vertex 阶段后，维护者测得 A15 明显变快，Pixel 7 Pro 和 M4 Max 的部分模式却回退几个百分点，RTX 4090 基本持平。WebGPU 又缺少可靠的 adapter 分流信息，因此这不是“一律更快”的升级。依赖 Viewer 的产品必须覆盖手机、Apple Silicon、桌面独显与目标头显。\nHoloLab 把真实扫描交付为机器人仿真场景\nHoloLab 的 Robot Simulation Starter Kit 用 XGRIDS 扫描现实空间，把 3DGS 作为视觉层、网格作为碰撞层，再导入 NVIDIA Isaac Sim。首批目标包括 Unitree G1、Go2 和 Boston Dynamics Spot，另有现场扫描、PC 配置、地形训练与真机验证服务。官方新闻稿给出的价格口径是询价。\n它说明高斯场景开始进入机器人仿真的服务交付，但官方没有公开场景规模、Isaac Sim 帧率、控制频率或 sim-to-real 成功率。采购判断应围绕尺度误差、碰撞简化、坐标一致性和目标机器人边界，而不是只看视觉逼真度。\nKIRI Engine 4.4.0 支持 360 视频直传 3DGS\nKIRI Engine 4.4.0 的 App Store 记录确认：Web 端 3DGS Scan 接受 360 视频，Manual Capture 可以录制视频，单次输入提高到 500 张照片或 5 分钟视频。它减少了全景视频拆帧与整理步骤，也给长走拍明确了上限。\n版本说明没有给出“画质提升”的数据集或指标，也没有明确新上限适用的订阅档位。已有 KIRI 订阅和 360 相机的团队，可以用同一素材比较视频直传与人工拆帧的上传、失败恢复、训练时间和结果，而不应把商店更新当成评测结论。\nLichtFeld 分开训练 ROI 与点云裁剪\nLichtFeld Studio 的 PR #4081让训练 ROI 和点云 crop 拥有独立的形状、变换、可见性、撤销与序列化 role。ROI 会跨越训练、暂停和完成状态，点云裁剪则继续支持椭球；旧工程缺少 role 时仍按原行为读取。\n这项主干变化解决的是状态语义混淆，还修复了完成时按 ROI 裁剪后 Edit Mode 空白的问题。它没有新正式 tag，旧 cropbox 工程、训练恢复、完成后裁剪、撤销和 MCP/Python 调用应锁定提交回归。\nSpirula 减少反向无效像素并加入 EPnP\nSpirula 的 PR #429在 8×8 tile 内跳过零梯度并压缩活跃像素，CUDA 与 Vulkan 共用路径；PR 给出了精确性测试，没有统一性能数字。另一项 EPnP 更新进入 RANSAC PnP 的局部重拟合，覆盖平面、近似平面和广角/鱼眼 bearing。\n两条改动分别落在训练反向成本和相机位姿稳定性上，不能用一项 benchmark 代替另一项验收。建议固定场景比较 GPU 时间与最终梯度，同时用平面标定板和鱼眼数据验证位姿；当前仍是主干代码，不是正式发行。\nNCore 20 重做远端与异步传感器数据读\nNVIDIA NCore 20.0.0同时支持 zarr-python 2/3、可选 zarr format v3，并为组件 reader 和 sequence open 增加异步 API。远端 .itar 可并发读取精确字节范围，本地路径加入缓存、positional read 和少复制优化。\n作者报告本地全帧读取快 1.7—5.5 倍，运动补偿也有新路径；这些都是作者条件。release notes 同时列出多项 breaking changes，涉及 loader、构造、有效性返回、参数与异常类型。NuRec 或多传感器重建用户应先照迁移指南回归，不要只因性能数字直接替换数据层。\nMicroPasts 为文化遗产 viewer 补上比例与来源语境\nMicroPasts/splat-viewer 0.1.2 是面向 React 18 与 WebGL 2 的 MIT 组件，支持 PLY、SPZ、SPLAT、KSPLAT、SOG，以及可分页的 RAD。它把比例尺、paradata 和 splat telemetry 作为一等界面：只有明确 mmPerUnit 才显示真实尺度，并记录采集、重建、来源和衍生资产。\n本地文件只在浏览器内读取，但会完整载入；分享链接只带视角与显示参数，不包含本地资产。项目刚创建、仓库规模很小，SparkJS/WASM 包也建议懒加载。它适合原型和机构展示试验，不能仅凭功能列表判断生产成熟度。\nSplatBridge 1.4.0 的 Web 发布尚未在商店页闭环\n媒体报道和演示称 SplatBridge 1.4.0 已支持 Unity WebGL2 与 WebGPU，但本期核对 Unity Asset Store时，官方页面仍显示 1.3.2，并写明 WebGL 不支持。\n这可能是商店审核或页面传播延迟，也可能是演示构建尚未成为购买者可下载版本。当前只能报道来源冲突，不能写成“商店已正式交付”。已购用户应先核对账号内包版本、Unity 6000.x 条件、WebGL2/WebGPU 路径和许可证，再决定是否安排迁移。\nVersionGS 与 SprintGS 分别重写动态存储和快速训练成本\nVersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。论文。\nSprintGS 则从 scheduled tile culling、透明收敛项剪枝、反向 warp 通信和 fused loss 四处减少冗余。作者报告比 FastGS 快 2.15 倍，高质量设置快 1.81 倍；同样没有可核验官方实现。论文\n两篇论文分别回答“动态高斯如何避免快动作退化并压缩存储”和“Gaussian 已经很少后，训练时间还花在哪里”。现阶段它们都是论文无代码，作者指标不能替代复现。"
+    },
+    {
       "id": "gsd-2026-11-16",
       "kind": "daily",
       "title": "高斯日报：PlayCanvas 修正动画高斯旋转，Budget3D 开放可变预算生成",
@@ -32105,6 +32602,227 @@
       ],
       "url": "/daily/2026/09/18/",
       "text": "Blender 加固 PLY/SPZ 导入并统一高斯默认属性\nBlender 的高斯导入代码补上了异常文件与缺失属性的处理。PLY 中用于描述视角相关颜色的球谐系数按颜色通道排列；旧实现遇到不完整的系数层级时，可能读错红、绿、蓝通道的位置，导致颜色异常。\n此次修复按文件实际提供的系数计算偏移，并为不支持的属性数量给出警告。另一项修复让 Cycles 在缺少颜色、缩放或旋转属性时采用与 EEVEE 一致的默认值，减少同一资产在两个渲染器中表现不同的问题。历史记录中的部分提交还缺直接的一手回链，具体核对状态见研究归档。\n导入时需要检查哪些属性文件能打开，只能证明解析流程走通。交换资产时还应核对位置、缩放、旋转、不透明度、球谐系数的排列及坐标约定。此次记录的导入边界包括最高四阶球谐、最多 72 个 f_rest 属性；不完整层级采用可用部分并警告。\n来源\nPlayCanvas 跳过缓存阴影计算并修正阴影更新调度\nPlayCanvas Engine 调整了高斯阴影的计算时机。灯光的阴影已经缓存、无需重新绘制时，现在可以跳过数据上传、变换刷新和候选高斯剔除等准备工作。\n后续调度修复又把方向光的剔除请求绑定到实际启用的阴影通道，减少没有安排重绘却仍进行计算的情况。收益主要面向静态场景与缓存阴影；只有应用使用了相应高斯阴影路径，升级才可能影响这部分开销。\n来源\nArcturus Vision 公开空间视频到 SOG 的转换脚本\nArcturus Vision 公开了一套把空间视频转为 SOG 高斯场景的脚本。它利用双目视频随附的标定和轨迹，整理出 COLMAP 场景，再调用 LichtFeld 训练，最后输出可供查看器使用的文件。\n这项内容发布于 9 月 16 日，本期属于补收。官方目标环境为 Linux 工作站，并依赖 NVIDIA GPU、COLMAP 和 LichtFeld；脚本可下载，但当期尚未确认明确的开源许可证。\n采集与训练条件记录中的要求包括 NVIDIA Compute Capability 7.5 及以上、570 系列及以上驱动和 uv。默认采用半分辨率训练，上限为 150 万高斯；全分辨率、断点恢复和无界面运行需使用相应参数。双目轨迹提供了初始化条件，仍需检查标定、同步与最终几何质量。\n来源\nPrecisionReach-GS 公开机器人抓取代码与双视图查看器\nPrecisionReach-GS 公开了从实景重建到机器人观察数据生成的一段工作流。项目把 COLMAP 与高斯场景对齐到机器人基座坐标系，随后生成腕部相机轨迹及对应的末端执行器位姿，用于视觉、语言与动作模型的数据准备。\n随附查看器可以同时呈现腕部相机和第三人称视角，并导出视频与逐帧位姿。公开内容不包含完整数据集、训练策略和最终实验输出；当期仓库也未声明许可证，因此不能据此声称最终抓取成功率已经可复现。\n来源\nLichtFeld 修复工程管理、Gallery 同步与主题显示\nLichtFeld 的更新集中在工程管理界面：Inspector 改为按需覆盖显示，列表只在可见行或列数变化时重建，Gallery 重连失败也有了集中提示和明确的重试入口。\n这些改动改善大量项目的浏览和同步过程。另有主题、透明度显示修复，均属于界面与工程管理调整，不代表训练算法或重建质量发生变化。\n来源\nCorbeauSplat 修正动态重建的相机配准\nCorbeauSplat 把 Mac 上的相机配准、训练和编辑工具串在一起。2.0.0-beta.4 修正了动态重建时把不同时间的所有画面一起交给 COLMAP 的问题，改为先取各相机的同一参考时刻。它解决的是重建输入错误，仍属于预发布版。\n报道与来源 · 原始材料\nfVDB 将高斯接口迁入 Reality Capture\nfVDB 0.6 将高层高斯 Python 接口迁到 fVDB Reality Capture，底层 CUDA 运算继续保留。直接从旧模块导入训练或渲染接口的程序需要调整；新版本还加入多 GPU 3DGUT 支持。升级前应先检查调用路径，不能只替换包版本。\n报道与来源 · 原始材料\nNormLift 用跨视角一致性改善语义判断\nNormLift 将不同视角的视觉语言特征映射回三维，再用聚合特征的强度估计这些观察是否一致。这个信号用于细化语义投票，关注的是物体含义的可靠性，而非单纯提高画面分辨率。\n来源\nGeometry beneath the Waves 改善水下稀疏视角重建\nGeometry beneath the Waves 研究水下稀疏视角的高斯重建，用密集几何先验帮助初始化场景，目标是在可用照片较少时获得更可靠的结构。它面向水下采集的特定条件；当期可运行的官方代码尚未明确，尚不能据论文直接判断自己的素材和设备能否获得同样效果。\n来源\n面部关键点引导的高斯说话头像研究\n这项研究用面部关键点引导高斯说话头像合成，关注表情与口型如何驱动外观。它是此前已有的论文，本期收录不代表 9 月 18 日新提交；具体方法和公开状态保留在研究归档中。\n来源\nThree.js 原生高斯渲染仍需区分显示与完整工作流\nThree.js r186 的原生高斯路径让场景显示更方便，但选型时仍需分别核对层次细节、流式加载和后处理支持。历史记录把它与 Spark、PlayCanvas 的能力边界放在一起讨论；“原生支持”这一标签本身不足以说明大场景交付条件。\n这部分作为当时的工程观察保留，具体限制与待补来源见研究归档。\n来源"
+    },
+    {
+      "id": "arxiv:2611.33374",
+      "kind": "paper",
+      "title": "VersionGS：基于版本化高斯的紧凑、抗运动动态高斯泼溅",
+      "summary": "VersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。论文。",
+      "date": "2026-11-27",
+      "topics": [],
+      "url": "/daily/2026/11/27/#event-versiongs-sprintgs",
+      "text": "VersionGS：基于版本化高斯的紧凑、抗运动动态高斯泼溅 VersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。论文。 https://arxiv.org/abs/2611.33374 VersionGS 与 SprintGS 分别重写动态存储和快速训练成本 ## VersionGS 与 SprintGS 分别重写动态存储和快速训练成本\n\nVersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。[论文](https://arxiv.org/abs/2611.33374)。\n\nSprintGS 则从 scheduled tile culling、透明收敛项剪枝、反向 warp 通信和 fused loss 四处减少冗余。作者报告比 FastGS 快 2.15 倍，高质量设置快 1.81 倍；同样没有可核验官方实现。[论文](https://arxiv.org/abs/2611.33796)\n\n两篇论文分别回答“动态高斯如何避免快动作退化并压缩存储”和“Gaussian 已经很少后，训练时间还花在哪里”。现阶段它们都是论文无代码，作者指标不能替代复现。"
+    },
+    {
+      "id": "arxiv:2611.33796",
+      "kind": "paper",
+      "title": "SprintGS：消除冗余以加速三维高斯泼溅训练",
+      "summary": "VersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。论文。",
+      "date": "2026-11-27",
+      "topics": [
+        "3dgs",
+        "4dgs"
+      ],
+      "url": "/daily/2026/11/27/#section-versiongs用版本字典保存快速运动动态高斯",
+      "text": "SprintGS：消除冗余以加速三维高斯泼溅训练 VersionGS 用逐帧 Gaussian 状态和组内共享版本字典表示动态场景：未变化项复用旧版本，变化项才追加。作者报告快速舞蹈场景的前景 PSNR 提升 2.7 dB，并在 N3DV 与 Technicolor 上比 TAD-GS 少 6.0 倍和 5.7 倍存储；播放只需普通 rasterizer。目前没有找到官方代码。论文。 https://arxiv.org/abs/2611.33796 VersionGS：用版本字典保存快速运动动态高斯"
+    },
+    {
+      "id": "github.com/electronicarts/perf-gs/releases/tag/v1.0.0",
+      "kind": "tool",
+      "title": "PERF-GS 用图形计算栈打开跨厂商训练路线",
+      "summary": "EA SEED 发布的 PERF-GS v1.0.0 以 Slang 编写训练核心，走 Vulkan 或 D3D12，在 NVIDIA 与 AMD GPU 上运行，不依赖 CUDA 或 PyTorch。独立应用把 COLMAP、检查、训练、查看和导出串在一起，也保留无界面入口。发行页和仓库都已公开。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-perf-gs-v1-0-0",
+      "text": "PERF-GS 用图形计算栈打开跨厂商训练路线 EA SEED 发布的 PERF-GS v1.0.0 以 Slang 编写训练核心，走 Vulkan 或 D3D12，在 NVIDIA 与 AMD GPU 上运行，不依赖 CUDA 或 PyTorch。独立应用把 COLMAP、检查、训练、查看和导出串在一起，也保留无界面入口。发行页和仓库都已公开。 https://github.com/electronicarts/perf-gs/releases/tag/v1.0.0 PERF-GS 用图形计算栈打开跨厂商训练路线 ## PERF-GS 用图形计算栈打开跨厂商训练路线\n\nEA SEED 发布的 PERF-GS v1.0.0 以 Slang 编写训练核心，走 Vulkan 或 D3D12，在 NVIDIA 与 AMD GPU 上运行，不依赖 CUDA 或 PyTorch。独立应用把 COLMAP、检查、训练、查看和导出串在一起，也保留无界面入口。[发行页](https://github.com/electronicarts/perf-gs/releases/tag/v1.0.0)和[仓库](https://github.com/electronicarts/perf-gs)都已公开。\n\n作者的 RTX 4090 数据把训练循环压到 10.51—122.66 秒区间，RTX 4050 6 GB 的 Balanced 记录约 2.80 GiB；但它们不含 COLMAP、载入和导出。Windows 的 NVIDIA/AMD 路径最清楚，Linux 与 macOS 未验证。真正值得做的是同数据、同预设的 RTX/RX 端到端对照，而不是直接转述“秒级训练”。"
+    },
+    {
+      "id": "github.com/harry7557558/spirula-studio/pull/429",
+      "kind": "tool",
+      "title": "Spirula 减少反向无效像素并加入 EPnP",
+      "summary": "Spirula 的 PR #429在 8×8 tile 内跳过零梯度并压缩活跃像素，CUDA 与 Vulkan 共用路径；PR 给出了精确性测试，没有统一性能数字。另一项 EPnP 更新进入 RANSAC PnP 的局部重拟合，覆盖平面、近似平面和广角/鱼眼 bearing。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-spirula-backward-epnp",
+      "text": "Spirula 减少反向无效像素并加入 EPnP Spirula 的 PR #429在 8×8 tile 内跳过零梯度并压缩活跃像素，CUDA 与 Vulkan 共用路径；PR 给出了精确性测试，没有统一性能数字。另一项 EPnP 更新进入 RANSAC PnP 的局部重拟合，覆盖平面、近似平面和广角/鱼眼 bearing。 https://github.com/harry7557558/spirula-studio/pull/429 Spirula 减少反向无效像素并加入 EPnP ## Spirula 减少反向无效像素并加入 EPnP\n\nSpirula 的 [PR #429](https://github.com/harry7557558/spirula-studio/pull/429)在 8×8 tile 内跳过零梯度并压缩活跃像素，CUDA 与 Vulkan 共用路径；PR 给出了精确性测试，没有统一性能数字。另一项 EPnP 更新进入 RANSAC PnP 的局部重拟合，覆盖平面、近似平面和广角/鱼眼 bearing。\n\n两条改动分别落在训练反向成本和相机位姿稳定性上，不能用一项 benchmark 代替另一项验收。建议固定场景比较 GPU 时间与最终梯度，同时用平面标定板和鱼眼数据验证位姿；当前仍是主干代码，不是正式发行。"
+    },
+    {
+      "id": "github.com/MicroPasts/splat-viewer/releases/tag/v0.1.2",
+      "kind": "tool",
+      "title": "MicroPasts 为文化遗产 viewer 补上比例与来源语境",
+      "summary": "MicroPasts/splat-viewer 0.1.2 是面向 React 18 与 WebGL 2 的 MIT 组件，支持 PLY、SPZ、SPLAT、KSPLAT、SOG，以及可分页的 RAD。它把比例尺、paradata 和 splat telemetry 作为一等界面：只有明确 mmPerUnit 才显示真实尺度，并记录采集、重建、来源和衍生资产。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-micropasts-splat-viewer",
+      "text": "MicroPasts 为文化遗产 viewer 补上比例与来源语境 MicroPasts/splat-viewer 0.1.2 是面向 React 18 与 WebGL 2 的 MIT 组件，支持 PLY、SPZ、SPLAT、KSPLAT、SOG，以及可分页的 RAD。它把比例尺、paradata 和 splat telemetry 作为一等界面：只有明确 mmPerUnit 才显示真实尺度，并记录采集、重建、来源和衍生资产。 https://github.com/MicroPasts/splat-viewer MicroPasts 为文化遗产 viewer 补上比例与来源语境 ## MicroPasts 为文化遗产 viewer 补上比例与来源语境\n\n[MicroPasts/splat-viewer](https://github.com/MicroPasts/splat-viewer) 0.1.2 是面向 React 18 与 WebGL 2 的 MIT 组件，支持 PLY、SPZ、SPLAT、KSPLAT、SOG，以及可分页的 RAD。它把比例尺、paradata 和 splat telemetry 作为一等界面：只有明确 `mmPerUnit` 才显示真实尺度，并记录采集、重建、来源和衍生资产。\n\n本地文件只在浏览器内读取，但会完整载入；分享链接只带视角与显示参数，不包含本地资产。项目刚创建、仓库规模很小，SparkJS/WASM 包也建议懒加载。它适合原型和机构展示试验，不能仅凭功能列表判断生产成熟度。"
+    },
+    {
+      "id": "github.com/MrNeRF/LichtFeld-Studio/pull/4081",
+      "kind": "tool",
+      "title": "LichtFeld 分开训练 ROI 与点云裁剪",
+      "summary": "LichtFeld Studio 的 PR #4081让训练 ROI 和点云 crop 拥有独立的形状、变换、可见性、撤销与序列化 role。ROI 会跨越训练、暂停和完成状态，点云裁剪则继续支持椭球；旧工程缺少 role 时仍按原行为读取。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-lichtfeld-roi-crop-separation",
+      "text": "LichtFeld 分开训练 ROI 与点云裁剪 LichtFeld Studio 的 PR #4081让训练 ROI 和点云 crop 拥有独立的形状、变换、可见性、撤销与序列化 role。ROI 会跨越训练、暂停和完成状态，点云裁剪则继续支持椭球；旧工程缺少 role 时仍按原行为读取。 https://github.com/MrNeRF/LichtFeld-Studio/pull/4081 LichtFeld 分开训练 ROI 与点云裁剪 ## LichtFeld 分开训练 ROI 与点云裁剪\n\nLichtFeld Studio 的 [PR #4081](https://github.com/MrNeRF/LichtFeld-Studio/pull/4081)让训练 ROI 和点云 crop 拥有独立的形状、变换、可见性、撤销与序列化 role。ROI 会跨越训练、暂停和完成状态，点云裁剪则继续支持椭球；旧工程缺少 role 时仍按原行为读取。\n\n这项主干变化解决的是状态语义混淆，还修复了完成时按 ROI 裁剪后 Edit Mode 空白的问题。它没有新正式 tag，旧 cropbox 工程、训练恢复、完成后裁剪、撤销和 MCP/Python 调用应锁定提交回归。"
+    },
+    {
+      "id": "github.com/NVIDIA/ncore/releases/tag/v20.0.0",
+      "kind": "tool",
+      "title": "NCore 20 重做远端与异步传感器数据读",
+      "summary": "NVIDIA NCore 20.0.0同时支持 zarr-python 2/3、可选 zarr format v3，并为组件 reader 和 sequence open 增加异步 API。远端 .itar 可并发读取精确字节范围，本地路径加入缓存、positional read 和少复制优化。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-ncore-v20",
+      "text": "NCore 20 重做远端与异步传感器数据读 NVIDIA NCore 20.0.0同时支持 zarr-python 2/3、可选 zarr format v3，并为组件 reader 和 sequence open 增加异步 API。远端 .itar 可并发读取精确字节范围，本地路径加入缓存、positional read 和少复制优化。 https://github.com/NVIDIA/ncore/releases/tag/v20.0.0 NCore 20 重做远端与异步传感器数据读 ## NCore 20 重做远端与异步传感器数据读\n\nNVIDIA [NCore 20.0.0](https://github.com/NVIDIA/ncore/releases/tag/v20.0.0)同时支持 zarr-python 2/3、可选 zarr format v3，并为组件 reader 和 sequence open 增加异步 API。远端 `.itar` 可并发读取精确字节范围，本地路径加入缓存、positional read 和少复制优化。\n\n作者报告本地全帧读取快 1.7—5.5 倍，运动补偿也有新路径；这些都是作者条件。release notes 同时列出多项 breaking changes，涉及 loader、构造、有效性返回、参数与异常类型。NuRec 或多传感器重建用户应先照迁移指南回归，不要只因性能数字直接替换数据层。"
+    },
+    {
+      "id": "github.com/playcanvas/supersplat-viewer/releases/tag/v1.44.0",
+      "kind": "tool",
+      "title": "SuperSplat Viewer 1.44.0 要求跨设备验收",
+      "summary": "SuperSplat Viewer v1.44.0 正式包含宿主控制信息面板、容器全屏、滚轮与快捷键的嵌入改造，并允许完全关闭 info 入口。XR 双手缩放扩大到 0.1—10 倍，VR 中新增地面网格；两项仍缺头显实测。正式 release已可用。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-supersplat-viewer-v1-44-0",
+      "text": "SuperSplat Viewer 1.44.0 要求跨设备验收 SuperSplat Viewer v1.44.0 正式包含宿主控制信息面板、容器全屏、滚轮与快捷键的嵌入改造，并允许完全关闭 info 入口。XR 双手缩放扩大到 0.1—10 倍，VR 中新增地面网格；两项仍缺头显实测。正式 release已可用。 https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.44.0 SuperSplat Viewer 1.44.0 要求跨设备验收 ## SuperSplat Viewer 1.44.0 要求跨设备验收\n\nSuperSplat Viewer v1.44.0 正式包含宿主控制信息面板、容器全屏、滚轮与快捷键的嵌入改造，并允许完全关闭 info 入口。XR 双手缩放扩大到 0.1—10 倍，VR 中新增地面网格；两项仍缺头显实测。[正式 release](https://github.com/playcanvas/supersplat-viewer/releases/tag/v1.44.0)已可用。\n\nstochastic raster 把颜色解码移到 vertex 阶段后，维护者测得 A15 明显变快，Pixel 7 Pro 和 M4 Max 的部分模式却回退几个百分点，RTX 4090 基本持平。WebGPU 又缺少可靠的 adapter 分流信息，因此这不是“一律更快”的升级。依赖 Viewer 的产品必须覆盖手机、Apple Silicon、桌面独显与目标头显。"
+    },
+    {
+      "id": "hololab:robot-simulation-starter-kit-2026-11-26",
+      "kind": "news",
+      "title": "HoloLab 把真实扫描交付为机器人仿真场景",
+      "summary": "HoloLab 的 Robot Simulation Starter Kit 用 XGRIDS 扫描现实空间，把 3DGS 作为视觉层、网格作为碰撞层，再导入 NVIDIA Isaac Sim。首批目标包括 Unitree G1、Go2 和 Boston Dynamics Spot，另有现场扫描、PC 配置、地形训练与真机验证服务。官方新闻稿给出的价格口径是询价。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-hololab-robot-simulation-kit",
+      "text": "HoloLab 把真实扫描交付为机器人仿真场景 HoloLab 的 Robot Simulation Starter Kit 用 XGRIDS 扫描现实空间，把 3DGS 作为视觉层、网格作为碰撞层，再导入 NVIDIA Isaac Sim。首批目标包括 Unitree G1、Go2 和 Boston Dynamics Spot，另有现场扫描、PC 配置、地形训练与真机验证服务。官方新闻稿给出的价格口径是询价。 https://prtimes.jp/main/html/rd/p/000000161.000023638.html HoloLab 把真实扫描交付为机器人仿真场景 ## HoloLab 把真实扫描交付为机器人仿真场景\n\nHoloLab 的 Robot Simulation Starter Kit 用 XGRIDS 扫描现实空间，把 3DGS 作为视觉层、网格作为碰撞层，再导入 NVIDIA Isaac Sim。首批目标包括 Unitree G1、Go2 和 Boston Dynamics Spot，另有现场扫描、PC 配置、地形训练与真机验证服务。[官方新闻稿](https://prtimes.jp/main/html/rd/p/000000161.000023638.html)给出的价格口径是询价。\n\n它说明高斯场景开始进入机器人仿真的服务交付，但官方没有公开场景规模、Isaac Sim 帧率、控制频率或 sim-to-real 成功率。采购判断应围绕尺度误差、碰撞简化、坐标一致性和目标机器人边界，而不是只看视觉逼真度。"
+    },
+    {
+      "id": "kiri-engine:4.4.0",
+      "kind": "tool",
+      "title": "KIRI Engine 4.4.0 支持 360 视频直传 3DGS",
+      "summary": "KIRI Engine 4.4.0 的 App Store 记录确认：Web 端 3DGS Scan 接受 360 视频，Manual Capture 可以录制视频，单次输入提高到 500 张照片或 5 分钟视频。它减少了全景视频拆帧与整理步骤，也给长走拍明确了上限。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-kiri-engine-4-4-0",
+      "text": "KIRI Engine 4.4.0 支持 360 视频直传 3DGS KIRI Engine 4.4.0 的 App Store 记录确认：Web 端 3DGS Scan 接受 360 视频，Manual Capture 可以录制视频，单次输入提高到 500 张照片或 5 分钟视频。它减少了全景视频拆帧与整理步骤，也给长走拍明确了上限。 https://apps.apple.com/us/app/kiri-engine-3d-scanner-lidar/id1577127142 KIRI Engine 4.4.0 支持 360 视频直传 3DGS ## KIRI Engine 4.4.0 支持 360 视频直传 3DGS\n\nKIRI Engine 4.4.0 的 [App Store 记录](https://apps.apple.com/us/app/kiri-engine-3d-scanner-lidar/id1577127142)确认：Web 端 3DGS Scan 接受 360 视频，Manual Capture 可以录制视频，单次输入提高到 500 张照片或 5 分钟视频。它减少了全景视频拆帧与整理步骤，也给长走拍明确了上限。\n\n版本说明没有给出“画质提升”的数据集或指标，也没有明确新上限适用的订阅档位。已有 KIRI 订阅和 360 相机的团队，可以用同一素材比较视频直传与人工拆帧的上传、失败恢复、训练时间和结果，而不应把商店更新当成评测结论。"
+    },
+    {
+      "id": "splatbridge:1.4.0-unconfirmed",
+      "kind": "news",
+      "title": "SplatBridge 1.4.0 的 Web 发布尚未在商店页闭环",
+      "summary": "媒体报道和演示称 SplatBridge 1.4.0 已支持 Unity WebGL2 与 WebGPU，但本期核对 Unity Asset Store时，官方页面仍显示 1.3.2，并写明 WebGL 不支持。",
+      "date": "2026-11-27",
+      "topics": [
+        "capture",
+        "spatial-ai",
+        "xr",
+        "industry",
+        "3dgs",
+        "4dgs",
+        "webgpu",
+        "lod",
+        "streaming",
+        "slam",
+        "formats"
+      ],
+      "url": "/daily/2026/11/27/#event-splatbridge-version-conflict",
+      "text": "SplatBridge 1.4.0 的 Web 发布尚未在商店页闭环 媒体报道和演示称 SplatBridge 1.4.0 已支持 Unity WebGL2 与 WebGPU，但本期核对 Unity Asset Store时，官方页面仍显示 1.3.2，并写明 WebGL 不支持。 https://assetstore.unity.com/packages/tools/particles-effects/splatbridge-real-time-3d-gaussian-splatting-3dgs-for-unity-334403 SplatBridge 1.4.0 的 Web 发布尚未在商店页闭环 ## SplatBridge 1.4.0 的 Web 发布尚未在商店页闭环\n\n媒体报道和演示称 SplatBridge 1.4.0 已支持 Unity WebGL2 与 WebGPU，但本期核对 [Unity Asset Store](https://assetstore.unity.com/packages/tools/particles-effects/splatbridge-real-time-3d-gaussian-splatting-3dgs-for-unity-334403)时，官方页面仍显示 1.3.2，并写明 WebGL 不支持。\n\n这可能是商店审核或页面传播延迟，也可能是演示构建尚未成为购买者可下载版本。当前只能报道来源冲突，不能写成“商店已正式交付”。已购用户应先核对账号内包版本、Unity 6000.x 条件、WebGL2/WebGPU 路径和许可证，再决定是否安排迁移。"
     },
     {
       "id": "github.com/BudgetAny/Budget3D",

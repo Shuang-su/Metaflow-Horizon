@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-27",
+    "sha256": "4acb5808b1ef88104132a04174a5b8b27011e1a9948a13d932a332614fb6f7ac"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-27": {
+      "date": "2026-11-27",
+      "url": "/share/2026-11-27.png",
+      "title": "PERF-GS 跨 NVIDIA/AMD 开放训练，SuperSplat Viewer 1.44.0 上线",
+      "contentHash": "791a2b3d72323db4c303b9f3ff4a55510fddf3b741e1e005321900f2a6f81d8c",
+      "inputHash": "879b724f14607af674ee89e022f1412a24aa65a51bc4a92e67c7a775b2e4d109",
+      "sha256": "4acb5808b1ef88104132a04174a5b8b27011e1a9948a13d932a332614fb6f7ac",
+      "bytes": 31117
     }
   }
 }
