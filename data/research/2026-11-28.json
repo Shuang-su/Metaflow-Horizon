@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-28",
+  "mode": "scheduled",
+  "window": {
+    "start": "2026-11-15T08:28:00+08:00",
+    "end": "2026-11-28T08:14:40+08:00"
+  },
+  "overlapStart": "2026-11-21T00:00:00+08:00",
+  "reviewedAt": "2026-11-28T08:14:40+08:00",
+  "checks": [
+    {
+      "sourceId": "radiancefields",
+      "status": "candidates",
+      "checkedAt": "2026-11-28T08:02:00+08:00",
+      "urls": [
+        "https://radiancefields.com/",
+        "https://radiancefields.com/platforms"
+      ],
+      "candidateIds": [
+        "octane-2027.1",
+        "spirula-v2026.11.27",
+        "hololab-arrival-space-japan",
+        "tas-gaussian-splat-1.6",
+        "siggraph-asia-dell-4dv-lab"
+      ],
+      "urlResults": [
+        {
+          "url": "https://radiancefields.com/",
+          "status": "candidates",
+          "checkedAt": "2026-11-28T08:01:00+08:00"
+        },
+        {
+          "url": "https://radiancefields.com/platforms",
+          "status": "candidates",
+          "checkedAt": "2026-11-28T08:02:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "official",
+      "status": "candidates",
+      "checkedAt": "2026-11-28T08:05:00+08:00",
+      "urls": [
+        "https://blog.playcanvas.com/",
+        "https://www.blender.org/news/"
+      ],
+      "candidateIds": [
+        "octane-2027.1",
+        "hololab-arrival-space-japan",
+        "tas-gaussian-splat-1.6",
+        "siggraph-asia-dell-4dv-lab"
+      ],
+      "gap": "PlayCanvas 博客可读但没有晚于既有归档的新文章；Blender News 返回 HTTP 403。厂商与活动候选分别回到 OTOY、HoloLab、TAS Visuals 和 SIGGRAPH Asia 官方页核验。",
+      "urlResults": [
+        {
+          "url": "https://blog.playcanvas.com/",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-28T08:03:00+08:00"
+        },
+        {
+          "url": "https://www.blender.org/news/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-28T08:04:00+08:00",
+          "gap": "HTTP 403，未取得可验证正文。"
+        }
+      ]
+    },
+    {
+      "sourceId": "x",
+      "status": "unavailable",
+      "checkedAt": "2026-11-28T08:06:00+08:00",
+      "urls": [
+        "https://x.com/radiancefields",
+        "https://x.com/playcanvas",
+        "https://x.com/willeastcott",
+        "https://x.com/valigurskym"
+      ],
+      "candidateIds": [],
+      "gap": "4 个登记账号分别返回 HTTP 403 或 DisabledError，未取得可验证原帖；没有把登录外壳、摘要或失败计作 checked-no-new。",
+      "urlResults": [
+        {
+          "url": "https://x.com/radiancefields",
+          "status": "unavailable",
+          "checkedAt": "2026-11-28T08:06:00+08:00",
+          "gap": "DisabledError，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/playcanvas",
+          "status": "unavailable",
+          "checkedAt": "2026-11-28T08:06:00+08:00",
+          "gap": "HTTP 403，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/willeastcott",
+          "status": "unavailable",
+          "checkedAt": "2026-11-28T08:06:00+08:00",
+          "gap": "HTTP 403，无可验证原帖。"
+        },
+        {
+          "url": "https://x.com/valigurskym",
+          "status": "unavailable",
+          "checkedAt": "2026-11-28T08:06:00+08:00",
+          "gap": "DisabledError，无可验证原帖。"
+        }
+      ]
+    },
+    {
+      "sourceId": "research",
+      "status": "unavailable",
+      "checkedAt": "2026-11-28T08:08:00+08:00",
+      "urls": [
+        "https://export.arxiv.org/api/query",
+        "https://huggingface.co/papers"
+      ],
+      "candidateIds": [
+        "research-no-new-2026-11-28"
+      ],
+      "gap": "arXiv export API 查询端点不可访问；Hugging Face Papers 可读。定向搜索只发现 11 月 27 日稿件已归档论文或更早论文，没有可由 arXiv 原页确认的新增。",
+      "urlResults": [
+        {
+          "url": "https://export.arxiv.org/api/query",
+          "status": "unavailable",
+          "checkedAt": "2026-11-28T08:07:00+08:00",
+          "gap": "API 查询 URL 不可访问。"
+        },
+        {
+          "url": "https://huggingface.co/papers",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-28T08:08:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "github",
+      "status": "candidates",
+      "checkedAt": "2026-11-28T08:11:00+08:00",
+      "urls": [
+        "https://github.com/playcanvas/supersplat",
+        "https://github.com/MrNeRF/LichtFeld-Studio"
+      ],
+      "candidateIds": [
+        "spirula-v2026.11.27",
+        "supersplat-pr-1122",
+        "supersplat-pr-1124",
+        "supersplat-pr-1126",
+        "lichtfeld-pr-4213",
+        "lichtfeld-pr-4219",
+        "lichtfeld-pr-4224",
+        "unitysplats-relighting-resurfaced"
+      ],
+      "urlResults": [
+        {
+          "url": "https://github.com/playcanvas/supersplat",
+          "status": "candidates",
+          "checkedAt": "2026-11-28T08:09:00+08:00"
+        },
+        {
+          "url": "https://github.com/MrNeRF/LichtFeld-Studio",
+          "status": "candidates",
+          "checkedAt": "2026-11-28T08:10:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "community",
+      "status": "unavailable",
+      "checkedAt": "2026-11-28T08:13:00+08:00",
+      "urls": [
+        "https://www.reddit.com/r/GaussianSplatting/",
+        "https://www.bilibili.com/",
+        "https://sspai.com/"
+      ],
+      "candidateIds": [
+        "unitysplats-relighting-resurfaced",
+        "community-undated-posts-2026-11-28"
+      ],
+      "gap": "Reddit 首页可读，但 UnitySplats 具体帖子直开失败；其摘要只作为发现线索并回到 GitHub 去重。B 站只返回浏览器版本提示；少数派可读但未出现相关新稿。",
+      "urlResults": [
+        {
+          "url": "https://www.reddit.com/r/GaussianSplatting/",
+          "status": "candidates",
+          "checkedAt": "2026-11-28T08:12:00+08:00",
+          "gap": "首页和搜索摘要可见，具体 UnitySplats 帖子返回 DisabledError。"
+        },
+        {
+          "url": "https://www.bilibili.com/",
+          "status": "unavailable",
+          "checkedAt": "2026-11-28T08:13:00+08:00",
+          "gap": "仅返回浏览器版本过低提示，无法核实视频与日期。"
+        },
+        {
+          "url": "https://sspai.com/",
+          "status": "checked-no-new",
+          "checkedAt": "2026-11-28T08:13:00+08:00"
+        }
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "octane-2027.1",
+      "title": "Octane 2027.1 正式加入 glTF 高斯导入与更快渲染",
+      "eventDate": "2026-11-26",
+      "reportDate": "2026-11-28",
+      "importance": "critical",
+      "disposition": "included",
+      "reason": "成熟商业 DCC 渲染器正式读取 KHR_gaussian_splatting，并公开带条件的跨平台吞吐提升。",
+      "sources": [
+        "https://home.otoy.com/render/octane-render./news/octane2027/",
+        "https://radiancefields.com/octane-2027-1-ships-with-faster-gaussian-splats"
+      ],
+      "eventId": "otoy:octane-2027.1"
+    },
+    {
+      "id": "spirula-v2026.11.27",
+      "title": "Spirula Studio 发布 v2026.11.27",
+      "eventDate": "2026-11-27",
+      "reportDate": "2026-11-28",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "三类遮罩、RDNA 4 优化、训练显存预测、分区与 SuperSplat 兼容导出进入可下载正式版。",
+      "sources": [
+        "https://github.com/harry7557558/spirula-studio/releases/tag/v2026.11.27",
+        "https://github.com/harry7557558/spirula-studio/pull/384",
+        "https://github.com/harry7557558/spirula-studio/pull/390",
+        "https://github.com/harry7557558/spirula-studio/pull/424"
+      ],
+      "eventId": "github.com/harry7557558/spirula-studio/releases/tag/v2026.11.27"
+    },
+    {
+      "id": "hololab-arrival-space-japan",
+      "title": "HoloLab 成为 Arrival.Space 日本销售伙伴",
+      "eventDate": "2026-11-27",
+      "reportDate": "2026-11-28",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "为日本企业增加日元合同、日语支持、日本区域数据与 XGRIDS 扫描到空间制作的落地路径。",
+      "sources": [
+        "https://prtimes.jp/main/html/rd/p/000000162.000023638.html",
+        "https://arrival.space/"
+      ],
+      "eventId": "hololab:arrival-space-japan-2026-11-27"
+    },
+    {
+      "id": "supersplat-pr-1122",
+      "title": "SuperSplat 恢复选择颜色 alpha 的 tint 强度",
+      "eventDate": "2026-11-27",
+      "reportDate": "2026-11-28",
+      "importance": "standard",
+      "disposition": "merged",
+      "reason": "与同一轮 selection/marker/outline 编辑器更新合并呈现，保留独立 PR 与 SHA。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat/pull/1122",
+        "https://github.com/playcanvas/supersplat/commit/f5e65e5ecb2a75649aed9ec4305bae33ef4590ff"
+      ],
+      "eventId": "github.com/playcanvas/supersplat/pull/1126"
+    },
+    {
+      "id": "supersplat-pr-1124",
+      "title": "SuperSplat 按 alpha 淡出未选标记并延后 x-ray 刷新",
+      "eventDate": "2026-11-28",
+      "reportDate": "2026-11-28",
+      "importance": "important",
+      "disposition": "merged",
+      "reason": "与同一轮 selection/marker/outline 编辑器更新合并呈现，保留性能条件与独立 PR。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat/pull/1124",
+        "https://github.com/playcanvas/supersplat/commit/f461e683a1869d0c4a625d529f25fce35e19839b"
+      ],
+      "eventId": "github.com/playcanvas/supersplat/pull/1126"
+    },
+    {
+      "id": "supersplat-pr-1126",
+      "title": "SuperSplat 让 outline 取代重复的选择标记",
+      "eventDate": "2026-11-28",
+      "reportDate": "2026-11-28",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "选择轮廓、stochastic 交互、picker 和网格遮挡边界同时调整，直接影响大场景编辑。",
+      "sources": [
+        "https://github.com/playcanvas/supersplat/pull/1126",
+        "https://github.com/playcanvas/supersplat/commit/70bbed773cc8fb52753dc1f602f9254905a52d6a"
+      ],
+      "eventId": "github.com/playcanvas/supersplat/pull/1126"
+    },
+    {
+      "id": "lichtfeld-pr-4213",
+      "title": "LichtFeld 修复 Apple MoltenVK 的 MRNF blend peak 顺序",
+      "eventDate": "2026-11-27",
+      "reportDate": "2026-11-28",
+      "importance": "important",
+      "disposition": "included",
+      "reason": "Apple Silicon Vulkan 路径此前不统计 render count，使 retire quota 与 keep-covered 失效。",
+      "sources": [
+        "https://github.com/MrNeRF/LichtFeld-Studio/pull/4213",
+        "https://github.com/MrNeRF/LichtFeld-Studio/commit/337f6c8ea189367e4824a6f04114f293e227c76f"
+      ],
+      "eventId": "github.com/MrNeRF/LichtFeld-Studio/pull/4213"
+    },
+    {
+      "id": "lichtfeld-pr-4219",
+      "title": "LichtFeld 在恢复训练时保留深度锚点",
+      "eventDate": "2026-11-28",
+      "reportDate": "2026-11-28",
+      "importance": "important",
+      "disposition": "merged",
+      "reason": "与同日训练正确性和编辑预览更新合并呈现，避免 sidecar 错误重拟合和监督目标漂移。",
+      "sources": [
+        "https://github.com/MrNeRF/LichtFeld-Studio/pull/4219",
+        "https://github.com/MrNeRF/LichtFeld-Studio/commit/3d5293f84b05472f19d778fdcc1e2684b3efbdcf"
+      ],
+      "eventId": "github.com/MrNeRF/LichtFeld-Studio/pull/4213"
+    },
+    {
+      "id": "lichtfeld-pr-4224",
+      "title": "LichtFeld 为 Align Models 增加 wipe 预览",
+      "eventDate": "2026-11-28",
+      "reportDate": "2026-11-28",
+      "importance": "standard",
+      "disposition": "merged",
+      "reason": "与同日 LichtFeld 更新合并呈现，保留独立 PR 与提交。",
+      "sources": [
+        "https://github.com/MrNeRF/LichtFeld-Studio/pull/4224",
+        "https://github.com/MrNeRF/LichtFeld-Studio/commit/7953aead970ed4a3a833283dce6bff5b6f302cfb"
+      ],
+      "eventId": "github.com/MrNeRF/LichtFeld-Studio/pull/4213"
+    },
+    {
+      "id": "tas-gaussian-splat-1.6",
+      "title": "TAS Visuals Gaussian Splat 1.6 进入媒体索引",
+      "eventDate": "2026-10-01",
+      "reportDate": "2026-11-28",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "作为历史补收，确认 Resolume 中的 SOG/PLY/SPLAT、360/VR180/Dome 和节拍修改器，不把媒体发现日写成版本发布日。",
+      "sources": [
+        "https://www.tasvisuals.com/TASGaussianSplat/",
+        "https://radiancefields.com/tas-visuals-sells-a-gaussian-splat-plugin-for-resolume"
+      ],
+      "eventId": "tasvisuals:gaussian-splat-1.6"
+    },
+    {
+      "id": "siggraph-asia-dell-4dv-lab",
+      "title": "Dell 与 4DV.ai 将在 SIGGRAPH Asia 开设 4DGS 实操课",
+      "eventDate": "2026-12-03",
+      "reportDate": "2026-11-28",
+      "importance": "standard",
+      "disposition": "included",
+      "reason": "官方日程确认完整捕获到发布流程和参与者资产交付，是即将发生的生产教育信号。",
+      "sources": [
+        "https://sa2026.conference-schedule.org/presentation/?id=EXT107&sess=sess224"
+      ],
+      "eventId": "siggraph-asia-2026:ext107"
+    },
+    {
+      "id": "unitysplats-relighting-resurfaced",
+      "title": "UnitySplats relighting 展示再次传播",
+      "eventDate": "2026-11-27",
+      "reportDate": "2026-11-28",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "技术能力对应 2026-10-21 的 UnitySplats 2.0.0 提交，本窗口没有新 tag、代码差异或独立 benchmark；仅在简讯中说明去重结论。",
+      "exclusionEvidence": [
+        "https://github.com/arloopa/UnitySplats/commit/689e0a7dd2acfad813494a205f8ebbe8eee86434",
+        "https://github.com/arloopa/UnitySplats/blob/main/README.md"
+      ],
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/comments/1y6u9m4/gaussian_splatting_relighting_in_unity_with/",
+        "https://github.com/arloopa/UnitySplats"
+      ]
+    },
+    {
+      "id": "research-no-new-2026-11-28",
+      "title": "研究源未确认晚于昨日归档的新论文",
+      "eventDate": "2026-11-28",
+      "reportDate": "2026-11-28",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "定向检索只返回 VersionGS、SprintGS 或更早论文，均已归档或不在今日事件窗口；arXiv API 不可用，因此不把检索缺口写成全网无新增。",
+      "exclusionEvidence": [
+        "docs/daily/2026/11/2026-11-27.md",
+        "https://arxiv.org/abs/2611.33374",
+        "https://arxiv.org/abs/2611.33796"
+      ],
+      "sources": [
+        "https://huggingface.co/papers",
+        "https://export.arxiv.org/api/query"
+      ]
+    },
+    {
+      "id": "community-undated-posts-2026-11-28",
+      "title": "社区首页出现缺少稳定日期或一手新增事实的帖子",
+      "eventDate": "2026-11-28",
+      "reportDate": "2026-11-28",
+      "importance": "standard",
+      "disposition": "excluded",
+      "reason": "未满足稳定事件日期与独立核验要求。",
+      "exclusionEvidence": [
+        "https://www.reddit.com/r/GaussianSplatting/"
+      ],
+      "sources": [
+        "https://www.reddit.com/r/GaussianSplatting/"
+      ]
+    }
+  ]
+}
