@@ -18,8 +18,8 @@
   },
   "default": {
     "url": "/share/default.png",
-    "date": "2026-11-16",
-    "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b"
+    "date": "2026-11-28",
+    "sha256": "ead12dcc0da3a249febb3753f4f197f2292c098a844e2f0234aeba50f7affbf7"
   },
   "reports": {
     "2026-09-18": {
@@ -901,6 +901,15 @@
       "inputHash": "c048749c179be43e90feba65ed71d76841d97db3a1c6719e653d172a42fc0a49",
       "sha256": "b5d37b8e49a10ea8fa72c270a5410573c24897e2a31bfc232e3dc644758c618b",
       "bytes": 34842
+    },
+    "2026-11-28": {
+      "date": "2026-11-28",
+      "url": "/share/2026-11-28.png",
+      "title": "Octane 2027.1 打通 glTF 高斯，Spirula 正式版补强训练与 AMD 路线",
+      "contentHash": "a68f05cd8ce8375827bc45398c41d9108fcca2a7f786d69e6803277b073cbf21",
+      "inputHash": "33eb76a6035b46903c4c22e5ce7598a21e34550ac3727e469050b575f287af15",
+      "sha256": "ead12dcc0da3a249febb3753f4f197f2292c098a844e2f0234aeba50f7affbf7",
+      "bytes": 33875
     }
   }
 }
